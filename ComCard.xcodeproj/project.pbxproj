@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */; };
-		DBD1F95D1FF8271200A2CAE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95C1FF8271200A2CAE6 /* ViewController.swift */; };
+		DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */; };
 		DBD1F9601FF8271200A2CAE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F95E1FF8271200A2CAE6 /* Main.storyboard */; };
 		DBD1F9621FF8271200A2CAE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F9611FF8271200A2CAE6 /* Assets.xcassets */; };
 		DBD1F9651FF8271200A2CAE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F9631FF8271200A2CAE6 /* LaunchScreen.storyboard */; };
 		DBD1F9701FF8271200A2CAE6 /* ComCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F96F1FF8271200A2CAE6 /* ComCardTests.swift */; };
 		DBD1F97B1FF8271200A2CAE6 /* ComCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F97A1FF8271200A2CAE6 /* ComCardUITests.swift */; };
+		DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */; };
+		DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 /* Begin PBXFileReference section */
 		DBD1F9571FF8271200A2CAE6 /* ComCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DBD1F95C1FF8271200A2CAE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		DBD1F95F1FF8271200A2CAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBD1F9611FF8271200A2CAE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBD1F9641FF8271200A2CAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		DBD1F9761FF8271200A2CAE6 /* ComCardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComCardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBD1F97A1FF8271200A2CAE6 /* ComCardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComCardUITests.swift; sourceTree = "<group>"; };
 		DBD1F97C1FF8271200A2CAE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonStyle.swift; sourceTree = "<group>"; };
+		DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,9 @@
 		DBD1F9591FF8271200A2CAE6 /* ComCard */ = {
 			isa = PBXGroup;
 			children = (
+				DBD1F98B1FF8315300A2CAE6 /* Controller */,
+				DBD1F98A1FF8314300A2CAE6 /* Style */,
 				DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */,
-				DBD1F95C1FF8271200A2CAE6 /* ViewController.swift */,
 				DBD1F95E1FF8271200A2CAE6 /* Main.storyboard */,
 				DBD1F9611FF8271200A2CAE6 /* Assets.xcassets */,
 				DBD1F9631FF8271200A2CAE6 /* LaunchScreen.storyboard */,
@@ -123,6 +128,23 @@
 				DBD1F97C1FF8271200A2CAE6 /* Info.plist */,
 			);
 			path = ComCardUITests;
+			sourceTree = "<group>";
+		};
+		DBD1F98A1FF8314300A2CAE6 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		DBD1F98B1FF8315300A2CAE6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */,
+				DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD1F95D1FF8271200A2CAE6 /* ViewController.swift in Sources */,
+				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
+				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
+				DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

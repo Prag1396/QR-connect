@@ -1,24 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-DemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Home ScreenVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeScreenVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="QIE-Zy-qx7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="tZo-m9-ads">
+                                <rect key="frame" x="32.5" y="59" width="310" height="87"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="IjQ-Zj-KXK"/>
+                                    <constraint firstAttribute="width" constant="310" id="ugJ-9b-nOX"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-1l-PDi">
+                                <rect key="frame" x="137.5" y="160" width="100" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Nsr-1l-PDi" secondAttribute="height" multiplier="100:67" id="2e0-QY-Ike"/>
+                                    <constraint firstAttribute="width" constant="100" id="LYh-PB-gzp"/>
+                                    <constraint firstAttribute="height" constant="67" id="Ocd-mj-tC8"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-Hx-x5F" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="47.5" y="456" width="280" height="46"/>
+                                <color key="backgroundColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="2sG-w3-HnD"/>
+                                    <constraint firstAttribute="width" secondItem="7eU-Hx-x5F" secondAttribute="height" multiplier="140:23" id="d6n-oW-n7M"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="nAF-jr-K0n">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="340"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Contact Credit/Debit Card Holder">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="23"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Ms-JYC" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="47.5" y="342" width="280" height="46"/>
+                                <color key="backgroundColor" red="0.30196078431372547" green="0.85098039215686272" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="58t-Ms-JYC" secondAttribute="height" multiplier="140:23" id="GGZ-3v-QxC"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="dGG-37-uEP">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="340"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="46" id="ypT-KZ-Uan"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Link Card with Phone Number">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="23"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="2o3-8U-A67" kind="presentation" identifier="LinkOptionPressed" id="Vj9-WG-YQe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="58t-Ms-JYC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Fr-zQ-WoJ"/>
+                            <constraint firstItem="QIE-Zy-qx7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6AO-x3-MD1"/>
+                            <constraint firstItem="tZo-m9-ads" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="39" id="EiO-9T-Ufs"/>
+                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="centerX" secondItem="58t-Ms-JYC" secondAttribute="centerX" id="UAD-Ty-T1j"/>
+                            <constraint firstItem="58t-Ms-JYC" firstAttribute="top" secondItem="Nsr-1l-PDi" secondAttribute="bottom" constant="115" id="W0T-Ca-2Zx">
+                                <variation key="heightClass=compact-widthClass=compact" constant="25"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="tZo-m9-ads" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="czh-TK-ohh"/>
+                            <constraint firstItem="QIE-Zy-qx7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nri-aN-klA"/>
+                            <constraint firstItem="QIE-Zy-qx7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="o5R-I1-99V"/>
+                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="top" secondItem="58t-Ms-JYC" secondAttribute="bottom" constant="68" id="orl-8C-Qpf">
+                                <variation key="heightClass=compact-widthClass=compact" constant="24"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="24"/>
+                            </constraint>
+                            <constraint firstItem="Nsr-1l-PDi" firstAttribute="top" secondItem="tZo-m9-ads" secondAttribute="bottom" constant="14" id="t2m-Vd-cIK"/>
+                            <constraint firstItem="Nsr-1l-PDi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t3f-ef-Ev0"/>
+                            <constraint firstItem="QIE-Zy-qx7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tzj-86-wys"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="HS2-Yd-Bua">
+            <objects>
+                <viewController id="2o3-8U-A67" customClass="LoginVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xXS-fG-uqX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="kLt-wY-EcF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-1k-wFN">
+                                <rect key="frame" x="32" y="59" width="310" height="87"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="C0h-gx-iAk"/>
+                                    <constraint firstAttribute="width" constant="310" id="Evf-Bq-itY"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="FGe-Gq-TQt">
+                                <rect key="frame" x="137" y="160" width="100" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="QEI-Df-V7v"/>
+                                    <constraint firstAttribute="width" secondItem="FGe-Gq-TQt" secondAttribute="height" multiplier="100:67" id="cQN-LV-D2F"/>
+                                    <constraint firstAttribute="width" constant="100" id="iGx-wd-RnW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VV1-1k-wFN" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="Zh8-II-F0S"/>
+                            <constraint firstItem="VV1-1k-wFN" firstAttribute="top" secondItem="A1v-ZD-inn" secondAttribute="top" constant="39" id="cEg-nn-rJV"/>
+                            <constraint firstItem="FGe-Gq-TQt" firstAttribute="top" secondItem="VV1-1k-wFN" secondAttribute="bottom" constant="14" id="j4V-y1-whN"/>
+                            <constraint firstItem="FGe-Gq-TQt" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="x93-CR-ZPi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="A1v-ZD-inn"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="663-T8-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="781.60000000000002" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Background" width="375" height="667"/>
+        <image name="Title" width="308" height="67"/>
+        <image name="logo" width="100" height="68"/>
+    </resources>
 </document>
