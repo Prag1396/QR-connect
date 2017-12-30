@@ -12,7 +12,9 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="AvenirNext.ttc">
+            <string>AvenirNext-Bold</string>
             <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -27,16 +29,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="QIE-Zy-qx7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="tZo-m9-ads">
-                                <rect key="frame" x="32.5" y="59" width="310" height="87"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="IjQ-Zj-KXK"/>
-                                    <constraint firstAttribute="width" constant="310" id="ugJ-9b-nOX"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-1l-PDi">
-                                <rect key="frame" x="137.5" y="160" width="100" height="67"/>
+                                <rect key="frame" x="137.5" y="141" width="100" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Nsr-1l-PDi" secondAttribute="height" multiplier="100:67" id="2e0-QY-Ike"/>
                                     <constraint firstAttribute="width" constant="100" id="LYh-PB-gzp"/>
@@ -44,14 +38,11 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-Hx-x5F" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="47.5" y="456" width="280" height="46"/>
+                                <rect key="frame" x="48" y="416.5" width="280" height="46"/>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="2sG-w3-HnD"/>
-                                    <constraint firstAttribute="width" secondItem="7eU-Hx-x5F" secondAttribute="height" multiplier="140:23" id="d6n-oW-n7M"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="nAF-jr-K0n">
-                                        <variation key="heightClass=compact-widthClass=compact" constant="340"/>
-                                    </constraint>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="leA-Ph-dqZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Contact Credit/Debit Card Holder">
@@ -63,15 +54,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="tZo-m9-ads">
+                                <rect key="frame" x="33.5" y="60" width="308" height="67"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Ms-JYC" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="47.5" y="342" width="280" height="46"/>
+                                <rect key="frame" x="47.5" y="310.5" width="280" height="46"/>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.85098039215686272" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="58t-Ms-JYC" secondAttribute="height" multiplier="140:23" id="GGZ-3v-QxC"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="dGG-37-uEP">
-                                        <variation key="heightClass=compact-widthClass=compact" constant="340"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="46" id="ypT-KZ-Uan"/>
+                                    <constraint firstAttribute="height" constant="46" id="43a-zd-YPL"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="4ao-kp-lhs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Link Card with Phone Number">
@@ -88,21 +80,17 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="58t-Ms-JYC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Fr-zQ-WoJ"/>
                             <constraint firstItem="QIE-Zy-qx7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6AO-x3-MD1"/>
-                            <constraint firstItem="tZo-m9-ads" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="39" id="EiO-9T-Ufs"/>
-                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="centerX" secondItem="58t-Ms-JYC" secondAttribute="centerX" id="UAD-Ty-T1j"/>
-                            <constraint firstItem="58t-Ms-JYC" firstAttribute="top" secondItem="Nsr-1l-PDi" secondAttribute="bottom" constant="115" id="W0T-Ca-2Zx">
-                                <variation key="heightClass=compact-widthClass=compact" constant="25"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="40"/>
-                            </constraint>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tZo-m9-ads" secondAttribute="trailing" constant="33.5" id="87t-Qj-dbo"/>
+                            <constraint firstItem="58t-Ms-JYC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A8U-IY-CPg"/>
+                            <constraint firstItem="tZo-m9-ads" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="EiO-9T-Ufs"/>
+                            <constraint firstItem="tZo-m9-ads" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33.5" id="JnM-nu-REz"/>
+                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="top" secondItem="58t-Ms-JYC" secondAttribute="bottom" constant="60" id="SjM-pQ-tbB"/>
+                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="centerX" secondItem="58t-Ms-JYC" secondAttribute="centerX" id="Vcp-Ob-7am"/>
                             <constraint firstItem="tZo-m9-ads" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="czh-TK-ohh"/>
                             <constraint firstItem="QIE-Zy-qx7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nri-aN-klA"/>
                             <constraint firstItem="QIE-Zy-qx7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="o5R-I1-99V"/>
-                            <constraint firstItem="7eU-Hx-x5F" firstAttribute="top" secondItem="58t-Ms-JYC" secondAttribute="bottom" constant="68" id="orl-8C-Qpf">
-                                <variation key="heightClass=compact-widthClass=compact" constant="24"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="24"/>
-                            </constraint>
+                            <constraint firstItem="58t-Ms-JYC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="p2Q-rk-x5e"/>
                             <constraint firstItem="Nsr-1l-PDi" firstAttribute="top" secondItem="tZo-m9-ads" secondAttribute="bottom" constant="14" id="t2m-Vd-cIK"/>
                             <constraint firstItem="Nsr-1l-PDi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t3f-ef-Ev0"/>
                             <constraint firstItem="QIE-Zy-qx7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tzj-86-wys"/>
@@ -122,32 +110,156 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="kLt-wY-EcF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLt-wY-EcF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-1k-wFN">
-                                <rect key="frame" x="32" y="59" width="310" height="87"/>
+                                <rect key="frame" x="33.5" y="60" width="308" height="67"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="C0h-gx-iAk"/>
-                                    <constraint firstAttribute="width" constant="310" id="Evf-Bq-itY"/>
-                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="FGe-Gq-TQt">
-                                <rect key="frame" x="137" y="160" width="100" height="67"/>
+                                <rect key="frame" x="137.5" y="141" width="100" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="QEI-Df-V7v"/>
                                     <constraint firstAttribute="width" secondItem="FGe-Gq-TQt" secondAttribute="height" multiplier="100:67" id="cQN-LV-D2F"/>
                                     <constraint firstAttribute="width" constant="100" id="iGx-wd-RnW"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bt-VT-FAa">
+                                <rect key="frame" x="159" y="442" width="57" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="Kf3-2j-O7c"/>
+                                    <constraint firstAttribute="height" constant="50" id="ZXN-i4-pzZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="21"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-G9-S80" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="47.5" y="599" width="280" height="46"/>
+                                <color key="backgroundColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="KXr-dG-6ex"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="PYo-Xs-OUt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Scan Card">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="23"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" backIndicatorImage="back" backIndicatorTransitionMaskImage="back" translatesAutoresizingMaskIntoConstraints="NO" id="apa-V1-F2S">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="oc5-Pl-OFH"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <items>
+                                    <navigationItem id="yzq-b4-SUY">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="ls1-kx-p8b"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="nVh-s3-qXP">
+                                <rect key="frame" x="33" y="260" width="308.5" height="174"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter phone number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e6N-iG-n6I" customClass="TextFieldStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="308.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="r9k-ok-XIN"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter first name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZiB-Go-AEo" customClass="TextFieldStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="48" width="308.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="kLw-kJ-AWT"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter last name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WY2-qe-rj4" customClass="TextFieldStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="96" width="308.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1qU-S6-VrX"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter card number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QOF-2B-ywy" customClass="TextFieldStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="144" width="308.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="M8I-Bq-FTM"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZiB-Go-AEo" firstAttribute="leading" secondItem="e6N-iG-n6I" secondAttribute="leading" id="QWX-F1-6CX"/>
+                                    <constraint firstItem="WY2-qe-rj4" firstAttribute="leading" secondItem="ZiB-Go-AEo" secondAttribute="leading" id="WHz-go-FIY"/>
+                                    <constraint firstItem="QOF-2B-ywy" firstAttribute="leading" secondItem="WY2-qe-rj4" secondAttribute="leading" id="roB-Zg-qox"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kLt-wY-EcF" firstAttribute="bottom" secondItem="A1v-ZD-inn" secondAttribute="bottom" id="38C-q8-P3b"/>
+                            <constraint firstItem="e6N-iG-n6I" firstAttribute="leading" secondItem="VV1-1k-wFN" secondAttribute="leading" id="39M-oC-l8k"/>
+                            <constraint firstItem="6bt-VT-FAa" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="3AI-fJ-Bf3"/>
+                            <constraint firstItem="e6N-iG-n6I" firstAttribute="trailing" secondItem="VV1-1k-wFN" secondAttribute="trailing" id="5au-3K-NaB"/>
+                            <constraint firstItem="apa-V1-F2S" firstAttribute="trailing" secondItem="A1v-ZD-inn" secondAttribute="trailing" id="Fsu-bv-Pvb"/>
+                            <constraint firstItem="A1v-ZD-inn" firstAttribute="bottom" secondItem="jI8-G9-S80" secondAttribute="bottom" constant="22" id="IJF-Z2-Rhx"/>
+                            <constraint firstItem="apa-V1-F2S" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" id="PD0-yf-FeU"/>
+                            <constraint firstItem="6bt-VT-FAa" firstAttribute="top" secondItem="nVh-s3-qXP" secondAttribute="bottom" constant="8" id="RYF-Et-uj0"/>
+                            <constraint firstItem="kLt-wY-EcF" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" id="TbX-yf-878"/>
+                            <constraint firstItem="nVh-s3-qXP" firstAttribute="top" secondItem="FGe-Gq-TQt" secondAttribute="bottom" constant="52" id="Tbp-IS-dmO"/>
+                            <constraint firstItem="kLt-wY-EcF" firstAttribute="top" secondItem="xXS-fG-uqX" secondAttribute="top" id="UYk-9l-63d"/>
+                            <constraint firstItem="apa-V1-F2S" firstAttribute="top" secondItem="xXS-fG-uqX" secondAttribute="top" id="Xm7-gK-4vu"/>
                             <constraint firstItem="VV1-1k-wFN" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="Zh8-II-F0S"/>
-                            <constraint firstItem="VV1-1k-wFN" firstAttribute="top" secondItem="A1v-ZD-inn" secondAttribute="top" constant="39" id="cEg-nn-rJV"/>
+                            <constraint firstItem="VV1-1k-wFN" firstAttribute="top" secondItem="A1v-ZD-inn" secondAttribute="top" constant="40" id="cEg-nn-rJV"/>
+                            <constraint firstItem="jI8-G9-S80" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="gd6-Ug-YNu"/>
                             <constraint firstItem="FGe-Gq-TQt" firstAttribute="top" secondItem="VV1-1k-wFN" secondAttribute="bottom" constant="14" id="j4V-y1-whN"/>
+                            <constraint firstItem="VV1-1k-wFN" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" constant="33.5" id="ryc-xk-YTJ"/>
+                            <constraint firstItem="kLt-wY-EcF" firstAttribute="trailing" secondItem="A1v-ZD-inn" secondAttribute="trailing" id="tXU-91-NDI"/>
+                            <constraint firstItem="A1v-ZD-inn" firstAttribute="trailing" secondItem="VV1-1k-wFN" secondAttribute="trailing" constant="33.5" id="vPN-SI-bVM"/>
                             <constraint firstItem="FGe-Gq-TQt" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="x93-CR-ZPi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="A1v-ZD-inn"/>
@@ -155,12 +267,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="663-T8-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781.60000000000002" y="33.733133433283363"/>
+            <point key="canvasLocation" x="780" y="32.74647887323944"/>
         </scene>
     </scenes>
     <resources>
         <image name="Background" width="375" height="667"/>
         <image name="Title" width="308" height="67"/>
+        <image name="back" width="14" height="26"/>
         <image name="logo" width="100" height="68"/>
     </resources>
 </document>
