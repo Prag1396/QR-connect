@@ -18,6 +18,7 @@
 		DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */; };
 		DBD1F98F1FF8423400A2CAE6 /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F98E1FF8423400A2CAE6 /* TextFieldStyle.swift */; };
 		DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */; };
+		DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		DBD1F98E1FF8423400A2CAE6 /* TextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
 		DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContacVC.swift; sourceTree = "<group>"; };
+		DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLoginVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */,
 				DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */,
 				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
+				DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */,
 				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
+				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */,
 				DBD1F98F1FF8423400A2CAE6 /* TextFieldStyle.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
