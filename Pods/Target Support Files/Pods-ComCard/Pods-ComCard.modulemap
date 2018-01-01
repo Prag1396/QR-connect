@@ -1,0 +1,6 @@
+framework module Pods_ComCard {
+  umbrella header "Pods-ComCard-umbrella.h"
+
+  export *
+  module * { export * }
+}
