@@ -22,6 +22,8 @@
 		DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */; };
 		DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */; };
 		DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */; };
+		DBD1F9991FFAE44900A2CAE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */; };
+		DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContacVC.swift; sourceTree = "<group>"; };
 		DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLoginVC.swift; sourceTree = "<group>"; };
 		DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
+		DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DD246F84E7ADA9782C151448 /* Pods_ComCardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,10 +151,13 @@
 		DBD1F9591FF8271200A2CAE6 /* ComCard */ = {
 			isa = PBXGroup;
 			children = (
+				DBD1F9971FFAE23400A2CAE6 /* Services */,
+				DBD1F9961FFAE1EF00A2CAE6 /* Model */,
 				DBD1F98B1FF8315300A2CAE6 /* Controller */,
 				DBD1F98A1FF8314300A2CAE6 /* Style */,
 				DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */,
 				DBD1F95E1FF8271200A2CAE6 /* Main.storyboard */,
+				DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */,
 				DBD1F9611FF8271200A2CAE6 /* Assets.xcassets */,
 				DBD1F9631FF8271200A2CAE6 /* LaunchScreen.storyboard */,
 				DBD1F9661FF8271200A2CAE6 /* Info.plist */,
@@ -194,6 +201,21 @@
 				DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		DBD1F9961FFAE1EF00A2CAE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DBD1F9971FFAE23400A2CAE6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBD1F9651FF8271200A2CAE6 /* LaunchScreen.storyboard in Resources */,
+				DBD1F9991FFAE44900A2CAE6 /* GoogleService-Info.plist in Resources */,
 				DBD1F9621FF8271200A2CAE6 /* Assets.xcassets in Resources */,
 				DBD1F9601FF8271200A2CAE6 /* Main.storyboard in Resources */,
 			);
@@ -357,11 +380,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ComCard/Pods-ComCard-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,6 +525,7 @@
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
+				DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

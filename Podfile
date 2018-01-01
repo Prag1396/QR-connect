@@ -7,6 +7,8 @@ target 'ComCard' do
 
   # Pods for ComCard
   pod 'TextFieldEffects'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
   target 'ComCardTests' do
     inherit! :search_paths
