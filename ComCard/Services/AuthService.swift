@@ -15,7 +15,6 @@ class AuthService: UIViewController {
     let defaults = UserDefaults.standard
 
     
-    
     func sendCode(withPhoneNumber phoneNumber: String, messageSentComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if error != nil {
