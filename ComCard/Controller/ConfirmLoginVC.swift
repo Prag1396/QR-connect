@@ -16,7 +16,6 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var code: UITextField!
     
     private var _phoneNumber: String = ""
-    let defaults = UserDefaults.standard
     
     var phoneNumber: String {
         get {
@@ -28,43 +27,38 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func sendCodePressed(_ sender: Any) {
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-            if error != nil {
-                let alert = UIAlertController(title: "Warning", message: "Phone Number not Recognized. Enter with country code", preferredStyle: UIAlertControllerStyle.alert)
+        
+        AuthService.instance.sendCode(withPhoneNumber: phoneNumber) { (status, error) in
+            if error != nil && status == false {
+                //Present Alert
+                let alert = UIAlertController(title: "Warning", message: "Phone number not recognized. Enter with country code.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 print(error.debugDescription)
                 self.present(alert, animated: true, completion: nil)
-
-            } else {
-                self.defaults.set(verificationID, forKey: "authVID")
-                
             }
         }
+        
         
     }
     
     
     @IBAction func loginPressed(_ sender: Any) {
         
-        
-        let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: self.code.text!)
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
+        AuthService.instance.auth(code: code) { (status, error) in
+            if error != nil && status == false {
                 let alert = UIAlertController(title: "Warning", message: "Invalid Code", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 print(error.debugDescription)
                 self.present(alert, animated: true, completion: nil)
-            } else {
-                print("Phonenumber: \(String(describing: user?.phoneNumber))")
-                let userInfo = user?.providerData[0]
-                print("ProviderID: \(String(describing: userInfo?.providerID))")
-                //Load USER INFO View Controller
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            }   else if error == nil && status == true {
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "userDetailsVC") as? UserDetailsVC
-                self.present(nextViewController!, animated:true, completion:nil)
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "userDetailsVC") as? UserDetailsVC
+                    self.present(nextViewController!, animated:true, completion:nil)
             }
         }
+
+        
         
     }
     
