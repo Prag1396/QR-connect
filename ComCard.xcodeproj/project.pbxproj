@@ -24,6 +24,7 @@
 		DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */; };
 		DBD1F9991FFAE44900A2CAE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */; };
 		DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */; };
+		DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		DBD1F99E1FFB0A0400A2CAE6 /* ComCard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ComCard.entitlements; sourceTree = "<group>"; };
 		DD246F84E7ADA9782C151448 /* Pods_ComCardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -151,6 +154,7 @@
 		DBD1F9591FF8271200A2CAE6 /* ComCard */ = {
 			isa = PBXGroup;
 			children = (
+				DBD1F99E1FFB0A0400A2CAE6 /* ComCard.entitlements */,
 				DBD1F9971FFAE23400A2CAE6 /* Services */,
 				DBD1F9961FFAE1EF00A2CAE6 /* Model */,
 				DBD1F98B1FF8315300A2CAE6 /* Controller */,
@@ -214,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */,
+				DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -296,6 +301,11 @@
 					DBD1F9561FF8271200A2CAE6 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					DBD1F96A1FF8271200A2CAE6 = {
 						CreatedOnToolsVersion = 9.2;
@@ -380,6 +390,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ComCard/Pods-ComCard-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -387,6 +398,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -521,6 +533,7 @@
 				DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */,
 				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
+				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */,
@@ -692,9 +705,11 @@
 			baseConfigurationReference = 8411E7F6BE361A8D6FF6BCDB /* Pods-ComCard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ComCard/ComCard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LP7F4D4WS;
 				INFOPLIST_FILE = ComCard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = PragunSharma.ComCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -708,9 +723,11 @@
 			baseConfigurationReference = 05E723363CE9757A9B7CAA03 /* Pods-ComCard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ComCard/ComCard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LP7F4D4WS;
 				INFOPLIST_FILE = ComCard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = PragunSharma.ComCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
