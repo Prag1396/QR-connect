@@ -115,13 +115,18 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 //Call DB_CreateUser to create an user
                 let user = Auth.auth().currentUser
-                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, (user?.phoneNumber)!: self.passcode, "CardNumber" : self.cardNumber]
+                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber, "Passcode": self.passcode ]
                 DataService.instance.createDBUser(uid: (user?.uid)!, userData: userData)
                 self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
             }
         }
         }
         
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
     

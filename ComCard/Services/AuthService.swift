@@ -20,20 +20,13 @@ class AuthService: UIViewController {
             if error != nil {
                 messageSentComplete(false, error)
             } else {
-                //Check if user already exists
-                self.checkIfUserIDExists(userId: (Auth.auth().currentUser?.uid)!, checkUserComplete: { (status, errmsg) in
-                    if (status == false) {
-                        //Present alert
-                        messageSentComplete(false, errmsg as? Error!)
-                    } else {
                         self.defaults.set(verificationID, forKey: "authVID")
                         messageSentComplete(true, nil)
 
                     }
-                })
+            
                 
             }
-        }
     }
     
     func auth(code: UITextField, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
@@ -52,19 +45,6 @@ class AuthService: UIViewController {
                     }
             }
     }
-    
-    func checkIfUserIDExists(userId: String, checkUserComplete: @escaping (_ status: Bool, _ error: String?)->()) {
-        let userRef = DataService.instance.REF_USERS
-        userRef.child(userId).observeSingleEvent(of: DataEventType.value) { (snapshot) in
-            if snapshot.hasChild((Auth.auth().currentUser?.phoneNumber)!) {
-                checkUserComplete(false, "Phone number already in use")
-            } else {
-                checkUserComplete(true, "Phone number is valid")
-            }
-        }
-        
-    }
-
     
     func handleErrorCode(error: NSError, onCompleteErrorHandler: @escaping(_ errorMsg: String, _ data: AnyObject?)->()) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {
@@ -101,6 +81,15 @@ class AuthService: UIViewController {
             
             }
         }
+    }
+    
+    
+    func checkIfPhoneNymbeExists(phoneNumber: String) {
+        
+        
+        
+        
+        
     }
     
 }
