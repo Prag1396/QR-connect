@@ -21,26 +21,30 @@ class AuthService: UIViewController {
                 messageSentComplete(false, error)                
             } else {
                 self.defaults.set(verificationID, forKey: "authVID")
+                
                 messageSentComplete(true, nil)
             }
         }
     }
     
-    func auth(code: UITextField, loginComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
+    func auth(code: UITextField, password: String, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!)
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
-                loginComplete(false, error)
+                authorizationComplete(false, error)
             } else {
                 print("Phonenumber: \(String(describing: user?.phoneNumber))")
                 let userInfo = user?.providerData[0]
                 print("ProviderID: \(String(describing: userInfo?.providerID))")
-                //Login Successfull
-                loginComplete(true, nil)
+                //Authorization successfull
+                authorizationComplete(true, nil)
 
             }
         }
     }
-
+    
+    
+    
+    
 }

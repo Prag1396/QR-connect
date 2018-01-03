@@ -98,6 +98,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         else {
         performSegue(withIdentifier: "connectPressed", sender: (Any).self)
+            
         }
       
         

@@ -28,7 +28,6 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -64,7 +63,13 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     }
     @IBAction func signInBtnTapped(_ sender: Any) {
         
-        performSegue(withIdentifier: "signInComplete", sender: Any.self)
+        if userNameTextField.text != nil && passwordTextField.text != nil {
+            
+        }
+        
+        
+        
+        performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
     }
     
 }

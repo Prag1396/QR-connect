@@ -21,7 +21,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     private var _phoneNumber: String? = nil
     private var _cardNumber: String? = nil
     private var _passcode: String? = nil
-    
+    private var fullName: String? = nil
     var firstName: String {
         get {
             return _firstName!
@@ -67,6 +67,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         }
     }
     
+    //Send code to device
     @IBAction func sendCodePressed(_ sender: Any) {
         if phoneConfirmText.text != nil {
         AuthService.instance.sendCode(withPhoneNumber: phoneNumber) { (status, error) in
@@ -83,10 +84,10 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         
     }
     
-    
+    //Login Before verification
     @IBAction func loginPressed(_ sender: Any) {
         if code.text != nil {
-        AuthService.instance.auth(code: code) { (status, error) in
+        AuthService.instance.auth(code: code, password: passcode) { (status, error) in
             if error != nil && status == false {
                 let alert = UIAlertController(title: "Warning", message: "Invalid Code", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -94,16 +95,19 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 self.present(alert, animated: true, completion: nil)
             }   else if error == nil && status == true {
                 
-                    //Call DB_CreateUser to create an user
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "userDetailsVC") as? UserDetailsVC
-                    self.present(nextViewController!, animated:true, completion:nil)
+                //Call DB_CreateUser to create an user
+                let user = Auth.auth().currentUser
+                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, "\(user?.phoneNumber as String!)": self._cardNumber ?? Any.self]
+                DataService.instance.createDBUser(uid: (user?.uid)!, userData: userData)
+                self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
             }
         }
         }
         
         
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +119,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         code.clearsOnBeginEditing = false
         phoneConfirmText.keyboardAppearance = .dark
         code.keyboardAppearance = .dark
+        
+        fullName = firstName + " " + lastName
+        print(fullName ?? String())
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
