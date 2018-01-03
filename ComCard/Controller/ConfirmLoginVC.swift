@@ -73,10 +73,20 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         AuthService.instance.sendCode(withPhoneNumber: phoneNumber) { (status, error) in
             if error != nil && status == false {
                 //Present Alert
-                let alert = UIAlertController(title: "Warning", message: "Phone number not recognized. Enter with country code.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                print(error.debugDescription)
-                self.present(alert, animated: true, completion: nil)
+                AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
+                    let alert = UIAlertController(title: "Warning", message: "\(errmsg)", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    print(error.debugDescription)
+                    self.present(alert, animated: true, completion: nil)
+                })
+            } else if error == nil && status == false {
+                    let alert = UIAlertController(title: "Warning", message: "Phone number already in use", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
+                    self.performSegue(withIdentifier: "backbtnpressedinconfirmvc", sender: Any.self)
+
+                }))
+                    self.present(alert, animated: true, completion: nil)
+
             }
         }
         }
@@ -84,26 +94,33 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         
     }
     
+    @IBAction func backbtnPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //Login Before verification
     @IBAction func loginPressed(_ sender: Any) {
         if code.text != nil {
-        AuthService.instance.auth(code: code, password: passcode) { (status, error) in
+        AuthService.instance.auth(code: code) { (status, error) in
             if error != nil && status == false {
-                let alert = UIAlertController(title: "Warning", message: "Invalid Code", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                print(error.debugDescription)
-                self.present(alert, animated: true, completion: nil)
+                AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
+                    let alert = UIAlertController(title: "Warning", message: "\(errmsg)", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    print(error.debugDescription)
+                    self.present(alert, animated: true, completion: nil)
+                })
+
+
             }   else if error == nil && status == true {
                 
                 //Call DB_CreateUser to create an user
                 let user = Auth.auth().currentUser
-                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, "\(user?.phoneNumber as String!)": self._cardNumber ?? Any.self]
+                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, (user?.phoneNumber)!: self.passcode, "CardNumber" : self.cardNumber]
                 DataService.instance.createDBUser(uid: (user?.uid)!, userData: userData)
                 self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
             }
         }
         }
-        
         
     }
     

@@ -63,6 +63,9 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag: Int = textField.tag + 1
+        if(textField.tag == 3) {
+
+        }
         self.jumpToNextField(textfield: textField, withTag: nextTag)
         return false
     }
@@ -79,7 +82,6 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
         
     }
-    
     
     @IBAction func backbtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

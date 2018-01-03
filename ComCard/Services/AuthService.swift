@@ -18,33 +18,89 @@ class AuthService: UIViewController {
     func sendCode(withPhoneNumber phoneNumber: String, messageSentComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if error != nil {
-                messageSentComplete(false, error)                
+                messageSentComplete(false, error)
             } else {
-                self.defaults.set(verificationID, forKey: "authVID")
+                //Check if user already exists
+                self.checkIfUserIDExists(userId: (Auth.auth().currentUser?.uid)!, checkUserComplete: { (status, errmsg) in
+                    if (status == false) {
+                        //Present alert
+                        messageSentComplete(false, errmsg as? Error!)
+                    } else {
+                        self.defaults.set(verificationID, forKey: "authVID")
+                        messageSentComplete(true, nil)
+
+                    }
+                })
                 
-                messageSentComplete(true, nil)
             }
         }
     }
     
-    func auth(code: UITextField, password: String, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
+    func auth(code: UITextField, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!)
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 authorizationComplete(false, error)
             } else {
-                print("Phonenumber: \(String(describing: user?.phoneNumber))")
-                let userInfo = user?.providerData[0]
-                print("ProviderID: \(String(describing: userInfo?.providerID))")
-                //Authorization successfull
-                authorizationComplete(true, nil)
+                    print("Phonenumber: \(String(describing: user?.phoneNumber))")
+                    let userInfo = user?.providerData[0]
+                    print("ProviderID: \(String(describing: userInfo?.providerID))")
+                        
+                    //Authorization successfull
+                    authorizationComplete(true, nil)
+                    }
+            }
+    }
+    
+    func checkIfUserIDExists(userId: String, checkUserComplete: @escaping (_ status: Bool, _ error: String?)->()) {
+        let userRef = DataService.instance.REF_USERS
+        userRef.child(userId).observeSingleEvent(of: DataEventType.value) { (snapshot) in
+            if snapshot.hasChild((Auth.auth().currentUser?.phoneNumber)!) {
+                checkUserComplete(false, "Phone number already in use")
+            } else {
+                checkUserComplete(true, "Phone number is valid")
+            }
+        }
+        
+    }
 
+    
+    func handleErrorCode(error: NSError, onCompleteErrorHandler: @escaping(_ errorMsg: String, _ data: AnyObject?)->()) {
+        if let errorCode = AuthErrorCode(rawValue: error.code) {
+            switch (errorCode) {
+            case .tooManyRequests: do {
+                onCompleteErrorHandler("Too many requests from this device. Please try again later", nil)
+                }
+            case .userTokenExpired: do {
+                onCompleteErrorHandler("Session has expired. Please try again", nil)
+                }
+            case .userDisabled: do {
+                onCompleteErrorHandler("Your accunt has been disabled. Please contact the admin", nil)
+                }
+            case .invalidPhoneNumber: do {
+                onCompleteErrorHandler("Invalid Phone number. Enter phone number again with country code", nil)
+                }
+            case .webNetworkRequestFailed: do {
+                onCompleteErrorHandler("Network Error. Please try again later", nil)
+                }
+            case .networkError: do {
+                onCompleteErrorHandler("Session Timed out. Please try again", nil)
+                }
+            case .wrongPassword: do {
+                onCompleteErrorHandler("Invalid Passcode", nil)
+                }
+            case .invalidVerificationCode: do {
+                onCompleteErrorHandler("Invalid Code. Please try again", nil)
+                }
+            case .credentialAlreadyInUse: do {
+                onCompleteErrorHandler("Phone number already in use", nil)
+                }
+            default:
+                onCompleteErrorHandler("Internal Error. Please try again.", nil)
+            
             }
         }
     }
-    
-    
-    
     
 }
