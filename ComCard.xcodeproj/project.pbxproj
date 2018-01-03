@@ -18,13 +18,14 @@
 		DBD1F9701FF8271200A2CAE6 /* ComCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F96F1FF8271200A2CAE6 /* ComCardTests.swift */; };
 		DBD1F97B1FF8271200A2CAE6 /* ComCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F97A1FF8271200A2CAE6 /* ComCardUITests.swift */; };
 		DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */; };
-		DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */; };
+		DBD1F98D1FF83B9000A2CAE6 /* UserSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F98C1FF83B9000A2CAE6 /* UserSignupVC.swift */; };
 		DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */; };
 		DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */; };
 		DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */; };
 		DBD1F9991FFAE44900A2CAE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F9981FFAE44900A2CAE6 /* GoogleService-Info.plist */; };
 		DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */; };
 		DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */; };
+		DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +68,7 @@
 		DBD1F97A1FF8271200A2CAE6 /* ComCardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComCardUITests.swift; sourceTree = "<group>"; };
 		DBD1F97C1FF8271200A2CAE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonStyle.swift; sourceTree = "<group>"; };
-		DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		DBD1F98C1FF83B9000A2CAE6 /* UserSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignupVC.swift; sourceTree = "<group>"; };
 		DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContacVC.swift; sourceTree = "<group>"; };
 		DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLoginVC.swift; sourceTree = "<group>"; };
 		DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		DBD1F99E1FFB0A0400A2CAE6 /* ComCard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ComCard.entitlements; sourceTree = "<group>"; };
+		DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSigninVC.swift; sourceTree = "<group>"; };
 		DD246F84E7ADA9782C151448 /* Pods_ComCardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -199,10 +201,11 @@
 			isa = PBXGroup;
 			children = (
 				DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */,
-				DBD1F98C1FF83B9000A2CAE6 /* LoginVC.swift */,
+				DBD1F98C1FF83B9000A2CAE6 /* UserSignupVC.swift */,
 				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */,
 				DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */,
+				DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -535,8 +538,9 @@
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
+				DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
-				DBD1F98D1FF83B9000A2CAE6 /* LoginVC.swift in Sources */,
+				DBD1F98D1FF83B9000A2CAE6 /* UserSignupVC.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
 				DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */,
 			);

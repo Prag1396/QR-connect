@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var firstNameLabel: UITextField!
@@ -42,12 +42,16 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegat
     func setupOutlets() {
         firstNameLabel.delegate = self
         firstNameLabel.tag = 1
+        firstNameLabel.clearsOnBeginEditing = false
         lastNameLabel.delegate = self
         lastNameLabel.tag = 2
+        lastNameLabel.clearsOnBeginEditing = false
         phoneNumberLabel.delegate = self
         phoneNumberLabel.tag = 3
+        phoneNumberLabel.clearsOnBeginEditing = false
         cardNumberLabel.delegate = self
         cardNumberLabel.tag = 4
+        cardNumberLabel.clearsOnBeginEditing = false
         passCodeLabel.delegate = self
         passCodeLabel.tag = 5
         firstNameLabel.keyboardAppearance = .dark
@@ -83,15 +87,29 @@ class LoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegat
     
     
     @IBAction func connectBtnPressed(_ sender: Any) {
+        captureText()
+        if ((firstNameLabel.text?.isEmpty)! || (lastNameLabel.text?.isEmpty)! || (phoneNumberLabel.text?.isEmpty)! || (cardNumberLabel.text?.isEmpty)! || (passCodeLabel.text?.isEmpty)!) {
+            //Present Alert
+            let alert = UIAlertController(title: "Warning", message: "Please fill all the text fields", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        } 
+        
+        else {
+        performSegue(withIdentifier: "connectPressed", sender: (Any).self)
+        }
+      
+        
+    }
+    
+    func captureText() {
         _firstname = firstNameLabel.text!
         _lastname = lastNameLabel.text!
         _phoneNumber = phoneNumberLabel.text!
         _cardNumber = cardNumberLabel.text!
         _passcode = passCodeLabel.text!
-        
     }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "connectPressed") {

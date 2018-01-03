@@ -110,7 +110,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         phoneConfirmText.text = _phoneNumber
         phoneConfirmText.allowsEditingTextAttributes = false
         phoneConfirmText.delegate = self
+        phoneConfirmText.clearsOnBeginEditing = false
         code.delegate = self
+        code.clearsOnBeginEditing = false
         phoneConfirmText.keyboardAppearance = .dark
         code.keyboardAppearance = .dark
         

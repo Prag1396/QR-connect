@@ -54,7 +54,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="YW1-c0-l1G" kind="presentation" identifier="RptPressed" id="QET-19-4MH"/>
+                                    <segue destination="YW1-c0-l1G" kind="show" identifier="RptPressed" id="QET-19-4MH"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="tZo-m9-ads">
@@ -78,7 +78,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="2o3-8U-A67" kind="presentation" identifier="LinkOptionPressed" id="Vj9-WG-YQe"/>
+                                    <segue destination="2o3-8U-A67" kind="show" identifier="LinkOptionPressed" id="Vj9-WG-YQe"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="qmY-4v-c1t">
@@ -204,6 +204,9 @@
                                 <state key="normal" backgroundImage="backbutton">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="backBtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="cFw-It-BpO"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="callfriend_btn" translatesAutoresizingMaskIntoConstraints="NO" id="JjT-AJ-5Yj">
                                 <rect key="frame" x="62" y="587" width="15" height="15"/>
@@ -246,10 +249,10 @@
             </objects>
             <point key="canvasLocation" x="31.199999999999999" y="1032.2660098522167"/>
         </scene>
-        <!--View Controller-->
+        <!--User SigninVC-->
         <scene sceneID="KJO-eF-A4a">
             <objects>
-                <viewController id="WOu-pG-rtD" sceneMemberID="viewController">
+                <viewController id="WOu-pG-rtD" customClass="UserSigninVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hXl-sl-gTK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,6 +270,9 @@
                                 <state key="normal" backgroundImage="backbutton">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="backbtnPressed:" destination="WOu-pG-rtD" eventType="touchUpInside" id="7i1-vJ-uJv"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="username_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZEZ-H6-Rsr">
                                 <rect key="frame" x="34" y="210" width="20" height="20"/>
@@ -275,14 +281,14 @@
                                     <constraint firstAttribute="height" constant="20" id="9MR-vi-KUX"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter passcode (6 Digits)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-Ps-pft" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter passcode" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-Ps-pft" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="85" y="265" width="257" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="30C-Mf-yF3"/>
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -298,14 +304,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="+1 4152729677" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ze1-dp-3O2" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ze1-dp-3O2" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="85" y="201" width="257" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GQn-Ik-oGa"/>
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -361,6 +367,9 @@
                                         <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInBtnTapped:" destination="WOu-pG-rtD" eventType="touchUpInside" id="Qov-rA-Zg8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,15 +401,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ELL-TH-emw"/>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="txP-8Z-jXU" id="VEp-He-mgU"/>
+                        <outlet property="passwordTextField" destination="lDJ-Ps-pft" id="gw6-xm-OLP"/>
+                        <outlet property="userNameTextField" destination="Ze1-dp-3O2" id="iOk-cN-cEY"/>
+                        <segue destination="0b5-fR-lD6" kind="show" identifier="signInComplete" id="33y-Kn-Cvn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dw-Gp-x6s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="1032"/>
+            <point key="canvasLocation" x="998" y="1032"/>
         </scene>
-        <!--LoginVC-->
+        <!--User SignupVC-->
         <scene sceneID="HS2-Yd-Bua">
             <objects>
-                <viewController id="2o3-8U-A67" customClass="LoginVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2o3-8U-A67" customClass="UserSignupVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xXS-fG-uqX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -531,7 +546,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Set Passcode (6 Digits)" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-RE-zbG" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Set Passcode " clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-RE-zbG" customClass="HoshiTextField" customModule="TextFieldEffects">
                                         <rect key="frame" x="0.0" y="192" width="308.66666666666669" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -607,7 +622,6 @@
                                 </state>
                                 <connections>
                                     <action selector="connectBtnPressed:" destination="2o3-8U-A67" eventType="touchUpInside" id="GKE-Ig-bHE"/>
-                                    <segue destination="0b5-fR-lD6" kind="show" identifier="connectPressed" id="vnl-f8-qdZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3k-uf-ZG3">
@@ -621,7 +635,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="WOu-pG-rtD" kind="presentation" id="sgW-3Z-sZa"/>
+                                    <segue destination="WOu-pG-rtD" kind="show" id="sgW-3Z-sZa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -663,6 +677,7 @@
                         <outlet property="lastNameLabel" destination="ZiB-Go-AEo" id="htm-AN-SPD"/>
                         <outlet property="passCodeLabel" destination="cKy-RE-zbG" id="bMw-qH-wb6"/>
                         <outlet property="phoneNumberLabel" destination="WY2-qe-rj4" id="gYQ-2g-oeY"/>
+                        <segue destination="0b5-fR-lD6" kind="show" identifier="connectPressed" id="CVK-Ck-IZT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="663-T8-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,7 +740,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -749,7 +764,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -956,7 +971,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutpressed" id="xAF-WQ-SJ2"/>
+                                    <action selector="homebtnPressed:" destination="fdE-wq-AbN" eventType="touchUpInside" id="fOG-9e-u0B"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGh-tX-wLK" customClass="HoshiTextField" customModule="TextFieldEffects">
@@ -1022,10 +1037,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pqn-0z-iUA"/>
                     </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="homebtnpressed" id="gD5-DZ-zf2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJ5-iN-4Xb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2940" y="31.690140845070424"/>
+            <point key="canvasLocation" x="33" y="-809"/>
         </scene>
     </scenes>
     <resources>
@@ -1041,4 +1059,7 @@
         <image name="username_icon" width="20" height="20"/>
         <image name="wallet" width="20" height="17"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="33y-Kn-Cvn"/>
+    </inferredMetricsTieBreakers>
 </document>
