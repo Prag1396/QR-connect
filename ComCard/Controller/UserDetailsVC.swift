@@ -8,17 +8,24 @@
 
 import UIKit
 
-class UserDetailsVC: UIViewController {
+class UserDetailsVC: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var FullNameTextField: UITextField!
+    @IBOutlet weak var CreditCardTextField: UITextField!
+    @IBOutlet weak var PhoneNumberTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func setupTextFields() {
+        FullNameTextField.delegate = self
+        CreditCardTextField.delegate = self
+        PhoneNumberTextField.delegate = self
+        FullNameTextField.allowsEditingTextAttributes = false
+        CreditCardTextField.allowsEditingTextAttributes = false
+        PhoneNumberTextField.allowsEditingTextAttributes = false
     }
     
 

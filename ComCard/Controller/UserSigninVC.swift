@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -23,6 +25,8 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         userNameTextField.clearsOnBeginEditing = false
         passwordTextField.delegate = self
         passwordTextField.tag = 2
+        userNameTextField.keyboardAppearance = .dark
+        passwordTextField.keyboardAppearance = .dark
         passwordTextField.clearsOnBeginEditing = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
@@ -50,12 +54,15 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     @objc func backgroundTapped() {
         view.endEditing(true)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     @IBAction func backbtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -64,6 +71,19 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBAction func signInBtnTapped(_ sender: Any) {
         
         if userNameTextField.text != nil && passwordTextField.text != nil {
+            let userRef = DataService.instance.REF_BASE
+            let userID = Auth.auth().currentUser?.uid
+            userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let dict = snapshot.value as? NSDictionary
+                let username = dict?["PhoneNumber"] as? String
+                let password = dict?["Passcode"] as? String
+                if((self.userNameTextField.text == username) && (self.passwordTextField.text == password)) {
+                    print("Successfull sign in")
+                } else {
+                    //handle errors
+                }
+            })
+            
             
         }
         

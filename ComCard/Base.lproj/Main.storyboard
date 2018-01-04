@@ -358,8 +358,8 @@
                                     <constraint firstAttribute="height" constant="30" id="Fpb-rx-XO5"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="156" id="YQE-ie-doO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
-                                <state key="normal" title=" SIGN IN" image="LoginUIButton">
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                <state key="normal" title=" VIEW DETAILS" image="LoginUIButton">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -835,7 +835,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fFr-QZ-bOv"/>
                                 </constraints>
-                                <state key="normal" image="LoginUIButton">
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title=" VERIFY" image="LoginUIButton">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -928,14 +929,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmV-8B-8Vy">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-fm-OPU" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-fm-OPU" userLabel="FullNameTextField" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="100" y="191" width="162" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="XXJ-Dt-317"/>
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -965,14 +966,14 @@
                                     <constraint firstAttribute="width" constant="15" id="kQJ-OU-Fif"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="siy-46-5hk" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="siy-46-5hk" userLabel="PhoneNumberTextField" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="100" y="252" width="162" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jlS-4e-ITB"/>
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -1020,14 +1021,14 @@
                                     <action selector="homebtnPressed:" destination="fdE-wq-AbN" eventType="touchUpInside" id="fOG-9e-u0B"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGh-tX-wLK" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGh-tX-wLK" userLabel="CreditCardNumberTextField" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="100" y="313" width="162" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="sDc-u8-tje"/>
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
@@ -1084,6 +1085,9 @@
                         <viewLayoutGuide key="safeArea" id="pqn-0z-iUA"/>
                     </view>
                     <connections>
+                        <outlet property="CreditCardTextField" destination="XGh-tX-wLK" id="3Sc-Lj-ltF"/>
+                        <outlet property="FullNameTextField" destination="Eep-fm-OPU" id="Sue-Hj-Kga"/>
+                        <outlet property="PhoneNumberTextField" destination="siy-46-5hk" id="Lvx-GI-BgI"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="homebtnpressed" id="gD5-DZ-zf2"/>
                     </connections>
                 </viewController>
@@ -1106,8 +1110,7 @@
         <image name="wallet" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CVK-Ck-IZT"/>
         <segue reference="ffs-XY-gdX"/>
-        <segue reference="sgW-3Z-sZa"/>
+        <segue reference="mMn-JZ-ue3"/>
     </inferredMetricsTieBreakers>
 </document>
