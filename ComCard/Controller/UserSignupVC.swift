@@ -68,17 +68,23 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func checkPhoneNumber() {
-        AuthService.instance.checkIfPhoneNymbeExists(phoneNumber: self.phoneNumberLabel.text!, checkComplete: { (status, errmsg) in
+        AuthService.instance.checkIfPhoneNumberExists(phoneNumber: self.phoneNumberLabel.text!, checkComplete: { (status, errmsg) in
             if status == false {
                 
                 self.isReadytoPerformSegue = false
                 self.phoneNumberAlreaduInUse.isHidden = false
                 self.connectBtn.isUserInteractionEnabled = false
+                self.connectBtn.backgroundColor = UIColor(red: 161/255, green: 172/255, blue: 174/255, alpha: 1.0)
+
                 
             } else {
                 self.isReadytoPerformSegue = true
                 self.phoneNumberAlreaduInUse.isHidden = true
                 self.connectBtn.isUserInteractionEnabled = true
+                if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.cardNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
+                    self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+                }
+
             }
         })
     }
@@ -106,6 +112,10 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         if textField.tag == 3 {
             checkPhoneNumber()
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.connectBtn.backgroundColor = UIColor(red: 161/255, green: 172/255, blue: 174/255, alpha: 1.0)
     }
     
 
