@@ -10,18 +10,20 @@ import UIKit
 
 class ConfigureCell: UITableViewCell {
 
-    @IBOutlet weak var creditCardLabel: UILabel!
-    @IBOutlet weak var phonenumberLabel: UILabel!
     @IBOutlet weak var fullnameLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var creditCardLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func updateUI(user: User) {
+        fullnameLabel.text = user.fullName
+        phoneNumberLabel.text = user.phoneNumber
+        creditCardLabel.text = user.cardNumber
 
-        // Configure the view for the selected state
     }
 
 }
