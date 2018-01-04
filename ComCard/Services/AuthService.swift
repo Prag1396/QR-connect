@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
+
 class AuthService: UIViewController {
     static let instance = AuthService()
     let defaults = UserDefaults.standard
