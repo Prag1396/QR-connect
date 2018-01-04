@@ -459,10 +459,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="nVh-s3-qXP">
-                                <rect key="frame" x="33" y="150" width="253.5" height="222"/>
+                                <rect key="frame" x="33" y="150" width="224.5" height="222"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter first name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e6N-iG-n6I" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="0.0" width="253.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="224.5" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="r9k-ok-XIN"/>
@@ -486,7 +486,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter last name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZiB-Go-AEo" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="48" width="253.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="48" width="224.5" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="kLw-kJ-AWT"/>
@@ -510,7 +510,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter phone number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WY2-qe-rj4" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="96" width="253.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="96" width="224.5" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="1qU-S6-VrX"/>
@@ -534,7 +534,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter card number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QOF-2B-ywy" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="144" width="253.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="144" width="224.5" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="M8I-Bq-FTM"/>
@@ -558,7 +558,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Set Passcode " clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-RE-zbG" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="192" width="253.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="192" width="224.5" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="aPw-pv-0aC"/>
@@ -605,7 +605,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-G9-S80" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="60" y="436" width="200" height="36"/>
+                                <rect key="frame" x="53" y="436" width="214" height="36"/>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="KXr-dG-6ex"/>
@@ -623,7 +623,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUJ-cq-Ifn">
                                 <rect key="frame" x="-1" y="497" width="320" height="30"/>
-                                <color key="backgroundColor" red="0.30196078430000001" green="0.85098039219999999" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.63174474239349365" green="0.67440736293792725" blue="0.68239820003509521" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SKI-51-XNa"/>
                                 </constraints>
@@ -649,18 +649,31 @@
                                     <segue destination="WOu-pG-rtD" kind="show" id="sgW-3Z-sZa"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number already in use" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-If-6Wk">
+                                <rect key="frame" x="160" y="256" width="107" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="112" id="Slh-lQ-t1U"/>
+                                    <constraint firstAttribute="height" constant="21" id="mVz-C9-GCH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="8"/>
+                                <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="e6N-iG-n6I" firstAttribute="leading" secondItem="VV1-1k-wFN" secondAttribute="leading" id="39M-oC-l8k"/>
                             <constraint firstItem="6bt-VT-FAa" firstAttribute="centerX" secondItem="xXS-fG-uqX" secondAttribute="centerX" id="3AI-fJ-Bf3"/>
-                            <constraint firstItem="e6N-iG-n6I" firstAttribute="trailing" secondItem="VV1-1k-wFN" secondAttribute="trailing" id="5au-3K-NaB"/>
+                            <constraint firstItem="e6N-iG-n6I" firstAttribute="trailing" secondItem="VV1-1k-wFN" secondAttribute="trailing" constant="-29" id="5au-3K-NaB"/>
                             <constraint firstItem="qAE-LS-O2f" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" constant="12" id="6vw-Nh-dAd"/>
                             <constraint firstItem="nVh-s3-qXP" firstAttribute="top" secondItem="VV1-1k-wFN" secondAttribute="bottom" constant="19" id="7cQ-jp-hAJ"/>
+                            <constraint firstItem="kIM-If-6Wk" firstAttribute="top" secondItem="ZiB-Go-AEo" secondAttribute="bottom" constant="28" id="9wd-vS-5es"/>
                             <constraint firstItem="qAE-LS-O2f" firstAttribute="top" secondItem="apa-V1-F2S" secondAttribute="bottom" constant="8" id="Caw-PN-BKX"/>
                             <constraint firstItem="apa-V1-F2S" firstAttribute="trailing" secondItem="A1v-ZD-inn" secondAttribute="trailing" id="Fsu-bv-Pvb"/>
+                            <constraint firstItem="kIM-If-6Wk" firstAttribute="trailing" secondItem="jI8-G9-S80" secondAttribute="trailing" id="IAg-CD-3ad"/>
                             <constraint firstItem="AUJ-cq-Ifn" firstAttribute="trailing" secondItem="A1v-ZD-inn" secondAttribute="trailing" constant="-1" id="MOZ-mn-qDo"/>
                             <constraint firstItem="apa-V1-F2S" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" id="PD0-yf-FeU"/>
+                            <constraint firstItem="kIM-If-6Wk" firstAttribute="leading" secondItem="WY2-qe-rj4" secondAttribute="trailing" constant="-97.5" id="QQ1-wd-aR4"/>
                             <constraint firstItem="6bt-VT-FAa" firstAttribute="top" secondItem="nVh-s3-qXP" secondAttribute="bottom" constant="14" id="RYF-Et-uj0"/>
                             <constraint firstItem="S3k-uf-ZG3" firstAttribute="leading" secondItem="kLt-wY-EcF" secondAttribute="trailing" constant="-140" id="Tb5-7G-Ad1"/>
                             <constraint firstItem="kLt-wY-EcF" firstAttribute="leading" secondItem="A1v-ZD-inn" secondAttribute="leading" id="TbX-yf-878"/>
@@ -682,18 +695,21 @@
                         <viewLayoutGuide key="safeArea" id="A1v-ZD-inn"/>
                     </view>
                     <connections>
+                        <outlet property="AlreadyamemberSigninBtn" destination="S3k-uf-ZG3" id="cDb-Dy-qIf"/>
                         <outlet property="background" destination="kLt-wY-EcF" id="krG-8n-BmC"/>
                         <outlet property="cardNumberLabel" destination="QOF-2B-ywy" id="q3d-vf-l7r"/>
+                        <outlet property="connectBtn" destination="AUJ-cq-Ifn" id="DO2-Rn-DXe"/>
                         <outlet property="firstNameLabel" destination="e6N-iG-n6I" id="1i4-fl-HF2"/>
                         <outlet property="lastNameLabel" destination="ZiB-Go-AEo" id="htm-AN-SPD"/>
                         <outlet property="passCodeLabel" destination="cKy-RE-zbG" id="bMw-qH-wb6"/>
+                        <outlet property="phoneNumberAlreaduInUse" destination="kIM-If-6Wk" id="6yD-ev-kac"/>
                         <outlet property="phoneNumberLabel" destination="WY2-qe-rj4" id="gYQ-2g-oeY"/>
                         <segue destination="0b5-fR-lD6" kind="show" identifier="connectPressed" id="CVK-Ck-IZT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="663-T8-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="999" y="33"/>
+            <point key="canvasLocation" x="997.5" y="32.74647887323944"/>
         </scene>
         <!--Confirm LoginVC-->
         <scene sceneID="kaK-2b-YV5">
@@ -1090,7 +1106,8 @@
         <image name="wallet" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="CVK-Ck-IZT"/>
         <segue reference="ffs-XY-gdX"/>
-        <segue reference="mMn-JZ-ue3"/>
+        <segue reference="sgW-3Z-sZa"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -84,8 +84,19 @@ class AuthService: UIViewController {
     }
     
     
-    func checkIfPhoneNymbeExists(phoneNumber: String) {
-        
+    func checkIfPhoneNymbeExists(phoneNumber: String, checkComplete: @escaping(_ status: Bool, _ errmsg: String?)->()) {
+        let userRef = DataService.instance.REF_BASE
+        userRef.child("users").queryOrdered(byChild: "PhoneNumber").queryEqual(toValue: phoneNumber).observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects {
+                print(rest)
+            }
+            let isPhoneexists = snapshot.exists()
+            if (isPhoneexists) {
+                checkComplete(false, "Duplicate number exists")
+            } else {
+                checkComplete(true, nil)
+            }
+        }
         
         
         

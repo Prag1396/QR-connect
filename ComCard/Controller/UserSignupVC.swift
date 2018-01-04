@@ -16,6 +16,9 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var phoneNumberLabel: UITextField!
     @IBOutlet weak var cardNumberLabel: UITextField!
     @IBOutlet weak var passCodeLabel: UITextField!
+    @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
+    @IBOutlet weak var AlreadyamemberSigninBtn: UIButton!
+    @IBOutlet weak var connectBtn: UIButton!
     
     private var _phoneNumber: String? = nil
     private var _firstname: String? = nil
@@ -24,6 +27,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     private var _passcode: String? = nil
     
     var next_responder: UIResponder!
+    var isReadytoPerformSegue: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +36,12 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         setupOutlets()
+        isReadytoPerformSegue = true
         
     }
     
     @objc func backgroundTapped() {
+        
         view.endEditing(true)
     }
     
@@ -61,15 +67,48 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         passCodeLabel.keyboardAppearance = .dark
     }
     
+    func checkPhoneNumber() {
+        AuthService.instance.checkIfPhoneNymbeExists(phoneNumber: self.phoneNumberLabel.text!, checkComplete: { (status, errmsg) in
+            if status == false {
+                
+                self.isReadytoPerformSegue = false
+                self.phoneNumberAlreaduInUse.isHidden = false
+                self.connectBtn.isUserInteractionEnabled = false
+                
+            } else {
+                self.isReadytoPerformSegue = true
+                self.phoneNumberAlreaduInUse.isHidden = true
+                self.connectBtn.isUserInteractionEnabled = true
+            }
+        })
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag: Int = textField.tag + 1
         if(textField.tag == 3) {
-
+            
+            self.checkPhoneNumber()
+        
+        }
+        else if(textField.tag == 5) {
+            if(self.isReadytoPerformSegue == true) {
+                self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+            }
         }
         self.jumpToNextField(textfield: textField, withTag: nextTag)
         return false
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && cardNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
+            self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+        }
+        if textField.tag == 3 {
+            checkPhoneNumber()
+        }
+    }
+    
+
     
     func jumpToNextField(textfield: UITextField, withTag tag: Int) {
         
@@ -96,7 +135,11 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
-        } 
+        }  else if (isReadytoPerformSegue == false) {
+            let alert = UIAlertController(title: "Warning", message: "Please fill all the text fields", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         
         else {
         performSegue(withIdentifier: "connectPressed", sender: (Any).self)
