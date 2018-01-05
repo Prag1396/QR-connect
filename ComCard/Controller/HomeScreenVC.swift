@@ -13,6 +13,9 @@ class HomeScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //Check if user authenticated
+        //If yes then load contactVC if not authenticated then load sign up screen
+        
     }
 
     override func didReceiveMemoryWarning() {

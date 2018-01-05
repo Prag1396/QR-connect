@@ -26,6 +26,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Do any additional setup after loading the view.
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
+        print(userID ?? String())
         userRef.child("users").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? NSDictionary
             let fullName = dict?["FullName"] as? String
