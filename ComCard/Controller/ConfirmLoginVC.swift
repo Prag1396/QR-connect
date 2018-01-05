@@ -115,8 +115,10 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 //Call DB_CreateUser to create an user
                 let user = Auth.auth().currentUser
-                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber, "Passcode": self.passcode ]
-                DataService.instance.createDBUser(uid: (user?.uid)!, userData: userData)
+                let userData: Dictionary<String, Any> = ["FullName": self.fullName ?? Any.self, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber]
+                let pvtData: Dictionary<String, Any> = ["\(user?.phoneNumber ?? String())": self.passcode ]
+                DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
+                DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
                 self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
             }
         }

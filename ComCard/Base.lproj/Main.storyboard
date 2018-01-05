@@ -273,6 +273,7 @@
                                 </state>
                                 <connections>
                                     <action selector="backbtnPressed:" destination="WOu-pG-rtD" eventType="touchUpInside" id="7i1-vJ-uJv"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="T02-rN-a0a"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="username_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZEZ-H6-Rsr">
@@ -1115,7 +1116,8 @@
         <image name="wallet" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vj9-WG-YQe"/>
+        <segue reference="ffs-XY-gdX"/>
         <segue reference="mMn-JZ-ue3"/>
+        <segue reference="T02-rN-a0a"/>
     </inferredMetricsTieBreakers>
 </document>
