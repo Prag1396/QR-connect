@@ -37,7 +37,24 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    @IBAction func deleteAccountPressed(_ sender: Any) {
+        let currUser = Auth.auth().currentUser
+        print(currUser?.uid ?? String())
+        currUser?.delete(completion: { (error) in
+            if((error) != nil) {
+                let alert = UIAlertController(title: "Unable to delete account", message: "This operation is sensitive and requires recent authentication", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                print(error.debugDescription)
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+        
+    }
     
+    @IBAction func reauthenticatePressed(_ sender: Any) {
+        
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
