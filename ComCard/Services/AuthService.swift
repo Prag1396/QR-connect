@@ -92,29 +92,25 @@ class AuthService: UIViewController {
     
     func deleteUser(userID: String) {
         let userRef = DataService.instance.REF_USERS
+        let privateRef = DataService.instance.REF_PVT
         userRef.child(userID).setValue(nil)
-        
+        privateRef.child(userID).setValue(nil)
         
     }
     
     
     func checkIfPhoneNumberExists(phoneNumber: String, checkComplete: @escaping(_ status: Bool, _ errmsg: String?)->()) {
         let userRef = DataService.instance.REF_BASE
-        userRef.child("users").queryOrdered(byChild: "PhoneNumber").queryEqual(toValue: phoneNumber).observeSingleEvent(of: .value) { (snapshot) in
-            for rest in snapshot.children.allObjects {
-                print(rest)
-            }
-            let isPhoneexists = snapshot.exists()
-            if (isPhoneexists) {
+        userRef.child("users").queryOrdered(byChild: "PhoneNumber").observeSingleEvent(of: .value) { (dataSnapshot) in
+            let isPhoneExist = dataSnapshot.exists()
+            if (isPhoneExist) {
+                print("here")
                 checkComplete(false, "Duplicate number exists")
             } else {
+                print("here again")
                 checkComplete(true, nil)
             }
         }
-        
-        
-        
-        
+
     }
-    
 }

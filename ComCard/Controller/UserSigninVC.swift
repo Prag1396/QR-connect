@@ -17,6 +17,8 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBOutlet weak var userNameTextField: UITextField!
     
     var next_Responder: UIResponder!
+    private var _userNameDownloaded = String()
+    private var _passwordDownloaded = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,23 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         userNameTextField.keyboardAppearance = .dark
         passwordTextField.keyboardAppearance = .dark
         passwordTextField.clearsOnBeginEditing = false
+        
+        let userRef = DataService.instance.REF_BASE
+        let privateRef = DataService.instance.REF_PVT
+        let userID = Auth.auth().currentUser?.uid
+        print(userID ?? String())
+        
+        userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let dict = snapshot.value as? NSDictionary
+            self._userNameDownloaded = (dict?["PhoneNumber"] as? String)!
+            print(self._userNameDownloaded)
+        })
+        //Get Password
+        privateRef.child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let dict = snapshot.value as? NSDictionary
+            self._passwordDownloaded = (dict?["Passcode"] as! String)
+        })
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
@@ -64,46 +83,29 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    @IBAction func backbtnPressed(_ sender: Any) {
-        
-        
-    }
     @IBAction func signInBtnTapped(_ sender: Any) {
         
         if userNameTextField.text != nil && passwordTextField.text != nil {
-            let userRef = DataService.instance.REF_BASE
-            let userID = Auth.auth().currentUser?.uid
-            print(userID ?? String())
-            userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let dict = snapshot.value as? NSDictionary
-                let username = dict?["PhoneNumber"] as? String
-                let password = dict?["Passcode"] as? String
-                if((self.userNameTextField.text == username) && (self.passwordTextField.text == password)) {
-                    self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
-                    
-                }
-                else if(self.userNameTextField.text != username) {
-                    let alert = UIAlertController(title: "Warning", message: "Username does not exists. Please try signing up", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                }
+
+            if(self._userNameDownloaded == userNameTextField.text && self._passwordDownloaded == passwordTextField.text) {
+                //Successfull sign in
+                self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+            }
+            else if(self.userNameTextField.text != self._userNameDownloaded) {
+
+                let alert = UIAlertController(title: "Warning", message: "Username does not exists. Please try signing up", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "Warning", message: "Username and password do not match", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
-                else {
-                    let alert = UIAlertController(title: "Warning", message: "Username and password do not match", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                }
-            })
-            
+            }
             
         }
-        
-        
-        
-        
+ 
     }
     
 }

@@ -18,7 +18,7 @@ class DataService {
     
     private var _REF_BASE = DB_BASE
     private var _REF_USERS = DB_BASE.child("users")
-    private var _REF_PVT = DB_BASE.child("pvtData")
+    private var _REF_PVT = DB_BASE.child("pvtdata")
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -33,10 +33,10 @@ class DataService {
     }
     
     func createDBUserProfile(uid: String, userData: Dictionary <String, Any>) {
-        REF_USERS.child(uid).child("profile").setValue(userData)
+        REF_USERS.child(uid).setValue(userData)
     }
     
     func createPrivateData(uid: String, userData: Dictionary <String,Any>) {
-        REF_PVT.child(uid).child("pvtData").setValue(userData)
+        REF_PVT.child(uid).setValue(userData)
     }
 }

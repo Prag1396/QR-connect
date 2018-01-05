@@ -109,9 +109,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && cardNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
             self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
         }
-        if textField.tag == 3 {
-            checkPhoneNumber()
-        }
+
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
