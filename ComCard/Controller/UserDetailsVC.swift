@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
+    private var _phoneNumberdownloaded: String? = nil
 
     @IBOutlet weak var mytableview: UITableView!
     
@@ -30,6 +30,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let dict = snapshot.value as? NSDictionary
             let fullName = dict?["FullName"] as? String
             let phoneNumber = dict?["PhoneNumber"] as? String
+            self._phoneNumberdownloaded = phoneNumber
             let cardNumber = dict?["CardNumber"] as? String
             let user = User(fullname: fullName!, phoneNumber: phoneNumber!, cardNumber: cardNumber!)
             self.users.append(user)
@@ -39,22 +40,15 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBAction func deleteAccountPressed(_ sender: Any) {
         let currUser = Auth.auth().currentUser
-        print(currUser?.uid ?? String())
-        currUser?.delete(completion: { (error) in
-            if((error) != nil) {
-                let alert = UIAlertController(title: "Unable to delete account", message: "This operation is sensitive and requires recent authentication", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                print(error.debugDescription)
-                self.present(alert, animated: true, completion: nil)
-            }
-        })
-        
+        AuthService.instance.deleteUser(userID: (currUser?.uid)!)
+        let alert = UIAlertController(title: "Account successfully deleted", message: "We hope to see you again soon", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            //perform segue that returns you to home screen
+            self.performSegue(withIdentifier: "homebtnpressed", sender: Any.self)
+        }))
+        self.present(alert, animated: true, completion: nil)        
     }
     
-    @IBAction func reauthenticatePressed(_ sender: Any) {
-        
-        
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
@@ -74,6 +68,5 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func homebtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "homebtnpressed", sender: Any.self)
     }
-
-
+    
 }

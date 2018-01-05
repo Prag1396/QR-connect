@@ -40,7 +40,13 @@ class AuthService: UIViewController {
                     print("Phonenumber: \(String(describing: user?.phoneNumber))")
                     let userInfo = user?.providerData[0]
                     print("ProviderID: \(String(describing: userInfo?.providerID))")
-                        
+                user?.link(with: credential, completion: { (user, error) in
+                    if(error != nil) {
+                        let alert = UIAlertController(title: "Warning", message: "Unable to link credentials", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
                     //Authorization successfull
                     authorizationComplete(true, nil)
                     }
@@ -82,6 +88,13 @@ class AuthService: UIViewController {
             
             }
         }
+    }
+    
+    func deleteUser(userID: String) {
+        let userRef = DataService.instance.REF_USERS
+        userRef.child(userID).setValue(nil)
+        
+        
     }
     
     
