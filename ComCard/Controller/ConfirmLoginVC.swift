@@ -121,12 +121,6 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
             }
         }
         }
-        
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
     
     

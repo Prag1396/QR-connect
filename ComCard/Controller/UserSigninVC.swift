@@ -32,6 +32,8 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -73,14 +75,26 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         if userNameTextField.text != nil && passwordTextField.text != nil {
             let userRef = DataService.instance.REF_BASE
             let userID = Auth.auth().currentUser?.uid
+            print(userID ?? String())
             userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let dict = snapshot.value as? NSDictionary
                 let username = dict?["PhoneNumber"] as? String
                 let password = dict?["Passcode"] as? String
                 if((self.userNameTextField.text == username) && (self.passwordTextField.text == password)) {
-                    print("Successfull sign in")
-                } else {
-                    //handle errors
+                    self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+                    
+                }
+                else if(self.userNameTextField.text != username) {
+                    let alert = UIAlertController(title: "Warning", message: "Username does not exists. Please try signing up", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                else {
+                    let alert = UIAlertController(title: "Warning", message: "Username and password do not match", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
             })
             
@@ -89,7 +103,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         
         
         
-        performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+        
     }
     
 }
