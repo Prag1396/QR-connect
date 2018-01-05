@@ -45,7 +45,6 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "datacell") as! ConfigureCell
         let user = users[indexPath.row]
-        print("here")
         cell.updateUI(user: user)
         return cell
         
