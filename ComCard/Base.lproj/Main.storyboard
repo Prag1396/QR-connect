@@ -46,7 +46,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="leA-Ph-dqZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Contact Credit/Debit Card Holder">
+                                <state key="normal" title="Contact Card Holder">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -55,7 +55,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="YW1-c0-l1G" kind="show" identifier="RptPressed" id="QET-19-4MH"/>
+                                    <action selector="contactBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Opm-Zv-TkJ"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="tZo-m9-ads">
@@ -114,6 +114,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="YW1-c0-l1G" kind="show" identifier="userverified" id="yxp-HR-LWW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,7 +159,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs9-Xf-8yr" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs9-Xf-8yr" userLabel="CallButton" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
                                 <rect key="frame" x="111" y="372.5" width="156" height="24"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -171,8 +174,11 @@
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="callButtonPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="5SQ-wT-0Os"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAZ-XG-yw5" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAZ-XG-yw5" userLabel="MessageButton" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
                                 <rect key="frame" x="111" y="432" width="156" height="24"/>
                                 <color key="backgroundColor" red="0.67000001669999998" green="0.67000001669999998" blue="0.67000001669999998" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -187,6 +193,9 @@
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="messageButtonPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="N0l-cw-edw"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Message" translatesAutoresizingMaskIntoConstraints="NO" id="YKm-Qt-6dZ">
                                 <rect key="frame" x="62" y="437" width="15" height="15"/>
@@ -216,6 +225,37 @@
                                     <constraint firstAttribute="height" constant="15" id="XDw-iW-Juv"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-Gm-viJ" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="29.5" y="228" width="261" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="261" id="HFP-UP-gZn"/>
+                                    <constraint firstAttribute="height" constant="30" id="usC-7b-s2i"/>
+                                </constraints>
+                                <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.72161138059999996" green="0.7215975523" blue="0.72160685059999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbz-GG-Acg">
+                                <rect key="frame" x="132" y="174" width="57" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="Gnb-54-raK"/>
+                                    <constraint firstAttribute="height" constant="50" id="aZU-L4-1KI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="21"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -231,8 +271,10 @@
                             <constraint firstItem="Mbx-Pe-hkq" firstAttribute="top" secondItem="5mH-rT-cnk" secondAttribute="top" constant="100" id="EmA-hH-ZKV"/>
                             <constraint firstItem="QWB-ag-QqH" firstAttribute="leading" secondItem="5mH-rT-cnk" secondAttribute="leading" constant="12" id="Fs1-e0-dxQ"/>
                             <constraint firstItem="YKm-Qt-6dZ" firstAttribute="top" secondItem="JjT-AJ-5Yj" secondAttribute="bottom" constant="45.5" id="JBF-9W-Uwa"/>
+                            <constraint firstItem="Xbz-GG-Acg" firstAttribute="top" secondItem="Mbx-Pe-hkq" secondAttribute="bottom" constant="8" id="MGD-im-kYC"/>
                             <constraint firstItem="ugH-A1-T2A" firstAttribute="top" secondItem="4gu-Hb-XwC" secondAttribute="top" id="TdO-X9-zJR"/>
                             <constraint firstItem="qs9-Xf-8yr" firstAttribute="leading" secondItem="JjT-AJ-5Yj" secondAttribute="trailing" constant="34" id="VK8-Z6-U67"/>
+                            <constraint firstItem="Xbz-GG-Acg" firstAttribute="centerX" secondItem="4gu-Hb-XwC" secondAttribute="centerX" id="Zgp-Ny-j2f"/>
                             <constraint firstItem="5mH-rT-cnk" firstAttribute="trailing" secondItem="Mbx-Pe-hkq" secondAttribute="trailing" constant="53" id="aOA-VX-Gkt"/>
                             <constraint firstItem="5x0-hQ-BwU" firstAttribute="leading" secondItem="5mH-rT-cnk" secondAttribute="leading" id="b7T-Qa-4nm"/>
                             <constraint firstItem="5x0-hQ-BwU" firstAttribute="top" secondItem="4gu-Hb-XwC" secondAttribute="top" id="iK0-d5-XCJ"/>
@@ -241,14 +283,23 @@
                             <constraint firstItem="JAZ-XG-yw5" firstAttribute="centerY" secondItem="YKm-Qt-6dZ" secondAttribute="centerY" id="pBc-ND-PJw"/>
                             <constraint firstItem="Mbx-Pe-hkq" firstAttribute="leading" secondItem="5mH-rT-cnk" secondAttribute="leading" constant="54" id="sid-Uv-D2B"/>
                             <constraint firstItem="5mH-rT-cnk" firstAttribute="bottom" secondItem="JAZ-XG-yw5" secondAttribute="bottom" constant="112" id="uEa-t3-um7"/>
+                            <constraint firstItem="PhR-Gm-viJ" firstAttribute="top" secondItem="Xbz-GG-Acg" secondAttribute="bottom" constant="4" id="vol-Im-QAG"/>
                             <constraint firstItem="YKm-Qt-6dZ" firstAttribute="leading" secondItem="5mH-rT-cnk" secondAttribute="leading" constant="62" id="wTo-HV-pnK"/>
+                            <constraint firstItem="PhR-Gm-viJ" firstAttribute="top" secondItem="Xbz-GG-Acg" secondAttribute="bottom" constant="4" id="z13-0R-ZG1"/>
+                            <constraint firstItem="PhR-Gm-viJ" firstAttribute="centerX" secondItem="4gu-Hb-XwC" secondAttribute="centerX" id="zJZ-Se-Djc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5mH-rT-cnk"/>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="5x0-hQ-BwU" id="6tq-z4-wlP"/>
+                        <outlet property="callButton" destination="qs9-Xf-8yr" id="4VQ-nJ-zq9"/>
+                        <outlet property="creditCardTextField" destination="PhR-Gm-viJ" id="H7z-Pe-Dwo"/>
+                        <outlet property="messageButton" destination="JAZ-XG-yw5" id="xXC-Ri-UqJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhr-uB-pQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31.199999999999999" y="1032.2660098522167"/>
+            <point key="canvasLocation" x="30" y="1030.9859154929577"/>
         </scene>
         <!--User SigninVC-->
         <scene sceneID="KJO-eF-A4a">
@@ -427,7 +478,7 @@
         <!--User SignupVC-->
         <scene sceneID="HS2-Yd-Bua">
             <objects>
-                <viewController id="2o3-8U-A67" customClass="UserSignupVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userSignUp" id="2o3-8U-A67" customClass="UserSignupVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xXS-fG-uqX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1115,8 +1166,8 @@
         <image name="wallet" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ffs-XY-gdX"/>
-        <segue reference="mMn-JZ-ue3"/>
+        <segue reference="Vj9-WG-YQe"/>
+        <segue reference="sgW-3Z-sZa"/>
         <segue reference="T02-rN-a0a"/>
     </inferredMetricsTieBreakers>
 </document>

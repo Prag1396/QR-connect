@@ -34,12 +34,10 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         let userRef = DataService.instance.REF_BASE
         let privateRef = DataService.instance.REF_PVT
         let userID = Auth.auth().currentUser?.uid
-        print(userID ?? String())
         
         userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let dict = snapshot.value as? NSDictionary
             self._userNameDownloaded = (dict?["PhoneNumber"] as? String)!
-            print(self._userNameDownloaded)
         })
         //Get Password
         privateRef.child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in

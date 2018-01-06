@@ -37,9 +37,9 @@ class AuthService: UIViewController {
             if error != nil {
                 authorizationComplete(false, error)
             } else {
-                    print("Phonenumber: \(String(describing: user?.phoneNumber))")
-                    let userInfo = user?.providerData[0]
-                    print("ProviderID: \(String(describing: userInfo?.providerID))")
+                    //print("Phonenumber: \(String(describing: user?.phoneNumber))")
+                    //let userInfo = user?.providerData[0]
+                    //print("ProviderID: \(String(describing: userInfo?.providerID))")
                 user?.link(with: credential, completion: { (user, error) in
                     if(error != nil) {
                         let alert = UIAlertController(title: "Warning", message: "Unable to link credentials", preferredStyle: UIAlertControllerStyle.alert)
@@ -95,19 +95,18 @@ class AuthService: UIViewController {
         let privateRef = DataService.instance.REF_PVT
         userRef.child(userID).setValue(nil)
         privateRef.child(userID).setValue(nil)
+
         
     }
     
     
     func checkIfPhoneNumberExists(phoneNumber: String, checkComplete: @escaping(_ status: Bool, _ errmsg: String?)->()) {
         let userRef = DataService.instance.REF_BASE
-        userRef.child("users").queryOrdered(byChild: "PhoneNumber").observeSingleEvent(of: .value) { (dataSnapshot) in
+        userRef.child("users").queryOrdered(byChild: "PhoneNumber").queryEqual(toValue: phoneNumber).observeSingleEvent(of: .value) { (dataSnapshot) in
             let isPhoneExist = dataSnapshot.exists()
             if (isPhoneExist) {
-                print("here")
                 checkComplete(false, "Duplicate number exists")
             } else {
-                print("here again")
                 checkComplete(true, nil)
             }
         }
