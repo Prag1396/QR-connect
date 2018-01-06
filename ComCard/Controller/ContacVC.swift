@@ -125,7 +125,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
             let message: MFMessageComposeViewController = MFMessageComposeViewController()
             message.messageComposeDelegate = self
             message.recipients = [self.phonenumber]
-            message.body = "Hi, I am contacting you because I found you credit card. I was able to find you phone number through ComCard. Please contact me as soon as possible."
+            message.body = "Hi, I am contacting you because I found you credit card. I was able to find your phone number through ComCard. Please contact me as soon as possible."
             self.present(message, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "WARNING", message: "Your device does not have the ability to send text messages", preferredStyle: UIAlertControllerStyle.alert)
