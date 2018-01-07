@@ -19,6 +19,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
     @IBOutlet weak var AlreadyamemberSigninBtn: UIButton!
     @IBOutlet weak var connectBtn: UIButton!
+    @IBOutlet weak var passPortLabel: UITextField!
     
     private var _phoneNumber: String? = nil
     private var _firstname: String? = nil
@@ -74,7 +75,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 self.isReadytoPerformSegue = false
                 self.phoneNumberAlreaduInUse.isHidden = false
                 self.connectBtn.isUserInteractionEnabled = false
-                self.connectBtn.backgroundColor = UIColor(red: 161/255, green: 172/255, blue: 174/255, alpha: 1.0)
+                self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
 
                 
             } else {
@@ -82,7 +83,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 self.phoneNumberAlreaduInUse.isHidden = true
                 self.connectBtn.isUserInteractionEnabled = true
                 if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.cardNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
-                    self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+                    self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
                 }
 
             }
@@ -98,7 +99,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
         else if(textField.tag == 5) {
             if(self.isReadytoPerformSegue == true) {
-                self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+                self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
             }
         }
         self.jumpToNextField(textfield: textField, withTag: nextTag)
@@ -107,13 +108,13 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && cardNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
-            self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+            self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         }
 
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.connectBtn.backgroundColor = UIColor(red: 161/255, green: 172/255, blue: 174/255, alpha: 1.0)
+        self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
     }
     
 

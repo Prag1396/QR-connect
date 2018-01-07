@@ -88,8 +88,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
                 alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                self.callButton.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
-                self.messageButton.backgroundColor = UIColor(red: 77/255, green: 217/255, blue: 187/255, alpha: 1.0)
+                self.callButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+                self.messageButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
                 self.messageButton.isUserInteractionEnabled = true
                 self.callButton.isUserInteractionEnabled = true
                 
