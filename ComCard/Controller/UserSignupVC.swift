@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var background: UIImageView!
@@ -32,6 +33,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
@@ -43,10 +45,12 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     @objc func backgroundTapped() {
         
+        
         view.endEditing(true)
     }
     
     func setupOutlets() {
+        
         firstNameLabel.delegate = self
         firstNameLabel.tag = 1
         firstNameLabel.clearsOnBeginEditing = false
@@ -59,13 +63,20 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         cardNumberLabel.delegate = self
         cardNumberLabel.tag = 4
         cardNumberLabel.clearsOnBeginEditing = false
+        passPortLabel.delegate = self
+        passPortLabel.tag = 5
         passCodeLabel.delegate = self
-        passCodeLabel.tag = 5
+        passCodeLabel.tag = 6
+        passPortLabel.clearsOnBeginEditing = false
+        
         firstNameLabel.keyboardAppearance = .dark
         lastNameLabel.keyboardAppearance = .dark
         phoneNumberLabel.keyboardAppearance = .dark
         cardNumberLabel.keyboardAppearance = .dark
         passCodeLabel.keyboardAppearance = .dark
+        passPortLabel.keyboardAppearance = .dark
+        
+        
     }
     
     func checkPhoneNumber() {
@@ -97,7 +108,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             self.checkPhoneNumber()
         
         }
-        else if(textField.tag == 5) {
+        else if(textField.tag == 6) {
             if(self.isReadytoPerformSegue == true) {
                 self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
             }
@@ -123,7 +134,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         next_responder = self.view.viewWithTag(tag)
         
-        if (tag <= 5) {
+        if (tag <= 6) {
             next_responder.becomeFirstResponder()
         } else {
             textfield.resignFirstResponder()
