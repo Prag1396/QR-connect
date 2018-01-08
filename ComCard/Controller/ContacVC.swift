@@ -52,7 +52,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(textField: )))
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
@@ -77,18 +77,23 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
 
     @objc func handleDoneActionForCard() {
         self.cardNumber = creditCardTextField.text!
-        downloadDataandUpdateButtons()
+        downloadDataandUpdateButtons(textField: creditCardTextField)
         view.endEditing(true)
     }
     
     @objc func handleDoneActionForPassport() {
         self.passportNumber = passportTextField.text!
-        //downloadDataandUpdateButtons()
+        downloadDataandUpdateButtons(textField: passportTextField)
         view.endEditing(true)
     }
     
-    @objc func backgroundTapped() {
+    @objc func backgroundTapped(textField: UITextField) {
         view.endEditing(true)
+        if (creditCardTextField.text != nil) {
+            creditCardTextField.endEditing(true)
+        } else if(passportTextField.text != nil) {
+            passportTextField.endEditing(true)
+        }
     }
     
     func downloadRecord(withcardNumber cardNumber: String, downloadComplete: @escaping (_ status: Bool, _ error: String?) -> ()) {
@@ -115,12 +120,53 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         
     }
     
-    func downloadDataandUpdateButtons() {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        callButton.isUserInteractionEnabled = false
+        messageButton.isUserInteractionEnabled = false
+        callButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+        messageButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if (textField.tag == 1) {
+            self.cardNumber = creditCardTextField.text!
+        } else if (textField.tag == 2) {
+            self.passportNumber = passportTextField.text!
+        }
+        textField.resignFirstResponder()
+        downloadDataandUpdateButtons(textField: textField)
+    }
+    
+    func downloadRecord(withPassportNumber passportnum: String, downloadComplete: @escaping(_ status: Bool, _ error: String?)->()) {
+        let userRef = DataService.instance.REF_USERS
+        userRef.queryOrdered(byChild: "PassportNumber").queryEqual(toValue: passportnum).observeSingleEvent(of: .value) { (snapshot) in
+            let isSnapShotexists = snapshot.exists()
+            if (isSnapShotexists) {
+                let array: NSArray = snapshot.children.allObjects as NSArray
+                for child in array {
+                    let snap = child as! DataSnapshot
+                    if snap.value is NSDictionary {
+                         let data: NSDictionary = (snap.value as? NSDictionary)!
+                         if let phone = data.value(forKey: "PhoneNumber") {
+                            self.phonenumber = phone as! String
+                            downloadComplete(true, nil)
+                        }
+                    }
+                }
+            } else {
+                downloadComplete(true, "Data not found")
+            }
+        }
+    }
+    
+    func downloadDataandUpdateButtons(textField: UITextField) {
+        if (textField.tag == 1) {
         downloadRecord(withcardNumber: (self.cardNumber)) { (status, error) in
             if (error != nil) {
                 //handle Errors
                 let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else {
                 self.callButton.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
@@ -130,6 +176,21 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
                 
             }
         }
+        } else if(textField.tag == 2) {
+            downloadRecord(withPassportNumber: self.passportNumber, downloadComplete: { (status, error) in
+                if (error != nil) {
+                    //handle Errors
+                    let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    self.callButton.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
+                    self.messageButton.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
+                    self.messageButton.isUserInteractionEnabled = true
+                    self.callButton.isUserInteractionEnabled = true
+                }
+            })
+        }
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -137,26 +198,17 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.cardNumber = creditCardTextField.text!
+        if (textField.tag == 1) {
+            self.cardNumber = creditCardTextField.text!
+        } else if (textField.tag == 2) {
+            self.passportNumber = passportTextField.text!
+        }
         textField.resignFirstResponder()
-        downloadDataandUpdateButtons()
-        let _tag = textField.tag + 1
-        self.jumpToNextField(textfield: textField, withTag: _tag)
+        downloadDataandUpdateButtons(textField: textField)
         return true
     }
-
     
-    func jumpToNextField(textfield: UITextField, withTag tag: Int) {
-        
-        next_responder = self.view.viewWithTag(tag)
-        
-        if (tag <= 2) {
-            next_responder.becomeFirstResponder()
-        } else {
-            textfield.resignFirstResponder()
-        }
-        
-    }
+    
     @IBAction func callButtonPressed(_ sender: Any) {
         if let url = URL(string: "tel://\(self.phonenumber)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -174,7 +226,11 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
             let message: MFMessageComposeViewController = MFMessageComposeViewController()
             message.messageComposeDelegate = self
             message.recipients = [self.phonenumber]
-            message.body = "Hi, I am contacting you because I found you credit card. I was able to find your phone number through ComCard. Please contact me as soon as possible."
+            if (self.creditCardTextField.text != nil) {
+                message.body = "Hi, I am contacting you because I found your credit card. I was able to find your phone number through ComCard. Please contact me as soon as possible."
+            } else if(self.passportTextField.text != nil) {
+                message.body = "Hi, I am contacting you because I found your Passport. I was able to find your phone number through ComCard. Please contact me as soon as possible."
+            }
             self.present(message, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "WARNING", message: "Your device does not have the ability to send text messages", preferredStyle: UIAlertControllerStyle.alert)

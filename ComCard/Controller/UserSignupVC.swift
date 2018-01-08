@@ -26,6 +26,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     private var _firstname: String? = nil
     private var _lastname: String? = nil
     private var _cardNumber: String? = nil
+    private var _passportNumber: String? = nil
     private var _passcode: String? = nil
     
     var next_responder: UIResponder!
@@ -174,6 +175,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         _lastname = lastNameLabel.text!
         _phoneNumber = phoneNumberLabel.text!
         _cardNumber = cardNumberLabel.text!
+        _passportNumber = passPortLabel.text!
         _passcode = passCodeLabel.text!
     }
     
@@ -192,9 +194,13 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 if cardNumberLabel.text != nil {
                     destination.cardNumber = _cardNumber!
                 }
+                if passPortLabel.text != nil {
+                    destination.passPortNumber = _passportNumber!
+                }
                 if passCodeLabel.text != nil {
                     destination.passcode = _passcode!
                 }
+                
             }
             
         }

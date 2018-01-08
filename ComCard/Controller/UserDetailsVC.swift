@@ -30,9 +30,10 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let dict = snapshot.value as? NSDictionary
             let fullName = dict?["FullName"] as? String
             let phoneNumber = dict?["PhoneNumber"] as? String
+            let passportNumber = dict?["PassportNumber"] as? String
             self._phoneNumberdownloaded = phoneNumber
             let cardNumber = dict?["CardNumber"] as? String
-            let user = User(fullname: fullName!, phoneNumber: phoneNumber!, cardNumber: cardNumber!)
+            let user = User(fullname: fullName!, phoneNumber: phoneNumber!, cardNumber: cardNumber!, passportNumber: passportNumber!)
             self.users.append(user)
             self.mytableview.reloadData()
         }

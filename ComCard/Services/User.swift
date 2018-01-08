@@ -13,6 +13,7 @@ struct User {
     private var _fullName: String
     private var _phonenumber: String
     private var _cardNumber: String
+    private var _passportNumber: String
     
     var fullName: String {
         return _fullName
@@ -26,10 +27,15 @@ struct User {
         return _cardNumber
     }
     
-    init(fullname: String, phoneNumber: String, cardNumber: String) {
+    var passportNumber: String {
+        return _passportNumber
+    }
+    
+    init(fullname: String, phoneNumber: String, cardNumber: String, passportNumber: String) {
         _fullName = fullname
         _phonenumber = phoneNumber
         _cardNumber = cardNumber
+        _passportNumber = passportNumber
     }
     
     
