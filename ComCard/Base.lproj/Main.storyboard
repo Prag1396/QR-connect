@@ -874,14 +874,14 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nl1-EY-e6E">
-                                <rect key="frame" x="161.5" y="278" width="52" height="30"/>
+                                <rect key="frame" x="157.5" y="278" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Srg-bt-Zye"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="ZPC-MM-PGq"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="ZPC-MM-PGq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="10"/>
-                                <state key="normal" title="Send Code">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="SEND CODE">
+                                    <color key="titleColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sendCodePressed:" destination="0b5-fR-lD6" eventType="touchUpInside" id="xhE-IN-evR"/>
@@ -938,6 +938,7 @@
                         <outlet property="background" destination="N1S-8j-SL9" id="ig6-ns-T7f"/>
                         <outlet property="code" destination="bxA-hG-WzO" id="RuO-7U-H57"/>
                         <outlet property="phoneConfirmText" destination="4v2-p2-SX7" id="2lz-Gg-D8l"/>
+                        <outlet property="sendCodeButton" destination="nl1-EY-e6E" id="6Ux-Wi-GMp"/>
                         <segue destination="WOu-pG-rtD" kind="show" identifier="verificationsuccessfull" id="mMn-JZ-ue3"/>
                         <segue destination="2o3-8U-A67" kind="show" identifier="backbtnpressedinconfirmvc" id="ffs-XY-gdX"/>
                     </connections>

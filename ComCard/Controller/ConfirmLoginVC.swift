@@ -15,6 +15,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var phoneConfirmText: UITextField!
     @IBOutlet weak var code: UITextField!
+    @IBOutlet weak var sendCodeButton: UIButton!
     
     private var _firstName: String? = nil
     private var _lastName: String? = nil
@@ -22,6 +23,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     private var _cardNumber: String? = nil
     private var _passcode: String? = nil
     private var fullName: String? = nil
+    
     var firstName: String {
         get {
             return _firstName!
@@ -79,13 +81,17 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                     self.present(alert, animated: true, completion: nil)
                 })
             } else if error == nil && status == false {
-                    let alert = UIAlertController(title: "Warning", message: "Phone number already in use", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Warning", message: "Unable to send code", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
                     self.performSegue(withIdentifier: "backbtnpressedinconfirmvc", sender: Any.self)
 
                 }))
                     self.present(alert, animated: true, completion: nil)
 
+            }
+            else if (status == true) {
+                print("here")
+                self.sendCodeButton.setTitle("SENT. RESEND CODE?", for: .normal)
             }
         }
         }
@@ -137,7 +143,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         code.keyboardAppearance = .dark
         
         fullName = firstName + " " + lastName
-        
+        self.sendCodeButton.setTitle("SEND CODE", for: .normal)
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
