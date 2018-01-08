@@ -211,7 +211,7 @@
                                     <constraint firstAttribute="height" constant="50" id="KDX-7T-bnK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Scan Card">
+                                <state key="normal" title="Scan QRCode">
                                     <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -234,7 +234,7 @@
                                     <action selector="backBtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="cFw-It-BpO"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Passport Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-zg-wFy" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-zg-wFy" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="57" y="315" width="261" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="261" id="dtp-H4-99X"/>
@@ -290,8 +290,8 @@
                         <outlet property="background" destination="5x0-hQ-BwU" id="6tq-z4-wlP"/>
                         <outlet property="callButton" destination="qs9-Xf-8yr" id="4VQ-nJ-zq9"/>
                         <outlet property="creditCardTextField" destination="PhR-Gm-viJ" id="H7z-Pe-Dwo"/>
+                        <outlet property="emailTextField" destination="oNj-zg-wFy" id="QEn-Dt-QIB"/>
                         <outlet property="messageButton" destination="JAZ-XG-yw5" id="xXC-Ri-UqJ"/>
-                        <outlet property="passportTextField" destination="oNj-zg-wFy" id="OAA-ug-w8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhr-uB-pQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -593,7 +593,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Passport Number (Optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EcF-2k-aW8" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EcF-2k-aW8" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="33.5" y="343" width="308" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eeg-aY-vTf"/>
@@ -740,10 +740,10 @@
                         <outlet property="background" destination="kLt-wY-EcF" id="krG-8n-BmC"/>
                         <outlet property="cardNumberLabel" destination="B44-o1-FDa" id="SGv-5m-QfX"/>
                         <outlet property="connectBtn" destination="AUJ-cq-Ifn" id="DO2-Rn-DXe"/>
+                        <outlet property="emailLabel" destination="EcF-2k-aW8" id="uef-bv-tFI"/>
                         <outlet property="firstNameLabel" destination="6oA-BQ-w7r" id="0eD-ve-ulE"/>
                         <outlet property="lastNameLabel" destination="WJ7-Su-Woc" id="VTq-FJ-Ytr"/>
-                        <outlet property="passCodeLabel" destination="WtW-NP-Gbw" id="ifC-oV-1Fk"/>
-                        <outlet property="passPortLabel" destination="EcF-2k-aW8" id="aaM-Vx-lpD"/>
+                        <outlet property="passCodeLabel" destination="WtW-NP-Gbw" id="r18-Ng-4jY"/>
                         <outlet property="phoneNumberAlreaduInUse" destination="kIM-If-6Wk" id="6yD-ev-kac"/>
                         <outlet property="phoneNumberLabel" destination="PaS-gb-dHj" id="Z4q-Eh-YTm"/>
                         <segue destination="0b5-fR-lD6" kind="show" identifier="connectPressed" id="CVK-Ck-IZT"/>
@@ -959,11 +959,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxr-8o-w19" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="47.5" y="508" width="280" height="46"/>
+                                <rect key="frame" x="97.5" y="570" width="180" height="46"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="Olo-2g-SdZ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="fkg-i3-7eR"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="fkg-i3-7eR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="DELETE ACCOUNT">
@@ -1062,7 +1062,7 @@
                                                     <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passport" translatesAutoresizingMaskIntoConstraints="NO" id="ifU-Hd-z3r">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon-82461" translatesAutoresizingMaskIntoConstraints="NO" id="ifU-Hd-z3r">
                                                     <rect key="frame" x="65" y="146" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="5lQ-JV-GJ6"/>
@@ -1101,17 +1101,38 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="creditCardLabel" destination="3g2-by-RSk" id="9bS-Ur-nAc"/>
+                                            <outlet property="emailLabel" destination="S6p-JX-Zuh" id="oke-t2-TBy"/>
                                             <outlet property="fullnameLabel" destination="7wD-Zc-7cb" id="4tG-dP-8UA"/>
-                                            <outlet property="passportNumberLabel" destination="S6p-JX-Zuh" id="c7Q-w2-nen"/>
                                             <outlet property="phoneNumberLabel" destination="GKf-eB-JcZ" id="oBo-nz-6dU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thT-5a-xaE" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="68" y="499" width="239" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="239" id="LRW-NI-hOL"/>
+                                    <constraint firstAttribute="height" constant="50" id="UJd-MX-S8v"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Build QRCode">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buildQRCodePressed:" destination="fdE-wq-AbN" eventType="touchUpInside" id="V1R-7o-O35"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cq4-bI-3uA" firstAttribute="top" secondItem="pqn-0z-iUA" secondAttribute="top" constant="20" id="0lA-0m-P2I"/>
+                            <constraint firstItem="thT-5a-xaE" firstAttribute="top" secondItem="8Mj-eL-vdD" secondAttribute="bottom" constant="19" id="5tv-cF-yCd"/>
                             <constraint firstItem="pqn-0z-iUA" firstAttribute="bottom" secondItem="8ft-c0-JpE" secondAttribute="bottom" constant="20" id="8lX-yv-QtQ"/>
                             <constraint firstItem="8Mj-eL-vdD" firstAttribute="top" secondItem="cq4-bI-3uA" secondAttribute="bottom" constant="22" id="FeP-Sm-XuO"/>
                             <constraint firstItem="8Mj-eL-vdD" firstAttribute="leading" secondItem="pqn-0z-iUA" secondAttribute="leading" id="LHz-6Z-Rae"/>
@@ -1119,10 +1140,11 @@
                             <constraint firstItem="8ft-c0-JpE" firstAttribute="top" secondItem="8Mj-eL-vdD" secondAttribute="bottom" constant="139" id="ck9-Xf-yLc"/>
                             <constraint firstItem="bmV-8B-8Vy" firstAttribute="leading" secondItem="pqn-0z-iUA" secondAttribute="leading" id="dAl-8H-FEm"/>
                             <constraint firstItem="pqn-0z-iUA" firstAttribute="trailing" secondItem="8ft-c0-JpE" secondAttribute="trailing" constant="16" id="eAh-cm-Q4L"/>
-                            <constraint firstItem="Jxr-8o-w19" firstAttribute="top" secondItem="8Mj-eL-vdD" secondAttribute="bottom" constant="28" id="hmF-7l-AcY"/>
+                            <constraint firstItem="Jxr-8o-w19" firstAttribute="top" secondItem="8Mj-eL-vdD" secondAttribute="bottom" constant="90" id="hmF-7l-AcY"/>
                             <constraint firstItem="Jxr-8o-w19" firstAttribute="centerX" secondItem="0gW-uW-SIu" secondAttribute="centerX" id="p2v-Cc-fIY"/>
                             <constraint firstAttribute="bottom" secondItem="bmV-8B-8Vy" secondAttribute="bottom" id="pkN-WI-V5n"/>
                             <constraint firstItem="cq4-bI-3uA" firstAttribute="centerX" secondItem="0gW-uW-SIu" secondAttribute="centerX" id="sZT-fG-Nq8"/>
+                            <constraint firstItem="thT-5a-xaE" firstAttribute="centerX" secondItem="0gW-uW-SIu" secondAttribute="centerX" id="x35-Wn-87m"/>
                             <constraint firstItem="bmV-8B-8Vy" firstAttribute="trailing" secondItem="pqn-0z-iUA" secondAttribute="trailing" id="xGw-GV-mhD"/>
                             <constraint firstItem="bmV-8B-8Vy" firstAttribute="top" secondItem="0gW-uW-SIu" secondAttribute="top" id="zlO-WI-nys"/>
                         </constraints>
@@ -1147,15 +1169,15 @@
         <image name="Title" width="317" height="71"/>
         <image name="backbutton" width="10" height="17"/>
         <image name="callfriend_btn" width="15" height="15"/>
+        <image name="email-icon-82461" width="10" height="8"/>
         <image name="home_btn" width="24" height="28"/>
         <image name="logo" width="100" height="68"/>
-        <image name="passport" width="10" height="12"/>
         <image name="usernameIcon" width="20" height="20"/>
         <image name="wallet" width="16" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ffs-XY-gdX"/>
         <segue reference="sgW-3Z-sZa"/>
-        <segue reference="T02-rN-a0a"/>
+        <segue reference="gD5-DZ-zf2"/>
     </inferredMetricsTieBreakers>
 </document>

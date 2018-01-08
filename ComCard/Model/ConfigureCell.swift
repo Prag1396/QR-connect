@@ -13,7 +13,7 @@ class ConfigureCell: UITableViewCell {
     @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var creditCardLabel: UILabel!
-    @IBOutlet weak var passportNumberLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,8 +24,7 @@ class ConfigureCell: UITableViewCell {
         fullnameLabel.text = user.fullName
         phoneNumberLabel.text = user.phoneNumber
         creditCardLabel.text = user.cardNumber
-        passportNumberLabel.text = user.passportNumber
-        print(user.passportNumber)
+        emailLabel.text = user.email
 
     }
 

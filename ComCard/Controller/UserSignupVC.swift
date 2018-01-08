@@ -9,6 +9,9 @@
 import UIKit
 
 
+struct CurrentLength {
+    static var currLength: Int = 0
+}
 class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var background: UIImageView!
@@ -20,15 +23,15 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
     @IBOutlet weak var AlreadyamemberSigninBtn: UIButton!
     @IBOutlet weak var connectBtn: UIButton!
-    @IBOutlet weak var passPortLabel: UITextField!
+    @IBOutlet weak var emailLabel: UITextField!
     
     private var _phoneNumber: String? = nil
     private var _firstname: String? = nil
     private var _lastname: String? = nil
     private var _cardNumber: String? = nil
-    private var _passportNumber: String? = nil
+    private var _email: String? = nil
     private var _passcode: String? = nil
-    
+
     var next_responder: UIResponder!
     var isReadytoPerformSegue: Bool!
     
@@ -64,18 +67,18 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         cardNumberLabel.delegate = self
         cardNumberLabel.tag = 4
         cardNumberLabel.clearsOnBeginEditing = false
-        passPortLabel.delegate = self
-        passPortLabel.tag = 5
+        emailLabel.delegate = self
+        emailLabel.tag = 5
         passCodeLabel.delegate = self
         passCodeLabel.tag = 6
-        passPortLabel.clearsOnBeginEditing = false
+        emailLabel.clearsOnBeginEditing = false
         
         firstNameLabel.keyboardAppearance = .dark
         lastNameLabel.keyboardAppearance = .dark
         phoneNumberLabel.keyboardAppearance = .dark
         cardNumberLabel.keyboardAppearance = .dark
         passCodeLabel.keyboardAppearance = .dark
-        passPortLabel.keyboardAppearance = .dark
+        emailLabel.keyboardAppearance = .dark
         
         
     }
@@ -129,7 +132,39 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
     }
     
-
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if(textField.tag == 3) {
+            
+            //let allowedCharacters = CharacterSet.decimalDigits
+            //let characterSet = CharacterSet(charactersIn: string)
+            
+            if(range.location == 14) {
+                return false
+            }
+            /*
+            if(range.length == 0 &&  !(allowedCharacters.isSuperset(of: characterSet))) {
+                return false
+            }
+            */
+            if(range.length == 0 && range.location == 5 || range.location == 9) {
+                textField.text = NSString(format: "%@-%@", textField.text!, string) as String
+                return false
+            }
+            
+            if(range.length == 1 && range.location == 6 || range.location == 10) {
+                var _range: NSRange = range
+                _range.location = _range.location - 1
+                _range.length = 2
+                textField.text = (textField.text as NSString?)?.replacingCharacters(in: _range, with: "")
+                
+                return false
+                
+            }
+        }
+        return true
+    }
     
     func jumpToNextField(textfield: UITextField, withTag tag: Int) {
         
@@ -175,7 +210,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         _lastname = lastNameLabel.text!
         _phoneNumber = phoneNumberLabel.text!
         _cardNumber = cardNumberLabel.text!
-        _passportNumber = passPortLabel.text!
+        _email = emailLabel.text!
         _passcode = passCodeLabel.text!
     }
     
@@ -194,8 +229,8 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 if cardNumberLabel.text != nil {
                     destination.cardNumber = _cardNumber!
                 }
-                if passPortLabel.text != nil {
-                    destination.passPortNumber = _passportNumber!
+                if emailLabel.text != nil {
+                    destination.email = _email!
                 }
                 if passCodeLabel.text != nil {
                     destination.passcode = _passcode!

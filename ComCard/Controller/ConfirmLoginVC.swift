@@ -23,7 +23,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     private var _cardNumber: String? = nil
     private var _passcode: String? = nil
     private var fullName: String? = nil
-    private var _passportNumber: String? = nil
+    private var _email: String? = nil
     
     var firstName: String {
         get {
@@ -61,11 +61,11 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         }
     }
     
-    var passPortNumber: String {
+    var email: String {
         get {
-            return _passportNumber!
+            return _email!
         } set {
-            self._passportNumber = newValue
+            self._email = newValue
         }
     }
     
@@ -128,7 +128,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 //Call DB_CreateUser to create an user
                 let user = Auth.auth().currentUser
-                let userData: Dictionary<String, String> = ["FullName": self.fullName!, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber, "PassportNumber" : self.passPortNumber]
+                let userData: Dictionary<String, String> = ["FullName": self.fullName!, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber, "Email" : self.email]
                 let pvtData: Dictionary<String, String> = ["Passcode": self.passcode]
                 DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                 DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)

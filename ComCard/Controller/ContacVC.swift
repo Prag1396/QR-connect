@@ -18,11 +18,11 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     @IBOutlet weak var creditCardTextField: UITextField!
     @IBOutlet weak var messageButton: buttonStyle!
     @IBOutlet weak var callButton: buttonStyle!
-    @IBOutlet weak var passportTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     
     private var _cardNumber: String? = nil
     private var _phoneNumber: String? = nil
-    private var _passportNumber: String? = nil
+    private var _email: String? = nil
     var next_responder: UIResponder!
 
     var cardNumber: String {
@@ -41,11 +41,11 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         }
     }
     
-    var passportNumber: String {
+    var email: String {
         get {
-            return _passportNumber!
+            return _email!
         } set {
-            _passportNumber = newValue
+            _email = newValue
         }
     }
     
@@ -61,9 +61,9 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         creditCardTextField.delegate = self
         creditCardTextField.keyboardAppearance = .dark
         
-        passportTextField.tag = 2
-        passportTextField.delegate = self
-        passportTextField.keyboardAppearance = .dark
+        emailTextField.tag = 2
+        emailTextField.delegate = self
+        emailTextField.keyboardAppearance = .dark
         
         callButton.isUserInteractionEnabled = false
         messageButton.isUserInteractionEnabled = false
@@ -72,7 +72,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Continue"
         
         creditCardTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForCard))
-        passportTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForPassport))
+        emailTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForPassport))
     }
 
     @objc func handleDoneActionForCard() {
@@ -82,8 +82,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     }
     
     @objc func handleDoneActionForPassport() {
-        self.passportNumber = passportTextField.text!
-        downloadDataandUpdateButtons(textField: passportTextField)
+        self.email = emailTextField.text!
+        downloadDataandUpdateButtons(textField: emailTextField)
         view.endEditing(true)
     }
     
@@ -91,8 +91,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         view.endEditing(true)
         if (creditCardTextField.text != nil) {
             creditCardTextField.endEditing(true)
-        } else if(passportTextField.text != nil) {
-            passportTextField.endEditing(true)
+        } else if(emailTextField.text != nil) {
+            emailTextField.endEditing(true)
         }
     }
     
@@ -132,7 +132,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         if (textField.tag == 1) {
             self.cardNumber = creditCardTextField.text!
         } else if (textField.tag == 2) {
-            self.passportNumber = passportTextField.text!
+            self.email = emailTextField.text!
         }
         textField.resignFirstResponder()
         downloadDataandUpdateButtons(textField: textField)
@@ -140,7 +140,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     
     func downloadRecord(withPassportNumber passportnum: String, downloadComplete: @escaping(_ status: Bool, _ error: String?)->()) {
         let userRef = DataService.instance.REF_USERS
-        userRef.queryOrdered(byChild: "PassportNumber").queryEqual(toValue: passportnum).observeSingleEvent(of: .value) { (snapshot) in
+        userRef.queryOrdered(byChild: "Email").queryEqual(toValue: passportnum).observeSingleEvent(of: .value) { (snapshot) in
             let isSnapShotexists = snapshot.exists()
             if (isSnapShotexists) {
                 let array: NSArray = snapshot.children.allObjects as NSArray
@@ -177,7 +177,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
             }
         }
         } else if(textField.tag == 2) {
-            downloadRecord(withPassportNumber: self.passportNumber, downloadComplete: { (status, error) in
+            downloadRecord(withPassportNumber: self.email, downloadComplete: { (status, error) in
                 if (error != nil) {
                     //handle Errors
                     let alert = UIAlertController(title: "Warning", message: error, preferredStyle: .alert)
@@ -201,7 +201,7 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         if (textField.tag == 1) {
             self.cardNumber = creditCardTextField.text!
         } else if (textField.tag == 2) {
-            self.passportNumber = passportTextField.text!
+            self.email = emailTextField.text!
         }
         textField.resignFirstResponder()
         downloadDataandUpdateButtons(textField: textField)
@@ -228,8 +228,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
             message.recipients = [self.phonenumber]
             if (self.creditCardTextField.text != nil) {
                 message.body = "Hi, I am contacting you because I found your credit card. I was able to find your phone number through ComCard. Please contact me as soon as possible."
-            } else if(self.passportTextField.text != nil) {
-                message.body = "Hi, I am contacting you because I found your Passport. I was able to find your phone number through ComCard. Please contact me as soon as possible."
+            } else if(self.emailTextField.text != nil) {
+                message.body = "Hi, I am contacting you because I found your belongings. I was able to find your email through ComCard. Please contact me as soon as possible."
             }
             self.present(message, animated: true, completion: nil)
         } else {
