@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import MessageUI
-
+import IQKeyboardManagerSwift
 
 class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MFMessageComposeViewControllerDelegate{
 
@@ -18,10 +18,13 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     @IBOutlet weak var creditCardTextField: UITextField!
     @IBOutlet weak var messageButton: buttonStyle!
     @IBOutlet weak var callButton: buttonStyle!
+    @IBOutlet weak var passportTextField: UITextField!
     
     private var _cardNumber: String? = nil
     private var _phoneNumber: String? = nil
-    
+    private var _passportNumber: String? = nil
+    var next_responder: UIResponder!
+
     var cardNumber: String {
         get {
             return _cardNumber!
@@ -38,20 +41,52 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         }
     }
     
+    var passportNumber: String {
+        get {
+            return _passportNumber!
+        } set {
+            _passportNumber = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+        creditCardTextField.tag = 1
         creditCardTextField.delegate = self
         creditCardTextField.keyboardAppearance = .dark
+        
+        passportTextField.tag = 2
+        passportTextField.delegate = self
+        passportTextField.keyboardAppearance = .dark
+        
         callButton.isUserInteractionEnabled = false
         messageButton.isUserInteractionEnabled = false
+        
         // Do any additional setup after loading the view.
-
+        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Continue"
+        
+        creditCardTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForCard))
+        passportTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForPassport))
     }
 
+    @objc func handleDoneActionForCard() {
+        self.cardNumber = creditCardTextField.text!
+        downloadDataandUpdateButtons()
+        view.endEditing(true)
+    }
+    
+    @objc func handleDoneActionForPassport() {
+        self.passportNumber = passportTextField.text!
+        //downloadDataandUpdateButtons()
+        view.endEditing(true)
+    }
+    
     @objc func backgroundTapped() {
         view.endEditing(true)
     }
@@ -88,8 +123,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
                 alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                self.callButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-                self.messageButton.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+                self.callButton.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
+                self.messageButton.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
                 self.messageButton.isUserInteractionEnabled = true
                 self.callButton.isUserInteractionEnabled = true
                 
@@ -105,9 +140,23 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         self.cardNumber = creditCardTextField.text!
         textField.resignFirstResponder()
         downloadDataandUpdateButtons()
+        let _tag = textField.tag + 1
+        self.jumpToNextField(textfield: textField, withTag: _tag)
         return true
     }
 
+    
+    func jumpToNextField(textfield: UITextField, withTag tag: Int) {
+        
+        next_responder = self.view.viewWithTag(tag)
+        
+        if (tag <= 2) {
+            next_responder.becomeFirstResponder()
+        } else {
+            textfield.resignFirstResponder()
+        }
+        
+    }
     @IBAction func callButtonPressed(_ sender: Any) {
         if let url = URL(string: "tel://\(self.phonenumber)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)

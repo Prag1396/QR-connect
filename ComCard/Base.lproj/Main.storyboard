@@ -128,7 +128,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Contact">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -147,7 +147,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Contact ">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -172,7 +172,7 @@
                                     <constraint firstAttribute="height" constant="15" id="XDw-iW-Juv"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-Gm-viJ" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-Gm-viJ" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="57" y="232" width="261" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="261" id="HFP-UP-gZn"/>
@@ -180,7 +180,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -221,10 +221,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWB-ag-QqH">
-                                <rect key="frame" x="11" y="21" width="10" height="17"/>
+                                <rect key="frame" x="11" y="18" width="13" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="IAS-ys-ida"/>
-                                    <constraint firstAttribute="height" constant="17" id="Iz0-hZ-wJo"/>
+                                    <constraint firstAttribute="width" constant="13" id="IAS-ys-ida"/>
+                                    <constraint firstAttribute="height" constant="20" id="Iz0-hZ-wJo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" backgroundImage="backbutton">
@@ -234,7 +234,7 @@
                                     <action selector="backBtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="cFw-It-BpO"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-zg-wFy" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Passport Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-zg-wFy" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="57" y="315" width="261" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="261" id="dtp-H4-99X"/>
@@ -242,7 +242,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,6 +291,7 @@
                         <outlet property="callButton" destination="qs9-Xf-8yr" id="4VQ-nJ-zq9"/>
                         <outlet property="creditCardTextField" destination="PhR-Gm-viJ" id="H7z-Pe-Dwo"/>
                         <outlet property="messageButton" destination="JAZ-XG-yw5" id="xXC-Ri-UqJ"/>
+                        <outlet property="passportTextField" destination="oNj-zg-wFy" id="OAA-ug-w8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhr-uB-pQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -405,10 +406,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB9-bT-Lll" userLabel="back">
-                                <rect key="frame" x="11" y="21" width="10" height="17"/>
+                                <rect key="frame" x="11" y="18" width="13" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="SxN-iE-mmF"/>
-                                    <constraint firstAttribute="width" constant="10" id="l1N-0f-VWs"/>
+                                    <constraint firstAttribute="height" constant="20" id="SxN-iE-mmF"/>
+                                    <constraint firstAttribute="width" constant="13" id="l1N-0f-VWs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" backgroundImage="backbutton">
@@ -488,10 +489,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAE-LS-O2f">
-                                <rect key="frame" x="11" y="21" width="10" height="17"/>
+                                <rect key="frame" x="11" y="18" width="13" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="nV1-Ee-jgJ"/>
-                                    <constraint firstAttribute="width" constant="10" id="ySk-Fu-7sD"/>
+                                    <constraint firstAttribute="height" constant="20" id="nV1-Ee-jgJ"/>
+                                    <constraint firstAttribute="width" constant="13" id="ySk-Fu-7sD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" backgroundImage="backbutton">
@@ -541,7 +542,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="CONNECT">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -887,10 +888,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yd8-J8-oTc" userLabel="backbtn">
-                                <rect key="frame" x="11" y="27" width="10" height="17"/>
+                                <rect key="frame" x="11" y="27" width="13" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="jJi-Pp-ib6"/>
-                                    <constraint firstAttribute="width" constant="10" id="kTd-0A-qFg"/>
+                                    <constraint firstAttribute="height" constant="20" id="jJi-Pp-ib6"/>
+                                    <constraint firstAttribute="width" constant="13" id="kTd-0A-qFg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" backgroundImage="backbutton">
@@ -1153,6 +1154,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="ffs-XY-gdX"/>
         <segue reference="mMn-JZ-ue3"/>
-        <segue reference="gD5-DZ-zf2"/>
+        <segue reference="T02-rN-a0a"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -94,7 +94,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 self.phoneNumberAlreaduInUse.isHidden = true
                 self.connectBtn.isUserInteractionEnabled = true
                 if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.cardNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
-                    self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+                    self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
                 }
 
             }
@@ -110,7 +110,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
         else if(textField.tag == 6) {
             if(self.isReadytoPerformSegue == true) {
-                self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+                self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
             }
         }
         self.jumpToNextField(textfield: textField, withTag: nextTag)
@@ -119,7 +119,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && cardNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
-            self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+            self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
         }
 
     }
