@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -19,7 +20,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     var next_Responder: UIResponder!
     private var _userNameDownloaded = String()
     private var _passwordDownloaded = String()
-    
+    let userID = Auth.auth().currentUser?.uid
     override func viewDidLoad() {
         super.viewDidLoad()
         userNameTextField.delegate = self
@@ -31,13 +32,34 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         passwordTextField.keyboardAppearance = .dark
         passwordTextField.clearsOnBeginEditing = false
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        background.addGestureRecognizer(tap)
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+        
+        self.downLoadUsernameandPassword { (status) in
+            if(status == true) {
+                print(self._userNameDownloaded)
+                let data = (self._userNameDownloaded).data(using: String.Encoding.ascii, allowLossyConversion: false)
+                self.uploadQRCode(uid: (self.userID)!, data: data!)
+            }
+        }
+
+        
+        
+        
+    }
+    
+    func downLoadUsernameandPassword(onusernameDownloadComplete: @escaping (_ status: Bool)->()) {
         let userRef = DataService.instance.REF_BASE
         let privateRef = DataService.instance.REF_PVT
-        let userID = Auth.auth().currentUser?.uid
         
+        //Get Username
         userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let dict = snapshot.value as? NSDictionary
             self._userNameDownloaded = (dict?["PhoneNumber"] as? String)!
+            onusernameDownloadComplete(true)
+            print("PRAGUN: \(self._userNameDownloaded)")
         })
         //Get Password
         privateRef.child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -45,12 +67,30 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
             self._passwordDownloaded = (dict?["Passcode"] as! String)
         })
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
-        background.addGestureRecognizer(tap)
-        tap.delegate = self
-        self.view.addGestureRecognizer(tap)
-        
-        
+    }
+    
+    
+    func uploadQRCode(uid: String, data: Data) {
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setValue(data, forKey: "inputMessage")
+        let imageToUpload = convertToUIImage(c_image: (filter?.outputImage)!)
+        StorageService.instance.uploadImage(withuserID: userID!, image: imageToUpload) { (status, error, url) in
+            if (error != nil) {
+                let alert = UIAlertController(title: "Warning", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                print("Uploaded Successfully")
+            }
+
+        }
+    }
+    
+    func convertToUIImage(c_image: CIImage) -> UIImage {
+        let context:CIContext = CIContext.init(options: nil)
+        let cgImage:CGImage = context.createCGImage(c_image, from: c_image.extent)!
+        let image:UIImage = UIImage.init(cgImage: cgImage)
+        return image
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -75,6 +115,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         view.endEditing(true)
         
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -7,3 +7,37 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseStorage
+
+let SB_BASE = Storage.storage().reference()
+
+class StorageService {
+    static let instance = StorageService()
+    private var _REFSB_BASE = SB_BASE
+    private var _REFSB_CODE = SB_BASE.child("users")
+    
+    var REFSB_BASE: StorageReference {
+        return _REFSB_BASE
+    }
+    
+    var REFSB_CODE: StorageReference {
+        return _REFSB_CODE
+    }
+    
+    func uploadImage(withuserID userID: String, image: UIImage, onImageUploadComplete: @escaping (_ status: Bool, _ error: Error?, _ url: URL?)->()) {
+        
+        let storageRef = REFSB_CODE.child(userID)
+        
+        if let uploadData = UIImagePNGRepresentation(image) {
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if (error != nil) {
+                    onImageUploadComplete(false, error, nil)
+                    return
+                }
+                let imageurl = metadata?.downloadURL()?.absoluteURL
+                onImageUploadComplete(true, nil, imageurl)
+            })
+        }
+    }
+}

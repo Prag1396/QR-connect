@@ -132,12 +132,12 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 let pvtData: Dictionary<String, String> = ["Passcode": self.passcode]
                 DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                 DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+                
                 self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
             }
         }
         }
     }
-    
     
     
     override func viewDidLoad() {
@@ -158,9 +158,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         
-        let data = self.phoneNumber.data(using: .ascii, allowLossyConversion: false)
-        let filter = CIFilter(name: "CIQRCodeGenerator")
-        filter?.setValue(data, forKey: "inputMessage")
+
 
     }
     
