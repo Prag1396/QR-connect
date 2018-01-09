@@ -157,6 +157,11 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+        let data = self.phoneNumber.data(using: .ascii, allowLossyConversion: false)
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setValue(data, forKey: "inputMessage")
+
     }
     
     @objc func backgroundTapped() {

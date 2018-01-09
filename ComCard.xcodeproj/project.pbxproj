@@ -12,6 +12,7 @@
 		DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */; };
 		DB229323C2D2F07693FD83CB /* Pods_ComCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
+		DBBCCC5620044A050078E662 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5520044A050078E662 /* StorageService.swift */; };
 		DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */; };
 		DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */; };
 		DBD1F9601FF8271200A2CAE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F95E1FF8271200A2CAE6 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
+		DBBCCC5520044A050078E662 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		DBD1F9571FF8271200A2CAE6 /* ComCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */,
 				DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */,
 				DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */,
+				DBBCCC5520044A050078E662 /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
+				DBBCCC5620044A050078E662 /* StorageService.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* UserSignupVC.swift in Sources */,
 				DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */,
 				DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */,

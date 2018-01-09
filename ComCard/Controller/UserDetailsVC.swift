@@ -12,8 +12,11 @@ import FirebaseAuth
 
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var QRImg: UIImageView!
     private var _phoneNumberdownloaded: String? = nil
-
+    private var _fullNameDownloaded: String? = nil
+    private var _emailDownloaded: String? = nil
+    
     @IBOutlet weak var mytableview: UITableView!
     
     private var users = [User]()
@@ -32,6 +35,8 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let phoneNumber = dict?["PhoneNumber"] as? String
             let email = dict?["Email"] as? String
             self._phoneNumberdownloaded = phoneNumber
+            self._fullNameDownloaded = fullName
+            self._emailDownloaded = email
             let cardNumber = dict?["CardNumber"] as? String
             let user = User(fullname: fullName!, phoneNumber: phoneNumber!, cardNumber: cardNumber!, email: email!)
             self.users.append(user)
@@ -41,7 +46,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBAction func buildQRCodePressed(_ sender: Any) {
         
-        
+       //Download QRCode
     }
     
     @IBAction func deleteAccountPressed(_ sender: Any) {
