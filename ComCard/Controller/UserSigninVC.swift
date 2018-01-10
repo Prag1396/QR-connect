@@ -18,8 +18,10 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBOutlet weak var userNameTextField: UITextField!
     
     var next_Responder: UIResponder!
+    private var _imageURL: String? = nil
     private var _userNameDownloaded = String()
     private var _passwordDownloaded = String()
+    
     let userID = Auth.auth().currentUser?.uid
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +46,6 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 self.uploadQRCode(uid: (self.userID)!, data: data!)
             }
         }
-
-        
-        
-        
     }
     
     func downLoadUsernameandPassword(onusernameDownloadComplete: @escaping (_ status: Bool)->()) {
@@ -81,6 +79,11 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 self.present(alert, animated: true, completion: nil)
             } else {
                 print("Uploaded Successfully")
+                self._imageURL = "\(url!)"
+                //set destination image url
+                ImageURLStruct.imageURL = self._imageURL!
+                print(self._imageURL!)
+                
             }
 
         }
@@ -121,7 +124,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func signInBtnTapped(_ sender: Any) {
         
         if userNameTextField.text != nil && passwordTextField.text != nil {

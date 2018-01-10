@@ -10,6 +10,18 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+struct ImageURLStruct {
+    private static var _imageURL: String? = nil
+    
+    static var imageURL: String {
+        get {
+            return _imageURL!
+        } set {
+            _imageURL = newValue
+        }
+    }
+}
+
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var QRImg: UIImageView!
@@ -18,6 +30,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     private var _emailDownloaded: String? = nil
     
     @IBOutlet weak var mytableview: UITableView!
+    @IBOutlet weak var QRImage: UIImageView!
     
     private var users = [User]()
     
@@ -47,6 +60,33 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func buildQRCodePressed(_ sender: Any) {
         
        //Download QRCode
+        let downloadimageURL: StorageReference = Storage.storage().reference(forURL: ImageURLStruct.imageURL)
+        downloadimageURL.downloadURL { (url, error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("image url referencecreated")
+                print(url!)
+                StorageService.instance.downloadImage(withURL: url!, downloadCompleteImage: { (status, error, data)  in
+                    if (error != nil) {
+                        //present alert
+                        print(error.debugDescription)
+                    } else {
+                        //Present sub view with the options of saving the image or emailing it
+                        let imageData = UIImage(data: data!)
+                        print(imageData!)
+                        DispatchQueue.main.async {
+                            let input: CIImage = CIImage(image: imageData!)!
+                            let transform = CGAffineTransform(scaleX: 10, y: 10)
+                            let transformImage = input.transformed(by: transform)
+                            let imageset = UIImage(ciImage: transformImage)
+                            self.QRImage.image = imageset
+                        }
+                    }
+                })
+            }
+        }
+ 
     }
     
     @IBAction func deleteAccountPressed(_ sender: Any) {

@@ -132,40 +132,6 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
     }
     
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if(textField.tag == 3) {
-            
-            //let allowedCharacters = CharacterSet.decimalDigits
-            //let characterSet = CharacterSet(charactersIn: string)
-            
-            if(range.location == 14) {
-                return false
-            }
-            /*
-            if(range.length == 0 &&  !(allowedCharacters.isSuperset(of: characterSet))) {
-                return false
-            }
-            */
-            if(range.length == 0 && range.location == 5 || range.location == 9) {
-                textField.text = NSString(format: "%@-%@", textField.text!, string) as String
-                return false
-            }
-            
-            if(range.length == 1 && range.location == 6 || range.location == 10) {
-                var _range: NSRange = range
-                _range.location = _range.location - 1
-                _range.length = 2
-                textField.text = (textField.text as NSString?)?.replacingCharacters(in: _range, with: "")
-                
-                return false
-                
-            }
-        }
-        return true
-    }
-    
     func jumpToNextField(textfield: UITextField, withTag tag: Int) {
         
         next_responder = self.view.viewWithTag(tag)

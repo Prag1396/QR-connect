@@ -25,9 +25,10 @@ class StorageService {
         return _REFSB_CODE
     }
     
+    
     func uploadImage(withuserID userID: String, image: UIImage, onImageUploadComplete: @escaping (_ status: Bool, _ error: Error?, _ url: URL?)->()) {
         
-        let storageRef = REFSB_CODE.child(userID)
+        let storageRef = REFSB_CODE.child(userID).child("QRCode.png")
         
         if let uploadData = UIImagePNGRepresentation(image) {
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
@@ -39,5 +40,17 @@ class StorageService {
                 onImageUploadComplete(true, nil, imageurl)
             })
         }
+    }
+    
+    func downloadImage(withURL url: URL, downloadCompleteImage: @escaping (_ status: Bool, _ error: Error?, _ data: Data?)->()) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if (error != nil) {
+                print(error.debugDescription)
+                downloadCompleteImage(false, error, nil)
+            } else {
+                print("here")
+                downloadCompleteImage(true, nil, data)
+            }
+        }.resume()
     }
 }
