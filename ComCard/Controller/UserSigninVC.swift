@@ -59,7 +59,6 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
             let dict = snapshot.value as? NSDictionary
             self._userNameDownloaded = (dict?["PhoneNumber"] as? String)!
             onusernameDownloadComplete(true)
-            print("PRAGUN: \(self._userNameDownloaded)")
         })
         //Get Password
         privateRef.child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in

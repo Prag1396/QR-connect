@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import Photos
+import MessageUI
 
 struct ImageURLStruct {
     private static var _imageURL: String? = nil
@@ -22,7 +24,7 @@ struct ImageURLStruct {
     }
 }
 
-class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
     private var _phoneNumberdownloaded: String? = nil
     private var _fullNameDownloaded: String? = nil
@@ -55,6 +57,10 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func buildQRCodePressed(_ sender: Any) {
         
        //Download QRCode
@@ -72,7 +78,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         //Present sub view with the options of saving the image or emailing it
                         DispatchQueue.main.async {
                             let imageData = UIImage(data: data!)
-                            self.showAlertView(image: imageData!)
+                            self.showAlertView(image: imageData!, data: data!)
                         }
                         
                     }
@@ -82,29 +88,61 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
  
     }
     
-    func showAlertView(image: UIImage) {
+    func showAlertView(image: UIImage, data: Data) {
         let alertView = UIAlertController(title: "Comcard", message: "QRCode has been downloaded", preferredStyle: .alert)
         
         //Add Image
         alertView.addImage(image: image)
         
         alertView.addAction(UIAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
-            self.saveToPhotosPressed()
+            self.saveToPhotosPressed(image: image)
         }))
         alertView.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-            self.emailPressed()
+            self.emailPressed(data: data)
         }))
         
         self.present(alertView, animated: true, completion: nil)
         
     }
     
-    func emailPressed() {
+    func emailPressed(data: Data) {
+        print(self._emailDownloaded!)
+        let composeemail = MFMailComposeViewController()
+        composeemail.mailComposeDelegate = self
+        composeemail.setToRecipients([self._emailDownloaded!])
+        composeemail.setSubject("ComCard App - QR-Code")
+        composeemail.setMessageBody("Hi, we are excited to see you. Hope you never lose your belongings again!", isHTML: false)
+        composeemail.addAttachmentData(data, mimeType: "image/png", fileName: "QRCode")
+        self.present(composeemail, animated: true, completion: nil)
         
     }
     
-    func saveToPhotosPressed() {
+    func saveToPhotosPressed(image: UIImage) {
         
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if status == .authorized {
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                } else {
+                    let alertview = UIAlertController(title: "Comcard", message: "The app needs access to your photos to save the QRCode", preferredStyle: .alert)
+                    alertview.addAction((UIAlertAction(title: "OK", style: .default, handler: nil)))
+                    self.present(alertview, animated: true, completion: nil)
+                    
+                }
+            })
+        }
+        else if photos == .authorized {
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        }
+        else  {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if status == .authorized {
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                }
+            })
+        }
     }
     
     @IBAction func deleteAccountPressed(_ sender: Any) {
