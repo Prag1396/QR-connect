@@ -39,11 +39,13 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         
-        self.downLoadUsernameandPassword { (status) in
-            if(status == true) {
-                print(self._userNameDownloaded)
-                let data = (self._userNameDownloaded).data(using: String.Encoding.ascii, allowLossyConversion: false)
-                self.uploadQRCode(uid: (self.userID)!, data: data!)
+        if(Auth.auth().currentUser?.uid != nil) {
+            self.downLoadUsernameandPassword { (status) in
+                if(status == true) {
+                    print(self._userNameDownloaded)
+                    let data = (self._userNameDownloaded).data(using: String.Encoding.ascii, allowLossyConversion: false)
+                    self.uploadQRCode(uid: (self.userID)!, data: data!)
+                }
             }
         }
     }
@@ -71,6 +73,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     func uploadQRCode(uid: String, data: Data) {
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
+        
         let imageToUpload = convertToUIImage(c_image: (filter?.outputImage)!)
         StorageService.instance.uploadImage(withuserID: userID!, image: imageToUpload) { (status, error, url) in
             if (error != nil) {
@@ -92,8 +95,10 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     func convertToUIImage(c_image: CIImage) -> UIImage {
         let context:CIContext = CIContext.init(options: nil)
         let cgImage:CGImage = context.createCGImage(c_image, from: c_image.extent)!
+        
         let image:UIImage = UIImage.init(cgImage: cgImage)
-        return image
+        let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 60, height: 60))
+        return scaledImage
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

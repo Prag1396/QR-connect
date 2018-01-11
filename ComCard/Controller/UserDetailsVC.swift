@@ -24,13 +24,11 @@ struct ImageURLStruct {
 
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var QRImg: UIImageView!
     private var _phoneNumberdownloaded: String? = nil
     private var _fullNameDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     
     @IBOutlet weak var mytableview: UITableView!
-    @IBOutlet weak var QRImage: UIImageView!
     
     private var users = [User]()
     
@@ -65,28 +63,48 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             if (error != nil) {
                 print(error.debugDescription)
             } else {
-                print("image url referencecreated")
-                print(url!)
+
                 StorageService.instance.downloadImage(withURL: url!, downloadCompleteImage: { (status, error, data)  in
                     if (error != nil) {
                         //present alert
                         print(error.debugDescription)
                     } else {
                         //Present sub view with the options of saving the image or emailing it
-                        let imageData = UIImage(data: data!)
-                        print(imageData!)
                         DispatchQueue.main.async {
-                            let input: CIImage = CIImage(image: imageData!)!
-                            let transform = CGAffineTransform(scaleX: 10, y: 10)
-                            let transformImage = input.transformed(by: transform)
-                            let imageset = UIImage(ciImage: transformImage)
-                            self.QRImage.image = imageset
+                            let imageData = UIImage(data: data!)
+                            self.showAlertView(image: imageData!)
                         }
+                        
                     }
                 })
             }
         }
  
+    }
+    
+    func showAlertView(image: UIImage) {
+        let alertView = UIAlertController(title: "Comcard", message: "QRCode has been downloaded", preferredStyle: .alert)
+        
+        //Add Image
+        alertView.addImage(image: image)
+        
+        alertView.addAction(UIAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
+            self.saveToPhotosPressed()
+        }))
+        alertView.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
+            self.emailPressed()
+        }))
+        
+        self.present(alertView, animated: true, completion: nil)
+        
+    }
+    
+    func emailPressed() {
+        
+    }
+    
+    func saveToPhotosPressed() {
+        
     }
     
     @IBAction func deleteAccountPressed(_ sender: Any) {

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 
 class AuthService: UIViewController {
@@ -96,6 +97,22 @@ class AuthService: UIViewController {
         userRef.child(userID).setValue(nil)
         privateRef.child(userID).setValue(nil)
 
+        let imageRef = Storage.storage().reference(forURL: ImageURLStruct.imageURL)
+        imageRef.delete { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("Deleted successfully")
+            }
+        }
+        
+        Auth.auth().currentUser?.delete(completion: { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("Deleted User Successfully")
+            }
+        })
         
     }
     
