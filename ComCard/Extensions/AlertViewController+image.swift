@@ -11,7 +11,7 @@ import UIKit
 extension UIAlertController {
     func addImage(image: UIImage) {
 
-        var rescaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 60, height: 60))
+        var rescaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 120, height: 120))
         let padding: CGFloat = 35
         let left: CGFloat = -self.view.frame.size.width/2 + rescaledImage.size.width + padding
         rescaledImage = rescaledImage.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: left, bottom: 0, right: 0))

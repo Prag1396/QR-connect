@@ -93,10 +93,13 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     func convertToUIImage(c_image: CIImage) -> UIImage {
         let context:CIContext = CIContext.init(options: nil)
-        let cgImage:CGImage = context.createCGImage(c_image, from: c_image.extent)!
+        let transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        let img = c_image.transformed(by: transform)
+        let cgImage:CGImage = context.createCGImage(img, from: c_image.extent)!
         
         let image:UIImage = UIImage.init(cgImage: cgImage)
-        let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 60, height: 60))
+        //Change size
+        let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 120, height: 120))
         return scaledImage
     }
     
