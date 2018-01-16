@@ -10,6 +10,8 @@
 		AB9B43F4E7D55541BC6D7041 /* Pods_ComCardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 167BCB9C6027956347E01A01 /* Pods_ComCardUITests.framework */; };
 		DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */; };
 		DB229323C2D2F07693FD83CB /* Pods_ComCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */; };
+		DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D48F200C96A6005D5219 /* viewStyle.swift */; };
+		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
 		DBBCCC5620044A050078E662 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5520044A050078E662 /* StorageService.swift */; };
 		DBBCCC592006DA250078E662 /* Image+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC582006DA250078E662 /* Image+size.swift */; };
@@ -51,6 +53,8 @@
 		8411E7F6BE361A8D6FF6BCDB /* Pods-ComCard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComCard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComCard/Pods-ComCard.debug.xcconfig"; sourceTree = "<group>"; };
 		8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DB78D48F200C96A6005D5219 /* viewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewStyle.swift; sourceTree = "<group>"; };
+		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
 		DBBCCC5520044A050078E662 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		DBBCCC582006DA250078E662 /* Image+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+size.swift"; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				DBD1F9881FF8313900A2CAE6 /* buttonStyle.swift */,
+				DB78D48F200C96A6005D5219 /* viewStyle.swift */,
+				DB78D491200D730B005D5219 /* imageStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -462,7 +468,9 @@
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
+				DB78D492200D730B005D5219 /* imageStyle.swift in Sources */,
 				DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */,
+				DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
 				DBBCCC5620044A050078E662 /* StorageService.swift in Sources */,
 				DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */,
