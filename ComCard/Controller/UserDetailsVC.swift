@@ -89,7 +89,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func showAlertView(image: UIImage, data: Data) {
-        let alertView = UIAlertController(title: "Comcard", message: "QRCode has been downloaded", preferredStyle: .alert)
+        let alertView = UIAlertController(title: "QRConnect", message: "QRCode has been downloaded", preferredStyle: .alert)
         
         //Add Image
         alertView.addImage(image: image)
@@ -110,7 +110,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let composeemail = MFMailComposeViewController()
         composeemail.mailComposeDelegate = self
         composeemail.setToRecipients([self._emailDownloaded!])
-        composeemail.setSubject("ComCard App - QR-Code")
+        composeemail.setSubject("QRConnect - QR-Code")
         composeemail.setMessageBody("Hi, we are excited to see you. Hope you never lose your belongings again!", isHTML: false)
         composeemail.addAttachmentData(data, mimeType: "image/png", fileName: "QRCode")
         self.present(composeemail, animated: true, completion: nil)
@@ -126,7 +126,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if status == .authorized {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 } else {
-                    let alertview = UIAlertController(title: "Comcard", message: "The app needs access to your photos to save the QRCode", preferredStyle: .alert)
+                    let alertview = UIAlertController(title: "QRConnect", message: "The app needs access to your photos to save the QRCode", preferredStyle: .alert)
                     alertview.addAction((UIAlertAction(title: "OK", style: .default, handler: nil)))
                     self.present(alertview, animated: true, completion: nil)
                     

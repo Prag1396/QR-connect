@@ -13,8 +13,9 @@ import MessageUI
 import IQKeyboardManagerSwift
 import AVFoundation
 
-class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MFMessageComposeViewControllerDelegate, AVCaptureMetadataOutputObjectsDelegate {
+class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MFMessageComposeViewControllerDelegate, AVCaptureMetadataOutputObjectsDelegate, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var infoview: UIView!
     @IBOutlet weak var callsliderImage: UIImageView!
     @IBOutlet weak var mssgbtn: UIButton!
     @IBOutlet weak var callbtn: UIButton!
@@ -94,31 +95,38 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         
     }
     
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let pan: UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        if let pan: UIPanGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
         let vel: CGPoint = pan.velocity(in: self.view)
         if(vel.x > 0) {
             return true
+        }
         }
         return false
     }
     
     @objc func panGestureHandler(recognizer: UIPanGestureRecognizer) {
         
-
+        let loc = recognizer.location(in: view)
+        let stopPosition: CGFloat = callsliderImage.frame.width
         let buttonTag = (recognizer.view?.tag)!
         if(buttonTag == 1) {
             
                 if recognizer.state == .began {
                     self._initialposforcall = callbtn.center
                 } else if (recognizer.state == .ended || recognizer.state == .failed || recognizer.state == .cancelled) {
-                    callbtn.center = _initialposforcall
-                    
+                    if(loc.x - _initialposforcall.x + callsliderImage.frame.width/4 - callbtn.frame.width/2 >= stopPosition) {
+                        instantiateCall()
+                    } else {
+                        callbtn.center = _initialposforcall
+                    }
                 }
                 else {
                     
-                    let loc = recognizer.location(in: view)
-                    let stopPosition: CGFloat = callsliderImage.frame.width
                     if(loc.x - _initialposforcall.x + callsliderImage.frame.width/4 - callbtn.frame.width/2 < stopPosition) {
                         callbtn.frame.origin = CGPoint(x: loc.x - _initialposforcall.x + callsliderImage.frame.width/2, y: _initialposforcall.y - callbtn.frame.height/2)
                     }
@@ -134,6 +142,10 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         view.endEditing(true)
     }
     
+ 
+    @IBAction func cancelbtnpressed(_ sender: Any) {
+        self.view.sendSubview(toBack: self.infoview)
+    }
     
     @IBAction func scanQRCodepressed(_ sender: Any) {
         //Create Session
@@ -185,8 +197,14 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         self.phonenumber = phone
         downloadDetails(ofperson: self.phonenumber) { (status, errmsg) in
             if status == true {
-               print(self.fullName)
-               print(self.email)
+                print(self.fullName)
+                print(self.email)
+                self.fullnamelabel.text = self.fullName
+                let letter: Character = self.fullName.first!
+                let stringFromLetter: String = String(letter)
+                self.profileLetter.text = stringFromLetter
+                self.view.bringSubview(toFront: self.infoview)
+               
             } else if status == false {
                 print(errmsg!)
             }
@@ -292,27 +310,30 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         return true
     }
     
-    /*
-    @IBAction func callButtonPressed(_ sender: Any) {
+    
+    func instantiateCall() {
         if let url = URL(string: "tel://\(self.phonenumber)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: [:], completionHandler: { (status) in
+                self.callbtn.center = self._initialposforcall
+            })
             
         }
     }
-    */
+    
+ 
     
     @IBAction func backBtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    /*
+    
     @IBAction func messageButtonPressed(_ sender: Any) {
         if MFMessageComposeViewController.canSendText() {
             let message: MFMessageComposeViewController = MFMessageComposeViewController()
             message.messageComposeDelegate = self
             message.recipients = [self.phonenumber]
             if (self.creditCardTextField.text != nil) {
-                message.body = "Hi, I am contacting you because I found your credit card. I was able to find your phone number through ComCard. Please contact me as soon as possible."
+                message.body = "Hi, I am contacting you because I found an item which belongs to you. I was able to find your phone number through QRConnect. Please contact me as soon as possible."
             }
             self.present(message, animated: true, completion: nil)
         } else {
@@ -321,7 +342,16 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
             self.present(alert, animated: true, completion: nil)
         }
     }
-    */
+    
+    
+    @IBAction func emailbtnpressed(_ sender: Any) {
+        let composeemail = MFMailComposeViewController()
+        composeemail.mailComposeDelegate = self
+        composeemail.setToRecipients([self.email])
+        composeemail.setSubject("QRConnect - Found Lost item")
+        composeemail.setMessageBody("Hi, I am emailing you becuase I found an item that belongs to you. Hope you never lose your belongings again!", isHTML: false)
+        self.present(composeemail, animated: true, completion: nil)
+    }
     
 
 }

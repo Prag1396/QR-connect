@@ -46,8 +46,8 @@
                                     <constraint firstAttribute="height" constant="46" id="2sG-w3-HnD"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="leA-Ph-dqZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Contact Card Holder">
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Contact Owner">
                                     <color key="titleColor" red="0.13725490196078433" green="0.77647058823529413" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -70,8 +70,8 @@
                                     <constraint firstAttribute="height" constant="46" id="43a-zd-YPL"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="4ao-kp-lhs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Link Card with Phone Number">
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Generate QR-Code">
                                     <color key="titleColor" red="0.13725490196078433" green="0.77647058823529413" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -124,6 +124,142 @@
                                     <constraint firstAttribute="height" constant="386" id="DrX-WE-P6m"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOF-uC-bmo" customClass="viewStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="492" width="375" height="320"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-un-yJ0" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="7" y="233" width="361" height="57"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="r8D-wJ-gSJ"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="13"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelbtnpressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="is6-pF-d26"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Subview" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-xo-3Zh">
+                                        <rect key="frame" x="9" y="10" width="357" height="216"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="216" id="HEO-MQ-Ag9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilelabel" translatesAutoresizingMaskIntoConstraints="NO" id="ck3-PL-gOl" customClass="imageStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="155" y="-9" width="65" height="65"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="65" id="2sP-VW-Wb4"/>
+                                            <constraint firstAttribute="height" constant="65" id="y2m-jP-qtN"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woE-hP-wlV">
+                                        <rect key="frame" x="166" y="4" width="42" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="SEA-iw-nYS"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="cXt-AG-ZuO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="38"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4W-PA-Uax">
+                                        <rect key="frame" x="187.66666666666666" y="69" width="0.0" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="1oR-zd-okm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-Pt-xNc" userLabel="email" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="198.66666666666666" y="99" width="38" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="NnR-yu-Tci"/>
+                                            <constraint firstAttribute="height" constant="38" id="vXX-bL-eFW"/>
+                                        </constraints>
+                                        <state key="normal" image="circle_social-email-outline-stroke-512"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="19"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="emailbtnpressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="SWk-oK-Z7Z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxR-Dy-0U2" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="138.66666666666666" y="99" width="38" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="5aA-JT-51y"/>
+                                            <constraint firstAttribute="height" constant="38" id="QhF-kR-pH4"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="message ui"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="19"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="messageButtonPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="gWt-AO-p8I"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calluibutton" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-MB-9Df">
+                                        <rect key="frame" x="96" y="174" width="182" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="6RU-NW-gZ3"/>
+                                            <constraint firstAttribute="width" constant="182" id="z7L-Yl-5RC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em0-ub-qIl" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="96" y="164" width="41" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="41" id="DHb-U8-RPm"/>
+                                            <constraint firstAttribute="height" constant="41" id="UFJ-Rd-BAF"/>
+                                        </constraints>
+                                        <state key="normal" image="callui"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerY" secondItem="GAf-Pt-xNc" secondAttribute="centerY" id="45a-4k-MSP"/>
+                                    <constraint firstItem="K4W-PA-Uax" firstAttribute="top" secondItem="ck3-PL-gOl" secondAttribute="bottom" constant="13" id="9XZ-Jp-qWr"/>
+                                    <constraint firstItem="K4W-PA-Uax" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="BZd-Rg-ibX"/>
+                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="-30" id="Dc5-vG-Qwq"/>
+                                    <constraint firstItem="em0-ub-qIl" firstAttribute="leading" secondItem="bXX-MB-9Df" secondAttribute="leading" id="EP9-mu-oWH"/>
+                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="7" id="Gd3-zG-SWP"/>
+                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="top" secondItem="K4W-PA-Uax" secondAttribute="bottom" constant="9" id="KxY-0M-c0c"/>
+                                    <constraint firstItem="Q7c-xo-3Zh" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="9" id="Lyk-cu-NeF"/>
+                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="37" id="O7K-Mq-vbH"/>
+                                    <constraint firstAttribute="bottom" secondItem="aJF-un-yJ0" secondAttribute="bottom" constant="30" id="OBL-aJ-yok"/>
+                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="Q7c-xo-3Zh" secondAttribute="bottom" constant="7" id="RLM-Vz-PoW"/>
+                                    <constraint firstItem="em0-ub-qIl" firstAttribute="centerY" secondItem="bXX-MB-9Df" secondAttribute="centerY" id="UQ0-DO-Gbe"/>
+                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerY" secondItem="ck3-PL-gOl" secondAttribute="centerY" id="XFt-qf-tHf"/>
+                                    <constraint firstItem="ck3-PL-gOl" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="ZVu-ge-rbd"/>
+                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="aPB-XK-Axk"/>
+                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerX" secondItem="ck3-PL-gOl" secondAttribute="centerX" id="d9v-FR-VnX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q7c-xo-3Zh" secondAttribute="trailing" constant="9" id="oWM-kQ-Xdp"/>
+                                    <constraint firstAttribute="height" constant="250" id="pWB-15-gmR">
+                                        <variation key="heightClass=regular" constant="320"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="aJF-un-yJ0" secondAttribute="trailing" constant="7" id="rIF-a8-iLa"/>
+                                    <constraint firstItem="ck3-PL-gOl" firstAttribute="top" secondItem="eOF-uC-bmo" secondAttribute="top" constant="-9" id="uuT-Mi-pLL"/>
+                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="30" id="w6J-KE-3wx"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5x0-hQ-BwU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
@@ -192,133 +328,6 @@
                                     <action selector="backBtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="cFw-It-BpO"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOF-uC-bmo" customClass="viewStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="492" width="375" height="320"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-un-yJ0" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="7" y="233" width="361" height="57"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="57" id="r8D-wJ-gSJ"/>
-                                        </constraints>
-                                        <state key="normal" title="Cancel"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Subview" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-xo-3Zh">
-                                        <rect key="frame" x="9" y="10" width="357" height="216"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="216" id="HEO-MQ-Ag9"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilelabel" translatesAutoresizingMaskIntoConstraints="NO" id="ck3-PL-gOl" customClass="imageStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="155" y="-9" width="65" height="65"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="65" id="2sP-VW-Wb4"/>
-                                            <constraint firstAttribute="height" constant="65" id="y2m-jP-qtN"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woE-hP-wlV">
-                                        <rect key="frame" x="166" y="4" width="42" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="SEA-iw-nYS"/>
-                                            <constraint firstAttribute="width" constant="42" id="cXt-AG-ZuO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="38"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pragun Sharma" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4W-PA-Uax">
-                                        <rect key="frame" x="128.66666666666666" y="69" width="118" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="1oR-zd-okm"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-Pt-xNc" userLabel="email" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="198.66666666666666" y="99" width="38" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="38" id="NnR-yu-Tci"/>
-                                            <constraint firstAttribute="height" constant="38" id="vXX-bL-eFW"/>
-                                        </constraints>
-                                        <state key="normal" image="circle_social-email-outline-stroke-512"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="19"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxR-Dy-0U2" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="138.66666666666666" y="99" width="38" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="38" id="5aA-JT-51y"/>
-                                            <constraint firstAttribute="height" constant="38" id="QhF-kR-pH4"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="message ui"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="19"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calluibutton" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-MB-9Df">
-                                        <rect key="frame" x="96" y="174" width="182" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="6RU-NW-gZ3"/>
-                                            <constraint firstAttribute="width" constant="182" id="z7L-Yl-5RC"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em0-ub-qIl" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="96" y="164" width="41" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="41" id="DHb-U8-RPm"/>
-                                            <constraint firstAttribute="height" constant="41" id="UFJ-Rd-BAF"/>
-                                        </constraints>
-                                        <state key="normal" image="callui"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerY" secondItem="GAf-Pt-xNc" secondAttribute="centerY" id="45a-4k-MSP"/>
-                                    <constraint firstItem="K4W-PA-Uax" firstAttribute="top" secondItem="ck3-PL-gOl" secondAttribute="bottom" constant="13" id="9XZ-Jp-qWr"/>
-                                    <constraint firstItem="K4W-PA-Uax" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="BZd-Rg-ibX"/>
-                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="-30" id="Dc5-vG-Qwq"/>
-                                    <constraint firstItem="em0-ub-qIl" firstAttribute="leading" secondItem="bXX-MB-9Df" secondAttribute="leading" id="EP9-mu-oWH"/>
-                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="7" id="Gd3-zG-SWP"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="top" secondItem="K4W-PA-Uax" secondAttribute="bottom" constant="9" id="KxY-0M-c0c"/>
-                                    <constraint firstItem="Q7c-xo-3Zh" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="9" id="Lyk-cu-NeF"/>
-                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="37" id="O7K-Mq-vbH"/>
-                                    <constraint firstAttribute="bottom" secondItem="aJF-un-yJ0" secondAttribute="bottom" constant="30" id="OBL-aJ-yok"/>
-                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="Q7c-xo-3Zh" secondAttribute="bottom" constant="7" id="RLM-Vz-PoW"/>
-                                    <constraint firstItem="em0-ub-qIl" firstAttribute="centerY" secondItem="bXX-MB-9Df" secondAttribute="centerY" id="UQ0-DO-Gbe"/>
-                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerY" secondItem="ck3-PL-gOl" secondAttribute="centerY" id="XFt-qf-tHf"/>
-                                    <constraint firstItem="ck3-PL-gOl" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="ZVu-ge-rbd"/>
-                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="aPB-XK-Axk"/>
-                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerX" secondItem="ck3-PL-gOl" secondAttribute="centerX" id="d9v-FR-VnX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Q7c-xo-3Zh" secondAttribute="trailing" constant="9" id="oWM-kQ-Xdp"/>
-                                    <constraint firstAttribute="height" constant="250" id="pWB-15-gmR">
-                                        <variation key="heightClass=regular" constant="320"/>
-                                    </constraint>
-                                    <constraint firstAttribute="trailing" secondItem="aJF-un-yJ0" secondAttribute="trailing" constant="7" id="rIF-a8-iLa"/>
-                                    <constraint firstItem="ck3-PL-gOl" firstAttribute="top" secondItem="eOF-uC-bmo" secondAttribute="top" constant="-9" id="uuT-Mi-pLL"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="30" id="w6J-KE-3wx"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -350,6 +359,7 @@
                         <outlet property="callsliderImage" destination="bXX-MB-9Df" id="JAB-aq-xef"/>
                         <outlet property="creditCardTextField" destination="PhR-Gm-viJ" id="H7z-Pe-Dwo"/>
                         <outlet property="fullnamelabel" destination="K4W-PA-Uax" id="ajP-HS-eDv"/>
+                        <outlet property="infoview" destination="eOF-uC-bmo" id="95E-W9-7OK"/>
                         <outlet property="mssgbtn" destination="yxR-Dy-0U2" id="oNw-ab-U1U"/>
                         <outlet property="profileLetter" destination="woE-hP-wlV" id="SUf-C2-oLD"/>
                     </connections>
@@ -616,7 +626,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B44-o1-FDa" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Card Number (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B44-o1-FDa" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="33.666666666666657" y="312" width="308" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nnz-gN-0ci"/>
@@ -1084,7 +1094,7 @@
                                                         <constraint firstAttribute="width" constant="20" id="pIu-cj-EAG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wD-Zc-7cb" userLabel="FullnameLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wD-Zc-7cb" userLabel="FullnameLabel">
                                                     <rect key="frame" x="80" y="11" width="230" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="yKO-2p-riT"/>
@@ -1093,19 +1103,19 @@
                                                     <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g2-by-RSk" userLabel="CardnumberLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g2-by-RSk" userLabel="CardnumberLabel">
                                                     <rect key="frame" x="80" y="100" width="230" height="19"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                     <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6p-JX-Zuh" userLabel="CardnumberLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6p-JX-Zuh" userLabel="CardnumberLabel">
                                                     <rect key="frame" x="79.999999999999986" y="144" width="229.66666666666663" height="19"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                     <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKf-eB-JcZ" userLabel="PhonenumberLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKf-eB-JcZ" userLabel="PhonenumberLabel">
                                                     <rect key="frame" x="80" y="57" width="230" height="18"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                     <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>

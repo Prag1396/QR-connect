@@ -97,7 +97,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 self.isReadytoPerformSegue = true
                 self.phoneNumberAlreaduInUse.isHidden = true
                 self.connectBtn.isUserInteractionEnabled = true
-                if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.cardNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
+                if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
                     self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
                 }
 
@@ -122,7 +122,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && cardNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
+        if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
             self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
         }
 
@@ -151,7 +151,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     @IBAction func connectBtnPressed(_ sender: Any) {
         captureText()
-        if ((firstNameLabel.text?.isEmpty)! || (lastNameLabel.text?.isEmpty)! || (phoneNumberLabel.text?.isEmpty)! || (cardNumberLabel.text?.isEmpty)! || (passCodeLabel.text?.isEmpty)!) {
+        if ((firstNameLabel.text?.isEmpty)! || (lastNameLabel.text?.isEmpty)! || (phoneNumberLabel.text?.isEmpty)! || (passCodeLabel.text?.isEmpty)!) {
             //Present Alert
             let alert = UIAlertController(title: "Warning", message: "Please fill all the text fields", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -175,7 +175,9 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         _firstname = firstNameLabel.text!
         _lastname = lastNameLabel.text!
         _phoneNumber = phoneNumberLabel.text!
-        _cardNumber = cardNumberLabel.text!
+        if (cardNumberLabel.text != nil || cardNumberLabel.text?.isEmpty == false) {
+            _cardNumber = cardNumberLabel.text!
+        }
         _email = emailLabel.text!
         _passcode = passCodeLabel.text!
     }
