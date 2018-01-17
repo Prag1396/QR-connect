@@ -245,69 +245,46 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calluibutton" translatesAutoresizingMaskIntoConstraints="NO" id="5eO-51-2f4">
-                                        <rect key="frame" x="59" y="109.00000000000001" width="256" height="42.666666666666671"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="42.5" id="nmT-nd-kQF"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calluibutton" translatesAutoresizingMaskIntoConstraints="NO" id="8wF-5H-CDO" userLabel="messageuibutton">
-                                        <rect key="frame" x="59" y="168" width="256" height="42.666666666666657"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="42.5" id="17L-d1-fMy"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sc7-YE-XfP">
-                                        <rect key="frame" x="154.66666666666666" y="120" width="65.333333333333343" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="1XN-Ie-f5E"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                        <color key="textColor" red="0.47968968749046326" green="0.86932313442230225" blue="0.63923406600952148" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjh-PZ-oh0">
-                                        <rect key="frame" x="154" y="179" width="66.666666666666686" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="Qo9-ZQ-TV5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                        <color key="textColor" red="0.47968968750000002" green="0.86932313439999997" blue="0.63923406599999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPr-zX-KfJ" userLabel="callbtn" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="59" y="110" width="41" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="41" id="rFF-6v-7FQ"/>
-                                            <constraint firstAttribute="height" constant="41" id="tzt-xO-dZs"/>
-                                        </constraints>
-                                        <state key="normal" image="callswipe"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-Pt-xNc" userLabel="email" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="320" y="15" width="41" height="41"/>
+                                        <rect key="frame" x="198.66666666666666" y="99" width="38" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="iqF-DB-Jnd"/>
-                                            <constraint firstAttribute="width" constant="41" id="t4U-cm-aUX"/>
+                                            <constraint firstAttribute="width" constant="38" id="NnR-yu-Tci"/>
+                                            <constraint firstAttribute="height" constant="38" id="vXX-bL-eFW"/>
                                         </constraints>
                                         <state key="normal" image="circle_social-email-outline-stroke-512"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="22.5"/>
+                                                <real key="value" value="19"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pii-7O-DwL" userLabel="messagebtn" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="59" y="168" width="41" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxR-Dy-0U2" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="138.66666666666666" y="99" width="38" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="DTu-Y1-wj5"/>
-                                            <constraint firstAttribute="width" constant="41" id="TyZ-mF-eDZ"/>
+                                            <constraint firstAttribute="width" constant="38" id="5aA-JT-51y"/>
+                                            <constraint firstAttribute="height" constant="38" id="QhF-kR-pH4"/>
                                         </constraints>
-                                        <state key="normal" image="messageswipe"/>
+                                        <state key="normal" backgroundImage="message ui"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="19"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calluibutton" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-MB-9Df">
+                                        <rect key="frame" x="96" y="174" width="182" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="6RU-NW-gZ3"/>
+                                            <constraint firstAttribute="width" constant="182" id="z7L-Yl-5RC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em0-ub-qIl" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="96" y="164" width="41" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="41" id="DHb-U8-RPm"/>
+                                            <constraint firstAttribute="height" constant="41" id="UFJ-Rd-BAF"/>
+                                        </constraints>
+                                        <state key="normal" image="callui"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="20.5"/>
@@ -317,36 +294,29 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="5eO-51-2f4" firstAttribute="top" secondItem="K4W-PA-Uax" secondAttribute="bottom" constant="19" id="0I2-tV-NMo"/>
-                                    <constraint firstItem="8wF-5H-CDO" firstAttribute="top" secondItem="5eO-51-2f4" secondAttribute="bottom" constant="16.5" id="17i-fD-zWO"/>
-                                    <constraint firstItem="8wF-5H-CDO" firstAttribute="trailing" secondItem="5eO-51-2f4" secondAttribute="trailing" id="2bl-rY-ceT"/>
+                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerY" secondItem="GAf-Pt-xNc" secondAttribute="centerY" id="45a-4k-MSP"/>
                                     <constraint firstItem="K4W-PA-Uax" firstAttribute="top" secondItem="ck3-PL-gOl" secondAttribute="bottom" constant="13" id="9XZ-Jp-qWr"/>
-                                    <constraint firstItem="Sc7-YE-XfP" firstAttribute="centerY" secondItem="5eO-51-2f4" secondAttribute="centerY" id="AHX-Jp-CHH"/>
                                     <constraint firstItem="K4W-PA-Uax" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="BZd-Rg-ibX"/>
-                                    <constraint firstItem="8wF-5H-CDO" firstAttribute="top" secondItem="pii-7O-DwL" secondAttribute="bottom" constant="-41" id="GDw-Lc-rEc"/>
+                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="-30" id="Dc5-vG-Qwq"/>
+                                    <constraint firstItem="em0-ub-qIl" firstAttribute="leading" secondItem="bXX-MB-9Df" secondAttribute="leading" id="EP9-mu-oWH"/>
                                     <constraint firstItem="aJF-un-yJ0" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="7" id="Gd3-zG-SWP"/>
-                                    <constraint firstItem="Cjh-PZ-oh0" firstAttribute="centerY" secondItem="8wF-5H-CDO" secondAttribute="centerY" id="ITN-sj-4uS"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="leading" secondItem="Q7c-xo-3Zh" secondAttribute="trailing" constant="-46" id="LX6-8T-LpT"/>
+                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="top" secondItem="K4W-PA-Uax" secondAttribute="bottom" constant="9" id="KxY-0M-c0c"/>
                                     <constraint firstItem="Q7c-xo-3Zh" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="9" id="Lyk-cu-NeF"/>
+                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="37" id="O7K-Mq-vbH"/>
                                     <constraint firstAttribute="bottom" secondItem="aJF-un-yJ0" secondAttribute="bottom" constant="30" id="OBL-aJ-yok"/>
                                     <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="Q7c-xo-3Zh" secondAttribute="bottom" constant="7" id="RLM-Vz-PoW"/>
-                                    <constraint firstItem="Q7c-xo-3Zh" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="-46" id="TWn-zD-TOW"/>
+                                    <constraint firstItem="em0-ub-qIl" firstAttribute="centerY" secondItem="bXX-MB-9Df" secondAttribute="centerY" id="UQ0-DO-Gbe"/>
                                     <constraint firstItem="woE-hP-wlV" firstAttribute="centerY" secondItem="ck3-PL-gOl" secondAttribute="centerY" id="XFt-qf-tHf"/>
                                     <constraint firstItem="ck3-PL-gOl" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="ZVu-ge-rbd"/>
-                                    <constraint firstItem="Cjh-PZ-oh0" firstAttribute="centerX" secondItem="8wF-5H-CDO" secondAttribute="centerX" id="bLV-Db-KO7"/>
+                                    <constraint firstItem="bXX-MB-9Df" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="aPB-XK-Axk"/>
                                     <constraint firstItem="woE-hP-wlV" firstAttribute="centerX" secondItem="ck3-PL-gOl" secondAttribute="centerX" id="d9v-FR-VnX"/>
-                                    <constraint firstItem="TPr-zX-KfJ" firstAttribute="top" secondItem="5eO-51-2f4" secondAttribute="bottom" constant="-41.5" id="dns-Kq-2Q8"/>
-                                    <constraint firstItem="5eO-51-2f4" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="f9W-eb-iqJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Q7c-xo-3Zh" secondAttribute="trailing" constant="9" id="oWM-kQ-Xdp"/>
-                                    <constraint firstItem="Sc7-YE-XfP" firstAttribute="centerX" secondItem="5eO-51-2f4" secondAttribute="centerX" id="pGe-Sj-lIG"/>
                                     <constraint firstAttribute="height" constant="250" id="pWB-15-gmR">
                                         <variation key="heightClass=regular" constant="320"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="aJF-un-yJ0" secondAttribute="trailing" constant="7" id="rIF-a8-iLa"/>
-                                    <constraint firstItem="TPr-zX-KfJ" firstAttribute="leading" secondItem="5eO-51-2f4" secondAttribute="leading" id="soz-ew-HCJ"/>
                                     <constraint firstItem="ck3-PL-gOl" firstAttribute="top" secondItem="eOF-uC-bmo" secondAttribute="top" constant="-9" id="uuT-Mi-pLL"/>
-                                    <constraint firstItem="8wF-5H-CDO" firstAttribute="leading" secondItem="5eO-51-2f4" secondAttribute="leading" id="w2B-It-V4l"/>
-                                    <constraint firstItem="pii-7O-DwL" firstAttribute="leading" secondItem="8wF-5H-CDO" secondAttribute="leading" id="xuy-gq-sNP"/>
+                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" constant="30" id="w6J-KE-3wx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -376,12 +346,17 @@
                     <connections>
                         <outlet property="background" destination="5x0-hQ-BwU" id="6tq-z4-wlP"/>
                         <outlet property="border" destination="ZdK-pK-aRo" id="dXE-VC-Zik"/>
+                        <outlet property="callbtn" destination="em0-ub-qIl" id="hHd-cQ-tyx"/>
+                        <outlet property="callsliderImage" destination="bXX-MB-9Df" id="JAB-aq-xef"/>
                         <outlet property="creditCardTextField" destination="PhR-Gm-viJ" id="H7z-Pe-Dwo"/>
+                        <outlet property="fullnamelabel" destination="K4W-PA-Uax" id="ajP-HS-eDv"/>
+                        <outlet property="mssgbtn" destination="yxR-Dy-0U2" id="oNw-ab-U1U"/>
+                        <outlet property="profileLetter" destination="woE-hP-wlV" id="SUf-C2-oLD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhr-uB-pQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.600000000000001" y="1029.5352323838081"/>
+            <point key="canvasLocation" x="29.600000000000001" y="1029.3103448275863"/>
         </scene>
         <!--User SigninVC-->
         <scene sceneID="KJO-eF-A4a">
@@ -1224,13 +1199,13 @@
         <image name="Subview" width="357" height="216"/>
         <image name="Title" width="340" height="69"/>
         <image name="backbutton" width="10" height="17"/>
-        <image name="callswipe" width="41" height="41"/>
-        <image name="calluibutton" width="256" height="43"/>
+        <image name="callui" width="43" height="43"/>
+        <image name="calluibutton" width="182" height="21"/>
         <image name="circle_social-email-outline-stroke-512" width="41" height="41"/>
         <image name="email-icon-82461" width="10" height="8"/>
         <image name="home_btn" width="24" height="28"/>
         <image name="logo" width="65" height="65"/>
-        <image name="messageswipe" width="41" height="41"/>
+        <image name="message ui" width="40" height="40"/>
         <image name="profilelabel" width="75" height="75"/>
         <image name="scan-qr-ios-11" width="375" height="667"/>
         <image name="usernameIcon" width="20" height="20"/>

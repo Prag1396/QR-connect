@@ -13,8 +13,13 @@ import MessageUI
 import IQKeyboardManagerSwift
 import AVFoundation
 
-class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MFMessageComposeViewControllerDelegate, AVCaptureMetadataOutputObjectsDelegate{
+class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MFMessageComposeViewControllerDelegate, AVCaptureMetadataOutputObjectsDelegate {
 
+    @IBOutlet weak var callsliderImage: UIImageView!
+    @IBOutlet weak var mssgbtn: UIButton!
+    @IBOutlet weak var callbtn: UIButton!
+    @IBOutlet weak var fullnamelabel: UILabel!
+    @IBOutlet weak var profileLetter: UILabel!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var creditCardTextField: UITextField!
     @IBOutlet weak var border: UIImageView!
@@ -24,6 +29,8 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
     private var _phoneNumber: String? = nil
     private var _email: String? = nil
     private var _fullName: String? = nil
+    private var _initialposforcall = CGPoint.zero
+    private var _initialposfortext: CGPoint = CGPoint.zero
     
     var video = AVCaptureVideoPreviewLayer()
     
@@ -69,6 +76,12 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(recognizer:)))
+        callbtn.tag = 1
+        pan.minimumNumberOfTouches = 1
+        pan.delegate = self
+        callbtn.addGestureRecognizer(pan)
+        
         creditCardTextField.tag = 1
         creditCardTextField.delegate = self
         creditCardTextField.keyboardAppearance = .dark
@@ -78,6 +91,40 @@ class ContacVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelega
         
         creditCardTextField.addDoneOnKeyboardWithTarget(self, action: #selector(handleDoneActionForCard))
         
+        
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let pan: UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        let vel: CGPoint = pan.velocity(in: self.view)
+        if(vel.x > 0) {
+            return true
+        }
+        return false
+    }
+    
+    @objc func panGestureHandler(recognizer: UIPanGestureRecognizer) {
+        
+
+        let buttonTag = (recognizer.view?.tag)!
+        if(buttonTag == 1) {
+            
+                if recognizer.state == .began {
+                    self._initialposforcall = callbtn.center
+                } else if (recognizer.state == .ended || recognizer.state == .failed || recognizer.state == .cancelled) {
+                    callbtn.center = _initialposforcall
+                    
+                }
+                else {
+                    
+                    let loc = recognizer.location(in: view)
+                    let stopPosition: CGFloat = callsliderImage.frame.width
+                    if(loc.x - _initialposforcall.x + callsliderImage.frame.width/4 - callbtn.frame.width/2 < stopPosition) {
+                        callbtn.frame.origin = CGPoint(x: loc.x - _initialposforcall.x + callsliderImage.frame.width/2, y: _initialposforcall.y - callbtn.frame.height/2)
+                    }
+                    
+                }
+        }
         
     }
 
