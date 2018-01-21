@@ -10,6 +10,9 @@
 		AB9B43F4E7D55541BC6D7041 /* Pods_ComCardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 167BCB9C6027956347E01A01 /* Pods_ComCardUITests.framework */; };
 		DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */; };
 		DB229323C2D2F07693FD83CB /* Pods_ComCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */; };
+		DB2E3AAC2011B26800E39C79 /* EmailCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AAB2011B26800E39C79 /* EmailCaptureVC.swift */; };
+		DB2E3AAE2011B54D00E39C79 /* PasswordCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AAD2011B54D00E39C79 /* PasswordCaptureVC.swift */; };
+		DB2E3AB02011CFB200E39C79 /* NameCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AAF2011CFB200E39C79 /* NameCaptureVC.swift */; };
 		DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D48F200C96A6005D5219 /* viewStyle.swift */; };
 		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
@@ -53,6 +56,9 @@
 		8411E7F6BE361A8D6FF6BCDB /* Pods-ComCard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComCard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComCard/Pods-ComCard.debug.xcconfig"; sourceTree = "<group>"; };
 		8746F01FC988FBFD0E7D72E6 /* Pods_ComCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DB2E3AAB2011B26800E39C79 /* EmailCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCaptureVC.swift; sourceTree = "<group>"; };
+		DB2E3AAD2011B54D00E39C79 /* PasswordCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCaptureVC.swift; sourceTree = "<group>"; };
+		DB2E3AAF2011CFB200E39C79 /* NameCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCaptureVC.swift; sourceTree = "<group>"; };
 		DB78D48F200C96A6005D5219 /* viewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewStyle.swift; sourceTree = "<group>"; };
 		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
@@ -209,8 +215,11 @@
 			children = (
 				DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */,
 				DBD1F98C1FF83B9000A2CAE6 /* UserSignupVC.swift */,
-				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DBD1F9921FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift */,
+				DB2E3AAB2011B26800E39C79 /* EmailCaptureVC.swift */,
+				DB2E3AAD2011B54D00E39C79 /* PasswordCaptureVC.swift */,
+				DB2E3AAF2011CFB200E39C79 /* NameCaptureVC.swift */,
+				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */,
 				DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */,
 			);
@@ -466,6 +475,7 @@
 				DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */,
 				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
+				DB2E3AAE2011B54D00E39C79 /* PasswordCaptureVC.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DB78D492200D730B005D5219 /* imageStyle.swift in Sources */,
@@ -478,7 +488,9 @@
 				DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */,
 				DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
+				DB2E3AB02011CFB200E39C79 /* NameCaptureVC.swift in Sources */,
 				DBBCCC592006DA250078E662 /* Image+size.swift in Sources */,
+				DB2E3AAC2011B26800E39C79 /* EmailCaptureVC.swift in Sources */,
 				DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

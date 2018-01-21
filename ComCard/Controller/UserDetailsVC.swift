@@ -26,6 +26,7 @@ struct ImageURLStruct {
 
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var fullnameLabel: UILabel!
     private var _phoneNumberdownloaded: String? = nil
     private var _fullNameDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
@@ -42,18 +43,33 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Do any additional setup after loading the view.
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
+
+        userRef.child("pvtdata").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
+            let dict = snapshot.value as? NSDictionary
+            self._emailDownloaded = dict?["Email"] as? String
+            self._phoneNumberdownloaded = dict?["PhoneNumber"] as? String
+            self.downloadFirstname(onfirstnamedownloadComplete: { (status) in
+                if status == true {
+                    let user = User(phoneNumber: self._phoneNumberdownloaded!, email: self._emailDownloaded!)
+                    self.users.append(user)
+                    self.mytableview.reloadData()
+                    DispatchQueue.main.async {
+                        self.fullnameLabel.text = self._fullNameDownloaded
+                    }
+                }
+            })
+        }
+    }
+    
+    func downloadFirstname(onfirstnamedownloadComplete: @escaping (_ status: Bool)->()) {
+        let userRef = DataService.instance.REF_BASE
+        let userID = Auth.auth().currentUser?.uid
+        
         userRef.child("users").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? NSDictionary
-            let fullName = dict?["FullName"] as? String
-            let phoneNumber = dict?["PhoneNumber"] as? String
-            let email = dict?["Email"] as? String
-            self._phoneNumberdownloaded = phoneNumber
+            let fullName = dict?["FirstName"] as? String
             self._fullNameDownloaded = fullName
-            self._emailDownloaded = email
-            let cardNumber = dict?["CardNumber"] as? String
-            let user = User(fullname: fullName!, phoneNumber: phoneNumber!, cardNumber: cardNumber!, email: email!)
-            self.users.append(user)
-            self.mytableview.reloadData()
+            onfirstnamedownloadComplete(true)
         }
     }
     

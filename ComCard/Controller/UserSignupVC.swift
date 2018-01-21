@@ -15,22 +15,12 @@ struct CurrentLength {
 class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var firstNameLabel: UITextField!
-    @IBOutlet weak var lastNameLabel: UITextField!
     @IBOutlet weak var phoneNumberLabel: UITextField!
-    @IBOutlet weak var cardNumberLabel: UITextField!
-    @IBOutlet weak var passCodeLabel: UITextField!
     @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
-    @IBOutlet weak var AlreadyamemberSigninBtn: UIButton!
     @IBOutlet weak var connectBtn: UIButton!
-    @IBOutlet weak var emailLabel: UITextField!
     
     private var _phoneNumber: String? = nil
-    private var _firstname: String? = nil
-    private var _lastname: String? = nil
-    private var _cardNumber: String? = nil
-    private var _email: String? = nil
-    private var _passcode: String? = nil
+
 
     var next_responder: UIResponder!
     var isReadytoPerformSegue: Bool!
@@ -48,37 +38,15 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     @objc func backgroundTapped() {
-        
-        
         view.endEditing(true)
     }
     
     func setupOutlets() {
         
-        firstNameLabel.delegate = self
-        firstNameLabel.tag = 1
-        firstNameLabel.clearsOnBeginEditing = false
-        lastNameLabel.delegate = self
-        lastNameLabel.tag = 2
-        lastNameLabel.clearsOnBeginEditing = false
         phoneNumberLabel.delegate = self
-        phoneNumberLabel.tag = 3
+        phoneNumberLabel.tag = 1
         phoneNumberLabel.clearsOnBeginEditing = false
-        cardNumberLabel.delegate = self
-        cardNumberLabel.tag = 4
-        cardNumberLabel.clearsOnBeginEditing = false
-        emailLabel.delegate = self
-        emailLabel.tag = 5
-        passCodeLabel.delegate = self
-        passCodeLabel.tag = 6
-        emailLabel.clearsOnBeginEditing = false
-        
-        firstNameLabel.keyboardAppearance = .dark
-        lastNameLabel.keyboardAppearance = .dark
         phoneNumberLabel.keyboardAppearance = .dark
-        cardNumberLabel.keyboardAppearance = .dark
-        passCodeLabel.keyboardAppearance = .dark
-        emailLabel.keyboardAppearance = .dark
         
         
     }
@@ -90,96 +58,61 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 self.isReadytoPerformSegue = false
                 self.phoneNumberAlreaduInUse.isHidden = false
                 self.connectBtn.isUserInteractionEnabled = false
-                self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-
+                self.connectBtn.alpha = 0.6
                 
             } else {
                 self.isReadytoPerformSegue = true
                 self.phoneNumberAlreaduInUse.isHidden = true
                 self.connectBtn.isUserInteractionEnabled = true
-                if(self.firstNameLabel.text?.isEmpty == false && self.lastNameLabel.text?.isEmpty == false && self.phoneNumberLabel.text?.isEmpty == false && self.passCodeLabel.text?.isEmpty == false) {
-                    self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
-                }
-
             }
         })
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let nextTag: Int = textField.tag + 1
-        if(textField.tag == 3) {
-            
+
+        if(textField.tag == 1) {
             self.checkPhoneNumber()
-        
         }
-        else if(textField.tag == 6) {
-            if(self.isReadytoPerformSegue == true) {
-                self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
-            }
-        }
-        self.jumpToNextField(textfield: textField, withTag: nextTag)
+        textField.resignFirstResponder()
         return false
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if(self.isReadytoPerformSegue == true && firstNameLabel.text?.isEmpty == false && lastNameLabel.text?.isEmpty == false && phoneNumberLabel.text?.isEmpty == false && passCodeLabel.text?.isEmpty == false) {
-            self.connectBtn.backgroundColor = UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0)
+        if(phoneNumberLabel.text?.isEmpty == false) {
+            self.connectBtn.alpha = 1.0
         }
 
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.connectBtn.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-    }
-    
-    func jumpToNextField(textfield: UITextField, withTag tag: Int) {
-        
-        next_responder = self.view.viewWithTag(tag)
-        
-        if (tag <= 6) {
-            next_responder.becomeFirstResponder()
-        } else {
-            textfield.resignFirstResponder()
-        }
-        
-    }
-    
-    @IBAction func backbtnPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.connectBtn.alpha = 0.6
     }
     
     
     @IBAction func connectBtnPressed(_ sender: Any) {
         captureText()
-        if ((firstNameLabel.text?.isEmpty)! || (lastNameLabel.text?.isEmpty)! || (phoneNumberLabel.text?.isEmpty)! || (passCodeLabel.text?.isEmpty)!) {
+        if ((phoneNumberLabel.text?.isEmpty)!) {
             //Present Alert
-            let alert = UIAlertController(title: "Warning", message: "Please fill all the text fields", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter your contact number", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }  else if (isReadytoPerformSegue == false) {
-            let alert = UIAlertController(title: "Warning", message: "Please fill all the text fields", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter a valid contact number", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         
         else {
-        performSegue(withIdentifier: "connectPressed", sender: (Any).self)
-            
+            //Perform segue to verification
+            performSegue(withIdentifier: "connectPressed", sender: (Any).self)
         }
-      
-        
+   
     }
     
     func captureText() {
-        _firstname = firstNameLabel.text!
-        _lastname = lastNameLabel.text!
         _phoneNumber = phoneNumberLabel.text!
-        if (cardNumberLabel.text != nil || cardNumberLabel.text?.isEmpty == false) {
-            _cardNumber = cardNumberLabel.text!
-        }
-        _email = emailLabel.text!
-        _passcode = passCodeLabel.text!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -188,22 +121,6 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 if phoneNumberLabel.text != nil {
                     destination.phoneNumber = _phoneNumber!
                 }
-                if firstNameLabel.text != nil {
-                    destination.firstName = _firstname!
-                }
-                if lastNameLabel.text != nil {
-                    destination.lastName = _lastname!
-                }
-                if cardNumberLabel.text != nil {
-                    destination.cardNumber = _cardNumber!
-                }
-                if emailLabel.text != nil {
-                    destination.email = _email!
-                }
-                if passCodeLabel.text != nil {
-                    destination.passcode = _passcode!
-                }
-                
             }
             
         }

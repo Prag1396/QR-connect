@@ -17,31 +17,8 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     @IBOutlet weak var code: UITextField!
     @IBOutlet weak var sendCodeButton: UIButton!
     
-    private var _firstName: String? = nil
-    private var _lastName: String? = nil
     private var _phoneNumber: String? = nil
-    private var _cardNumber: String? = nil
-    private var _passcode: String? = nil
-    private var fullName: String? = nil
-    private var _email: String? = nil
     
-    var firstName: String {
-        get {
-            return _firstName!
-        }
-        set {
-            self._firstName = newValue
-        }
-    }
-    
-    var lastName: String {
-        get {
-            return _lastName!
-        }
-        set {
-            self._lastName = newValue
-        }
-    }
     
     var phoneNumber: String {
         get {
@@ -52,31 +29,6 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         }
     }
     
-    var cardNumber: String {
-        get {
-            return _cardNumber!
-        }
-        set {
-            self._cardNumber = newValue
-        }
-    }
-    
-    var email: String {
-        get {
-            return _email!
-        } set {
-            self._email = newValue
-        }
-    }
-    
-    var passcode: String {
-        get {
-            return _passcode!
-        }
-        set {
-            self._passcode = newValue
-        }
-    }
     
     //Send code to device
     @IBAction func sendCodePressed(_ sender: Any) {
@@ -126,14 +78,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
 
             }   else if error == nil && status == true {
                 
-                //Call DB_CreateUser to create an user
-                let user = Auth.auth().currentUser
-                let userData: Dictionary<String, String> = ["FullName": self.fullName!, "PhoneNumber": (user?.phoneNumber)!, "CardNumber" : self.cardNumber, "Email" : self.email]
-                let pvtData: Dictionary<String, String> = ["Passcode": self.passcode]
-                DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
-                DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+                //Perform segue to emailcapture
                 
-                self.performSegue(withIdentifier: "verificationsuccessfull", sender: Any.self)
+                self.performSegue(withIdentifier: "phoneauthsuccessfull", sender: Any.self)
             }
         }
         }
@@ -150,8 +97,6 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         code.clearsOnBeginEditing = false
         phoneConfirmText.keyboardAppearance = .dark
         code.keyboardAppearance = .dark
-        
-        fullName = firstName + " " + lastName
         self.sendCodeButton.setTitle("SEND CODE", for: .normal)
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
@@ -169,6 +114,17 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "phoneauthsuccessfull") {
+            if let destination = segue.destination as? EmailCaptureVC {
+                if phoneConfirmText.text != nil {
+                    destination.phoneNumber = phoneConfirmText.text!
+                }
+            }
+            
+        }
     }
     
 }

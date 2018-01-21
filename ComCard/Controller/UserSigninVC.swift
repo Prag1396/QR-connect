@@ -11,6 +11,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
+
+
 class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var background: UIImageView!
@@ -21,6 +23,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     private var _imageURL: String? = nil
     private var _userNameDownloaded = String()
     private var _passwordDownloaded = String()
+    private var _firstnameDownloaded = String()
     
     let userID = Auth.auth().currentUser?.uid
     override func viewDidLoad() {
@@ -40,33 +43,44 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         self.view.addGestureRecognizer(tap)
         
         if(Auth.auth().currentUser?.uid != nil) {
-            self.downLoadUsernameandPassword { (status) in
+            self.downLoadUserDetails { (status) in
                 if(status == true) {
                     print(self._userNameDownloaded)
-                    let data = (self._userNameDownloaded).data(using: String.Encoding.ascii, allowLossyConversion: false)
+                    print(self._firstnameDownloaded)
+                    let data = (self._userNameDownloaded + " " + self._firstnameDownloaded).data(using: String.Encoding.ascii, allowLossyConversion: false)
                     self.uploadQRCode(uid: (self.userID)!, data: data!)
                 }
             }
         }
+        
     }
     
-    func downLoadUsernameandPassword(onusernameDownloadComplete: @escaping (_ status: Bool)->()) {
+    func downLoadUserDetails(onusernameDownloadComplete: @escaping (_ status: Bool)->()) {
         let userRef = DataService.instance.REF_BASE
-        let privateRef = DataService.instance.REF_PVT
         
-        //Get Username
-        userRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        //Get Username and pwd
+        userRef.child("pvtdata").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let dict = snapshot.value as? NSDictionary
-            self._userNameDownloaded = (dict?["PhoneNumber"] as? String)!
-            print(self.userID!)
-            onusernameDownloadComplete(true)
+            self._userNameDownloaded = (dict?["Email"] as? String)!
+            self._passwordDownloaded = (dict?["Password"] as? String)!
+            self.downloadfirstName(onfirstnamedownloaded: { (status) in
+                if status == true {
+                    onusernameDownloadComplete(true)
+                }
+            })
         })
-        //Get Password
-        privateRef.child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+ 
+    }
+    
+    func downloadfirstName(onfirstnamedownloaded: @escaping (_ status: Bool)->()) {
+        let userRef = DataService.instance.REF_BASE
+
+        //Get first name
+        userRef.child("users").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? NSDictionary
-            self._passwordDownloaded = (dict?["Passcode"] as! String)
-        })
-        
+            self._firstnameDownloaded = (dict?["FirstName"] as? String)!
+            onfirstnamedownloaded(true)
+        }
     }
     
     

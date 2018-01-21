@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "email-icon-82461.png",
+      "filename" : "emailIconcontactvc.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "email-icon-82461@2x.png",
+      "filename" : "emailIconcontactvc@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "email-icon-82461@3x.png",
+      "filename" : "emailIconcontactvc@3x.png",
       "scale" : "3x"
     }
   ],

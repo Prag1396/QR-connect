@@ -115,18 +115,25 @@ class AuthService: UIViewController {
         })
         
     }
-    
+
     
     func checkIfPhoneNumberExists(phoneNumber: String, checkComplete: @escaping(_ status: Bool, _ errmsg: String?)->()) {
         let userRef = DataService.instance.REF_BASE
-        userRef.child("users").queryOrdered(byChild: "PhoneNumber").queryEqual(toValue: phoneNumber).observeSingleEvent(of: .value) { (dataSnapshot) in
-            let isPhoneExist = dataSnapshot.exists()
-            if (isPhoneExist) {
-                checkComplete(false, "Duplicate number exists")
-            } else {
-                checkComplete(true, nil)
+        userRef.child("pvtdata").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value) { (dataSnapshot) in
+            let array:NSArray = dataSnapshot.children.allObjects as NSArray
+            for child in array {
+                let snap = child as! DataSnapshot
+                if let phonedowloaded = snap.value as? String {
+                    if phonedowloaded == phoneNumber {
+                        checkComplete(false, "Duplicate number exists")
+                    } else {
+                        checkComplete(true, nil)
+                    }
+                }
+                
+                
             }
-        }
+           }
 
-    }
+        }
 }

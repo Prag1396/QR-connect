@@ -27,6 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         IQKeyboardManager.sharedManager().enable = true
+        print(Auth.auth().currentUser?.uid ?? String())
+        if Auth.auth().currentUser == nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let usersignupVC = storyboard.instantiateViewController(withIdentifier: "userSignUp")
+            window?.makeKeyAndVisible()
+            window?.rootViewController?.present(usersignupVC, animated: true, completion: nil)
+            
+        }
         return true
     }
 

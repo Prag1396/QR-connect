@@ -10,9 +10,7 @@ import UIKit
 
 class ConfigureCell: UITableViewCell {
 
-    @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
-    @IBOutlet weak var creditCardLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
     override func awakeFromNib() {
@@ -21,10 +19,8 @@ class ConfigureCell: UITableViewCell {
     }
 
     func updateUI(user: User) {
-        fullnameLabel.text = user.fullName
-        phoneNumberLabel.text = user.phoneNumber
-        creditCardLabel.text = user.cardNumber
         emailLabel.text = user.email
+        phoneNumberLabel.text = user.phoneNumber
 
     }
 
