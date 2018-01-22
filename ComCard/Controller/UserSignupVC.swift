@@ -50,6 +50,9 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         
     }
+    @IBAction func backbtnpressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func checkPhoneNumber() {
         AuthService.instance.checkIfPhoneNumberExists(phoneNumber: self.phoneNumberLabel.text!, checkComplete: { (status, errmsg) in

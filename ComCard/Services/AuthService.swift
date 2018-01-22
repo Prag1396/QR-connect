@@ -38,21 +38,37 @@ class AuthService: UIViewController {
             if error != nil {
                 authorizationComplete(false, error)
             } else {
-                    //print("Phonenumber: \(String(describing: user?.phoneNumber))")
-                    //let userInfo = user?.providerData[0]
-                    //print("ProviderID: \(String(describing: userInfo?.providerID))")
-                user?.link(with: credential, completion: { (user, error) in
-                    if(error != nil) {
-                        let alert = UIAlertController(title: "Warning", message: "Unable to link credentials", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                })
                     //Authorization successfull
                     authorizationComplete(true, nil)
                     }
             }
     }
+    
+        
+    func registerUser(withEmail email: String, andPassword password: String, firstName: String, lastname: String, phonenumber: String, userCreationComplete: @escaping (_ uid: String?, _ status: Bool, _ error: Error?) -> ()) {
+            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+               if error != nil {
+                    userCreationComplete(nil, false, error)
+               } else {
+                let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "ProfileURL": "somevalue"]
+                let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
+                DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
+                DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+                userCreationComplete((user?.uid)!, true, nil)
+                }
+            }
+    }
+        
+    func loginUser(withEmail email: String, andPassword password: String, loginComplete: @escaping (_ status: Bool, _ error: Error?) -> ()) {
+            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                if error != nil {
+                    loginComplete(false, error)
+                    return
+                }
+                loginComplete(true, nil)
+            }
+    }
+    
     
     func handleErrorCode(error: NSError, onCompleteErrorHandler: @escaping(_ errorMsg: String, _ data: AnyObject?)->()) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {

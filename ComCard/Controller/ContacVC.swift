@@ -66,6 +66,10 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         
     }
     
+    @IBAction func messagebtnPressed(_ sender: Any) {
+        
+        performSegue(withIdentifier: "loadchat", sender: Any.self)
+    }
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }

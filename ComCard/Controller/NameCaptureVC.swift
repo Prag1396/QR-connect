@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -21,6 +22,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     var isReadytoPerformSegue: Bool!
     var data: [String] = ["Email", "In-App Message"]
     
+    private var _imageURL: String? = nil
     private var _phonenumber: String? = nil
     private var _email: String? = nil
     private var _password: String? = nil
@@ -124,14 +126,55 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
             
         } else {
             //Create DB User
-            let user = Auth.auth().currentUser
-            let userData: Dictionary<String, String> = ["FirstName" : self._firstName!, "lastName": self._lastName!, "ProfileURL": "somevalue"]
-            let pvtData: Dictionary<String, String> = ["PhoneNumber": self.phoneNumber, "Password": self.password, "Email": self.email]
-            
-            DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
-            DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+            AuthService.instance.registerUser(withEmail: self.email, andPassword: self.password, firstName: self._firstName!, lastname: self._lastName!, phonenumber: self.phoneNumber, userCreationComplete: { (userID, success, registrationError)  in
+                    if success {
+                        AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
+                            
+                            let data = (self.email + " " + self._firstName!).data(using: String.Encoding.ascii, allowLossyConversion: false)
+                            self.uploadQRCode(uid: (userID)!, data: data!)
+                            self.performSegue(withIdentifier: "loaduserdetails", sender: Any.self)
+                            print("Successfully registered user")
+                        })
+                    } else {
+                        print(String(describing: registrationError?.localizedDescription))
+                    }
+                })
+
+        }
+    }
+    
+    func convertToUIImage(c_image: CIImage) -> UIImage {
+        let context:CIContext = CIContext.init(options: nil)
+        let transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        let img = c_image.transformed(by: transform)
+        let cgImage:CGImage = context.createCGImage(img, from: c_image.extent)!
+        
+        let image:UIImage = UIImage.init(cgImage: cgImage)
+        //Change size
+        let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 120, height: 120))
+        return scaledImage
+    }
+    
+    
+    func uploadQRCode(uid: String, data: Data) {
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setValue(data, forKey: "inputMessage")
+        
+        let imageToUpload = convertToUIImage(c_image: (filter?.outputImage)!)
+        StorageService.instance.uploadImage(withuserID: uid, image: imageToUpload) { (status, error, url) in
+            if (error != nil) {
+                let alert = UIAlertController(title: "Warning", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                print("Uploaded Successfully")
+                self._imageURL = "\(url!)"
+                //set destination image url
+                ImageURLStruct.imageURL = self._imageURL!
+                print(self._imageURL!)
+                
+            }
             
         }
-        
     }
 }
