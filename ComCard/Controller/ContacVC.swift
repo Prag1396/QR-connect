@@ -133,9 +133,17 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         let stringFromLetter: String = String(letter)
         self.profileLetter.text = stringFromLetter
         self.view.bringSubview(toFront: self.infoview)
-        
-    }
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ChatVC {
+            if(self._fullName != nil) {
+                destination.fullname = self._fullName!
+            }
+                
+        }
+    }
     
     @objc func backgroundTapped(textField: UITextField) {
         view.endEditing(true)

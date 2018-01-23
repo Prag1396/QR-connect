@@ -11,13 +11,25 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
+
+
 class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var userfirstname: UILabel!
     @IBOutlet weak var messagefield: TextFieldStyle!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var sendbtn: UIButton!
-
     @IBOutlet weak var mycollectionview: UICollectionView!
+    
+    private var _fullName: String? = nil
+    
+    var fullname: String {
+        get {
+            return _fullName!
+        } set {
+           self._fullName = newValue
+        }
+    }
 
     override func viewDidLoad() {
 
@@ -28,7 +40,13 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+        print(self.fullname)
+        self.userfirstname.text = self.fullname
         // Do any additional setup after loading the view.
+        
+        
+        
     }
 
     @objc func backgroundTapped() {

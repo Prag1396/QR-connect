@@ -224,9 +224,9 @@
 				DB2E3AAB2011B26800E39C79 /* EmailCaptureVC.swift */,
 				DB2E3AAD2011B54D00E39C79 /* PasswordCaptureVC.swift */,
 				DB2E3AAF2011CFB200E39C79 /* NameCaptureVC.swift */,
-				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DBD1F9941FF9FE4300A2CAE6 /* UserDetailsVC.swift */,
 				DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */,
+				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DB2E3AB12015A33B00E39C79 /* ChatVC.swift */,
 			);
 			path = Controller;

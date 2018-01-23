@@ -122,7 +122,6 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func emailPressed(data: Data) {
-        print(self._emailDownloaded!)
         let composeemail = MFMailComposeViewController()
         composeemail.mailComposeDelegate = self
         composeemail.setToRecipients([self._emailDownloaded!])
