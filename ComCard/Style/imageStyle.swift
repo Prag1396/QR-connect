@@ -15,5 +15,6 @@ class imageStyle: UIImageView {
             self.layer.cornerRadius = cornerRadius
         }
     }
+ 
 
 }

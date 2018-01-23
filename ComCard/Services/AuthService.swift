@@ -54,6 +54,14 @@ class AuthService: UIViewController {
                 let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
                 DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                 DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+                let provider = EmailAuthProvider.credential(withEmail: email, password: password)
+                Auth.auth().currentUser?.link(with: provider, completion: { (user, error) in
+                    if (error != nil) {
+                        print(error.debugDescription)
+                    } else {
+                        print("Linked successfully")
+                    }
+                })
                 userCreationComplete((user?.uid)!, true, nil)
                 }
             }

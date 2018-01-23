@@ -23,9 +23,13 @@ class HomeScreenVC: UIViewController {
     
 
     @IBAction func contactBtnPressed(_ sender: Any) {
+        //User has never signed in
         if((currentUser) != nil) {
             performSegue(withIdentifier: "userverified", sender: Any.self)
-        } else {
+        }
+        //User is logged out
+        
+        else {
             //Get UserSign up has storyboard and load it
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignUp")
@@ -33,5 +37,7 @@ class HomeScreenVC: UIViewController {
             
         }
     }
+    
+    
 }
 

@@ -16,13 +16,21 @@ class TextFieldStyle: UITextField {
             
         }
     }
-    override func draw(_ rect: CGRect) {
-        self.layer.masksToBounds = false
-        self.layer.shadowRadius = 4.0
-        self.layer.shadowColor = UIColor.cyan.cgColor
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.layer.shadowOpacity = 0.5
+    
+    let padding = UIEdgeInsets(top: 0, left: 5, bottom: 0, right:5);
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
     }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
 }
 
 

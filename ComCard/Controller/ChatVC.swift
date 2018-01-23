@@ -7,33 +7,52 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-class ChatVC: UIViewController, UINavigationBarDelegate {
+class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
-    @IBOutlet weak var navbar: UINavigationBar!
+    @IBOutlet weak var messagefield: TextFieldStyle!
+    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var sendbtn: UIButton!
+
+    @IBOutlet weak var mycollectionview: UICollectionView!
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
-        navbar.delegate = self
-        navbar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.darkGray]
-        navbar.barTintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-        navbar.setTitleVerticalPositionAdjustment(9, for: .default)
+        messagefield.delegate = self
+        messagefield.keyboardAppearance = .dark
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        background.addGestureRecognizer(tap)
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
 
+    @objc func backgroundTapped() {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func sendbtnpressed(_ sender: Any) {
+        if(messagefield.text != nil) {
+            let data = ["message": messagefield.text!]
+            DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientemail: "recipient email", message: data)
+            
+        }
     }
-    */
+    
+    
+    
 
 }

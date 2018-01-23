@@ -189,6 +189,8 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
 
     @IBAction func homebtnPressed(_ sender: Any) {
+        //sign out user
+        
         performSegue(withIdentifier: "homebtnpressed", sender: Any.self)
     }
     
