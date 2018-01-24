@@ -50,21 +50,63 @@ class AuthService: UIViewController {
                if error != nil {
                     userCreationComplete(nil, false, error)
                } else {
-                let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname]
-                let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
-                DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
-                DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
-                let provider = EmailAuthProvider.credential(withEmail: email, password: password)
-                Auth.auth().currentUser?.link(with: provider, completion: { (user, error) in
-                    if (error != nil) {
-                        print(error.debugDescription)
+                
+                let data = ("\(email) \(firstName) \((user?.uid)!)").data(using: String.Encoding.ascii, allowLossyConversion: false)
+                self.uploadQRCode(uid: (user?.uid)!, data: data!) { (imageURL, status, error) in
+                    if error != nil {
+                        print("error uploading image")
                     } else {
-                        print("Linked successfully")
+                        let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "imageURL": imageURL!]
+                        let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
+                        DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
+                        DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
+                        let provider = EmailAuthProvider.credential(withEmail: email, password: password)
+                        Auth.auth().currentUser?.link(with: provider, completion: { (user, error) in
+                            if (error != nil) {
+                                print(error.debugDescription)
+                            } else {
+                                print("Linked successfully")
+                            }
+                        })
+                        userCreationComplete((user?.uid)!, true, nil)
                     }
-                })
-                userCreationComplete((user?.uid)!, true, nil)
+                }
                 }
             }
+    }
+    
+    func uploadQRCode(uid: String, data: Data, onUploadingImageComplete: @escaping (_ imageURL: String?,_ status: Bool, _ error: Error?)->()) {
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setValue(data, forKey: "inputMessage")
+        
+        let imageToUpload = convertToUIImage(c_image: (filter?.outputImage)!)
+        StorageService.instance.uploadImage(withuserID: uid, image: imageToUpload) { (status, error, url) in
+            if (error != nil) {
+                let alert = UIAlertController(title: "Warning", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                onUploadingImageComplete(nil,false, error)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                print("Uploaded Successfully")
+                //set destination image url
+                //ImageURLStruct.imageURL = self._imageURL!
+                onUploadingImageComplete("\(url!)", true, nil)
+                
+            }
+            
+        }
+    }
+    
+    func convertToUIImage(c_image: CIImage) -> UIImage {
+        let context:CIContext = CIContext.init(options: nil)
+        let transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        let img = c_image.transformed(by: transform)
+        let cgImage:CGImage = context.createCGImage(img, from: c_image.extent)!
+        
+        let image:UIImage = UIImage.init(cgImage: cgImage)
+        //Change size
+        let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 120, height: 120))
+        return scaledImage
     }
         
     func loginUser(withEmail email: String, andPassword password: String, loginComplete: @escaping (_ status: Bool, _ error: Error?) -> ()) {
@@ -115,49 +157,27 @@ class AuthService: UIViewController {
         }
     }
     
-    func deleteUser(userID: String) {
-        let userRef = DataService.instance.REF_USERS
-        let privateRef = DataService.instance.REF_PVT
-        userRef.child(userID).setValue(nil)
-        privateRef.child(userID).setValue(nil)
 
-        let imageRef = Storage.storage().reference(forURL: ImageURLStruct.imageURL)
-        imageRef.delete { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                print("Deleted successfully")
-            }
-        }
-        
-        Auth.auth().currentUser?.delete(completion: { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                print("Deleted User Successfully")
-            }
-        })
-        
-    }
 
-    
     func checkIfPhoneNumberExists(phoneNumber: String, checkComplete: @escaping(_ status: Bool, _ errmsg: String?)->()) {
-        let userRef = DataService.instance.REF_BASE
-        userRef.child("pvtdata").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value) { (dataSnapshot) in
-            let array:NSArray = dataSnapshot.children.allObjects as NSArray
-            for child in array {
-                let snap = child as! DataSnapshot
-                if let phonedowloaded = snap.value as? String {
-                    if phonedowloaded == phoneNumber {
-                        checkComplete(false, "Duplicate number exists")
-                    } else {
-                        checkComplete(true, nil)
+        if(Auth.auth().currentUser != nil) {
+            let userRef = DataService.instance.REF_BASE
+            userRef.child("pvtdata").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value) { (dataSnapshot) in
+                let array:NSArray = dataSnapshot.children.allObjects as NSArray
+                for child in array {
+                    let snap = child as! DataSnapshot
+                    if let phonedowloaded = snap.value as? String {
+                        if phonedowloaded == phoneNumber {
+                            checkComplete(false, "Duplicate number exists")
+                        } else {
+                            checkComplete(true, nil)
+                        }
                     }
+                    
+                    
                 }
-                
-                
             }
-           }
-
+            
         }
+    }
 }

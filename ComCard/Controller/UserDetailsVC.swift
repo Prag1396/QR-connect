@@ -12,17 +12,6 @@ import FirebaseAuth
 import Photos
 import MessageUI
 
-struct ImageURLStruct {
-    private static var _imageURL: String? = nil
-    
-    static var imageURL: String {
-        get {
-            return _imageURL!
-        } set {
-            _imageURL = newValue
-        }
-    }
-}
 
 class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
@@ -30,6 +19,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     private var _phoneNumberdownloaded: String? = nil
     private var _fullNameDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
+    private var _imageURLDownloaded: String? = nil
     
     @IBOutlet weak var mytableview: UITableView!
     
@@ -48,7 +38,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let dict = snapshot.value as? NSDictionary
             self._emailDownloaded = dict?["Email"] as? String
             self._phoneNumberdownloaded = dict?["PhoneNumber"] as? String
-            self.downloadFirstname(onfirstnamedownloadComplete: { (status) in
+            self.downloadFirstnameandImageUrl(onfirstnamedownloadComplete: { (status) in
                 if status == true {
                     let user = User(phoneNumber: self._phoneNumberdownloaded!, email: self._emailDownloaded!)
                     self.users.append(user)
@@ -61,14 +51,17 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func downloadFirstname(onfirstnamedownloadComplete: @escaping (_ status: Bool)->()) {
+    func downloadFirstnameandImageUrl(onfirstnamedownloadComplete: @escaping (_ status: Bool)->()) {
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
         
         userRef.child("users").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? NSDictionary
             let fullName = dict?["FirstName"] as? String
+            let imageURL = dict?["imageURL"] as? String
             self._fullNameDownloaded = fullName
+            self._imageURLDownloaded = imageURL
+            
             onfirstnamedownloadComplete(true)
         }
     }
@@ -80,7 +73,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func buildQRCodePressed(_ sender: Any) {
         
        //Download QRCode
-        let downloadimageURL: StorageReference = Storage.storage().reference(forURL: ImageURLStruct.imageURL)
+        let downloadimageURL: StorageReference = Storage.storage().reference(forURL: self._imageURLDownloaded!)
         downloadimageURL.downloadURL { (url, error) in
             if (error != nil) {
                 print(error.debugDescription)
@@ -115,6 +108,11 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }))
         alertView.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
             self.emailPressed(data: data)
+        }))
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            //dismiss alertview
+            alertView.dismiss(animated: true, completion: nil)
         }))
         
         self.present(alertView, animated: true, completion: nil)
@@ -160,16 +158,6 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    @IBAction func deleteAccountPressed(_ sender: Any) {
-        let currUser = Auth.auth().currentUser
-        AuthService.instance.deleteUser(userID: (currUser?.uid)!)
-        let alert = UIAlertController(title: "Account successfully deleted", message: "We hope to see you again soon", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            //perform segue that returns you to home screen
-            self.performSegue(withIdentifier: "homebtnpressed", sender: Any.self)
-        }))
-        self.present(alert, animated: true, completion: nil)        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count

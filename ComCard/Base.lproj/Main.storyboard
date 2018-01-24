@@ -1430,26 +1430,6 @@
                                     <action selector="homebtnPressed:" destination="fdE-wq-AbN" eventType="touchUpInside" id="fOG-9e-u0B"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxr-8o-w19" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="499" width="114" height="29"/>
-                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="114" id="tpt-aS-oxY"/>
-                                    <constraint firstAttribute="height" constant="29" id="zIs-kh-CZI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="11"/>
-                                <state key="normal" title="DELETE ACCOUNT">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="14.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="deleteAccountPressed:" destination="fdE-wq-AbN" eventType="touchUpInside" id="npb-Gc-g2I"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4o-Od-oIT">
                                 <rect key="frame" x="16" y="193" width="146" height="21"/>
                                 <constraints>
@@ -1498,11 +1478,9 @@
                         <constraints>
                             <constraint firstItem="bmV-8B-8Vy" firstAttribute="leading" secondItem="h9I-IF-YEt" secondAttribute="leading" id="5Rv-sZ-kOh"/>
                             <constraint firstItem="8Mj-eL-vdD" firstAttribute="leading" secondItem="h9I-IF-YEt" secondAttribute="leading" id="78f-Me-6np"/>
-                            <constraint firstItem="bmV-8B-8Vy" firstAttribute="leading" secondItem="Jxr-8o-w19" secondAttribute="trailing" constant="-130" id="CL2-4Q-SQP"/>
                             <constraint firstItem="h9I-IF-YEt" firstAttribute="bottom" secondItem="8ft-c0-JpE" secondAttribute="bottom" constant="40" id="HXQ-88-jOo"/>
                             <constraint firstItem="h9I-IF-YEt" firstAttribute="trailing" secondItem="8Mj-eL-vdD" secondAttribute="trailing" id="HfZ-4Q-NjC"/>
                             <constraint firstItem="8ft-c0-JpE" firstAttribute="trailing" secondItem="0gW-uW-SIu" secondAttribute="trailingMargin" id="Ht6-Ya-BSb"/>
-                            <constraint firstItem="Jxr-8o-w19" firstAttribute="leading" secondItem="0gW-uW-SIu" secondAttribute="leadingMargin" id="Idy-km-Biq"/>
                             <constraint firstItem="thT-5a-xaE" firstAttribute="top" secondItem="8Mj-eL-vdD" secondAttribute="bottom" constant="30" id="LGK-HA-oUw"/>
                             <constraint firstItem="thT-5a-xaE" firstAttribute="centerX" secondItem="h9I-IF-YEt" secondAttribute="centerX" id="MiH-ks-qTb"/>
                             <constraint firstItem="7wD-Zc-7cb" firstAttribute="centerX" secondItem="h9I-IF-YEt" secondAttribute="centerX" id="TqH-eI-lQG"/>
@@ -1510,7 +1488,6 @@
                             <constraint firstItem="cq4-bI-3uA" firstAttribute="top" secondItem="h9I-IF-YEt" secondAttribute="top" constant="20" id="Xuq-hr-e4u"/>
                             <constraint firstItem="CDg-RB-ML3" firstAttribute="centerX" secondItem="h9I-IF-YEt" secondAttribute="centerX" id="b5t-yS-804"/>
                             <constraint firstItem="ye3-nM-f4S" firstAttribute="trailing" secondItem="cq4-bI-3uA" secondAttribute="trailing" id="cpA-FF-pLm"/>
-                            <constraint firstItem="h9I-IF-YEt" firstAttribute="bottom" secondItem="Jxr-8o-w19" secondAttribute="bottom" constant="40" id="euW-BR-Y40"/>
                             <constraint firstAttribute="bottom" secondItem="bmV-8B-8Vy" secondAttribute="bottom" id="gs1-1b-Wu5"/>
                             <constraint firstItem="h9I-IF-YEt" firstAttribute="trailing" secondItem="bmV-8B-8Vy" secondAttribute="trailing" id="hqp-ch-HUZ"/>
                             <constraint firstItem="bmV-8B-8Vy" firstAttribute="top" secondItem="0gW-uW-SIu" secondAttribute="top" id="j2Y-Js-Wfi"/>
