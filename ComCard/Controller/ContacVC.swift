@@ -28,6 +28,8 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     private var _initialposforcall = CGPoint.zero
     private var _initialposfortext: CGPoint = CGPoint.zero
     
+    private var _recipientUID: String? = nil
+    
     var video = AVCaptureVideoPreviewLayer()
     
     var next_responder: UIResponder!
@@ -125,9 +127,13 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     }
     
     func setData(data: String) {
-        let details = data.components(separatedBy: " ")
+        print(data)
+        let correctformofString = data.condenseWhitespace()
+        let details = correctformofString.components(separatedBy: .whitespacesAndNewlines)
+
         self.email = details[0]
         self._fullName = details[1]
+        self._recipientUID = details[2]
         self.fullnamelabel.text = self.fullName
         let letter: Character = self.fullName.first!
         let stringFromLetter: String = String(letter)
@@ -137,11 +143,14 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ChatVC {
-            if(self._fullName != nil) {
-                destination.fullname = self._fullName!
-            }
+        if (segue.identifier == "loadchat") {
+            if let destination = segue.destination as? ChatVC {
+                if(self._fullName != nil) {
+                    destination.fullname = self._fullName!
+                    destination.recipientUID = self._recipientUID!
+                }
                 
+            }
         }
     }
     

@@ -50,7 +50,7 @@ class AuthService: UIViewController {
                if error != nil {
                     userCreationComplete(nil, false, error)
                } else {
-                let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "ProfileURL": "somevalue"]
+                let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname]
                 let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
                 DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                 DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)

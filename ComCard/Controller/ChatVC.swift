@@ -22,6 +22,8 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
     @IBOutlet weak var mycollectionview: UICollectionView!
     
     private var _fullName: String? = nil
+    private var _recipientUID: String? = nil
+    private var _currentUID = Auth.auth().currentUser?.uid
     
     var fullname: String {
         get {
@@ -30,7 +32,15 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
            self._fullName = newValue
         }
     }
-
+    
+    var recipientUID: String {
+        get {
+            return _recipientUID!
+        } set {
+            self._recipientUID = newValue
+        }
+    }
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -40,11 +50,8 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        
-        print(self.fullname)
         self.userfirstname.text = self.fullname
         // Do any additional setup after loading the view.
-        
         
         
     }
@@ -65,7 +72,7 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
     @IBAction func sendbtnpressed(_ sender: Any) {
         if(messagefield.text != nil) {
             let data = ["message": messagefield.text!]
-            DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientemail: "recipient email", message: data)
+            DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: recipientUID, message: data)
             
         }
     }

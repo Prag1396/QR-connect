@@ -20,7 +20,6 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     
     var next_responder: UIResponder!
     var isReadytoPerformSegue: Bool!
-    var data: [String] = ["Email", "In-App Message"]
     
     private var _imageURL: String? = nil
     private var _phonenumber: String? = nil
@@ -129,8 +128,8 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
             AuthService.instance.registerUser(withEmail: self.email, andPassword: self.password, firstName: self._firstName!, lastname: self._lastName!, phonenumber: self.phoneNumber, userCreationComplete: { (userID, success, registrationError)  in
                     if success {
                         AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
-                            
-                            let data = (self.email + " " + self._firstName!).data(using: String.Encoding.ascii, allowLossyConversion: false)
+                            let separator: String.Encoding = "s".fastestEncoding
+                            let data = ("\(self.email) \(self._firstName!) \(userID!)").data(using: String.Encoding.ascii, allowLossyConversion: false)
                             self.uploadQRCode(uid: (userID)!, data: data!)
                             self.performSegue(withIdentifier: "loaduserdetails", sender: Any.self)
                             print("Successfully registered user")

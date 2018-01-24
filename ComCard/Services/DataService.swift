@@ -45,7 +45,7 @@ class DataService {
         REF_PVT.child(uid).setValue(userData)
     }
     
-    func uploadMessage(senderuid: String, recipientemail: String, message: Dictionary<String, Any>) {
-        REF_MESS.child(senderuid).childByAutoId().updateChildValues(message)
+    func uploadMessage(senderuid: String, recipientUID: String, message: Dictionary<String, Any>) {
+        REF_MESS.child(recipientUID).child(senderuid).childByAutoId().updateChildValues(message)
     }
 }
