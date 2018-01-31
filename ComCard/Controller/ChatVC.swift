@@ -13,14 +13,14 @@ import FirebaseAuth
 
 
 
-class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
 
     @IBOutlet weak var userfirstname: UILabel!
     @IBOutlet weak var messagefield: TextFieldStyle!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var sendbtn: UIButton!
-    @IBOutlet weak var mycollectionview: UICollectionView!
-    
+
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
     private var _currentUID = Auth.auth().currentUser?.uid
@@ -52,15 +52,14 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
         // Do any additional setup after loading the view.
-        
-        
     }
-
+    
     @objc func backgroundTapped() {
         view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handleSend()
         textField.resignFirstResponder()
         return false
     }
@@ -70,13 +69,26 @@ class ChatVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
         // Dispose of any resources that can be recreated.
     }
     @IBAction func sendbtnpressed(_ sender: Any) {
+        handleSend()
+    }
+    
+    func handleSend() {
         if(messagefield.text != nil) {
-            let data = ["message": messagefield.text!]
-            DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: recipientUID, message: data)
+            let data = messagefield.text
+            let timeStamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+            DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, message: data!, time: timeStamp)
             
         }
     }
     
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
     
     
 

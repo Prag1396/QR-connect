@@ -16,6 +16,9 @@
 		DB2E3AB22015A33B00E39C79 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AB12015A33B00E39C79 /* ChatVC.swift */; };
 		DB2E3AB42016BA8B00E39C79 /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AB32016BA8B00E39C79 /* TextFieldStyle.swift */; };
 		DB2E3AB82018871F00E39C79 /* StringSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3AB72018871F00E39C79 /* StringSpaces.swift */; };
+		DB2E3ABB2019717C00E39C79 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABA2019717C00E39C79 /* Message.swift */; };
+		DB2E3ABD2019733900E39C79 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABC2019733900E39C79 /* MessageCell.swift */; };
+		DB2E3ABF201EF1CA00E39C79 /* ChatLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABE201EF1CA00E39C79 /* ChatLogVC.swift */; };
 		DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D48F200C96A6005D5219 /* viewStyle.swift */; };
 		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
@@ -65,6 +68,9 @@
 		DB2E3AB12015A33B00E39C79 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		DB2E3AB32016BA8B00E39C79 /* TextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
 		DB2E3AB72018871F00E39C79 /* StringSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSpaces.swift; sourceTree = "<group>"; };
+		DB2E3ABA2019717C00E39C79 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		DB2E3ABC2019733900E39C79 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		DB2E3ABE201EF1CA00E39C79 /* ChatLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogVC.swift; sourceTree = "<group>"; };
 		DB78D48F200C96A6005D5219 /* viewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewStyle.swift; sourceTree = "<group>"; };
 		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
@@ -139,6 +145,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DB2E3AB92019712800E39C79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB7BE7541FFDF25400987939 /* ConfigureCell.swift */,
+				DB2E3ABC2019733900E39C79 /* MessageCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DBBCCC572006DA0E0078E662 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +191,7 @@
 				DBD1F99E1FFB0A0400A2CAE6 /* ComCard.entitlements */,
 				DBBCCC572006DA0E0078E662 /* Extensions */,
 				DBD1F9971FFAE23400A2CAE6 /* Services */,
+				DB2E3AB92019712800E39C79 /* View */,
 				DBD1F9961FFAE1EF00A2CAE6 /* Model */,
 				DBD1F98B1FF8315300A2CAE6 /* Controller */,
 				DBD1F98A1FF8314300A2CAE6 /* Style */,
@@ -231,6 +247,7 @@
 				DBD1F9A11FFC4CA300A2CAE6 /* UserSigninVC.swift */,
 				DBD1F9901FF8B15200A2CAE6 /* ContacVC.swift */,
 				DB2E3AB12015A33B00E39C79 /* ChatVC.swift */,
+				DB2E3ABE201EF1CA00E39C79 /* ChatLogVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,7 +255,8 @@
 		DBD1F9961FFAE1EF00A2CAE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DB7BE7541FFDF25400987939 /* ConfigureCell.swift */,
+				DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */,
+				DB2E3ABA2019717C00E39C79 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,7 +266,6 @@
 			children = (
 				DBD1F99A1FFAE62A00A2CAE6 /* DataService.swift */,
 				DBD1F99C1FFB061400A2CAE6 /* AuthService.swift */,
-				DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */,
 				DBBCCC5520044A050078E662 /* StorageService.swift */,
 			);
 			path = Services;
@@ -486,12 +503,14 @@
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
 				DB2E3AAE2011B54D00E39C79 /* PasswordCaptureVC.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
+				DB2E3ABF201EF1CA00E39C79 /* ChatLogVC.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DB2E3AB82018871F00E39C79 /* StringSpaces.swift in Sources */,
 				DB78D492200D730B005D5219 /* imageStyle.swift in Sources */,
 				DB2E3AB42016BA8B00E39C79 /* TextFieldStyle.swift in Sources */,
 				DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */,
 				DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */,
+				DB2E3ABD2019733900E39C79 /* MessageCell.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
 				DBBCCC5620044A050078E662 /* StorageService.swift in Sources */,
 				DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */,
@@ -502,6 +521,7 @@
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
 				DB2E3AB02011CFB200E39C79 /* NameCaptureVC.swift in Sources */,
 				DBBCCC592006DA250078E662 /* Image+size.swift in Sources */,
+				DB2E3ABB2019717C00E39C79 /* Message.swift in Sources */,
 				DB2E3AAC2011B26800E39C79 /* EmailCaptureVC.swift in Sources */,
 				DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */,
 			);

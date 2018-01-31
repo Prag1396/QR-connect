@@ -52,6 +52,7 @@ class AuthService: UIViewController {
                } else {
                 
                 let data = ("\(email) \(firstName) \((user?.uid)!)").data(using: String.Encoding.ascii, allowLossyConversion: false)
+                //encrypt data
                 self.uploadQRCode(uid: (user?.uid)!, data: data!) { (imageURL, status, error) in
                     if error != nil {
                         print("error uploading image")
@@ -88,8 +89,6 @@ class AuthService: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 print("Uploaded Successfully")
-                //set destination image url
-                //ImageURLStruct.imageURL = self._imageURL!
                 onUploadingImageComplete("\(url!)", true, nil)
                 
             }

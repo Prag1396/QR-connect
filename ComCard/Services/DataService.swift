@@ -45,7 +45,9 @@ class DataService {
         REF_PVT.child(uid).setValue(userData)
     }
     
-    func uploadMessage(senderuid: String, recipientUID: String, message: Dictionary<String, Any>) {
-        REF_MESS.child(recipientUID).child(senderuid).childByAutoId().updateChildValues(message)
+    func uploadMessage(senderuid: String, recipientUID: String, message: String, time: NSNumber) {
+        //REF_MESS.child(recipientUID).child(senderuid).childByAutoId().updateChildValues(message)
+        let userData: Dictionary<String, AnyObject> = ["fromID": recipientUID as AnyObject, "toID": senderuid as AnyObject, "time": time, "messagetext": message as AnyObject]
+        REF_MESS.childByAutoId().updateChildValues(userData)
     }
 }
