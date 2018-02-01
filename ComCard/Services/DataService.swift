@@ -20,6 +20,7 @@ class DataService {
     private var _REF_USERS = DB_BASE.child("users")
     private var _REF_PVT = DB_BASE.child("pvtdata")
     private var _REF_MESS = DB_BASE.child("messages")
+    private var _REF_USERMESSAGES = DB_BASE.child("user-messages")
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -37,6 +38,10 @@ class DataService {
         return _REF_MESS
     }
     
+    var REF_USERMESSAGES: DatabaseReference {
+        return _REF_USERMESSAGES
+    }
+    
     func createDBUserProfile(uid: String, userData: Dictionary <String, Any>) {
         REF_USERS.child(uid).setValue(userData)
     }
@@ -46,8 +51,23 @@ class DataService {
     }
     
     func uploadMessage(senderuid: String, recipientUID: String, message: String, time: NSNumber) {
-        //REF_MESS.child(recipientUID).child(senderuid).childByAutoId().updateChildValues(message)
+        
+        let childRef = REF_MESS.childByAutoId()
+        
         let userData: Dictionary<String, AnyObject> = ["fromID": recipientUID as AnyObject, "toID": senderuid as AnyObject, "time": time, "messagetext": message as AnyObject]
-        REF_MESS.childByAutoId().updateChildValues(userData)
+
+        childRef.updateChildValues(userData) { (error, ref) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(senderuid)
+                let messageID = childRef.key
+                userMessagesRef.updateChildValues([messageID: 1])
+                
+                let recipientUserMessagesRef = DataService.instance.REF_USERMESSAGES.child(recipientUID)
+                recipientUserMessagesRef.updateChildValues([messageID: 1])
+            }
+            
+        }
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 struct Message {
     
@@ -39,7 +41,9 @@ struct Message {
         _timeStamp = timeStamp
     }
     
-    
+    func charParnterID() -> String? {
+        return fromUID == Auth.auth().currentUser?.uid ? toID : fromUID
+    }
     
     
     

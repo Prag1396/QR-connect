@@ -19,7 +19,8 @@ class MessageCell: UITableViewCell {
     
     var messagetodisplay: Message? {
         didSet {
-            let ref = DataService.instance.REF_USERS.child((self.messagetodisplay?.toID)!)
+                        
+            let ref = DataService.instance.REF_USERS.child((messagetodisplay?.charParnterID())!)
                 ref.observeSingleEvent(of: .value, with: { (snapshot) in
                     if let dict = snapshot.value as? NSDictionary {
                         if let name = dict["FirstName"] as? String {

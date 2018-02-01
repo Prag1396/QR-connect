@@ -27,7 +27,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     private var _fullName: String? = nil
     private var _initialposforcall = CGPoint.zero
     private var _initialposfortext: CGPoint = CGPoint.zero
-    
+
     private var _recipientUID: String? = nil
     
     var video = AVCaptureVideoPreviewLayer()
@@ -144,7 +144,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "loadchat") {
-            if let destination = segue.destination as? ChatVC {
+            if let destination = segue.destination as? ChatLogVC {
                 if(self._fullName != nil) {
                     destination.fullname = self._fullName!
                     destination.recipientUID = self._recipientUID!
