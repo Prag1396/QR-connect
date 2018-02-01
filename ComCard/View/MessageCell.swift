@@ -41,7 +41,7 @@ class MessageCell: UITableViewCell {
     }
 
     func updateUI(name: String, text: String, time: NSNumber) {
-        profileImg.image = UIImage(named: "chatprofile")
+        profileImg.image = UIImage(named: "chatprofileImage")
         self.name.text = name
         self.lastmessage.text = text
         

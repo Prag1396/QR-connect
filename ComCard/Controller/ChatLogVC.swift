@@ -11,16 +11,19 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
-class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var userfirstname: UILabel!
     @IBOutlet weak var messagefield: TextFieldStyle!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var sendbtn: UIButton!
-
+    @IBOutlet weak var messageCollectionView: UICollectionView!
+    
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
     private var _currentUID = Auth.auth().currentUser?.uid
+    
+    private var collectionViewMessages = [Message]()
     
     var fullname: String {
         get {
@@ -35,12 +38,17 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             return _recipientUID!
         } set {
             self._recipientUID = newValue
+            observeMessagesforuserClicked()
         }
     }
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        messageCollectionView.delegate = self
+        messageCollectionView.dataSource = self
+        messageCollectionView.alwaysBounceVertical = true
+        messageCollectionView.register(ChatMessageCVCell.self, forCellWithReuseIdentifier: "messageID")
         messagefield.delegate = self
         messagefield.keyboardAppearance = .dark
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
@@ -49,6 +57,10 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func signoutPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func backgroundTapped() {
@@ -69,6 +81,41 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         handleSend()
     }
     
+    func observeMessagesforuserClicked() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(uid)
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageID = snapshot.key
+            let messageRef = DataService.instance.REF_MESS.child(messageID)
+            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dict = snapshot.value as? NSDictionary {
+                    let fromID =  dict["fromID"] as? String
+                    let toID = dict["toID"] as? String
+                    let timeStamp = dict["time"] as? NSNumber
+                    let text = dict["messagetext"] as? String
+                    //potential of crashing if keys do not match
+                    let messageDownloaded = Message(fromUID: fromID!, toUID: toID!, messageText: text!, timeStamp: timeStamp!)
+                    if messageDownloaded.charParnterID() == self.recipientUID {
+                        self.collectionViewMessages.append(messageDownloaded)                        
+                        DispatchQueue.main.async {
+                            self.messageCollectionView.reloadData()
+                        }
+                    }
+
+                }
+
+            }, withCancel: nil)
+            
+            
+        }, withCancel: nil)
+        
+    }
+    
     func handleSend() {
         if(messagefield.text != nil) {
             let data = messagefield.text
@@ -78,15 +125,15 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         }
     }
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionViewMessages.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "messageID", for: indexPath) as! ChatMessageCVCell
+        let _message = collectionViewMessages[indexPath.row]
+        cell.textView.text = _message.messageText
+        return cell
     }
-    
-    
 
 }

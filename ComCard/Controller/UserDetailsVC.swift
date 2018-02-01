@@ -42,8 +42,8 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if status == true {
                     let user = User(phoneNumber: self._phoneNumberdownloaded!, email: self._emailDownloaded!)
                     self.users.append(user)
-                    self.mytableview.reloadData()
                     DispatchQueue.main.async {
+                        self.mytableview.reloadData()
                         self.fullnameLabel.text = self._fullNameDownloaded
                     }
                 }

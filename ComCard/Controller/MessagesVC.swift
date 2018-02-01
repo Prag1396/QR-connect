@@ -19,6 +19,7 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private var _messageText: String? = nil
     var messageArray = [Message]()
     var messagesDict = [String: Message]()
+    var namedownloaded: String? = nil
     
     @IBOutlet weak var chatTableView: UITableView!
     
@@ -117,6 +118,7 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatprofilecell") as! MessageCell
         let messagetodisplay = messageArray[indexPath.row]
         cell.messagetodisplay = messagetodisplay
+        cell.selectionStyle = .none
         return cell
         
     }
@@ -129,24 +131,38 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let ref = DataService.instance.REF_USERS.child(chatPartnerID)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            guard let dictionary = snapshot.value as? NSDictionary else {
-                return
+            self.recipientID = snapshot.key
+            if let dict = snapshot.value as? NSDictionary {
+                if let name = dict["FirstName"] as? String {
+                    self.namedownloaded = name
+                    self.showChatLogController(name: self.namedownloaded!, recipientID: self.recipientID)
+                }
             }
-           
-            
             
         }, withCancel: nil)
         
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor.lightGray
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor.clear
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func showChatLogController(foruser user: User) {
+    func showChatLogController(name: String, recipientID: String) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "ChatLogVC") as! ChatLogVC
+        controller.fullname = name
+        controller.recipientUID = recipientID
         self.present(controller, animated: true, completion: nil)
     }
     
