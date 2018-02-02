@@ -17,7 +17,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     @IBOutlet weak var messagefield: TextFieldStyle!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var sendbtn: UIButton!
-    @IBOutlet weak var messageCollectionView: UICollectionView!
+    @IBOutlet weak var messageCollectionView: UICollectionView?
     
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
@@ -45,10 +45,10 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        messageCollectionView.delegate = self
-        messageCollectionView.dataSource = self
-        messageCollectionView.alwaysBounceVertical = true
-        messageCollectionView.register(ChatMessageCVCell.self, forCellWithReuseIdentifier: "messageID")
+        messageCollectionView?.delegate = self
+        messageCollectionView?.dataSource = self
+        messageCollectionView?.alwaysBounceVertical = true
+        messageCollectionView?.register(ChatMessageCVCell.self, forCellWithReuseIdentifier: "messageID")
         messagefield.delegate = self
         messagefield.keyboardAppearance = .dark
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
@@ -103,7 +103,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
                     if messageDownloaded.charParnterID() == self.recipientUID {
                         self.collectionViewMessages.append(messageDownloaded)                        
                         DispatchQueue.main.async {
-                            self.messageCollectionView.reloadData()
+                            self.messageCollectionView?.reloadData()
                         }
                     }
 

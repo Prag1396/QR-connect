@@ -19,17 +19,30 @@ class MessageCell: UITableViewCell {
     
     var messagetodisplay: Message? {
         didSet {
-                        
-            let ref = DataService.instance.REF_USERS.child((messagetodisplay?.charParnterID())!)
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let dict = snapshot.value as? NSDictionary {
-                        if let name = dict["FirstName"] as? String {
-                            let messagetosend = self.messagetodisplay?.messageText
-                            let time = self.messagetodisplay?.timeStamp
-                            self.updateUI(name: name, text: messagetosend!, time: time!)
-                        }
-                    }
-  
+            setUpNameAndProfileImage()
+            if let seconds = messagetodisplay?.timeStamp.doubleValue {
+                let timeStampDate = NSDate(timeIntervalSince1970: seconds)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "hh:mm:ss a"
+                self.timelabel.text = dateFormatter.string(from: timeStampDate as Date)
+            }
+            
+
+        }
+    }
+    
+    fileprivate func setUpNameAndProfileImage() {
+        
+        if let id = messagetodisplay?.charParnterID() {
+            let ref = DataService.instance.REF_USERS.child(id)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dict = snapshot.value as? NSDictionary {
+                    self.name.text = dict["FirstName"] as? String
+                    self.lastmessage.text = self.messagetodisplay?.messageText
+                    self.profileImg.image = UIImage(named: "chatprofileImage")
+
+                }
+            
         }, withCancel: nil)
         }
     }
@@ -39,18 +52,4 @@ class MessageCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    func updateUI(name: String, text: String, time: NSNumber) {
-        profileImg.image = UIImage(named: "chatprofileImage")
-        self.name.text = name
-        self.lastmessage.text = text
-        
-        let seconds = time.doubleValue
-        let timeStampDate = NSDate(timeIntervalSince1970: seconds)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm:ss a"
-        self.timelabel.text = dateFormatter.string(from: timeStampDate as Date)
-    }
-    
-
 }

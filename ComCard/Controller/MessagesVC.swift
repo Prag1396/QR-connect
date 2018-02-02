@@ -13,57 +13,25 @@ import FirebaseDatabase
 
 class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private var _senderID: String? = nil
-    private var _recipientID: String? = nil
-    private var _timeStamp: NSNumber? = nil
-    private var _messageText: String? = nil
+ 
     var messageArray = [Message]()
     var messagesDict = [String: Message]()
-    var namedownloaded: String? = nil
+    var timer: Timer?
     
     @IBOutlet weak var chatTableView: UITableView!
     
-    var senderID: String {
-        get {
-        return _senderID!
-        } set {
-            _senderID = newValue
-        }
-    }
-    
-    var recipientID: String {
-        get {
-        return _recipientID!
-        } set {
-            _recipientID = newValue
-        }
-    }
-    
-    var timestamp: NSNumber {
-        get {
-        return _timeStamp!
-        } set {
-            _timeStamp = newValue
-        }
-    }
-    
-    var messageText: String {
-        get {
-        return _messageText!
-        } set {
-            _messageText = newValue
-        }
-    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
         chatTableView.delegate = self
         chatTableView.dataSource = self
         chatTableView.tableFooterView = UIView()
         
+        messageArray.removeAll()
+        messagesDict.removeAll()
+        chatTableView.reloadData()
         observeUserMessages()
-        
+
         // Do any additional setup after loading the view.
     }
     
@@ -81,24 +49,35 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dict = snapshot.value as? NSDictionary {
-                    self.senderID = (dict["fromID"] as? String)!
-                    self.recipientID = (dict["toID"] as? String)!
-                    self.timestamp = (dict["time"] as? NSNumber)!
-                    self.messageText = (dict["messagetext"] as? String)!
-                    let messageObj = Message(fromUID: self.senderID, toUID: self.recipientID, messageText: self.messageText, timeStamp: self.timestamp)
-                    self.messagesDict[messageObj.toID] = messageObj
-                    self.messageArray = Array(self.messagesDict.values)
-                    self.messageArray.sort(by: { (message1, message2) -> Bool in
-                        return message1.timeStamp.intValue > message2.timeStamp.intValue
-                    })
+                    let senderID = (dict["fromID"] as? String)!
+                    let recipientID = (dict["toID"] as? String)!
+                    let timestamp = (dict["time"] as? NSNumber)!
+                    let messageText = (dict["messagetext"] as? String)!
+                    let messageObj = Message(fromUID: senderID, toUID: recipientID, messageText: messageText, timeStamp: timestamp)
                     
-                    DispatchQueue.main.async {
-                        self.chatTableView.reloadData()
+                    if let chatPartnerID = messageObj.charParnterID()  {
+                        self.messagesDict[chatPartnerID] = messageObj
+                        self.messageArray = Array(self.messagesDict.values)
+                        self.messageArray.sort(by: { (message1, message2) -> Bool in
+                            return message1.timeStamp.intValue > message2.timeStamp.intValue
+                        })
                     }
+
+                    self.timer?.invalidate()
+                    
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+
                 }
             }, withCancel: nil)
             
         }, withCancel: nil)
+    }
+    
+    @objc func handleReloadTable() {
+        //this will crash because of background thread, so lets call this on dispatch_async main thread
+        DispatchQueue.main.async(execute: {
+            self.chatTableView.reloadData()
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,11 +110,10 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let ref = DataService.instance.REF_USERS.child(chatPartnerID)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            self.recipientID = snapshot.key
+            let recipientID = snapshot.key
             if let dict = snapshot.value as? NSDictionary {
                 if let name = dict["FirstName"] as? String {
-                    self.namedownloaded = name
-                    self.showChatLogController(name: self.namedownloaded!, recipientID: self.recipientID)
+                    self.showChatLogController(name: name, recipientID: recipientID)
                 }
             }
             
