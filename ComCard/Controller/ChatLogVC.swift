@@ -49,6 +49,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         messageCollectionView?.dataSource = self
         messageCollectionView?.alwaysBounceVertical = true
         messageCollectionView?.register(ChatMessageCVCell.self, forCellWithReuseIdentifier: "messageID")
+        messageCollectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         messagefield.delegate = self
         messagefield.keyboardAppearance = .dark
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
@@ -123,6 +124,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, message: data!, time: timeStamp)
             
         }
+        self.messagefield.text = nil
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -133,7 +135,31 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "messageID", for: indexPath) as! ChatMessageCVCell
         let _message = collectionViewMessages[indexPath.row]
         cell.textView.text = _message.messageText
+        
+        //modify bubbleview width
+        cell.bubbleWidthAnchor?.constant = estimatedHeightForText(text: _message.messageText).width + 32
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var height: CGFloat = 80
+        //get estimated height
+        let text = collectionViewMessages[indexPath.item].messageText
+        if(text.isEmpty == false) {
+            height = estimatedHeightForText(text: text).height + 20
+        }
+        
+        
+        return CGSize(width: view.frame.width, height: height)
+        
+    }
+    
+    private func estimatedHeightForText(text: String) -> CGRect {
+        
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.init(name: "Avenir", size: 16) as Any], context: nil)
     }
 
 }
