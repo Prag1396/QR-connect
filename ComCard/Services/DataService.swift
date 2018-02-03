@@ -54,17 +54,17 @@ class DataService {
         
         let childRef = REF_MESS.childByAutoId()
         
-        let userData: Dictionary<String, AnyObject> = ["fromID": recipientUID as AnyObject, "toID": senderuid as AnyObject, "time": time, "messagetext": message as AnyObject]
+        let userData: Dictionary<String, AnyObject> = ["fromID": senderuid as AnyObject, "toID": recipientUID as AnyObject, "time": time, "messagetext": message as AnyObject]
 
         childRef.updateChildValues(userData) { (error, ref) in
             if error != nil {
                 print(error.debugDescription)
             } else {
-                let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(senderuid)
+                let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(senderuid).child(recipientUID)
                 let messageID = childRef.key
                 userMessagesRef.updateChildValues([messageID: 1])
                 
-                let recipientUserMessagesRef = DataService.instance.REF_USERMESSAGES.child(recipientUID)
+                let recipientUserMessagesRef = DataService.instance.REF_USERMESSAGES.child(recipientUID).child(senderuid)
                 recipientUserMessagesRef.updateChildValues([messageID: 1])
             }
             

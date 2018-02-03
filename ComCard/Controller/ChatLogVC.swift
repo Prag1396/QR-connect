@@ -69,7 +69,6 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSend()
         textField.resignFirstResponder()
         return false
     }
@@ -88,7 +87,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             return
         }
         
-        let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(uid)
+        let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(uid).child(recipientUID)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
             
             let messageID = snapshot.key
@@ -101,13 +100,11 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
                     let text = dict["messagetext"] as? String
                     //potential of crashing if keys do not match
                     let messageDownloaded = Message(fromUID: fromID!, toUID: toID!, messageText: text!, timeStamp: timeStamp!)
-                    if messageDownloaded.charParnterID() == self.recipientUID {
-                        self.collectionViewMessages.append(messageDownloaded)                        
-                        DispatchQueue.main.async {
-                            self.messageCollectionView?.reloadData()
-                        }
+                    self.collectionViewMessages.append(messageDownloaded)
+                    DispatchQueue.main.async {
+                        self.messageCollectionView?.reloadData()
                     }
-
+                
                 }
 
             }, withCancel: nil)
@@ -136,9 +133,28 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         let _message = collectionViewMessages[indexPath.row]
         cell.textView.text = _message.messageText
         
+        setUpCell(cell: cell, message: _message)
+        
         //modify bubbleview width
         cell.bubbleWidthAnchor?.constant = estimatedHeightForText(text: _message.messageText).width + 32
         return cell
+    }
+    
+    private func setUpCell(cell: ChatMessageCVCell, message: Message) {
+        if message.fromUID == Auth.auth().currentUser?.uid {
+            //outgoing message
+            cell.bubbleView.backgroundColor = ChatMessageCVCell.yellowColor
+            cell.textView.textColor = UIColor.white
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+        } else {
+            //incoming message
+            cell.bubbleView.backgroundColor = UIColor(red: 240, green: 240, blue: 240, alpha: 1.0)
+            cell.textView.textColor = UIColor.black
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

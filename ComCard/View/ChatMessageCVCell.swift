@@ -10,8 +10,11 @@ import UIKit
 
 class ChatMessageCVCell: UICollectionViewCell {
     
-    
+    static let yellowColor = UIColor(red: 204/255, green: 255/255, blue: 102/255, alpha: 0.5)
     var bubbleWidthAnchor: NSLayoutConstraint?
+    var bubbleViewRightAnchor: NSLayoutConstraint?
+    var bubbleViewLeftAnchor: NSLayoutConstraint?
+    
     
     let textView: UITextView = {
         let tv = UITextView()
@@ -25,7 +28,7 @@ class ChatMessageCVCell: UICollectionViewCell {
     
     let bubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 204/255, green: 255/255, blue: 102/255, alpha: 0.5)
+        view.backgroundColor = yellowColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
@@ -50,6 +53,12 @@ class ChatMessageCVCell: UICollectionViewCell {
         textView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         textView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        
+        bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+        bubbleViewRightAnchor?.isActive = true
+        
+        bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8)
+        bubbleViewLeftAnchor?.isActive = false
         
     }
     

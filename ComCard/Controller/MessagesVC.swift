@@ -44,36 +44,54 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let ref = DataService.instance.REF_USERMESSAGES.child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
             
-            let messageID = snapshot.key
-            let messagesReference = DataService.instance.REF_MESS.child(messageID)
-            messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            let userID = snapshot.key
+            
+            DataService.instance.REF_USERMESSAGES.child(uid).child(userID).observe(.childAdded, with: { (snapshot) in
                 
-                if let dict = snapshot.value as? NSDictionary {
-                    let senderID = (dict["fromID"] as? String)!
-                    let recipientID = (dict["toID"] as? String)!
-                    let timestamp = (dict["time"] as? NSNumber)!
-                    let messageText = (dict["messagetext"] as? String)!
-                    let messageObj = Message(fromUID: senderID, toUID: recipientID, messageText: messageText, timeStamp: timestamp)
-                    
-                    if let chatPartnerID = messageObj.charParnterID()  {
-                        self.messagesDict[chatPartnerID] = messageObj
-                        self.messageArray = Array(self.messagesDict.values)
-                        self.messageArray.sort(by: { (message1, message2) -> Bool in
-                            return message1.timeStamp.intValue > message2.timeStamp.intValue
-                        })
-                    }
+                let messageID = snapshot.key
+                self.fetchMessageWithMessageID(messageID: messageID)
 
-                    self.timer?.invalidate()
-                    
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-
-                }
+                
+            }, withCancel: nil)
+                
+                
             }, withCancel: nil)
             
+    }
+    
+    private func fetchMessageWithMessageID(messageID: String) {
+        let messagesReference = DataService.instance.REF_MESS.child(messageID)
+        messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let dict = snapshot.value as? NSDictionary {
+                let senderID = (dict["fromID"] as? String)!
+                let recipientID = (dict["toID"] as? String)!
+                let timestamp = (dict["time"] as? NSNumber)!
+                let messageText = (dict["messagetext"] as? String)!
+                let messageObj = Message(fromUID: senderID, toUID: recipientID, messageText: messageText, timeStamp: timestamp)
+                
+                if let chatPartnerID = messageObj.charParnterID()  {
+                    self.messagesDict[chatPartnerID] = messageObj
+                    
+                }
+                
+                self.attemptReload()
+                
+            }
         }, withCancel: nil)
     }
     
+    private func attemptReload() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
+    
     @objc func handleReloadTable() {
+        
+        self.messageArray = Array(self.messagesDict.values)
+        self.messageArray.sort(by: { (message1, message2) -> Bool in
+            return message1.timeStamp.intValue > message2.timeStamp.intValue
+        })
         //this will crash because of background thread, so lets call this on dispatch_async main thread
         DispatchQueue.main.async(execute: {
             self.chatTableView.reloadData()
