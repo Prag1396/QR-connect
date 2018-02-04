@@ -70,4 +70,29 @@ class DataService {
             
         }
     }
+    
+    func sendMessagewithImageURL(image: UIImage, imageURL: String, senderuid: String, recipientUID: String, time: NSNumber) {
+        
+        let childRef = REF_MESS.childByAutoId()
+        
+        let userData: Dictionary<String, AnyObject> = ["fromID": senderuid as AnyObject, "toID": recipientUID as AnyObject, "time": time, "imageURL": imageURL as AnyObject, "imageWidth": image.size.width as AnyObject, "imageHeight": image.size.height as AnyObject]
+        
+        childRef.updateChildValues(userData) { (error, ref) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                let userMessagesRef = DataService.instance.REF_USERMESSAGES.child(senderuid).child(recipientUID)
+                let messageID = childRef.key
+                userMessagesRef.updateChildValues([messageID: 1])
+                
+                let recipientUserMessagesRef = DataService.instance.REF_USERMESSAGES.child(recipientUID).child(senderuid)
+                recipientUserMessagesRef.updateChildValues([messageID: 1])
+            }
+            
+        }
+        
+        
+    }
+    
+    
 }

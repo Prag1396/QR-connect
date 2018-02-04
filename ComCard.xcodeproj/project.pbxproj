@@ -20,6 +20,7 @@
 		DB2E3ABD2019733900E39C79 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABC2019733900E39C79 /* MessageCell.swift */; };
 		DB2E3ABF201EF1CA00E39C79 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABE201EF1CA00E39C79 /* MessagesVC.swift */; };
 		DB34E9FF202314EC00AF8640 /* ChatMessageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */; };
+		DB34EA0320268F0A00AF8640 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34EA0220268F0A00AF8640 /* ImageCache.swift */; };
 		DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D48F200C96A6005D5219 /* viewStyle.swift */; };
 		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
@@ -73,6 +74,7 @@
 		DB2E3ABC2019733900E39C79 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DB2E3ABE201EF1CA00E39C79 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCVCell.swift; sourceTree = "<group>"; };
+		DB34EA0220268F0A00AF8640 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		DB78D48F200C96A6005D5219 /* viewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewStyle.swift; sourceTree = "<group>"; };
 		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				DBBCCC582006DA250078E662 /* Image+size.swift */,
 				DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */,
 				DB2E3AB72018871F00E39C79 /* StringSpaces.swift */,
+				DB34EA0220268F0A00AF8640 /* ImageCache.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				DBBCCC592006DA250078E662 /* Image+size.swift in Sources */,
 				DB2E3ABB2019717C00E39C79 /* Message.swift in Sources */,
 				DB2E3AAC2011B26800E39C79 /* EmailCaptureVC.swift in Sources */,
+				DB34EA0320268F0A00AF8640 /* ImageCache.swift in Sources */,
 				DBD1F99B1FFAE62A00A2CAE6 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

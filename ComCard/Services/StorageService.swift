@@ -16,6 +16,7 @@ class StorageService {
     static let instance = StorageService()
     private var _REFSB_BASE = SB_BASE
     private var _REFSB_CODE = SB_BASE.child("users")
+    private var _REF_MESSAGESIMAGES = SB_BASE.child("messagesImages")
     
     var REFSB_BASE: StorageReference {
         return _REFSB_BASE
@@ -23,6 +24,10 @@ class StorageService {
     
     var REFSB_CODE: StorageReference {
         return _REFSB_CODE
+    }
+    
+    var REF_MESSAGESIMAGES: StorageReference {
+        return _REF_MESSAGESIMAGES
     }
     
     
@@ -53,4 +58,29 @@ class StorageService {
             }
         }.resume()
     }
+    
+    func uploadToFirebaseStorage(usingImage image: UIImage, onComplete: @escaping (_ status: Bool, _ error: Error?, _ imageurl: String?)->()) {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let imageName = NSUUID().uuidString
+        let ref = REF_MESSAGESIMAGES.child(uid).child(imageName)
+        
+        if let uploadData = UIImageJPEGRepresentation(image, 0.2) {
+            ref.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("Failed to upload image")
+                    onComplete(false, error, nil)
+                    return
+                }
+                if let imageURL = metadata?.downloadURL()?.absoluteString {
+                    onComplete(true, nil, imageURL)
+                }
+            })
+        }
+        
+    }
+    
 }

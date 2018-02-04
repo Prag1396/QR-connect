@@ -10,7 +10,10 @@ import UIKit
 
 class ChatMessageCVCell: UICollectionViewCell {
     
+    var chatLogController: ChatLogVC?
+    
     static let yellowColor = UIColor(red: 204/255, green: 255/255, blue: 102/255, alpha: 0.5)
+    
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
@@ -23,6 +26,7 @@ class ChatMessageCVCell: UICollectionViewCell {
         tv.font = UIFont.init(name: "Avenir", size: 16)
         tv.textColor = UIColor.white    
         tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.isEditable = false
         return tv
     }()
     
@@ -35,14 +39,40 @@ class ChatMessageCVCell: UICollectionViewCell {
         return view
     }()
     
+    lazy var messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self,action: #selector(handleTaponImage)))
+        return imageView
+    }()
+    
+    @objc func handleTaponImage(tapGesture: UITapGestureRecognizer) {
+        //Don't perfrom logic in view class
+        
+        if let imageView = tapGesture.view as? UIImageView {
+            self.chatLogController?.performZoomInForImageView(startingImageView: imageView)
+
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubview(bubbleView)
         addSubview(textView)
         
+        bubbleView.addSubview(messageImageView)
         
-        bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
+        
+        messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
+        
         bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
@@ -59,6 +89,8 @@ class ChatMessageCVCell: UICollectionViewCell {
         
         bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8)
         bubbleViewLeftAnchor?.isActive = false
+        
+        
         
     }
     

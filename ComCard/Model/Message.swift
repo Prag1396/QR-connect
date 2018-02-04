@@ -12,34 +12,26 @@ import FirebaseAuth
 
 struct Message {
     
-    private var _fromUID: String?
-    private var _toID: String?
-    private var _messagetext: String?
-    private var _timeStamp: NSNumber?
+    var fromUID: String?
+    var toID: String?
+    var messagetext: String?
+    var timeStamp: NSNumber?
+    var imageURL: String?
+    var imageHeight: NSNumber?
+    var imageWidth: NSNumber?
     
     
-    var fromUID: String {
-        return _fromUID!
+    init(dictionary: [String: Any]) {
+        self.fromUID = dictionary["fromID"] as? String
+        self.toID = dictionary["toID"] as? String
+        self.timeStamp = dictionary["time"] as? NSNumber
+        self.messagetext = dictionary["messagetext"] as? String
+        self.imageURL = dictionary["imageURL"] as? String
+        self.imageHeight = dictionary["imageHeight"] as? NSNumber
+        self.imageWidth = dictionary["imageWidth"] as? NSNumber
+    
     }
     
-    var toID: String {
-        return _toID!
-    }
-    
-    var messageText: String {
-        return _messagetext!
-    }
-    
-    var timeStamp: NSNumber {
-        return _timeStamp!
-    }
-    
-    init(fromUID: String, toUID: String, messageText: String, timeStamp: NSNumber) {
-        _fromUID = fromUID
-        _toID = toUID
-        _messagetext = messageText
-        _timeStamp = timeStamp
-    }
     
     func charParnterID() -> String? {
         return fromUID == Auth.auth().currentUser?.uid ? toID : fromUID

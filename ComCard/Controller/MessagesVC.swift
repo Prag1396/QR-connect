@@ -63,12 +63,9 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let messagesReference = DataService.instance.REF_MESS.child(messageID)
         messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
             
-            if let dict = snapshot.value as? NSDictionary {
-                let senderID = (dict["fromID"] as? String)!
-                let recipientID = (dict["toID"] as? String)!
-                let timestamp = (dict["time"] as? NSNumber)!
-                let messageText = (dict["messagetext"] as? String)!
-                let messageObj = Message(fromUID: senderID, toUID: recipientID, messageText: messageText, timeStamp: timestamp)
+            if let dict = snapshot.value as? [String: AnyObject] {
+
+                let messageObj = Message(dictionary: dict)
                 
                 if let chatPartnerID = messageObj.charParnterID()  {
                     self.messagesDict[chatPartnerID] = messageObj
@@ -90,7 +87,7 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         self.messageArray = Array(self.messagesDict.values)
         self.messageArray.sort(by: { (message1, message2) -> Bool in
-            return message1.timeStamp.intValue > message2.timeStamp.intValue
+            return (message1.timeStamp?.intValue)! > (message2.timeStamp?.intValue)!
         })
         //this will crash because of background thread, so lets call this on dispatch_async main thread
         DispatchQueue.main.async(execute: {

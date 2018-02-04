@@ -20,7 +20,7 @@ class MessageCell: UITableViewCell {
     var messagetodisplay: Message? {
         didSet {
             setUpNameAndProfileImage()
-            if let seconds = messagetodisplay?.timeStamp.doubleValue {
+            if let seconds = messagetodisplay?.timeStamp?.doubleValue {
                 let timeStampDate = NSDate(timeIntervalSince1970: seconds)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm:ss a"
@@ -38,7 +38,7 @@ class MessageCell: UITableViewCell {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? NSDictionary {
                     self.name.text = dict["FirstName"] as? String
-                    self.lastmessage.text = self.messagetodisplay?.messageText
+                    self.lastmessage.text = self.messagetodisplay?.messagetext
                     self.profileImg.image = UIImage(named: "chatprofileImage")
 
                 }
