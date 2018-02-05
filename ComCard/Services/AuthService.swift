@@ -15,7 +15,7 @@ import FirebaseStorage
 class AuthService: UIViewController {
     static let instance = AuthService()
     let defaults = UserDefaults.standard
-
+    private var phoneAuthCredential: PhoneAuthCredential?
     
     func sendCode(withPhoneNumber phoneNumber: String, messageSentComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
@@ -33,24 +33,35 @@ class AuthService: UIViewController {
     
     func auth(code: UITextField, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         
-        let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!)
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
-                authorizationComplete(false, error)
-            } else {
+        phoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!)
+        if let pac = phoneAuthCredential {
+            Auth.auth().signIn(with: pac) { (user, error) in
+                if error != nil {
+                    authorizationComplete(false, error)
+                } else {
                     //Authorization successfull
                     authorizationComplete(true, nil)
-                    }
+                }
             }
+        }
+
     }
     
         
     func registerUser(withEmail email: String, andPassword password: String, firstName: String, lastname: String, phonenumber: String, userCreationComplete: @escaping (_ uid: String?, _ status: Bool, _ error: Error?) -> ()) {
-            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-               if error != nil {
-                    userCreationComplete(nil, false, error)
-               } else {
+        
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        
+        let credentials = EmailAuthProvider.credential(withEmail: email, password: password)
+        user.link(with: credentials) { (user, error) in
+            if error != nil {
+                print(error.debugDescription)
+                userCreationComplete(nil, false, error)
                 
+            } else {
+                print("Linked Successfully")
                 let data = ("\(email) \(firstName) \((user?.uid)!)").data(using: String.Encoding.ascii, allowLossyConversion: false)
                 //encrypt data
                 self.uploadQRCode(uid: (user?.uid)!, data: data!) { (imageURL, status, error) in
@@ -61,19 +72,14 @@ class AuthService: UIViewController {
                         let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
                         DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                         DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)
-                        let provider = EmailAuthProvider.credential(withEmail: email, password: password)
-                        Auth.auth().currentUser?.link(with: provider, completion: { (user, error) in
-                            if (error != nil) {
-                                print(error.debugDescription)
-                            } else {
-                                print("Linked successfully")
-                            }
-                        })
+                        
                         userCreationComplete((user?.uid)!, true, nil)
+                        
                     }
                 }
-                }
+                
             }
+        }
     }
     
     func uploadQRCode(uid: String, data: Data, onUploadingImageComplete: @escaping (_ imageURL: String?,_ status: Bool, _ error: Error?)->()) {

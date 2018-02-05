@@ -116,8 +116,14 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
         // Dispose of any resources that can be recreated.
     }
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     @IBAction func donebtnpressed(_ sender: Any) {
+        
+        setUpActivityIndicator()
+        activityIndicator.startAnimating()
         captureText()
+        
         if ((firstName.text?.isEmpty)! || (lastName.text?.isEmpty)!) {
             //Present Alert
             let alert = UIAlertController(title: "Warning", message: "Please enter your full name", preferredStyle: UIAlertControllerStyle.alert)
@@ -131,6 +137,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
                     AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
                         
                         print("Successfully registered user")
+                        self.activityIndicator.stopAnimating()
                         self.performSegue(withIdentifier: "loaduserdetails", sender: Any.self)
                     })
                 } else {
@@ -139,6 +146,14 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
             })
             
         }
+    }
+    
+    func setUpActivityIndicator() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        view.addSubview(activityIndicator)
+        
     }
 
 }
