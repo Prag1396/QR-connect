@@ -12,22 +12,32 @@ import FirebaseAuth
 
 class HomeScreenVC: UIViewController {
 
-    var currentUser: FirebaseAuth.User? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //Check if user authenticated
-        //If yes then load contactVC if not authenticated then load sign up screen
-        currentUser = Auth.auth().currentUser
+
     }
     
-
+    @IBAction func generateQRCodeBtnPressed(_ sender: Any) {
+        //Check if user authenticated
+        //If yes then load usersignin if not authenticated then load sign up screen
+        if Auth.auth().currentUser == nil {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignup")
+            self.present(controllerToPresent, animated: true, completion: nil)
+        } else {
+            //load sign in
+            print(Auth.auth().currentUser?.uid ?? String())
+            performSegue(withIdentifier: "toUserSignin", sender: Any.self)
+        }
+    }
+    
     @IBAction func contactBtnPressed(_ sender: Any) {
-        //User has never signed in
-        if((currentUser) != nil) {
+        //Check if user authenticated
+        //If yes then load contactVC if not authenticated then load sign up screen
+        if((Auth.auth().currentUser) != nil) {
             performSegue(withIdentifier: "userverified", sender: Any.self)
         }
-        //User is logged out
         
         else {
             //Get UserSign up has storyboard and load it

@@ -82,7 +82,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="WOu-pG-rtD" kind="show" id="Uof-N5-2HB"/>
+                                    <action selector="generateQRCodeBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="acL-gq-7RR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -105,6 +105,7 @@
                     </view>
                     <connections>
                         <segue destination="YW1-c0-l1G" kind="show" identifier="userverified" id="yxp-HR-LWW"/>
+                        <segue destination="WOu-pG-rtD" kind="show" identifier="toUserSignin" id="SXp-LR-cKg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1714,7 +1715,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cad-KM-ja7"/>
-        <segue reference="ffs-XY-gdX"/>
-        <segue reference="gD5-DZ-zf2"/>
+        <segue reference="NRl-Jr-igb"/>
+        <segue reference="T02-rN-a0a"/>
     </inferredMetricsTieBreakers>
 </document>

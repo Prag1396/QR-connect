@@ -149,10 +149,21 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     }
     
     func setUpActivityIndicator() {
-        activityIndicator.center = self.view.center
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.view.center
+        loadingView.backgroundColor = UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-        view.addSubview(activityIndicator)
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        loadingView.addSubview(activityIndicator)
+        view.addSubview(loadingView)
         
     }
 
