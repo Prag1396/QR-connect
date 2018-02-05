@@ -30,7 +30,11 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         messageArray.removeAll()
         messagesDict.removeAll()
         chatTableView.reloadData()
+
         observeUserMessages()
+        
+        chatTableView.allowsMultipleSelectionDuringEditing = true
+        
 
         // Do any additional setup after loading the view.
     }
@@ -56,6 +60,13 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 
             }, withCancel: nil)
+        
+        ref.observe(.childRemoved, with: { (snapshot) in
+            
+            self.messagesDict.removeValue(forKey: snapshot.key)
+            self.attemptReload()
+            
+        }, withCancel: nil)
             
     }
     
@@ -148,6 +159,36 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        //Perform Delete logic here
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let message = messageArray[indexPath.row]
+        
+        if let chatPartnerID = message.charParnterID() {
+            DataService.instance.REF_USERMESSAGES.child(uid).child(chatPartnerID).removeValue(completionBlock: { (error, ref) in
+                
+                if error != nil {
+                    print(error.debugDescription)
+                    return
+                }
+                //Update table after removing messages
+                self.messagesDict.removeValue(forKey: chatPartnerID)
+                self.attemptReload()
+            })
+        }
+        
+        
     }
     
     func showChatLogController(name: String, recipientID: String) {

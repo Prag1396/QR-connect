@@ -80,17 +80,15 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                     //perform segue
                     self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
                 } else {
-                    print(String(describing: loginError?.localizedDescription))
+                    if let loginerror = loginError {
+                        AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in
+                            let alert = UIAlertController(title: "Warning", message: errmsg, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        })
+                    }
                 }
             })
-           /*
-            else {
-                let alert = UIAlertController(title: "Warning", message: "Username and password do not match", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                
-            }
-           */
             
         }
  

@@ -149,6 +149,16 @@ class AuthService: UIViewController {
             case .credentialAlreadyInUse: do {
                 onCompleteErrorHandler("Phone number already in use", nil)
                 }
+            case .userNotFound: do {
+                onCompleteErrorHandler("User not found. Please sign up", nil)
+                }
+            case .sessionExpired: do {
+                onCompleteErrorHandler("Session Expired", nil)
+                }
+            case .invalidEmail: do {
+                onCompleteErrorHandler("Invalid Email", nil)
+                }
+
             default:
                 onCompleteErrorHandler("Internal Error. Please try again.", nil)
             

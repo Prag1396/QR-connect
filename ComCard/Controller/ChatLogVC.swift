@@ -62,9 +62,18 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
+        self.sendbtn.isUserInteractionEnabled = false
+        messagefield.addTarget(self, action: #selector(textfieldDidChange(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
     
+    @objc func textfieldDidChange(_ textField: UITextField) {
+        if textField.text == nil || textField.text?.isEmpty == true {
+            sendbtn.isUserInteractionEnabled = false
+        } else {
+            sendbtn.isUserInteractionEnabled = true
+        }
+    }
     
     func setUpKeyBoardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -123,6 +132,11 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        if textField.text?.isEmpty == true || textField.text == nil {
+            sendbtn.isUserInteractionEnabled = false
+        } else {
+            sendbtn.isUserInteractionEnabled = true
+        }
         return false
     }
     
@@ -130,9 +144,20 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func sendbtnpressed(_ sender: Any) {
         handleSend()
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if textField.text == nil || textField.text?.isEmpty == true {
+            sendbtn.isUserInteractionEnabled = false
+        } else {
+            sendbtn.isUserInteractionEnabled = true
+        }
+    }
+    
+   
     
     func observeMessagesforuserClicked() {
         
@@ -172,6 +197,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, message: data!, time: timeStamp)
             
         }
+        
         self.messagefield.text = nil
     }
     

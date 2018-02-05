@@ -50,7 +50,7 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if(textField.tag == 1) {
-                self.checkifEmailExists()
+            self.checkifEmailExists()
         }
         textField.resignFirstResponder()
         return false
