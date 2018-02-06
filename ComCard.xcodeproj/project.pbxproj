@@ -24,6 +24,8 @@
 		DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D48F200C96A6005D5219 /* viewStyle.swift */; };
 		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
+		DBB1AF2B2029861400FF6AA6 /* CountryCodesAndNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */; };
+		DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */; };
 		DBBCCC5620044A050078E662 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5520044A050078E662 /* StorageService.swift */; };
 		DBBCCC592006DA250078E662 /* Image+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC582006DA250078E662 /* Image+size.swift */; };
 		DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */; };
@@ -78,6 +80,8 @@
 		DB78D48F200C96A6005D5219 /* viewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewStyle.swift; sourceTree = "<group>"; };
 		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
+		DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodesAndNames.swift; sourceTree = "<group>"; };
+		DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryFindKey.swift; sourceTree = "<group>"; };
 		DBBCCC5520044A050078E662 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		DBBCCC582006DA250078E662 /* Image+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+size.swift"; sourceTree = "<group>"; };
 		DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertViewController+image.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */,
 				DB2E3AB72018871F00E39C79 /* StringSpaces.swift */,
 				DB34EA0220268F0A00AF8640 /* ImageCache.swift */,
+				DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */,
+				DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -525,8 +531,10 @@
 				DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */,
 				DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */,
 				DB2E3AB22015A33B00E39C79 /* ChatLogVC.swift in Sources */,
+				DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
 				DB2E3AB02011CFB200E39C79 /* NameCaptureVC.swift in Sources */,
+				DBB1AF2B2029861400FF6AA6 /* CountryCodesAndNames.swift in Sources */,
 				DBBCCC592006DA250078E662 /* Image+size.swift in Sources */,
 				DB2E3ABB2019717C00E39C79 /* Message.swift in Sources */,
 				DB2E3AAC2011B26800E39C79 /* EmailCaptureVC.swift in Sources */,

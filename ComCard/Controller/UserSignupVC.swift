@@ -12,19 +12,28 @@ import UIKit
 struct CurrentLength {
     static var currLength: Int = 0
 }
-class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+
+
+class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var phoneNumberLabel: UITextField!
     @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
     @IBOutlet weak var connectBtn: UIButton!
+    @IBOutlet weak var country_extension_textlabel: UITextField!
     
+    private var _plus = "+"
+    private var _phoneNumberExt: String? = nil
+    private var _fullPhoneNumber: String? = nil
     private var _phoneNumber: String? = nil
-
-
     var next_responder: UIResponder!
     var isReadytoPerformSegue: Bool!
     
+    var countryNames = [String()]
+    var countryDictReturned = [String(): String()]
+    
+    var pickerView: UIPickerView = UIPickerView()
+    var obj: NSLocale = NSLocale()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,8 +42,25 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         setupOutlets()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        country_extension_textlabel.inputView = pickerView
+        countryDictReturned = obj.countryArrayPopulate()
+        countryNames = Array(countryDictReturned.values)
+        sortCountryArray()
+        setupDeafultValueForPickerView()
+        self._phoneNumberExt = _plus + "1"
         isReadytoPerformSegue = true
         
+    }
+
+    func sortCountryArray() {
+        //sort country names
+        countryNames.sort()
+    }
+    
+    func setupDeafultValueForPickerView() {
+        country_extension_textlabel.text = convertToFlag(country: "US")
     }
     
     @objc func backgroundTapped() {
@@ -48,34 +74,15 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         phoneNumberLabel.clearsOnBeginEditing = false
         phoneNumberLabel.keyboardAppearance = .dark
         
+        country_extension_textlabel.tintColor = UIColor.clear
         
     }
     @IBAction func backbtnpressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func checkPhoneNumber() {
-        AuthService.instance.checkIfPhoneNumberExists(phoneNumber: self.phoneNumberLabel.text!, checkComplete: { (status, errmsg) in
-            if status == false {
-                
-                self.isReadytoPerformSegue = false
-                self.phoneNumberAlreaduInUse.isHidden = false
-                self.connectBtn.isUserInteractionEnabled = false
-                self.connectBtn.alpha = 0.6
-                
-            } else {
-                self.isReadytoPerformSegue = true
-                self.phoneNumberAlreaduInUse.isHidden = true
-                self.connectBtn.isUserInteractionEnabled = true
-            }
-        })
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-        if(textField.tag == 1) {
-            self.checkPhoneNumber()
-        }
         textField.resignFirstResponder()
         return false
     }
@@ -89,9 +96,40 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         self.connectBtn.alpha = 0.6
     }
     
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return countryNames.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return countryNames[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let countryCode = countryDictReturned.someKey(forValue: countryNames[row])
+        if var cc = countryCode {
+            cc.removeFirst()
+            country_extension_textlabel.text = convertToFlag(country: cc)
+            //Get country code extension for phone number
+            self._phoneNumberExt =  _plus + cc.getCountryCallingCode(countryRegionCode: cc)
+        }
+    }
+    
+    func convertToFlag(country: String) -> String {
+        
+        let base: UInt32 = 127397
+        return country.unicodeScalars.flatMap { String.init(UnicodeScalar(base + $0.value)!) }.joined()
+    }
     
     @IBAction func connectBtnPressed(_ sender: Any) {
         captureText()
@@ -116,13 +154,14 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func captureText() {
         _phoneNumber = phoneNumberLabel.text!
+        self._fullPhoneNumber = _phoneNumberExt! + _phoneNumber!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "connectPressed") {
             if let destination = segue.destination as? ConfirmLoginVC {
                 if phoneNumberLabel.text != nil {
-                    destination.phoneNumber = _phoneNumber!
+                    destination.phoneNumber = self._fullPhoneNumber!
                 }
             }
             

@@ -750,7 +750,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-gb-dHj" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="25.666666666666657" y="269" width="324.33333333333337" height="30"/>
+                                <rect key="frame" x="95" y="269" width="255" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8hr-zy-r1L"/>
                                 </constraints>
@@ -791,7 +791,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qq-ex-cHa">
-                                <rect key="frame" x="33.666666666666671" y="185" width="255.33333333333331" height="21"/>
+                                <rect key="frame" x="25" y="185" width="264" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="h4E-zr-UsG"/>
                                 </constraints>
@@ -814,6 +814,26 @@
                                     <action selector="backbtnpressed:" destination="2o3-8U-A67" eventType="touchUpInside" id="UME-Z0-64A"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Extension" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="jOg-SN-s5U" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="25" y="269" width="52" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2M0-vz-bYo"/>
+                                </constraints>
+                                <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -826,15 +846,18 @@
                             <constraint firstItem="kLt-wY-EcF" firstAttribute="bottom" secondItem="xXS-fG-uqX" secondAttribute="bottom" id="P3N-ks-D1G"/>
                             <constraint firstItem="kIM-If-6Wk" firstAttribute="leading" secondItem="PaS-gb-dHj" secondAttribute="trailing" constant="-95" id="VzW-mP-Ljb"/>
                             <constraint firstItem="kLt-wY-EcF" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" id="Yac-Hk-J5P"/>
-                            <constraint firstItem="8Qq-ex-cHa" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="33.5" id="YyV-nU-oHg"/>
-                            <constraint firstItem="PaS-gb-dHj" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="25" id="Za2-2G-Wdn"/>
+                            <constraint firstItem="8Qq-ex-cHa" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="25" id="YyV-nU-oHg"/>
+                            <constraint firstItem="PaS-gb-dHj" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="95" id="Za2-2G-Wdn"/>
                             <constraint firstItem="Tge-Ri-XxY" firstAttribute="trailing" secondItem="qZe-Yh-HTf" secondAttribute="trailing" constant="33.5" id="cUZ-zR-JNM"/>
                             <constraint firstItem="kLt-wY-EcF" firstAttribute="trailing" secondItem="Tge-Ri-XxY" secondAttribute="trailing" id="gP6-fB-AT2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Qq-ex-cHa" secondAttribute="trailing" constant="70" id="gde-S9-l4o"/>
+                            <constraint firstItem="PaS-gb-dHj" firstAttribute="leading" secondItem="jOg-SN-s5U" secondAttribute="trailing" constant="18" id="h2E-dI-qep"/>
                             <constraint firstItem="8Qq-ex-cHa" firstAttribute="top" secondItem="qZe-Yh-HTf" secondAttribute="bottom" constant="40" id="l4c-3K-8pS"/>
                             <constraint firstItem="Tge-Ri-XxY" firstAttribute="trailing" secondItem="PaS-gb-dHj" secondAttribute="trailing" constant="25" id="mBr-Zm-3Fw"/>
+                            <constraint firstItem="jOg-SN-s5U" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="25" id="ntG-mO-cTe"/>
                             <constraint firstItem="qZe-Yh-HTf" firstAttribute="top" secondItem="Tge-Ri-XxY" secondAttribute="top" constant="30" id="ny8-kL-3ES"/>
                             <constraint firstItem="PaS-gb-dHj" firstAttribute="top" secondItem="kIM-If-6Wk" secondAttribute="bottom" constant="-18.5" id="qIf-ak-MH7"/>
+                            <constraint firstItem="jOg-SN-s5U" firstAttribute="top" secondItem="8Qq-ex-cHa" secondAttribute="bottom" constant="63" id="xnU-uJ-Dg9"/>
                             <constraint firstItem="qZe-Yh-HTf" firstAttribute="top" secondItem="Jsp-3Q-Apq" secondAttribute="bottom" constant="8" id="yhH-3q-lvO"/>
                             <constraint firstItem="Jsp-3Q-Apq" firstAttribute="leading" secondItem="Tge-Ri-XxY" secondAttribute="leading" constant="11" id="yt7-Fg-EyB"/>
                             <constraint firstItem="kIM-If-6Wk" firstAttribute="trailing" secondItem="PaS-gb-dHj" secondAttribute="trailing" id="zib-DX-iia"/>
@@ -844,6 +867,7 @@
                     <connections>
                         <outlet property="background" destination="kLt-wY-EcF" id="krG-8n-BmC"/>
                         <outlet property="connectBtn" destination="yDE-96-7Ge" id="ywx-zO-uPd"/>
+                        <outlet property="country_extension_textlabel" destination="jOg-SN-s5U" id="gy6-uY-e2l"/>
                         <outlet property="phoneNumberAlreaduInUse" destination="kIM-If-6Wk" id="6yD-ev-kac"/>
                         <outlet property="phoneNumberLabel" destination="PaS-gb-dHj" id="Z4q-Eh-YTm"/>
                         <segue destination="0b5-fR-lD6" kind="show" identifier="connectPressed" id="CVK-Ck-IZT"/>
@@ -851,7 +875,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="663-T8-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="986" y="33"/>
+            <point key="canvasLocation" x="984.79999999999995" y="32.512315270935964"/>
         </scene>
         <!--Confirm LoginVC-->
         <scene sceneID="kaK-2b-YV5">
@@ -1079,7 +1103,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkT-IG-bNP">
-                                <rect key="frame" x="33.666666666666671" y="185" width="187.33333333333331" height="21"/>
+                                <rect key="frame" x="25" y="185" width="187.33333333333334" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="BnG-re-pZh"/>
                                 </constraints>
@@ -1120,7 +1144,7 @@
                             <constraint firstItem="k7D-fL-x8Y" firstAttribute="leading" secondItem="l8D-1h-vHE" secondAttribute="leading" constant="25" id="hRP-H7-wKl"/>
                             <constraint firstItem="l8D-1h-vHE" firstAttribute="trailing" secondItem="6hB-7g-U4Q" secondAttribute="trailing" constant="25" id="jAd-hc-sIW"/>
                             <constraint firstItem="l8D-1h-vHE" firstAttribute="trailing" secondItem="k7D-fL-x8Y" secondAttribute="trailing" constant="25" id="mCB-nG-bqW"/>
-                            <constraint firstItem="BkT-IG-bNP" firstAttribute="leading" secondItem="l8D-1h-vHE" secondAttribute="leading" constant="33.5" id="nIn-Sh-7oZ"/>
+                            <constraint firstItem="BkT-IG-bNP" firstAttribute="leading" secondItem="l8D-1h-vHE" secondAttribute="leading" constant="25" id="nIn-Sh-7oZ"/>
                             <constraint firstItem="l8D-1h-vHE" firstAttribute="trailing" secondItem="d5r-UA-Mq6" secondAttribute="trailing" constant="33.5" id="r1z-I8-zML"/>
                             <constraint firstItem="d5r-UA-Mq6" firstAttribute="top" secondItem="l8D-1h-vHE" secondAttribute="top" constant="30" id="taV-Dd-jCb"/>
                             <constraint firstItem="Bst-Kw-yVW" firstAttribute="trailing" secondItem="l8D-1h-vHE" secondAttribute="trailing" id="y73-Aq-OPj"/>
@@ -1156,7 +1180,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1170,7 +1194,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create an account password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLu-WO-Nio">
-                                <rect key="frame" x="33.666666666666657" y="185" width="194" height="21"/>
+                                <rect key="frame" x="25" y="185" width="194" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="475-FK-00Z"/>
                                 </constraints>
@@ -1204,7 +1228,7 @@
                             <constraint firstItem="yKp-HG-WBv" firstAttribute="leading" secondItem="Br4-cN-HfW" secondAttribute="leading" id="666-qj-QxR"/>
                             <constraint firstItem="hHA-mI-yrS" firstAttribute="top" secondItem="tZm-49-CBs" secondAttribute="bottom" constant="35" id="74C-s0-82i"/>
                             <constraint firstItem="Br4-cN-HfW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mLu-WO-Nio" secondAttribute="trailing" constant="52.5" id="CX2-BU-UVX"/>
-                            <constraint firstItem="mLu-WO-Nio" firstAttribute="leading" secondItem="Br4-cN-HfW" secondAttribute="leading" constant="33.5" id="GL8-o3-QPc"/>
+                            <constraint firstItem="mLu-WO-Nio" firstAttribute="leading" secondItem="Br4-cN-HfW" secondAttribute="leading" constant="25" id="GL8-o3-QPc"/>
                             <constraint firstItem="Br4-cN-HfW" firstAttribute="trailing" secondItem="hHA-mI-yrS" secondAttribute="trailing" constant="25" id="KDc-FV-iR7"/>
                             <constraint firstItem="yKp-HG-WBv" firstAttribute="trailing" secondItem="Br4-cN-HfW" secondAttribute="trailing" id="QQQ-9W-aIy"/>
                             <constraint firstItem="tZm-49-CBs" firstAttribute="top" secondItem="mLu-WO-Nio" secondAttribute="bottom" constant="63" id="QWF-NT-QTX"/>
@@ -1248,7 +1272,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your name?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahX-De-rGJ">
-                                <rect key="frame" x="33" y="185" width="130.66666666666666" height="21"/>
+                                <rect key="frame" x="25" y="185" width="130.66666666666666" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="vex-Hx-eVh"/>
                                 </constraints>
@@ -1340,7 +1364,7 @@
                             <constraint firstItem="uGK-yN-pGc" firstAttribute="leading" secondItem="BlM-13-rc6" secondAttribute="leading" constant="25" id="ndd-d5-r6p"/>
                             <constraint firstItem="B8z-FV-IeR" firstAttribute="leading" secondItem="LyV-yE-cEb" secondAttribute="trailing" constant="22" id="s5c-yP-iiF"/>
                             <constraint firstItem="Wfo-Ia-8cx" firstAttribute="top" secondItem="uGK-yN-pGc" secondAttribute="bottom" constant="25" id="x7p-b3-4O7"/>
-                            <constraint firstItem="ahX-De-rGJ" firstAttribute="leading" secondItem="BlM-13-rc6" secondAttribute="leading" constant="33.5" id="xlz-48-2u9"/>
+                            <constraint firstItem="ahX-De-rGJ" firstAttribute="leading" secondItem="BlM-13-rc6" secondAttribute="leading" constant="25" id="xlz-48-2u9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BlM-13-rc6"/>
                     </view>
