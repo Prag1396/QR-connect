@@ -20,6 +20,7 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     private var _fullNameDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imageURLDownloaded: String? = nil
+        
     
     @IBOutlet weak var mytableview: UITableView!
     
@@ -29,11 +30,10 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.viewDidLoad()
         mytableview.delegate = self
         mytableview.dataSource = self
-     
+        
         // Do any additional setup after loading the view.
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
-
         userRef.child("pvtdata").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? NSDictionary
             self._emailDownloaded = dict?["Email"] as? String
