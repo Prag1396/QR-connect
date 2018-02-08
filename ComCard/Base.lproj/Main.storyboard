@@ -1477,15 +1477,6 @@
                                 <color key="textColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccp-fe-Gys">
-                                <rect key="frame" x="0.0" y="763" width="375" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem image="usernameIcon" id="sXP-TG-sw7"/>
-                                    <tabBarItem image="usernameIcon" id="r6L-Mq-Ujv"/>
-                                </items>
-                            </tabBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bde-1m-uiJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                                 <subviews>
@@ -1989,11 +1980,12 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3Tn-oM-cbz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u4F-Mp-XYV">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="barbuttonbackground" id="u4F-Mp-XYV">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
@@ -2018,6 +2010,7 @@
         <image name="addattachment" width="32" height="31"/>
         <image name="addressbook" width="16" height="18"/>
         <image name="backbutton" width="10" height="17"/>
+        <image name="barbuttonbackground" width="374" height="93"/>
         <image name="emailIconcontactvc" width="41" height="41"/>
         <image name="emailicon" width="18" height="14"/>
         <image name="logo" width="65" height="65"/>
