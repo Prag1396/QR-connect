@@ -23,7 +23,7 @@ class HomeScreenVC: UIViewController {
         //If yes then load usersignin if not authenticated then load sign up screen
         if Auth.auth().currentUser == nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignUp") as? UserSignupVC
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
             self.present(controllerToPresent!, animated: true, completion: nil)
         } else {
             //load sign in

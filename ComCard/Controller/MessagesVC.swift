@@ -111,10 +111,6 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backbtnpressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageArray.count
     }

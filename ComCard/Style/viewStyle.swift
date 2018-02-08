@@ -13,6 +13,7 @@ class viewStyle: UIView {
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = true
         }
     }
 
