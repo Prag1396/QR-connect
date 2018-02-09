@@ -51,7 +51,6 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
 
             }
             else if (status == true) {
-                print("here")
                 self.sendCodeButton.setTitle("SENT. RESEND CODE?", for: .normal)
             }
         }

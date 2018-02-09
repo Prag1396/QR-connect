@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBD1F96A1FF8271200A2CAE6"
+               BlueprintIdentifier = "DB67C1EC202D4C38002215F6"
                BuildableName = "ComCardTests.xctest"
                BlueprintName = "ComCardTests"
                ReferencedContainer = "container:ComCard.xcodeproj">

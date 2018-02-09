@@ -53,7 +53,6 @@ class StorageService {
                 print(error.debugDescription)
                 downloadCompleteImage(false, error, nil)
             } else {
-                print("here")
                 downloadCompleteImage(true, nil, data)
             }
         }.resume()

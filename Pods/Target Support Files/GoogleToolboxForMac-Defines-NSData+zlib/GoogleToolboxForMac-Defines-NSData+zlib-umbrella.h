@@ -10,10 +10,9 @@
 #endif
 #endif
 
-#import "FBShimmering.h"
-#import "FBShimmeringLayer.h"
-#import "FBShimmeringView.h"
+#import "GTMDefines.h"
+#import "GTMNSData+zlib.h"
 
-FOUNDATION_EXPORT double ShimmerVersionNumber;
-FOUNDATION_EXPORT const unsigned char ShimmerVersionString[];
+FOUNDATION_EXPORT double GoogleToolboxForMacVersionNumber;
+FOUNDATION_EXPORT const unsigned char GoogleToolboxForMacVersionString[];
 

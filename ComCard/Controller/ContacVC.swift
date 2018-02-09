@@ -77,13 +77,28 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     }
     
     @IBAction func cancelbtnpressed(_ sender: Any) {
-        self.view.sendSubview(toBack: self.infoview)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.view.sendSubview(toBack: self.infoview)
+            self.session.stopRunning()
 
+        }, completion: nil)
     }
     
     @IBAction func scanQRCodepressed(_ sender: Any) {
         //Create Session
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        if let inputs = session.inputs as? [AVCaptureDeviceInput] {
+            for input in inputs {
+                session.removeInput(input)
+            }
+        }
+        
+        if let outputs = session.outputs as? [AVCaptureMetadataOutput] {
+            for output in outputs {
+                session.removeOutput(output)
+            }
+        }
         
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice!)
@@ -127,10 +142,8 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     }
     
     func setData(data: String) {
-        print(data)
         let correctformofString = data.condenseWhitespace()
         let details = correctformofString.components(separatedBy: .whitespacesAndNewlines)
-
         self.email = details[0]
         self._fullName = details[1]
         self._recipientUID = details[2]
@@ -138,7 +151,14 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         let letter: Character = self.fullName.first!
         let stringFromLetter: String = String(letter)
         self.profileLetter.text = stringFromLetter
-        self.view.bringSubview(toFront: self.infoview)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.bringSubview(toFront: self.infoview)
+        }, completion: nil)
+
+        
+
+
+        
 
     }
     

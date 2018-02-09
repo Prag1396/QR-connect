@@ -21,9 +21,9 @@ class HomeScreenVC: UIViewController {
     @IBAction func generateQRCodeBtnPressed(_ sender: Any) {
         //Check if user authenticated
         //If yes then load usersignin if not authenticated then load sign up screen
-        if Auth.auth().currentUser == nil {
+        if Auth.auth().currentUser?.uid == nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignUp") as? UserSignupVC
             self.present(controllerToPresent!, animated: true, completion: nil)
         } else {
             //load sign in

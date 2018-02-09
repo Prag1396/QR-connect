@@ -77,8 +77,16 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         country_extension_textlabel.tintColor = UIColor.clear
         
     }
+    
     @IBAction func backbtnpressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func alreadyamemberBtnPressed(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
+        self.present(controllerToPresent!, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

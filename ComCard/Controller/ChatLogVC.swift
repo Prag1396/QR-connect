@@ -197,7 +197,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, message: data!, time: timeStamp)
             
         }
-        
+        view.endEditing(true)
         self.messagefield.text = nil
     }
     

@@ -17,11 +17,9 @@ target 'ComCard' do
   target 'ComCardTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Firebase'
   end
 
-  target 'ComCardUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  
 
 end
