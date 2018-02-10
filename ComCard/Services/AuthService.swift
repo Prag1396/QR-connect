@@ -33,7 +33,7 @@ class AuthService: UIViewController {
     
     func auth(code: UITextField, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         
-        phoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!)
+        phoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!.trimmingCharacters(in: .whitespaces))
         if let pac = phoneAuthCredential {
             Auth.auth().signIn(with: pac) { (user, error) in
                 if error != nil {

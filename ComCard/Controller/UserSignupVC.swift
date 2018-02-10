@@ -161,7 +161,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func captureText() {
-        _phoneNumber = phoneNumberLabel.text!
+        _phoneNumber = phoneNumberLabel.text!.trimmingCharacters(in: .whitespaces)
         self._fullPhoneNumber = _phoneNumberExt! + _phoneNumber!
     }
     

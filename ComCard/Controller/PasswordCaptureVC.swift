@@ -93,7 +93,7 @@ class PasswordCaptureVC: UIViewController, UITextFieldDelegate, UIGestureRecogni
     }
     
     func captureText() {
-        _password = passwordTextField.text!
+        _password = passwordTextField.text!.trimmingCharacters(in: .whitespaces)
         
     }
     

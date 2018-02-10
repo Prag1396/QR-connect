@@ -96,7 +96,7 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
     }
     
     func captureText() {
-        _email = emailTextField.text
+        _email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
     }
     
     @objc func backgroundTapped() {
