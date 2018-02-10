@@ -12,6 +12,7 @@ target 'ComCard' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'IQKeyboardManagerSwift'
+  pod 'RNCryptor', '~> 5.0'
 
 
   target 'ComCardTests' do

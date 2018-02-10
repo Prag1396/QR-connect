@@ -10,12 +10,13 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
-
+import RNCryptor
 
 class AuthService: UIViewController {
     static let instance = AuthService()
     let defaults = UserDefaults.standard
     private var phoneAuthCredential: PhoneAuthCredential?
+    private var _encryptKey = "JJ13962896QRConnectDec12"
     
     func sendCode(withPhoneNumber phoneNumber: String, messageSentComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
@@ -62,9 +63,11 @@ class AuthService: UIViewController {
                 
             } else {
                 print("Linked Successfully")
-                let data = ("\(email) \(firstName) \((user?.uid)!)").data(using: String.Encoding.ascii, allowLossyConversion: false)
+                let data = ("\(email) \(firstName) \((user?.uid)!)").data(using: String.Encoding.utf8, allowLossyConversion: false)
                 //encrypt data
-                self.uploadQRCode(uid: (user?.uid)!, data: data!) { (imageURL, status, error) in
+                let encryptedData = RNCryptor.encrypt(data: data!, withPassword: self._encryptKey)
+                let compressed =  encryptedData.base64EncodedData()
+                self.uploadQRCode(uid: (user?.uid)!, data: compressed) { (imageURL, status, error) in
                     if error != nil {
                         print("error uploading image")
                     } else {

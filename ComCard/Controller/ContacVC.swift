@@ -12,6 +12,7 @@ import FirebaseAuth
 import MessageUI
 import IQKeyboardManagerSwift
 import AVFoundation
+import RNCryptor
 
 class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate {
 
@@ -27,6 +28,8 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     private var _fullName: String? = nil
     private var _initialposforcall = CGPoint.zero
     private var _initialposfortext: CGPoint = CGPoint.zero
+    private var _encryptKey = "JJ13962896QRConnectDec12"
+    private var _decryptedString: String? = nil
 
     private var _recipientUID: String? = nil
     
@@ -129,15 +132,32 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         if metadataObjects.isEmpty == false  {
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
                 if object.type == AVMetadataObject.ObjectType.qr {
-                    setData(data: object.stringValue!)
-                    //dismiss the sublayer
-                    self.view.sendSubview(toBack: border)
-                    video.removeFromSuperlayer()
-                    session.stopRunning()
+                    
+                    //Decrypt
+                    if let uncompressedData = Data(base64Encoded: (object.stringValue?.data(using: String.Encoding.utf8))!) {
+                        self.decryptData(encryptdata: uncompressedData)
+                        //dismiss the sublayer
+                        self.view.sendSubview(toBack: border)
+                        video.removeFromSuperlayer()
+                        session.stopRunning()
+                    }
+                    
+
                     
                 }
             }
             
+        }
+    }
+    
+    func decryptData(encryptdata: Data) {
+        do {
+            let decrypt = try RNCryptor.decrypt(data: encryptdata, withPassword: self._encryptKey)
+            if let output = String(data: decrypt, encoding: String.Encoding.utf8) {
+                setData(data: output)
+            }
+        } catch {
+            print(error)
         }
     }
     
@@ -154,11 +174,6 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.bringSubview(toFront: self.infoview)
         }, completion: nil)
-
-        
-
-
-        
 
     }
     

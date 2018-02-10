@@ -1196,7 +1196,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKp-HG-WBv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZm-49-CBs" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter Password (minimum 6 characters)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZm-49-CBs" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="25.666666666666657" y="269" width="324.33333333333337" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SQ8-rk-11L"/>

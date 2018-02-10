@@ -19,7 +19,6 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     @IBOutlet weak var background: UIImageView!
     
     var next_responder: UIResponder!
-    var isReadytoPerformSegue: Bool!
     
     private var _imageURL: String? = nil
     private var _phonenumber: String? = nil
@@ -100,7 +99,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if(self.isReadytoPerformSegue == true && firstName.text?.isEmpty == false && lastName.text?.isEmpty == false) {
+        if(firstName.text?.isEmpty == false && lastName.text?.isEmpty == false) {
             self.donebtn.alpha = 1.0
         }
         
