@@ -128,6 +128,28 @@ class AuthService: UIViewController {
     }
     
     
+    func changePassword(withEmail email: String, currentPassword: String, andNewPassword newpassword: String, onReauthenticationComplete: @escaping (_ status: Bool, _ error: Error?)->()) {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (error) in
+            if error != nil {
+                print(error.debugDescription)
+                onReauthenticationComplete(false, error)
+                return
+            }
+            //Re-Authentication successfull
+            Auth.auth().currentUser?.updatePassword(to: newpassword, completion: { (error) in
+                if error != nil {
+                    print(error.debugDescription)
+                    onReauthenticationComplete(false, error)
+                    return
+                }
+                //New Password set successfully
+                onReauthenticationComplete(true, nil)
+            })
+        })
+    }
+    
+    
     func handleErrorCode(error: NSError, onCompleteErrorHandler: @escaping(_ errorMsg: String, _ data: AnyObject?)->()) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {
             switch (errorCode) {

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class SettingsVC: UIViewController {
 
@@ -21,6 +22,15 @@ class SettingsVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func inviteContactPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func requestQRStickerPressed(_ sender: Any) {
+        
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
@@ -36,5 +46,26 @@ class SettingsVC: UIViewController {
         }
     }
     
-
+    @IBAction func changePasswordBtn(_ sender: Any) {
+        
+    }
+    
+    @IBAction func reportIsuueBtnpressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clearChat(_ sender: Any) {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        DataService.instance.REF_USERMESSAGES.child(uid).removeValue { (error, ref) in
+            if error != nil {
+                print("Unable to delete messages")
+            }
+        }
+        
+    }
+    
 }
