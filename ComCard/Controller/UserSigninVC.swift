@@ -21,10 +21,14 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     var next_Responder: UIResponder!
 
+    private var _emailDownloaded: String? = nil
     
     let userID = Auth.auth().currentUser?.uid
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.downloadUsername()
         userNameTextField.delegate = self
         userNameTextField.tag = 1
         userNameTextField.clearsOnBeginEditing = false
@@ -38,7 +42,24 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+
         
+    }
+    
+    func downloadUsername() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userRef = DataService.instance.REF_BASE
+        userRef.child("pvtdata").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            if let dict = snapshot.value as? NSDictionary {
+                self._emailDownloaded = dict["Email"] as? String
+            } else {
+                //Show Alert
+                print("Could not find user")
+            }
+        }
     }
     
     
@@ -65,6 +86,27 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         
     }
     
+    
+    @IBAction func forgotPasswordBtnPressed(_ sender: Any) {
+        if let email = self._emailDownloaded {
+            AuthService.instance.forgotPassword(withEmail: email, onComplete: { (status, error) in
+                if error != nil {
+                    let alert = UIAlertController(title: "Warning", message: error?.localizedDescription ?? String(), preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Successfull", message: "An email has been sent to you with instructions on how to reset your password", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        } else {
+            //Show alert
+            let alert = UIAlertController(title: "Warning", message: "Could not find user", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

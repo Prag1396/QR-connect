@@ -691,6 +691,21 @@
                                     <segue destination="2o3-8U-A67" kind="show" id="NRl-Jr-igb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tI-3a-d8d" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="122" y="559" width="131" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="131" id="6mL-lx-brb"/>
+                                    <constraint firstAttribute="height" constant="30" id="RxM-40-RRm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <state key="normal" title="Forgot password?">
+                                    <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotPasswordBtnPressed:" destination="WOu-pG-rtD" eventType="touchUpInside" id="TCv-mQ-z1d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -704,6 +719,8 @@
                             <constraint firstItem="txP-8Z-jXU" firstAttribute="trailing" secondItem="Bjg-Yw-ZDw" secondAttribute="trailing" id="GRn-0B-Qqr"/>
                             <constraint firstItem="rkD-aj-bLo" firstAttribute="top" secondItem="ZEZ-H6-Rsr" secondAttribute="bottom" constant="45" id="Gah-Kh-RiX"/>
                             <constraint firstItem="txP-8Z-jXU" firstAttribute="leading" secondItem="Bjg-Yw-ZDw" secondAttribute="leading" id="Ino-Wt-aso"/>
+                            <constraint firstItem="qGn-29-Z5Z" firstAttribute="top" secondItem="1tI-3a-d8d" secondAttribute="bottom" constant="8" id="McY-PY-Saa"/>
+                            <constraint firstItem="1tI-3a-d8d" firstAttribute="centerX" secondItem="hXl-sl-gTK" secondAttribute="centerX" id="Ngq-qp-bUi"/>
                             <constraint firstItem="Bjg-Yw-ZDw" firstAttribute="trailing" secondItem="KeC-mJ-DdW" secondAttribute="trailing" constant="33" id="V4F-MO-Hho"/>
                             <constraint firstItem="KeC-mJ-DdW" firstAttribute="leading" secondItem="Bjg-Yw-ZDw" secondAttribute="leading" constant="34" id="ZLR-GC-ncg"/>
                             <constraint firstItem="lDJ-Ps-pft" firstAttribute="leading" secondItem="Ze1-dp-3O2" secondAttribute="leading" id="Zj1-hW-OAw"/>
@@ -1599,7 +1616,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ND-Lc-77W" id="04Q-Iw-CgX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ki-SU-81o">
@@ -2012,7 +2029,6 @@
                                 </constraints>
                                 <state key="normal" image="next_bt"/>
                                 <connections>
-                                    <action selector="changePasswordBtn:" destination="ymd-lD-qY6" eventType="touchUpInside" id="n3N-qX-yul"/>
                                     <segue destination="2C2-ZI-ikY" kind="show" id="H1f-LJ-ajE"/>
                                 </connections>
                             </button>

@@ -46,10 +46,6 @@ class SettingsVC: UIViewController {
         }
     }
     
-    @IBAction func changePasswordBtn(_ sender: Any) {
-        
-    }
-    
     @IBAction func reportIsuueBtnpressed(_ sender: Any) {
         
     }

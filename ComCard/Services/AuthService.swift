@@ -149,6 +149,15 @@ class AuthService: UIViewController {
         })
     }
     
+    func forgotPassword(withEmail email: String, onComplete: @escaping (_ status: Bool, _ error: Error?)->()) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+            if error != nil {
+                onComplete(false, error)
+            } else {
+                onComplete(true, nil)
+            }
+        })
+    }
     
     func handleErrorCode(error: NSError, onCompleteErrorHandler: @escaping(_ errorMsg: String, _ data: AnyObject?)->()) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {
