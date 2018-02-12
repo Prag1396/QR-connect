@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="33.251231527093594"/>
+            <point key="canvasLocation" x="28" y="27"/>
         </scene>
         <!--ContacVC-->
         <scene sceneID="lv3-yr-wbu">
@@ -1200,7 +1200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rs-gc-WI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2945" y="33"/>
+            <point key="canvasLocation" x="3060" y="33"/>
         </scene>
         <!--Password CaptureVC-->
         <scene sceneID="zAh-bA-pfN">
@@ -1291,7 +1291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uky-8v-5xR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3772.5" y="28.52112676056338"/>
+            <point key="canvasLocation" x="4030" y="27"/>
         </scene>
         <!--Name CaptureVC-->
         <scene sceneID="fQE-CU-UaE">
@@ -1418,7 +1418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WV3-CK-AIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4737" y="28"/>
+            <point key="canvasLocation" x="4958" y="28"/>
         </scene>
         <!--Home-->
         <scene sceneID="jnZ-91-fbw">
@@ -1616,7 +1616,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ND-Lc-77W" id="04Q-Iw-CgX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ki-SU-81o">
@@ -1705,7 +1705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QnZ-mf-TT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2026.4000000000001" y="-824.6305418719212"/>
+            <point key="canvasLocation" x="2050" y="-825"/>
         </scene>
         <!--Your QR-Code-->
         <scene sceneID="Zfs-vx-2Ta">
@@ -2269,8 +2269,8 @@
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hH3-Hl-jYk"/>
+        <segue reference="XtG-qf-Tkp"/>
         <segue reference="NRl-Jr-igb"/>
-        <segue reference="T02-rN-a0a"/>
+        <segue reference="gD5-DZ-zf2"/>
     </inferredMetricsTieBreakers>
 </document>
