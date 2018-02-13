@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import RNCryptor
+import FirebaseMessaging
 
 class AuthService: UIViewController {
     static let instance = AuthService()
@@ -71,7 +72,12 @@ class AuthService: UIViewController {
                     if error != nil {
                         print("error uploading image")
                     } else {
-                        let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "imageURL": imageURL!]
+                        
+                        guard let fcmtoken = Messaging.messaging().fcmToken else {
+                            return
+                        }
+                        
+                        let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "imageURL": imageURL!, "token": fcmtoken]
                         let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
                         DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                         DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)

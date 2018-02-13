@@ -9,31 +9,39 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
      response.send("Hello from Firebase!");
 });
 
+//Listen for following events and then trigger a push notification
+exports.observeusermessages = functions.database.ref('/messages/{messageID}').onCreate(event => {
 
-exports.sendPushNotifications = functions.https.onRequest((req, res) => {
-    res.send("Attempting to send push notifications")
+    var messageID = event.params.messageID;
 
-    //admin.message().sendToDevice(token, payload);
+    return admin.database().ref('/messages/' + messageID).once('value', snapshot => {
+        var message = snapshot.val();
 
-    // This registration token comes from the client FCM SDKs.
-    var fcmToken = "d7HQwse4F6c:APA91bF1UAJi66Fvi3SybrU0NqhEAmV1mm0XoTvxkJbfzIswJ0VrJ8deNRt2HL9W8dEkvSnYmq07P-8JkrTJLrV-C3MzLaaHE65fRWxYMzkg4yV7APriMj_YbxcpaW_xcyHoGf0i33iY";
+        observeUser(message.fromID, message.toID, message.messagetext);
+    })
+})
 
-    // See the "Defining the message payload" section below for details
-    // on how to define a message payload.
-    var payload = {
-        notification: {
-            title: "Lucky you!",
-            body: "Some just found a lost item that belongs to you, log in to get it back."
-        },
-        data: {
-            score: "850",
-            time: "2:45"
+function observeUser(senderID, recipientUID, text) {
+    admin.database().ref('/users/' + recipientUID).once('value', snapshot => {
+        var recipientUIDReference = snapshot.val()
+
+    console.log("Attempting to send message");
+    admin.database().ref('/users/' + senderID).once('value', snapshot => {
+        var _senderIDref = snapshot.val();
+        var name = _senderIDref.FirstName;
+        var payload = {
+            notification: {
+                title: name + " found your lost item",
+                body:  'log back in to get it back!'
+            },
+            data: {
+                //Put data
+                senderID: name,
+                text: text
+            }
         }
-    };
 
-    // Send a message to the device corresponding to the provided
-    // registration token.
-    admin.messaging().sendToDevice(fcmToken, payload)
+        admin.messaging().sendToDevice(recipientUIDReference.token, payload)
         .then(function(response) {
         // See the MessagingDevicesResponse reference documentation for
         // the contents of response.
@@ -43,4 +51,8 @@ exports.sendPushNotifications = functions.https.onRequest((req, res) => {
         .catch(function(error) {
             console.log("Error sending message:", error);
          });
-})
+
+    })
+
+    })
+}
