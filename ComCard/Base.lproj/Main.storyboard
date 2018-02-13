@@ -105,7 +105,6 @@
                     </view>
                     <connections>
                         <segue destination="YW1-c0-l1G" kind="show" identifier="userverified" id="yxp-HR-LWW"/>
-                        <segue destination="WOu-pG-rtD" kind="show" identifier="toUserSignin" id="SXp-LR-cKg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -753,7 +752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dw-Gp-x6s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852" y="-1866.5024630541873"/>
+            <point key="canvasLocation" x="2636" y="-1957"/>
         </scene>
         <!--User SignupVC-->
         <scene sceneID="HS2-Yd-Bua">
@@ -1710,7 +1709,7 @@
         <!--Your QR-Code-->
         <scene sceneID="Zfs-vx-2Ta">
             <objects>
-                <viewController id="vN6-yn-BQc" customClass="QRCodeVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="qrcodevc" id="vN6-yn-BQc" customClass="QRCodeVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="39M-K8-s4L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2220,10 +2219,94 @@
             </objects>
             <point key="canvasLocation" x="4958" y="-814"/>
         </scene>
+        <!--Code 3dVC-->
+        <scene sceneID="UXf-k8-43C">
+            <objects>
+                <viewController storyboardIdentifier="threedqr" modalPresentationStyle="currentContext" id="oux-Lx-8z7" customClass="QRCode3dVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QIz-AF-uVq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="UVK-dP-xrQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pG-da-IL9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My QR-Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wt7-F8-0vN">
+                                        <rect key="frame" x="118.66666666666669" y="39" width="138" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="oTX-e6-l0y"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="138" id="tyZ-ef-UqC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdR-N0-Dco" userLabel="backbtn">
+                                        <rect key="frame" x="8" y="34" width="44" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="PBO-wU-8Ur"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="tRF-Sm-fLv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title=" Back" image="backbutton">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backbtnPressed:" destination="0b5-fR-lD6" eventType="touchUpInside" id="TFl-sE-D3l"/>
+                                            <action selector="backbtnPressed:" destination="2o3-8U-A67" eventType="touchUpInside" id="dUh-16-kTU"/>
+                                            <action selector="backbtnPressed:" destination="2C2-ZI-ikY" eventType="touchUpInside" id="upo-q4-qu1"/>
+                                            <action selector="backbtnpressed:" destination="oux-Lx-8z7" eventType="touchUpInside" id="dsq-ux-tLI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.38977670669999998" green="0.48080554599999997" blue="0.57654100659999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="xdR-N0-Dco" firstAttribute="centerY" secondItem="Wt7-F8-0vN" secondAttribute="centerY" id="2dd-2i-yE7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wt7-F8-0vN" secondAttribute="bottom" constant="5" id="6EE-mP-nqA"/>
+                                    <constraint firstAttribute="height" constant="65" id="G1g-5g-Aia"/>
+                                    <constraint firstItem="Wt7-F8-0vN" firstAttribute="centerX" secondItem="9pG-da-IL9" secondAttribute="centerX" id="LPx-op-HZI"/>
+                                    <constraint firstItem="xdR-N0-Dco" firstAttribute="leading" secondItem="9pG-da-IL9" secondAttribute="leading" constant="8" id="tfT-HB-AcC"/>
+                                    <constraint firstItem="Wt7-F8-0vN" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xdR-N0-Dco" secondAttribute="trailing" constant="66.670000000000002" id="y0d-5o-5SH"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMd-7K-h2F" customClass="imageStyle" customModule="ComCard" customModuleProvider="target">
+                                <rect key="frame" x="97.666666666666686" y="316" width="180" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="PFH-06-32t"/>
+                                    <constraint firstAttribute="width" constant="180" id="qVm-Kb-7Zc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9pG-da-IL9" firstAttribute="top" secondItem="QIz-AF-uVq" secondAttribute="top" id="1vL-6E-MEG"/>
+                            <constraint firstItem="UVK-dP-xrQ" firstAttribute="top" secondItem="QIz-AF-uVq" secondAttribute="top" id="D9G-ep-GtA"/>
+                            <constraint firstItem="bMd-7K-h2F" firstAttribute="centerY" secondItem="QIz-AF-uVq" secondAttribute="centerY" id="H7l-Mb-Cdw"/>
+                            <constraint firstItem="UVK-dP-xrQ" firstAttribute="trailing" secondItem="GgZ-tb-H8P" secondAttribute="trailing" id="Lsq-SU-4VU"/>
+                            <constraint firstAttribute="bottom" secondItem="UVK-dP-xrQ" secondAttribute="bottom" id="RvN-iu-HVT"/>
+                            <constraint firstItem="9pG-da-IL9" firstAttribute="trailing" secondItem="GgZ-tb-H8P" secondAttribute="trailing" id="YMl-KV-p8Y"/>
+                            <constraint firstItem="UVK-dP-xrQ" firstAttribute="leading" secondItem="GgZ-tb-H8P" secondAttribute="leading" id="ZcK-LA-fav"/>
+                            <constraint firstItem="9pG-da-IL9" firstAttribute="leading" secondItem="GgZ-tb-H8P" secondAttribute="leading" id="k2K-zc-2eh"/>
+                            <constraint firstItem="bMd-7K-h2F" firstAttribute="centerX" secondItem="QIz-AF-uVq" secondAttribute="centerX" id="x0L-rH-Pry"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GgZ-tb-H8P"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="180" height="180"/>
+                    <connections>
+                        <outlet property="qrcode3d" destination="bMd-7K-h2F" id="OCg-4P-09q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pYb-1M-XPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5977" y="-815"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Afa-bc-gh1">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3Tn-oM-cbz" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabbarvc" automaticallyAdjustsScrollViewInsets="NO" id="3Tn-oM-cbz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u4F-Mp-XYV">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -2269,7 +2352,7 @@
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XtG-qf-Tkp"/>
+        <segue reference="hH3-Hl-jYk"/>
         <segue reference="NRl-Jr-igb"/>
         <segue reference="gD5-DZ-zf2"/>
     </inferredMetricsTieBreakers>

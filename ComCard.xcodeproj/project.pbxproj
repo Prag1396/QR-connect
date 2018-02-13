@@ -25,6 +25,7 @@
 		DB78D492200D730B005D5219 /* imageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78D491200D730B005D5219 /* imageStyle.swift */; };
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
 		DBAF945B202FFA4A0008F66B /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */; };
+		DBAF945F203398DC0008F66B /* QRCode3dVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF945E203398DC0008F66B /* QRCode3dVC.swift */; };
 		DBB1AF2B2029861400FF6AA6 /* CountryCodesAndNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */; };
 		DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */; };
 		DBB1AF35202C29F200FF6AA6 /* QRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF34202C29F200FF6AA6 /* QRCodeVC.swift */; };
@@ -96,6 +97,7 @@
 		DB78D491200D730B005D5219 /* imageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStyle.swift; sourceTree = "<group>"; };
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
 		DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		DBAF945E203398DC0008F66B /* QRCode3dVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode3dVC.swift; sourceTree = "<group>"; };
 		DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodesAndNames.swift; sourceTree = "<group>"; };
 		DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryFindKey.swift; sourceTree = "<group>"; };
 		DBB1AF34202C29F200FF6AA6 /* QRCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeVC.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				DBB1AF34202C29F200FF6AA6 /* QRCodeVC.swift */,
 				DBB1AF36202C2AEC00FF6AA6 /* SettingsVC.swift */,
 				DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */,
+				DBAF945E203398DC0008F66B /* QRCode3dVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */,
 				DBAF945B202FFA4A0008F66B /* ChangePasswordVC.swift in Sources */,
 				DB2E3AB22015A33B00E39C79 /* ChatLogVC.swift in Sources */,
+				DBAF945F203398DC0008F66B /* QRCode3dVC.swift in Sources */,
 				DBB1AF37202C2AEC00FF6AA6 /* SettingsVC.swift in Sources */,
 				DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,

@@ -12,15 +12,19 @@ import Firebase
 import Photos
 import MessageUI
 
-class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate {
+class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate {
 
     @IBOutlet weak var qrcodeimage: imageStyle!
     
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
-
+    private var _imagedata: Data? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: self.view)
+        }
         
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
@@ -45,6 +49,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate {
                                     DispatchQueue.main.async {
                                         if let imageData = UIImage(data: data!) {
                                             self.qrcodeimage.image = imageData
+                                            self._imagedata = data!
                                         }
                                     }
                                     
@@ -56,9 +61,33 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate {
             })
         }
 
-        // Do any additional setup after loading the view.
     }
 
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let convertedLocation = view.convert(location, to: qrcodeimage)
+        if qrcodeimage.bounds.contains(convertedLocation) {
+            //present options
+            print("here")
+            let detailsVC = storyboard?.instantiateViewController(withIdentifier: "threedqr") as? QRCode3dVC
+            DispatchQueue.main.async {
+                if let imageData = UIImage(data: self._imagedata!) {
+                    detailsVC?.qrcode3d.image = imageData
+                    detailsVC?.imageData = imageData
+ 
+                }
+            }
+            previewingContext.sourceRect = qrcodeimage.frame
+            return detailsVC
+        } else {
+            return nil
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        showDetailViewController(viewControllerToCommit, sender: self)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,6 +159,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func emailPressed(data: Data) {
+        print("hrer")
         let composeemail = MFMailComposeViewController()
         composeemail.mailComposeDelegate = self
         composeemail.setToRecipients([self._emailDownloaded!])
