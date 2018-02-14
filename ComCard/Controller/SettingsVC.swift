@@ -77,7 +77,15 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func inviteContactPressed(_ sender: Any) {
-        
+        self.requestAccess { (granted) in
+            if granted {
+                //fetch contacts
+                print("Granted")
+                self.performSegue(withIdentifier: "tocontacts", sender: Any.self)
+            } else {
+                print("Denied")
+            }
+        }
     }
     
     @IBAction func requestQRStickerPressed(_ sender: Any) {
