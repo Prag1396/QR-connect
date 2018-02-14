@@ -26,6 +26,10 @@
 		DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BE7541FFDF25400987939 /* ConfigureCell.swift */; };
 		DBAF945B202FFA4A0008F66B /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */; };
 		DBAF945F203398DC0008F66B /* QRCode3dVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF945E203398DC0008F66B /* QRCode3dVC.swift */; };
+		DBAF94612033F0640008F66B /* ContactStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF94602033F0640008F66B /* ContactStruct.swift */; };
+		DBAF94652033F2440008F66B /* ContactsInviteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF94642033F2440008F66B /* ContactsInviteVC.swift */; };
+		DBAF9467203400120008F66B /* ContacCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF9466203400120008F66B /* ContacCell.swift */; };
+		DBAF946D20341D350008F66B /* SearchbarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF946C20341D350008F66B /* SearchbarStyle.swift */; };
 		DBB1AF2B2029861400FF6AA6 /* CountryCodesAndNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */; };
 		DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */; };
 		DBB1AF35202C29F200FF6AA6 /* QRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF34202C29F200FF6AA6 /* QRCodeVC.swift */; };
@@ -98,6 +102,10 @@
 		DB7BE7541FFDF25400987939 /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
 		DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		DBAF945E203398DC0008F66B /* QRCode3dVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode3dVC.swift; sourceTree = "<group>"; };
+		DBAF94602033F0640008F66B /* ContactStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStruct.swift; sourceTree = "<group>"; };
+		DBAF94642033F2440008F66B /* ContactsInviteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInviteVC.swift; sourceTree = "<group>"; };
+		DBAF9466203400120008F66B /* ContacCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContacCell.swift; sourceTree = "<group>"; };
+		DBAF946C20341D350008F66B /* SearchbarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchbarStyle.swift; sourceTree = "<group>"; };
 		DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodesAndNames.swift; sourceTree = "<group>"; };
 		DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryFindKey.swift; sourceTree = "<group>"; };
 		DBB1AF34202C29F200FF6AA6 /* QRCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeVC.swift; sourceTree = "<group>"; };
@@ -185,6 +193,7 @@
 				DB7BE7541FFDF25400987939 /* ConfigureCell.swift */,
 				DB2E3ABC2019733900E39C79 /* MessageCell.swift */,
 				DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */,
+				DBAF9466203400120008F66B /* ContacCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -290,6 +299,7 @@
 				DB2E3AB32016BA8B00E39C79 /* TextFieldStyle.swift */,
 				DB78D491200D730B005D5219 /* imageStyle.swift */,
 				DBB1AF38202C4BB100FF6AA6 /* tabBarStyle.swift */,
+				DBAF946C20341D350008F66B /* SearchbarStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -312,6 +322,7 @@
 				DBB1AF36202C2AEC00FF6AA6 /* SettingsVC.swift */,
 				DBAF945A202FFA4A0008F66B /* ChangePasswordVC.swift */,
 				DBAF945E203398DC0008F66B /* QRCode3dVC.swift */,
+				DBAF94642033F2440008F66B /* ContactsInviteVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,6 +332,7 @@
 			children = (
 				DB0CAE8D1FFDFEE600F7B8C5 /* User.swift */,
 				DB2E3ABA2019717C00E39C79 /* Message.swift */,
+				DBAF94602033F0640008F66B /* ContactStruct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -610,17 +622,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBAF94612033F0640008F66B /* ContactStruct.swift in Sources */,
 				DBD1F9911FF8B15200A2CAE6 /* ContacVC.swift in Sources */,
 				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
 				DB2E3AAE2011B54D00E39C79 /* PasswordCaptureVC.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DB34E9FF202314EC00AF8640 /* ChatMessageCVCell.swift in Sources */,
+				DBAF9467203400120008F66B /* ContacCell.swift in Sources */,
 				DB2E3ABF201EF1CA00E39C79 /* MessagesVC.swift in Sources */,
 				DBD1F9931FF8EFEF00A2CAE6 /* ConfirmLoginVC.swift in Sources */,
 				DBB1AF39202C4BB100FF6AA6 /* tabBarStyle.swift in Sources */,
 				DB2E3AB82018871F00E39C79 /* StringSpaces.swift in Sources */,
 				DB78D492200D730B005D5219 /* imageStyle.swift in Sources */,
+				DBAF94652033F2440008F66B /* ContactsInviteVC.swift in Sources */,
 				DB2E3AB42016BA8B00E39C79 /* TextFieldStyle.swift in Sources */,
 				DBD1F9A21FFC4CA300A2CAE6 /* UserSigninVC.swift in Sources */,
 				DB78D490200C96A6005D5219 /* viewStyle.swift in Sources */,
@@ -636,6 +651,7 @@
 				DBAF945F203398DC0008F66B /* QRCode3dVC.swift in Sources */,
 				DBB1AF37202C2AEC00FF6AA6 /* SettingsVC.swift in Sources */,
 				DBB1AF2D2029A11C00FF6AA6 /* NSDictionaryFindKey.swift in Sources */,
+				DBAF946D20341D350008F66B /* SearchbarStyle.swift in Sources */,
 				DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */,
 				DB2E3AB02011CFB200E39C79 /* NameCaptureVC.swift in Sources */,
 				DBB1AF35202C29F200FF6AA6 /* QRCodeVC.swift in Sources */,
