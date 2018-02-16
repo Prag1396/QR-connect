@@ -44,6 +44,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         setupOutlets()
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.backgroundColor = UIColor.lightText
         country_extension_textlabel.inputView = pickerView
         countryDictReturned = obj.countryArrayPopulate()
         countryNames = Array(countryDictReturned.values)
