@@ -27,6 +27,13 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    @IBAction func backbtnpressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @objc func fetchContact() {
         self.requestAccess { (granted) in
             if granted {

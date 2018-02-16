@@ -60,6 +60,9 @@ class UserDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    @IBAction func backbtnpressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count

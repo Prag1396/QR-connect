@@ -39,6 +39,12 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    @IBAction func backbtnpressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func observeUserMessages() {
         
         guard let uid = Auth.auth().currentUser?.uid else {

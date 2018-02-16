@@ -30,6 +30,7 @@ class HomeScreenVC: UIViewController {
             print(Auth.auth().currentUser?.uid ?? String())
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+            
             self.present(controllerToPresent!, animated: true, completion: nil)
         }
     }
@@ -38,7 +39,13 @@ class HomeScreenVC: UIViewController {
         //Check if user authenticated
         //If yes then load contactVC if not authenticated then load sign up screen
         if((Auth.auth().currentUser) != nil) {
-            performSegue(withIdentifier: "userverified", sender: Any.self)
+           //load scan as UITabbar
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+            if let vc = controllerToPresent {
+                vc.selectedIndex = 1
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         
         else {
