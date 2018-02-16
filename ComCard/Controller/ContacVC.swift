@@ -171,7 +171,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         let letter: Character = self.fullName.first!
         let stringFromLetter: String = String(letter)
         self.profileLetter.text = stringFromLetter
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.bringSubview(toFront: self.infoview)
         }, completion: nil)
 
