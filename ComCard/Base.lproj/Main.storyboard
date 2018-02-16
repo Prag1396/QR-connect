@@ -38,7 +38,7 @@
                                     <constraint firstAttribute="height" constant="67" id="Ocd-mj-tC8"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-Hx-x5F" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-Hx-x5F" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
                                 <rect key="frame" x="48" y="461" width="280" height="46"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1578,11 +1578,11 @@
             <objects>
                 <viewController storyboardIdentifier="userDetailsVC" id="fdE-wq-AbN" customClass="UserDetailsVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gW-uW-SIu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmV-8B-8Vy">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USER INFORMATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-bI-3uA">
                                 <rect key="frame" x="49.666666666666657" y="85" width="276" height="52"/>
@@ -1686,7 +1686,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.38977670669999998" green="0.48080554599999997" blue="0.57654100659999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.38823529411764707" green="0.4823529411764706" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="1tt-CD-l4X"/>
                                     <constraint firstItem="bN4-RF-u0e" firstAttribute="centerX" secondItem="Bde-1m-uiJ" secondAttribute="centerX" id="LaS-eh-hOh"/>
@@ -1727,18 +1727,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJ5-iN-4Xb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="981.60000000000002" y="-824.6305418719212"/>
+            <point key="canvasLocation" x="1094" y="-1612"/>
         </scene>
         <!--Messages-->
         <scene sceneID="Lw8-hD-yUU">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ojF-EY-rRM" customClass="MessagesVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gAw-ol-wlB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9H1-2S-U1T">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BsI-8M-Zsp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -1761,15 +1761,15 @@
                                     <constraint firstAttribute="bottom" secondItem="2YL-Yl-PyQ" secondAttribute="bottom" constant="5" id="vUQ-G5-z7G"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h3c-Ty-G5D">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="77" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h3c-Ty-G5D">
                                 <rect key="frame" x="0.0" y="65" width="375" height="604"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chatprofilecell" rowHeight="93" id="5ND-Lc-77W" customClass="MessageCell" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="93"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chatprofilecell" rowHeight="77" id="5ND-Lc-77W" customClass="MessageCell" customModule="ComCard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ND-Lc-77W" id="04Q-Iw-CgX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ki-SU-81o">
@@ -1858,18 +1858,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QnZ-mf-TT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2048.8000000000002" y="-825.3694581280788"/>
+            <point key="canvasLocation" x="-642" y="-2560"/>
         </scene>
         <!--Your QR-Code-->
         <scene sceneID="Zfs-vx-2Ta">
             <objects>
                 <viewController storyboardIdentifier="qrcodevc" id="vN6-yn-BQc" customClass="QRCodeVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="39M-K8-s4L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan-qr-ios-11" translatesAutoresizingMaskIntoConstraints="NO" id="D4K-yr-Rvu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obo-O1-zRz">
@@ -1999,18 +1999,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opC-My-gB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3060" y="-815.49295774647885"/>
+            <point key="canvasLocation" x="1038" y="-2560"/>
         </scene>
         <!--Settings-->
         <scene sceneID="LHy-he-p0e">
             <objects>
                 <viewController id="ymd-lD-qY6" customClass="SettingsVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ilW-6N-oHE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="XsD-AQ-fCz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blH-hP-r6p">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -2289,7 +2289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0X-WW-nIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4029.5999999999999" y="-813.54679802955673"/>
+            <point key="canvasLocation" x="-642" y="-756"/>
         </scene>
         <!--Change PasswordVC-->
         <scene sceneID="S33-hg-23H">
@@ -2500,12 +2500,12 @@
             <objects>
                 <tabBarController storyboardIdentifier="tabbarvc" automaticallyAdjustsScrollViewInsets="NO" id="3Tn-oM-cbz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u4F-Mp-XYV">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="u4F-Mp-XYV">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.39224255084991455" green="0.39223459362983704" blue="0.39223995804786682" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.38823529411764707" green="0.4823529411764706" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="selectedImageTintColor" red="1" green="0.69250938719999999" blue="0.022409227319999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
@@ -2517,7 +2517,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pzp-HN-Nhv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="-822"/>
+            <point key="canvasLocation" x="-641" y="-1612"/>
         </scene>
     </scenes>
     <resources>
@@ -2544,7 +2544,7 @@
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hH3-Hl-jYk"/>
+        <segue reference="XtG-qf-Tkp"/>
         <segue reference="NRl-Jr-igb"/>
         <segue reference="gD5-DZ-zf2"/>
     </inferredMetricsTieBreakers>
