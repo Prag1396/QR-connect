@@ -164,10 +164,6 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func captureText() {
         guard let firstName = firstnamelabel.text, let lastName = lastnametextfield.text, let streetaddres = streetaddresstextfield.text, let city = citytextfield.text, let state = statetextfield.text, let country = countrytextfield.text,let zipCode = zipcodeTextField.text, let quantity = quantitytextfield.text else {
-            //show error
-            let alert = UIAlertController(title: "Warning", message: "All fields must be entered to successfully place an order", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
             return
             }
             self._firstName = firstName
@@ -183,8 +179,22 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     
     @IBAction func placeOrderbtnpressed(_ sender: Any) {
+        
         captureText()
-        print(_zipCode ?? String())
+        
+        if (self.firstnamelabel.text == nil || (self.firstnamelabel.text?.isEmpty)! || self.lastnametextfield.text == nil || (self.lastnametextfield.text?.isEmpty)! || self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! || self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
+            
+            let alert = UIAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            self.postToSpreadSheet()
+        }
+    }
+    
+    func postToSpreadSheet() {
+        
     }
     
 }
