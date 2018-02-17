@@ -57,19 +57,23 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("here")
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(textField: )))
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        
-
         // Do any additional setup after loading the view.
         IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Continue"
-        
-        
+        self.scanQrcode()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if session.isRunning == false {
+            self.scanQrcode()
+        }
+    }
+    
     
     @IBAction func messagebtnPressed(_ sender: Any) {
         
@@ -83,11 +87,12 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.view.sendSubview(toBack: self.infoview)
             self.session.stopRunning()
+            self.scanQrcode()
 
         }, completion: nil)
     }
     
-    @IBAction func scanQRCodepressed(_ sender: Any) {
+    func scanQrcode() {
         //Create Session
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
@@ -139,7 +144,6 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
                         //dismiss the sublayer
                         self.view.sendSubview(toBack: border)
                         video.removeFromSuperlayer()
-                        session.stopRunning()
                     }
                     
 

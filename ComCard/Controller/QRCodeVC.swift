@@ -16,6 +16,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
 
     @IBOutlet weak var qrcodeimage: imageStyle!
     
+    private let _orangeColor = UIColor(red: 255/255, green: 177/255, blue: 6/255, alpha: 1.0)
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
@@ -25,6 +26,20 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
+        
+        
+        if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
+        
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: self._orangeColor], for: .selected)
+            
+            for item in tabArray {
+                item.image = item.image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            }
+        }
+        
+        
+        
         
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid

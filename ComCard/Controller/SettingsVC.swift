@@ -14,6 +14,8 @@ import Contacts
 
 class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var changePwdLabel: UILabel!
+    @IBOutlet weak var viewProfileLabel: UILabel!
     @IBOutlet weak var contactlabel: UILabel!
     var contactStore = CNContactStore()
     
@@ -23,8 +25,32 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         contactlabel.addGestureRecognizer(tap)
         tap.delegate = self
         
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(loadProfile))
+        viewProfileLabel.addGestureRecognizer(tap2)
+        tap2.delegate = self
+        
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(loadchangepwdvc))
+        changePwdLabel.addGestureRecognizer(tap3)
+        tap3.delegate = self
+        
         
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func loadchangepwdvc() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "changepwdvc") as? ChangePasswordVC
+        if let vc = controllertoPresent {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func loadProfile() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "userDetailsVC") as? UserDetailsVC
+        if let vc = controllertoPresent {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     
