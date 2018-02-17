@@ -14,6 +14,7 @@ import Contacts
 
 class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var requestQRStickerslabel: UILabel!
     @IBOutlet weak var changePwdLabel: UILabel!
     @IBOutlet weak var viewProfileLabel: UILabel!
     @IBOutlet weak var contactlabel: UILabel!
@@ -33,8 +34,19 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         changePwdLabel.addGestureRecognizer(tap3)
         tap3.delegate = self
         
+        let tap4 = UITapGestureRecognizer(target: self, action: #selector(loadordervc))
+        requestQRStickerslabel.addGestureRecognizer(tap4)
+        tap4.delegate = self
         
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    @objc func loadordervc() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "ordervc") as? OrderPlaceVC
+        if let vc = controllertoPresent {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     @objc func loadchangepwdvc() {
