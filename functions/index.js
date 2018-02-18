@@ -7,6 +7,7 @@ admin.initializeApp(functions.config().firebase);
 //
 exports.helloWorld = functions.https.onRequest((request, response) => {
      response.send("Hello from Firebase!");
+     
 });
 
 //Listen for following events and then trigger a push notification

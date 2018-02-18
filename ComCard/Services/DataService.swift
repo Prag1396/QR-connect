@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
+
 let DB_BASE = Database.database().reference()
 
 class DataService {
@@ -21,6 +22,8 @@ class DataService {
     private var _REF_PVT = DB_BASE.child("pvtdata")
     private var _REF_MESS = DB_BASE.child("messages")
     private var _REF_USERMESSAGES = DB_BASE.child("user-messages")
+    private var _REF_ORDERSPLACED = DB_BASE.child("orders-placed")
+    private var _REF_ORDERDETAILS = DB_BASE.child("order-details")
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -40,6 +43,14 @@ class DataService {
     
     var REF_USERMESSAGES: DatabaseReference {
         return _REF_USERMESSAGES
+    }
+    
+    var REF_ORDERSPLACED: DatabaseReference {
+        return _REF_ORDERSPLACED
+    }
+    
+    var REF_ORDERDETAILS: DatabaseReference {
+        return _REF_ORDERDETAILS
     }
     
     func createDBUserProfile(uid: String, userData: Dictionary <String, Any>) {
@@ -91,6 +102,37 @@ class DataService {
             
         }
         
+        
+    }
+    
+    
+    func placeorder(firstname: String, lastname: String, addressline1: String, addressline2: String, city: String, state: String, country: String, zipCode: String, quantity: String, onOrderComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let orderRef = REF_ORDERSPLACED.childByAutoId()
+        let orderOwnerData: Dictionary<String, String> = ["OrderOwner": uid]
+        
+        let orderData: Dictionary<String, AnyObject> = ["FirstName": firstname as AnyObject, "LastName": lastname as AnyObject, "addline1": addressline1 as AnyObject, "addline2": addressline2 as AnyObject, "city": city as AnyObject, "state": state as AnyObject, "country": country as AnyObject, "zipcode": zipCode as AnyObject, "Quantity": quantity as AnyObject]
+        
+        
+        orderRef.updateChildValues(orderOwnerData) { (error, ref) in
+            if error != nil {
+                onOrderComplete(false, error)
+                return
+            }
+            let orderId = orderRef.key
+            let orderDetailsRef = self.REF_ORDERDETAILS.child(orderId)
+            orderDetailsRef.updateChildValues(orderData, withCompletionBlock: { (error, ref) in
+                if error != nil {
+                    onOrderComplete(false, error)
+                    return
+                }
+            })
+            onOrderComplete(true, nil)
+        }
+            
         
     }
     

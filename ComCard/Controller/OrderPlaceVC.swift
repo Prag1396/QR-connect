@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import MessageUI
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    
     @IBOutlet weak var zipcodeTextField: UITextField!
     @IBOutlet weak var countrytextfield: UITextField!
     @IBOutlet weak var statetextfield: UITextField!
     @IBOutlet weak var citytextfield: UITextField!
     @IBOutlet weak var streetaddresstextfield: UITextField!
-    @IBOutlet weak var lastnametextfield: UITextField!
-    @IBOutlet weak var firstnamelabel: UITextField!
+    @IBOutlet weak var streetAddresstextfield2: UITextField!
     @IBOutlet weak var quantitytextfield: UITextField!
     
     var numberpickerview: UIPickerView = UIPickerView()
@@ -32,21 +34,36 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     private var _state: String? = nil
     private var _city: String? = nil
     private var _street: String? = nil
+    private var _street2: String? = nil
     private var _quantity: String? = nil
     private var _firstName: String? = nil
     private var _lastName: String? = nil
     private var _zipCode: String? = nil
-    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.downloadUserName()
         self.setupOutlets()
-        // Do any additional setup after loading the view.
+        //Do any additional setup after loading the view.
         countryDictReturned = obj.countryArrayPopulate()
         countryArray = Array(countryDictReturned.values)
         countryArray.sort()
         countrytextfield.text = "United States"
+    }
+    
+    func downloadUserName() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userRef = DataService.instance.REF_USERS
+        userRef.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            if let dict = snapshot.value as? NSDictionary {
+                self._firstName = dict["FirstName"] as? String
+                self._lastName = dict["lastName"] as? String
+            }
+        }
     }
     
     func setupOutlets() {
@@ -58,7 +75,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         quantitytextfield.delegate = self
         quantitytextfield.keyboardAppearance = .dark
-        quantitytextfield.tag = 8
+        quantitytextfield.tag = 7
         
         countryPickerView.delegate = self
         countryPickerView.dataSource = self
@@ -66,32 +83,29 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         countryPickerView.backgroundColor = UIColor.lightText
         countrytextfield.delegate = self
         countrytextfield.keyboardAppearance = .dark
-        countrytextfield.tag = 6
+        countrytextfield.tag = 5
         countrytextfield.inputView = countryPickerView
         
         statetextfield.delegate = self
         statetextfield.keyboardAppearance = .dark
-        statetextfield.tag = 5
+        statetextfield.tag = 4
         
         citytextfield.delegate = self
         citytextfield.keyboardAppearance = .dark
-        citytextfield.tag = 4
+        citytextfield.tag = 3
         
         streetaddresstextfield.delegate = self
         streetaddresstextfield.keyboardAppearance = .dark
-        streetaddresstextfield.tag = 3
+        streetaddresstextfield.tag = 1
         
-        lastnametextfield.delegate = self
-        lastnametextfield.keyboardAppearance = .dark
-        lastnametextfield.tag = 2
+        streetAddresstextfield2.delegate = self
+        streetAddresstextfield2.keyboardAppearance = .dark
+        streetAddresstextfield2.tag = 2
         
-        firstnamelabel.delegate = self
-        firstnamelabel.keyboardAppearance = .dark
-        firstnamelabel.tag = 1
         
         zipcodeTextField.delegate = self
         zipcodeTextField.keyboardAppearance = .dark
-        zipcodeTextField.tag = 7
+        zipcodeTextField.tag = 6
         
         
         numberpickerview.delegate = self
@@ -112,7 +126,6 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     @IBAction func backbtnpressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -154,7 +167,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         next_responder = self.view.viewWithTag(tag)
         
-        if (tag <= 8) {
+        if (tag <= 7) {
             next_responder.becomeFirstResponder()
         } else {
             textfield.resignFirstResponder()
@@ -163,13 +176,13 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func captureText() {
-        guard let firstName = firstnamelabel.text, let lastName = lastnametextfield.text, let streetaddres = streetaddresstextfield.text, let city = citytextfield.text, let state = statetextfield.text, let country = countrytextfield.text,let zipCode = zipcodeTextField.text, let quantity = quantitytextfield.text else {
+        guard let streetaddres = streetaddresstextfield.text, let streetadress2 = streetAddresstextfield2.text, let city = citytextfield.text, let state = statetextfield.text, let country = countrytextfield.text,let zipCode = zipcodeTextField.text, let quantity = quantitytextfield.text else {
             return
             }
-            self._firstName = firstName
-            self._lastName = lastName
+
             self._city = city
             self._street = streetaddres
+            self._street2 = streetadress2
             self._state = state
             self._country = country
             self._zipCode = zipCode
@@ -182,18 +195,31 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         
         captureText()
         
-        if (self.firstnamelabel.text == nil || (self.firstnamelabel.text?.isEmpty)! || self.lastnametextfield.text == nil || (self.lastnametextfield.text?.isEmpty)! || self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! || self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
+        if (self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! ||
+            self.streetAddresstextfield2.text == nil || (self.streetAddresstextfield2.text?.isEmpty)! || self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
             
             let alert = UIAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         } else {
-            self.postToSpreadSheet()
+            self.storeData()
         }
     }
     
-    func postToSpreadSheet() {
+    func storeData() {
+        if let fn = self._firstName, let ln = self._lastName, let ad1 = self._street, let ad2 = self._street2, let city = self._city, let state = self._state, let country = self._country, let zc = self._zipCode, let quant = self._quantity {
+            DataService.instance.placeorder(firstname: fn, lastname: ln, addressline1: ad1, addressline2: ad2, city: city, state: state, country: country, zipCode: zc, quantity: quant, onOrderComplete: { (status, error) in
+                if error != nil {
+                    let alert = UIAlertController(title: "Warning", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    //Order Complete
+                }
+            })
+        }
+        
         
     }
     
