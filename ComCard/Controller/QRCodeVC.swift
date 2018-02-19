@@ -22,7 +22,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     private var _currentValueofMessages: Int!
-    let messagesUD = UserDefaults.standard
     var newValueofChildren: Int = 0
     
     
@@ -34,8 +33,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
-        messagesUD.set(_currentValueofMessages, forKey: "childcount")
-        print("Current value: \(_currentValueofMessages)")
+        
         self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
@@ -91,20 +89,46 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     func checkforunreadmessages() {
         
+        
+        self.downloadcountfromDatabase {
+            print("Current Value downloaded: \(self._currentValueofMessages)")
+        }
+        
         self.observeUnreadMessages {
-            let observedValue = self.messagesUD.integer(forKey: "childcount")
-            //If observedValue is not equal to newValue set imagehidden to be false and set the currentvalue to new value
-            if(observedValue != self.newValueofChildren) {
-                print("User Defaults Value: \(observedValue)")
-                print("New Value: \(self.newValueofChildren)")
+            
+    
+            if(self._currentValueofMessages == nil || self._currentValueofMessages != self.newValueofChildren) {
+                
+                print(self.newValueofChildren)
                 self._currentValueofMessages = self.newValueofChildren
-                self.messagesUD.set(self._currentValueofMessages, forKey: "childcount")
+                self.writecounttoDatabase()
                 self.unreadmessageindicator.isHidden = false
             } else {
                 print("equal")
                 self.unreadmessageindicator.isHidden = true
             }
+            
+            print("New Value: \(self.newValueofChildren)")
         }
+    }
+    
+    func downloadcountfromDatabase(onCompleteObserving: @escaping ()->()) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let userRef = DataService.instance.REF_USERMESSAGES
+        userRef.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? NSDictionary else {
+                return
+            }
+            let count = dict["count"] as? Int
+            self._currentValueofMessages = count
+            onCompleteObserving()
+        }
+    }
+    
+    func writecounttoDatabase() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let userRef = DataService.instance.REF_USERMESSAGES.child(uid)
+        userRef.updateChildValues(["count": self._currentValueofMessages])
     }
     
     func observeUnreadMessages(onCompleteCounting: @escaping ()->()) {

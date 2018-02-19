@@ -98,6 +98,7 @@ class DataService {
                 
                 let recipientUserMessagesRef = DataService.instance.REF_USERMESSAGES.child(recipientUID).child(senderuid)
                 recipientUserMessagesRef.updateChildValues([messageID: 1])
+
             }
             
         }
