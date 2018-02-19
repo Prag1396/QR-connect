@@ -21,16 +21,21 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
+    private var _currentValueofMessages: Int = 0
+    let messagesUD = UserDefaults.standard
+    var newValueofChildren: Int = 0
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         unreadmessageindicator.isHidden = true
         
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
         
+       self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
         
@@ -41,9 +46,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 item.image = item.image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
             }
         }
-        
-        
-        
         
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
@@ -81,6 +83,53 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         }
 
     }
+    
+    
+    
+    @IBAction func messagesbtnPressed(_ sender: Any) {
+        self._currentValueofMessages = newValueofChildren
+    }
+    
+    func checkforunreadmessages() {
+        
+        self.observeUnreadMessages {
+            let observedValue = self.messagesUD.integer(forKey: "childcount")
+            //If observedValue is not equal to newValue set imagehidden to be false and set the currentvalue to new value
+            if(observedValue != self.newValueofChildren) {
+                print(observedValue)
+                print(self.newValueofChildren)
+                self.unreadmessageindicator.isHidden = false
+            }
+        }
+    }
+    
+    func observeUnreadMessages(onCompleteCounting: @escaping ()->()) {
+        //count the number of messages recieved for current user
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userRef = DataService.instance.REF_MESS
+        userRef.observe(.childAdded) { (snapshot) in
+            guard let dict = snapshot.value as? NSDictionary else {
+                return
+            }
+            if let toID = dict["toID"] as? String {
+                if toID == uid {
+                    //increment counter
+                    self.newValueofChildren = self.newValueofChildren + 1
+                    onCompleteCounting()
+                }
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("here")
+        self.unreadmessageindicator.isHidden = true
+        messagesUD.set(_currentValueofMessages, forKey: "childcount")
+ 
+    }
+    
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         let convertedLocation = view.convert(location, to: qrcodeimage)
