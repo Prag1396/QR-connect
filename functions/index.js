@@ -33,7 +33,7 @@ function observeUser(senderID, recipientUID, text) {
         var payload = {
             notification: {
                 title: name + " found your lost item",
-                body:  'log back in to get it back!'
+                body:  'Log back in to get it back!'
             },
             data: {
                 //Put data

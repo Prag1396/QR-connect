@@ -108,7 +108,7 @@
             </objects>
             <point key="canvasLocation" x="28" y="27"/>
         </scene>
-        <!--Item-->
+        <!--Scan item-->
         <scene sceneID="lv3-yr-wbu">
             <objects>
                 <viewController storyboardIdentifier="contactvc" id="YW1-c0-l1G" customClass="ContacVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
@@ -357,7 +357,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cBa-3N-wGL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="scanqrbaritem" id="0aW-GU-XsJ">
+                    <tabBarItem key="tabBarItem" title="Scan item" image="scanqrbaritem" id="0aW-GU-XsJ">
                         <color key="badgeColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <connections>
@@ -2245,9 +2245,7 @@
                                         <rect key="frame" x="337" y="34" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BfE-JH-S8b"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Gol-43-lk7"/>
                                             <constraint firstAttribute="width" constant="30" id="HVB-7e-IZh"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="P52-4R-7mW"/>
                                         </constraints>
                                         <state key="normal" image="messiconTabBar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2256,6 +2254,13 @@
                                             <segue destination="ojF-EY-rRM" kind="show" id="tlv-Y4-8pu"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unreadmessagesindicator" translatesAutoresizingMaskIntoConstraints="NO" id="CMc-4I-9px">
+                                        <rect key="frame" x="357" y="36" width="8" height="8"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="8" id="Dci-Y1-ypv"/>
+                                            <constraint firstAttribute="width" constant="8" id="l8g-wh-ae4"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.38977670669999998" green="0.48080554599999997" blue="0.57654100659999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -2264,6 +2269,8 @@
                                     <constraint firstItem="uwJ-AI-j1k" firstAttribute="centerY" secondItem="9y5-q6-6ld" secondAttribute="centerY" id="EZV-gO-ijy"/>
                                     <constraint firstAttribute="bottom" secondItem="9y5-q6-6ld" secondAttribute="bottom" constant="5" id="GUG-uN-pMl"/>
                                     <constraint firstItem="o5w-AM-Goy" firstAttribute="centerY" secondItem="9y5-q6-6ld" secondAttribute="centerY" id="dVh-Si-vW8"/>
+                                    <constraint firstItem="o5w-AM-Goy" firstAttribute="top" secondItem="CMc-4I-9px" secondAttribute="bottom" constant="-10" id="jrF-zY-SLn"/>
+                                    <constraint firstAttribute="trailing" secondItem="CMc-4I-9px" secondAttribute="trailing" constant="10" id="uBo-F4-nHL"/>
                                     <constraint firstItem="uwJ-AI-j1k" firstAttribute="leading" secondItem="Obo-O1-zRz" secondAttribute="leading" constant="8" id="wS8-tR-hNQ"/>
                                     <constraint firstAttribute="trailing" secondItem="o5w-AM-Goy" secondAttribute="trailing" constant="8" id="wSg-tn-a3G"/>
                                 </constraints>
@@ -2374,6 +2381,7 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="qrcodeimage" destination="7Sf-Kw-ZAm" id="sfV-IX-xHY"/>
+                        <outlet property="unreadmessageindicator" destination="CMc-4I-9px" id="VpZ-6h-eV5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opC-My-gB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2972,11 +2980,12 @@
         <image name="scan-qr-ios-11" width="375" height="667"/>
         <image name="scanqrbaritem" width="20" height="20"/>
         <image name="settingsiconTabBar" width="17" height="20"/>
+        <image name="unreadmessagesindicator" width="20" height="20"/>
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GIi-xh-yIc"/>
-        <segue reference="tlv-Y4-8pu"/>
+        <segue reference="DuB-DZ-Cxg"/>
         <segue reference="ffs-XY-gdX"/>
         <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>

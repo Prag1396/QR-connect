@@ -216,11 +216,23 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                     self.present(alert, animated: true, completion: nil)
                 } else {
                     //Order Complete
+                    self.postToSpreadsheet()
                 }
             })
         }
-        
-        
+    }
+    
+    func postToSpreadsheet() {
+        HTTPService.instance.uploadtoSpreadsheet(firstName: self._firstName!, lastName: self._lastName!, street1: self._street!, street2: self._street2!, city: self._city!, state: self._state!, country: self._country!, zipcode: self._zipCode!, quantity: self._quantity!) { (status, error) in
+            if error != nil {
+                let alert = UIAlertController(title: "Warning", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                //Show confirmation
+                print("Congrats order confirmed")
+            }
+        }
     }
     
 }

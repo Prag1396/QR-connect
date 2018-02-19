@@ -14,6 +14,7 @@ import MessageUI
 
 class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate {
 
+    @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
     
     private let _orangeColor = UIColor(red: 255/255, green: 177/255, blue: 6/255, alpha: 1.0)
@@ -21,8 +22,11 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-     
+        
+        unreadmessageindicator.isHidden = true
+        
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
