@@ -24,13 +24,13 @@ class HomeScreenVC: UIViewController {
         if Auth.auth().currentUser?.uid == nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
+            controllerToPresent?.contactbuttonwassender = false
             self.present(controllerToPresent!, animated: true, completion: nil)
         } else {
             //load sign in
             print(Auth.auth().currentUser?.uid ?? String())
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
-            
             self.present(controllerToPresent!, animated: true, completion: nil)
         }
     }
@@ -52,6 +52,7 @@ class HomeScreenVC: UIViewController {
             //Get UserSign up has storyboard and load it
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
+            controllerToPresent?.contactbuttonwassender = true
             self.present(controllerToPresent!, animated: true, completion: nil)
             
         }

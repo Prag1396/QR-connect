@@ -17,11 +17,11 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
     
-    private let _orangeColor = UIColor(red: 255/255, green: 177/255, blue: 6/255, alpha: 1.0)
+  
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
-    private var _currentValueofMessages: Int = 0
+    private var _currentValueofMessages: Int!
     let messagesUD = UserDefaults.standard
     var newValueofChildren: Int = 0
     
@@ -34,14 +34,12 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
-        
-       self.checkforunreadmessages()
+        messagesUD.set(_currentValueofMessages, forKey: "childcount")
+        print("Current value: \(_currentValueofMessages)")
+        self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
         
-            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
-            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: self._orangeColor], for: .selected)
-            
             for item in tabArray {
                 item.image = item.image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
             }
@@ -87,7 +85,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     
     @IBAction func messagesbtnPressed(_ sender: Any) {
-        self._currentValueofMessages = newValueofChildren
+        self.unreadmessageindicator.isHidden = true
+        
     }
     
     func checkforunreadmessages() {
@@ -96,9 +95,14 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             let observedValue = self.messagesUD.integer(forKey: "childcount")
             //If observedValue is not equal to newValue set imagehidden to be false and set the currentvalue to new value
             if(observedValue != self.newValueofChildren) {
-                print(observedValue)
-                print(self.newValueofChildren)
+                print("User Defaults Value: \(observedValue)")
+                print("New Value: \(self.newValueofChildren)")
+                self._currentValueofMessages = self.newValueofChildren
+                self.messagesUD.set(self._currentValueofMessages, forKey: "childcount")
                 self.unreadmessageindicator.isHidden = false
+            } else {
+                print("equal")
+                self.unreadmessageindicator.isHidden = true
             }
         }
     }
@@ -122,14 +126,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             }
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("here")
-        self.unreadmessageindicator.isHidden = true
-        messagesUD.set(_currentValueofMessages, forKey: "childcount")
- 
-    }
-    
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         let convertedLocation = view.convert(location, to: qrcodeimage)

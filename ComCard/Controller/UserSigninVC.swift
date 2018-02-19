@@ -20,10 +20,20 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBOutlet weak var userNameTextField: UITextField!
     
     var next_Responder: UIResponder!
-
+    private var _contactbtnwassender: Bool!
     private var _emailDownloaded: String? = nil
     
     let userID = Auth.auth().currentUser?.uid
+    
+    var contactbuttonwassender: Bool {
+        get {
+            return _contactbtnwassender
+        }
+        set {
+            _contactbtnwassender = newValue
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,8 +129,20 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
             
             AuthService.instance.loginUser(withEmail: userNameTextField.text!, andPassword: passwordTextField.text!, loginComplete: { (success, loginError) in
                 if success {
-                    //perform segue
-                    self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+                    
+                    if self.contactbuttonwassender == false {
+                        //perform segue
+                        self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+                    } else if self.contactbuttonwassender == true {
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let vc = controllerToPresent {
+                            vc.selectedIndex = 1
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                    
+
                 } else {
                     if let loginerror = loginError {
                         AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in

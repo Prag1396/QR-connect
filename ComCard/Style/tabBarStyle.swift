@@ -16,16 +16,7 @@ class tabBarStyle: UITabBar {
         backgroundImage.frame = self.bounds
         self.addSubview(backgroundImage)
         self.sendSubview(toBack: backgroundImage)
-        self.changeColor()
 
     }
-    
-    func changeColor() {
-        
-        for item in self.items! {
-            item.badgeColor = UIColor.white
-        }
-    }
- 
 
 }

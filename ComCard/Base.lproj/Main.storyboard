@@ -357,7 +357,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cBa-3N-wGL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Scan item" image="scanqrbaritem" id="0aW-GU-XsJ">
+                    <tabBarItem key="tabBarItem" title="Scan item" image="scanqrbaritem" id="0aW-GU-XsJ" customClass="tabbaritemStyle" customModule="ComCard" customModuleProvider="target">
                         <color key="badgeColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <connections>
@@ -2376,7 +2376,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="A8s-jD-c5B"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Your QR-Code" image="qrcodeiconTabBar" id="9mL-7C-mPn">
+                    <tabBarItem key="tabBarItem" title="Your QR-Code" image="qrcodeiconTabBar" id="9mL-7C-mPn" customClass="tabbaritemStyle" customModule="ComCard" customModuleProvider="target">
                         <color key="badgeColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -2985,8 +2985,8 @@
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EJj-3d-GIx"/>
-        <segue reference="tlv-Y4-8pu"/>
+        <segue reference="GIi-xh-yIc"/>
+        <segue reference="DuB-DZ-Cxg"/>
         <segue reference="ffs-XY-gdX"/>
         <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>

@@ -64,6 +64,14 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
         IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Continue"
+        
+        if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
+            
+            for item in tabArray {
+                item.image = item.image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            }
+        }
+        
         self.scanQrcode()
         
     }

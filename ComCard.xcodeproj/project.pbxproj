@@ -20,6 +20,7 @@
 		DB2E3ABF201EF1CA00E39C79 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E3ABE201EF1CA00E39C79 /* MessagesVC.swift */; };
 		DB30BE012037AB7700A289C5 /* OrderPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE002037AB7700A289C5 /* OrderPlaceVC.swift */; };
 		DB30BE03203A61E100A289C5 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE02203A61E100A289C5 /* HTTPService.swift */; };
+		DB30BE05203AE01500A289C5 /* tabbaritemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE04203AE01500A289C5 /* tabbaritemStyle.swift */; };
 		DB34E9FF202314EC00AF8640 /* ChatMessageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */; };
 		DB34EA0320268F0A00AF8640 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34EA0220268F0A00AF8640 /* ImageCache.swift */; };
 		DB67C1F0202D4C38002215F6 /* ComCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67C1EF202D4C38002215F6 /* ComCardTests.swift */; };
@@ -94,6 +95,7 @@
 		DB2E3ABE201EF1CA00E39C79 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		DB30BE002037AB7700A289C5 /* OrderPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPlaceVC.swift; sourceTree = "<group>"; };
 		DB30BE02203A61E100A289C5 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
+		DB30BE04203AE01500A289C5 /* tabbaritemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabbaritemStyle.swift; sourceTree = "<group>"; };
 		DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCVCell.swift; sourceTree = "<group>"; };
 		DB34EA0220268F0A00AF8640 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		DB67C1E1202D4A0F002215F6 /* ComCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComCardTests.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				DB78D491200D730B005D5219 /* imageStyle.swift */,
 				DBB1AF38202C4BB100FF6AA6 /* tabBarStyle.swift */,
 				DBAF946C20341D350008F66B /* SearchbarStyle.swift */,
+				DB30BE04203AE01500A289C5 /* tabbaritemStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				DBBCCC5620044A050078E662 /* StorageService.swift in Sources */,
 				DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* UserSignupVC.swift in Sources */,
+				DB30BE05203AE01500A289C5 /* tabbaritemStyle.swift in Sources */,
 				DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */,
 				DB7BE7551FFDF25400987939 /* ConfigureCell.swift in Sources */,
 				DBAF945B202FFA4A0008F66B /* ChangePasswordVC.swift in Sources */,
