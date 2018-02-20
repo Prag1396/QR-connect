@@ -83,6 +83,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     
     @IBAction func messagesbtnPressed(_ sender: Any) {
+        self.writecounttoDatabase(newCount: self.newValueofChildren)
         self.unreadmessageindicator.isHidden = true
         
     }
@@ -97,7 +98,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 if(count != self.newValueofChildren && self.newValueofChildren > count) {
                     
                     print(self.newValueofChildren)
-                    self.writecounttoDatabase(newCount: self.newValueofChildren)
                     self.unreadmessageindicator.isHidden = false
                 } else {
                     print("equal")
@@ -118,8 +118,9 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 return
             }
             if let count = dict["count"] as? Int {
-            //self._currentValueofMessages = count
                 onCompleteObserving(count)
+            } else {
+                self.writecounttoDatabase(newCount: 0)
             }
         }
     }

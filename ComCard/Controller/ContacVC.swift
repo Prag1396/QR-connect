@@ -130,6 +130,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         
         video = AVCaptureVideoPreviewLayer(session: session)
+        video.videoGravity = AVLayerVideoGravity.resizeAspectFill
         video.frame = self.view.layer.bounds
         view.layer.addSublayer(video)
         self.view.bringSubview(toFront: border)
@@ -200,7 +201,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
             }
         }
     }
-    
+        
     @objc func backgroundTapped(textField: UITextField) {
         view.endEditing(true)
     }
