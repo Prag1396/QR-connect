@@ -130,7 +130,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         
         video = AVCaptureVideoPreviewLayer(session: session)
-        video.frame = view.layer.bounds
+        video.frame = self.view.layer.bounds
         view.layer.addSublayer(video)
         self.view.bringSubview(toFront: border)
         session.startRunning()

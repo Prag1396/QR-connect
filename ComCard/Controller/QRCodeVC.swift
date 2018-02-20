@@ -33,7 +33,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
-        
+        print(self._currentValueofMessages)
         self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
@@ -90,45 +90,44 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     func checkforunreadmessages() {
         
         
-        self.downloadcountfromDatabase {
-            print("Current Value downloaded: \(self._currentValueofMessages)")
-        }
-        
-        self.observeUnreadMessages {
-            
-    
-            if(self._currentValueofMessages == nil || self._currentValueofMessages != self.newValueofChildren) {
+        self.downloadcountfromDatabase(onCompleteObserving: { (count) in
+            print("Current Value downloaded: \(count)")
+            self.observeUnreadMessages {
                 
-                print(self.newValueofChildren)
-                self._currentValueofMessages = self.newValueofChildren
-                self.writecounttoDatabase()
-                self.unreadmessageindicator.isHidden = false
-            } else {
-                print("equal")
-                self.unreadmessageindicator.isHidden = true
+                if(count != self.newValueofChildren && self.newValueofChildren > count) {
+                    
+                    print(self.newValueofChildren)
+                    self.writecounttoDatabase(newCount: self.newValueofChildren)
+                    self.unreadmessageindicator.isHidden = false
+                } else {
+                    print("equal")
+                    self.unreadmessageindicator.isHidden = true
+                }
+                
+                print("New Value: \(self.newValueofChildren)")
             }
-            
-            print("New Value: \(self.newValueofChildren)")
-        }
+        })
+
     }
     
-    func downloadcountfromDatabase(onCompleteObserving: @escaping ()->()) {
+    func downloadcountfromDatabase(onCompleteObserving: @escaping (_ count: Int)->()) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let userRef = DataService.instance.REF_USERMESSAGES
         userRef.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? NSDictionary else {
                 return
             }
-            let count = dict["count"] as? Int
-            self._currentValueofMessages = count
-            onCompleteObserving()
+            if let count = dict["count"] as? Int {
+            //self._currentValueofMessages = count
+                onCompleteObserving(count)
+            }
         }
     }
     
-    func writecounttoDatabase() {
+    func writecounttoDatabase(newCount: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let userRef = DataService.instance.REF_USERMESSAGES.child(uid)
-        userRef.updateChildValues(["count": self._currentValueofMessages])
+        userRef.updateChildValues(["count": newCount])
     }
     
     func observeUnreadMessages(onCompleteCounting: @escaping ()->()) {
@@ -148,7 +147,9 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                     onCompleteCounting()
                 }
             }
+            
         }
+        
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
