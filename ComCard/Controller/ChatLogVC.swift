@@ -11,14 +11,15 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
-class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var uploadImageBtn: UIButton!
     @IBOutlet weak var userfirstname: UILabel!
-    @IBOutlet weak var messagefield: TextFieldStyle!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var sendbtn: UIButton!
     @IBOutlet weak var messageCollectionView: UICollectionView?
+    @IBOutlet weak var messagefield: textViewStyle!
+    @IBOutlet weak var heightContraint: NSLayoutConstraint!
     
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
@@ -33,7 +34,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         get {
             return _fullName!
         } set {
-           self._fullName = newValue
+            self._fullName = newValue
         }
     }
     
@@ -47,7 +48,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     }
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         messageCollectionView?.delegate = self
         messageCollectionView?.dataSource = self
@@ -63,15 +64,28 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
         self.sendbtn.isUserInteractionEnabled = false
-        messagefield.addTarget(self, action: #selector(textfieldDidChange(_:)), for: .editingChanged)
+        
         // Do any additional setup after loading the view.
     }
     
-    @objc func textfieldDidChange(_ textField: UITextField) {
-        if textField.text == nil || textField.text?.isEmpty == true {
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView.text == nil || textView.text.isEmpty == true {
             sendbtn.isUserInteractionEnabled = false
         } else {
+            
+            let size = CGSize(width: textView.frame.width, height: .infinity)
+            let estimatedSize = textView.sizeThatFits(size)
+            textView.constraints.forEach { (constraint) in
+                if constraint.firstAttribute == .height {
+                    constraint.constant = estimatedSize.height
+                }
+                let difference = estimatedSize.height - 36
+                self.heightContraint.constant = 42 + difference
+                self.view.layoutIfNeeded()
+            }
             sendbtn.isUserInteractionEnabled = true
+            
         }
     }
     
@@ -108,20 +122,20 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         
         if let selectedImage = selectedImagefromPicker {
             StorageService.instance.uploadToFirebaseStorage(usingImage: selectedImage, onComplete: { (status, error, imageurl) in
-                    if status == false || error != nil {
-                        print(error.debugDescription)
-                    } else {
-                        if let imageURL = imageurl {
-                            let timeStamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
-                            DataService.instance.sendMessagewithImageURL(image: selectedImage, imageURL: imageURL, senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, time: timeStamp)
-                        }
+                if status == false || error != nil {
+                    print(error.debugDescription)
+                } else {
+                    if let imageURL = imageurl {
+                        let timeStamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+                        DataService.instance.sendMessagewithImageURL(image: selectedImage, imageURL: imageURL, senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, time: timeStamp)
                     }
-                })
+                }
+            })
             dismiss(animated: true, completion: nil)
         }
     }
     
-
+    
     
     @IBAction func signoutPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -141,6 +155,19 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         return false
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            sendbtn.isUserInteractionEnabled = false
+            return false
+        }
+        else {
+            sendbtn.isUserInteractionEnabled = true
+            return true
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -150,15 +177,13 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         handleSend()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        if textField.text == nil || textField.text?.isEmpty == true {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == nil || textView.text.isEmpty == true {
             sendbtn.isUserInteractionEnabled = false
         } else {
             sendbtn.isUserInteractionEnabled = true
         }
     }
-    
-   
     
     func observeMessagesforuserClicked() {
         
@@ -175,7 +200,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
                 guard let dict = snapshot.value as? [String: AnyObject] else {
                     return
                 }
-                    
+                
                 let messageDownloaded = Message(dictionary: dict)
                 self.collectionViewMessages.append(messageDownloaded)
                 DispatchQueue.main.async {
@@ -183,7 +208,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
                     let indexPath = IndexPath(item: self.collectionViewMessages.count - 1, section: 0)
                     self.messageCollectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
                 }
-
+                
             }, withCancel: nil)
             
             
@@ -192,6 +217,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
     }
     
     func handleSend() {
+        
         if(messagefield.text != nil) {
             let data = messagefield.text
             let timeStamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
@@ -200,6 +226,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         }
         view.endEditing(true)
         self.messagefield.text = nil
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -216,7 +243,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
         setUpCell(cell: cell, message: _message)
         
         if let text = _message.messagetext {
-        //modify bubbleview width
+            //modify bubbleview width
             cell.bubbleWidthAnchor?.constant = estimatedHeightForText(text: text).width + 32
             cell.textView.isHidden = false
         } else if _message.imageURL != nil {
@@ -314,7 +341,7 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
                 
                 self.blackBackroundView?.alpha = 1
                 self.sendbtn.alpha = 0
-                self.messagefield.alpha = 0
+                //self.messagefield.alpha = 0
                 self.uploadImageBtn.alpha = 0
                 
                 // h2 / w1 = h1 / w1
@@ -326,26 +353,26 @@ class ChatLogVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDeleg
             }, completion: nil)
             
         }
-  
+        
     }
     
     @objc func handleZoomout(tapGesture: UISwipeGestureRecognizer) {
-            if let zoomOutImageView = tapGesture.view {
-                zoomOutImageView.layer.cornerRadius = 16
-                zoomOutImageView.clipsToBounds = true
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    
-                    zoomOutImageView.frame = self.startingFrame!
-                    self.blackBackroundView?.alpha = 0
-                    self.sendbtn.alpha = 1
-                    self.messagefield.alpha = 1
-                    self.uploadImageBtn.alpha = 1
-                    
-                }, completion: { (completed) in
-                    zoomOutImageView.removeFromSuperview()
-                    self.startingImageView?.isHidden = false
-                })
+        if let zoomOutImageView = tapGesture.view {
+            zoomOutImageView.layer.cornerRadius = 16
+            zoomOutImageView.clipsToBounds = true
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                zoomOutImageView.frame = self.startingFrame!
+                self.blackBackroundView?.alpha = 0
+                self.sendbtn.alpha = 1
+                //self.messagefield.alpha = 1
+                self.uploadImageBtn.alpha = 1
+                
+            }, completion: { (completed) in
+                zoomOutImageView.removeFromSuperview()
+                self.startingImageView?.isHidden = false
+            })
         }
     }
-
+    
 }
