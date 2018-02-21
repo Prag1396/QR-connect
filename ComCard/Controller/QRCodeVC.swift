@@ -21,7 +21,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
-    private var _currentValueofMessages: Int!
     var newValueofChildren: Int = 0
     
     
@@ -33,7 +32,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
-        print(self._currentValueofMessages)
+        
         self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
