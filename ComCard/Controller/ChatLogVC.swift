@@ -29,6 +29,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     var startingFrame: CGRect?
     var blackBackroundView : UIView?
     var startingImageView: UIImageView?
+    var expandContraint: NSLayoutConstraint?
+
     
     var fullname: String {
         get {
@@ -64,7 +66,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
         self.sendbtn.isUserInteractionEnabled = false
-        
+        self.expandContraint = messagefield.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5)
         // Do any additional setup after loading the view.
     }
     
@@ -80,9 +82,11 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
                 if constraint.firstAttribute == .height {
                     constraint.constant = estimatedSize.height
                 }
+
+                self.expandContraint?.isActive = true
                 let difference = estimatedSize.height - 36
                 self.heightContraint.constant = 42 + difference
-                self.view.layoutIfNeeded()
+                
             }
             sendbtn.isUserInteractionEnabled = true
             
@@ -143,10 +147,12 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     
     @objc func backgroundTapped() {
         view.endEditing(true)
+        self.expandContraint?.isActive = false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.expandContraint?.isActive = false
         if textField.text?.isEmpty == true || textField.text == nil {
             sendbtn.isUserInteractionEnabled = false
         } else {
@@ -157,7 +163,9 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
     {
+        
         if(text == "\n") {
+            self.expandContraint?.isActive = false
             textView.resignFirstResponder()
             sendbtn.isUserInteractionEnabled = false
             return false
