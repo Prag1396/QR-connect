@@ -16,10 +16,10 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     @IBOutlet weak var uploadImageBtn: UIButton!
     @IBOutlet weak var userfirstname: UILabel!
     @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var sendbtn: UIButton!
     @IBOutlet weak var messageCollectionView: UICollectionView?
     @IBOutlet weak var messagefield: textViewStyle!
     @IBOutlet weak var heightContraint: NSLayoutConstraint!
+    @IBOutlet weak var sendimg: UIImageView!
     
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
@@ -65,15 +65,18 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         self.userfirstname.text = self.fullname
-        self.sendbtn.isUserInteractionEnabled = false
+        self.sendimg.isUserInteractionEnabled = false
         self.expandContraint = messagefield.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5)
+        let tapsend = UITapGestureRecognizer(target: self, action: #selector(sendimgpressed))
+        tapsend.delegate = self
+        self.sendimg.addGestureRecognizer(tapsend)
         // Do any additional setup after loading the view.
     }
     
     func textViewDidChange(_ textView: UITextView) {
         
         if textView.text == nil || textView.text.isEmpty == true {
-            sendbtn.isUserInteractionEnabled = false
+            //sendbtn.isUserInteractionEnabled = false
         } else {
             
             let size = CGSize(width: textView.frame.width, height: .infinity)
@@ -88,8 +91,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
                 self.heightContraint.constant = 42 + difference
                 
             }
-            sendbtn.isUserInteractionEnabled = true
-            
+            self.sendimg.isUserInteractionEnabled = true
         }
     }
     
@@ -154,9 +156,9 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         textField.resignFirstResponder()
         self.expandContraint?.isActive = false
         if textField.text?.isEmpty == true || textField.text == nil {
-            sendbtn.isUserInteractionEnabled = false
+            self.sendimg.isUserInteractionEnabled = false
         } else {
-            sendbtn.isUserInteractionEnabled = true
+            self.sendimg.isUserInteractionEnabled = true
         }
         return false
     }
@@ -167,11 +169,11 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         if(text == "\n") {
             self.expandContraint?.isActive = false
             textView.resignFirstResponder()
-            sendbtn.isUserInteractionEnabled = false
+            self.sendimg.isUserInteractionEnabled = false
             return false
         }
         else {
-            sendbtn.isUserInteractionEnabled = true
+            self.sendimg.isUserInteractionEnabled = true
             return true
         }
     }
@@ -181,15 +183,15 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func sendbtnpressed(_ sender: Any) {
+    @objc func sendimgpressed() {
         handleSend()
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == nil || textView.text.isEmpty == true {
-            sendbtn.isUserInteractionEnabled = false
+            self.sendimg.isUserInteractionEnabled = false
         } else {
-            sendbtn.isUserInteractionEnabled = true
+            self.sendimg.isUserInteractionEnabled = true
         }
     }
     
@@ -232,6 +234,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             DataService.instance.uploadMessage(senderuid: (Auth.auth().currentUser?.uid)!, recipientUID: self.recipientUID, message: data!, time: timeStamp)
             
         }
+        self.expandContraint?.isActive = false
         view.endEditing(true)
         self.messagefield.text = nil
         
@@ -348,7 +351,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
                 self.blackBackroundView?.alpha = 1
-                self.sendbtn.alpha = 0
+                //self.sendbtn.alpha = 0
                 //self.messagefield.alpha = 0
                 self.uploadImageBtn.alpha = 0
                 
@@ -372,7 +375,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
                 
                 zoomOutImageView.frame = self.startingFrame!
                 self.blackBackroundView?.alpha = 0
-                self.sendbtn.alpha = 1
+                //self.sendbtn.alpha = 1
                 //self.messagefield.alpha = 1
                 self.uploadImageBtn.alpha = 1
                 
