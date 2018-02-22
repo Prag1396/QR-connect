@@ -536,6 +536,7 @@
                     </view>
                     <connections>
                         <outlet property="background" destination="18l-Gi-WjI" id="bzg-7z-QOc"/>
+                        <outlet property="camerabtn" destination="lIs-OG-hxA" id="CWh-ui-vXT"/>
                         <outlet property="heightContraint" destination="aWL-4d-hPr" id="BP4-j8-unS"/>
                         <outlet property="messageCollectionView" destination="f25-xb-GD3" id="LTV-H1-9H9"/>
                         <outlet property="messagefield" destination="91b-KA-EX1" id="z0T-Wc-k7Z"/>
@@ -2989,7 +2990,7 @@
         <image name="qrcodeiconTabBar" width="20" height="20"/>
         <image name="scan-qr-ios-11" width="375" height="667"/>
         <image name="scanqrbaritem" width="20" height="20"/>
-        <image name="sendicon" width="28" height="28"/>
+        <image name="sendicon" width="30" height="30"/>
         <image name="settingsiconTabBar" width="17" height="20"/>
         <image name="unreadmessagesindicator" width="20" height="20"/>
         <image name="usernameIcon" width="20" height="20"/>

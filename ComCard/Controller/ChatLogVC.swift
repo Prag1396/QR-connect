@@ -20,6 +20,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     @IBOutlet weak var messagefield: textViewStyle!
     @IBOutlet weak var heightContraint: NSLayoutConstraint!
     @IBOutlet weak var sendimg: UIImageView!
+    @IBOutlet weak var camerabtn: UIButton!
+    
     
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
@@ -70,6 +72,10 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         let tapsend = UITapGestureRecognizer(target: self, action: #selector(sendimgpressed))
         tapsend.delegate = self
         self.sendimg.addGestureRecognizer(tapsend)
+        
+        let cameraTap = UITapGestureRecognizer(target: self, action: #selector(showCamera))
+        cameraTap.delegate = self
+        self.camerabtn.addGestureRecognizer(cameraTap)
         // Do any additional setup after loading the view.
     }
     
@@ -93,6 +99,10 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             }
             self.sendimg.isUserInteractionEnabled = true
         }
+    }
+    
+    @objc func showCamera() {
+        
     }
     
     func setUpKeyBoardObserver() {
@@ -351,8 +361,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
                 self.blackBackroundView?.alpha = 1
-                //self.sendbtn.alpha = 0
-                //self.messagefield.alpha = 0
+                self.sendimg.alpha = 0
+                self.messagefield.alpha = 0
                 self.uploadImageBtn.alpha = 0
                 
                 // h2 / w1 = h1 / w1
@@ -375,8 +385,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
                 
                 zoomOutImageView.frame = self.startingFrame!
                 self.blackBackroundView?.alpha = 0
-                //self.sendbtn.alpha = 1
-                //self.messagefield.alpha = 1
+                self.sendimg.alpha = 1
+                self.messagefield.alpha = 1
                 self.uploadImageBtn.alpha = 1
                 
             }, completion: { (completed) in
