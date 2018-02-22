@@ -549,6 +549,74 @@
             </objects>
             <point key="canvasLocation" x="3796" y="-1813.3004926108374"/>
         </scene>
+        <!--Camera ControllerVC-->
+        <scene sceneID="riK-o1-oaQ">
+            <objects>
+                <viewController storyboardIdentifier="cameravc" id="9KR-T3-7Em" customClass="cameraControllerVC" customModule="ComCard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2g6-6s-JOP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kp-WP-gXp">
+                                <rect key="frame" x="147" y="686" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="dky-ox-Xlb"/>
+                                    <constraint firstAttribute="width" constant="80" id="g2H-Ff-vKZ"/>
+                                </constraints>
+                                <state key="normal" image="capture_photo"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8L-dL-HTQ">
+                                <rect key="frame" x="5" y="49" width="56" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="b5C-xg-7Zg"/>
+                                    <constraint firstAttribute="width" constant="56" id="c97-NK-ygh"/>
+                                </constraints>
+                                <state key="normal" image="cancel_shadow"/>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="9KR-T3-7Em" eventType="touchUpInside" id="COY-VG-7aI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFE-Zj-hX6">
+                                <rect key="frame" x="314" y="49" width="56" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="Thg-W6-gBX"/>
+                                    <constraint firstAttribute="height" constant="35" id="lmv-Y3-9X5"/>
+                                </constraints>
+                                <state key="normal" image="right_arrow_shadow"/>
+                                <connections>
+                                    <action selector="confirmbtnpressed:" destination="9KR-T3-7Em" eventType="touchUpInside" id="whP-J8-TyC"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uaE-Fv-VaB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.3178495466709137" green="0.49034437537193298" blue="0.6941831111907959" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="uaE-Fv-VaB" firstAttribute="leading" secondItem="Eph-Jv-YI0" secondAttribute="leading" id="EY4-W8-ApI"/>
+                            <constraint firstItem="Eph-Jv-YI0" firstAttribute="trailing" secondItem="eFE-Zj-hX6" secondAttribute="trailing" constant="5" id="FcH-cV-HY7"/>
+                            <constraint firstItem="N8L-dL-HTQ" firstAttribute="top" secondItem="Eph-Jv-YI0" secondAttribute="top" constant="5" id="JUb-xV-d3Z"/>
+                            <constraint firstItem="eFE-Zj-hX6" firstAttribute="centerY" secondItem="N8L-dL-HTQ" secondAttribute="centerY" id="Wa7-LZ-5Ym"/>
+                            <constraint firstAttribute="bottom" secondItem="uaE-Fv-VaB" secondAttribute="bottom" id="YIM-VV-iBS"/>
+                            <constraint firstItem="uaE-Fv-VaB" firstAttribute="top" secondItem="2g6-6s-JOP" secondAttribute="top" id="bcW-WI-Jr5"/>
+                            <constraint firstItem="N8L-dL-HTQ" firstAttribute="leading" secondItem="Eph-Jv-YI0" secondAttribute="leading" constant="5" id="fJk-YP-nVG"/>
+                            <constraint firstItem="uaE-Fv-VaB" firstAttribute="trailing" secondItem="Eph-Jv-YI0" secondAttribute="trailing" id="oVK-Hx-b9h"/>
+                            <constraint firstItem="Eph-Jv-YI0" firstAttribute="bottom" secondItem="2kp-WP-gXp" secondAttribute="bottom" constant="12" id="oZM-Fr-g59"/>
+                            <constraint firstItem="2kp-WP-gXp" firstAttribute="centerX" secondItem="2g6-6s-JOP" secondAttribute="centerX" id="uVN-re-zah"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Eph-Jv-YI0"/>
+                    </view>
+                    <connections>
+                        <outlet property="capturePhotoButton" destination="2kp-WP-gXp" id="iey-9L-Tj6"/>
+                        <outlet property="confirmImagebtn" destination="eFE-Zj-hX6" id="pEI-Qb-Inc"/>
+                        <outlet property="dismissbtn" destination="N8L-dL-HTQ" id="zcc-LQ-7xR"/>
+                        <outlet property="imageCaptured" destination="uaE-Fv-VaB" id="US3-Mu-zoE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ded-da-0QP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4784.8000000000002" y="-1810.344827586207"/>
+        </scene>
         <!--User SigninVC-->
         <scene sceneID="KJO-eF-A4a">
             <objects>
@@ -2321,14 +2389,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-NY-rfF" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="90.666666666666686" y="563.66666666666663" width="180" height="38"/>
+                                <rect key="frame" x="82.666666666666686" y="563.66666666666663" width="196" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="PGX-vi-6Wy"/>
                                     <constraint firstAttribute="height" constant="38" id="mdi-8R-tfA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="  Order QR-Stickers" image="cart">
+                                <state key="normal" title="  Order free QR-Stickers" image="cart">
                                     <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -2977,6 +3045,8 @@
         <image name="back_black" width="10" height="18"/>
         <image name="backbutton" width="10" height="17"/>
         <image name="camera" width="22" height="18"/>
+        <image name="cancel_shadow" width="25" height="25"/>
+        <image name="capture_photo" width="100" height="100"/>
         <image name="cart" width="20" height="18"/>
         <image name="chatprofileImage" width="45" height="45"/>
         <image name="emailIconcontactvc" width="41" height="41"/>
@@ -2988,6 +3058,7 @@
         <image name="nextbutton" width="50" height="50"/>
         <image name="profilelabel" width="75" height="75"/>
         <image name="qrcodeiconTabBar" width="20" height="20"/>
+        <image name="right_arrow_shadow" width="35" height="35"/>
         <image name="scan-qr-ios-11" width="375" height="667"/>
         <image name="scanqrbaritem" width="20" height="20"/>
         <image name="sendicon" width="30" height="30"/>
@@ -2996,8 +3067,8 @@
         <image name="usernameIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GIi-xh-yIc"/>
-        <segue reference="DuB-DZ-Cxg"/>
+        <segue reference="EJj-3d-GIx"/>
+        <segue reference="tlv-Y4-8pu"/>
         <segue reference="ffs-XY-gdX"/>
         <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>

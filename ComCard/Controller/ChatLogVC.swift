@@ -102,7 +102,11 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     }
     
     @objc func showCamera() {
-        
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "cameravc") as? cameraControllerVC
+        if let cp = controllerToPresent {
+            self.present(cp, animated: true, completion: nil)
+        }
     }
     
     func setUpKeyBoardObserver() {
