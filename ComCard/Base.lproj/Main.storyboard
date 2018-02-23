@@ -587,6 +587,17 @@
                                     <action selector="confirmbtnpressed:" destination="9KR-T3-7Em" eventType="touchUpInside" id="whP-J8-TyC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVf-4y-cb7">
+                                <rect key="frame" x="5" y="49" width="56" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="RDe-s0-3CN"/>
+                                    <constraint firstAttribute="width" constant="56" id="bnD-Ib-Bpk"/>
+                                </constraints>
+                                <state key="normal" image="retakepicture"/>
+                                <connections>
+                                    <action selector="retakePictureButtonPressed:" destination="9KR-T3-7Em" eventType="touchUpInside" id="OQb-2L-PaL"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uaE-Fv-VaB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
@@ -596,6 +607,8 @@
                             <constraint firstItem="uaE-Fv-VaB" firstAttribute="leading" secondItem="Eph-Jv-YI0" secondAttribute="leading" id="EY4-W8-ApI"/>
                             <constraint firstItem="Eph-Jv-YI0" firstAttribute="trailing" secondItem="eFE-Zj-hX6" secondAttribute="trailing" constant="5" id="FcH-cV-HY7"/>
                             <constraint firstItem="N8L-dL-HTQ" firstAttribute="top" secondItem="Eph-Jv-YI0" secondAttribute="top" constant="5" id="JUb-xV-d3Z"/>
+                            <constraint firstItem="hVf-4y-cb7" firstAttribute="leading" secondItem="Eph-Jv-YI0" secondAttribute="leading" constant="5" id="NQl-k6-7wJ"/>
+                            <constraint firstItem="hVf-4y-cb7" firstAttribute="top" secondItem="Eph-Jv-YI0" secondAttribute="top" constant="5" id="UzP-Ps-VBE"/>
                             <constraint firstItem="eFE-Zj-hX6" firstAttribute="centerY" secondItem="N8L-dL-HTQ" secondAttribute="centerY" id="Wa7-LZ-5Ym"/>
                             <constraint firstAttribute="bottom" secondItem="uaE-Fv-VaB" secondAttribute="bottom" id="YIM-VV-iBS"/>
                             <constraint firstItem="uaE-Fv-VaB" firstAttribute="top" secondItem="2g6-6s-JOP" secondAttribute="top" id="bcW-WI-Jr5"/>
@@ -611,6 +624,7 @@
                         <outlet property="confirmImagebtn" destination="eFE-Zj-hX6" id="pEI-Qb-Inc"/>
                         <outlet property="dismissbtn" destination="N8L-dL-HTQ" id="zcc-LQ-7xR"/>
                         <outlet property="imageCaptured" destination="uaE-Fv-VaB" id="US3-Mu-zoE"/>
+                        <outlet property="retakePicturebtn" destination="hVf-4y-cb7" id="YIp-w4-GKr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ded-da-0QP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3058,6 +3072,7 @@
         <image name="nextbutton" width="50" height="50"/>
         <image name="profilelabel" width="75" height="75"/>
         <image name="qrcodeiconTabBar" width="20" height="20"/>
+        <image name="retakepicture" width="22" height="26"/>
         <image name="right_arrow_shadow" width="35" height="35"/>
         <image name="scan-qr-ios-11" width="375" height="667"/>
         <image name="scanqrbaritem" width="20" height="20"/>

@@ -82,21 +82,13 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     func textViewDidChange(_ textView: UITextView) {
         
         if textView.text == nil || textView.text.isEmpty == true {
-            //sendbtn.isUserInteractionEnabled = false
+            sendimg.isUserInteractionEnabled = false
         } else {
             
-            let size = CGSize(width: textView.frame.width, height: .infinity)
-            let estimatedSize = textView.sizeThatFits(size)
-            textView.constraints.forEach { (constraint) in
-                if constraint.firstAttribute == .height {
-                    constraint.constant = estimatedSize.height
-                }
+            self.resetSizeforTextView(textView: textView)
+            self.expandContraint?.isActive = true
 
-                self.expandContraint?.isActive = true
-                let difference = estimatedSize.height - 36
-                self.heightContraint.constant = 42 + difference
-                
-            }
+            
             self.sendimg.isUserInteractionEnabled = true
         }
     }
@@ -105,6 +97,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
         let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "cameravc") as? cameraControllerVC
         if let cp = controllerToPresent {
+            cp.recipientID = self.recipientUID
             self.present(cp, animated: true, completion: nil)
         }
     }
@@ -251,7 +244,20 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         self.expandContraint?.isActive = false
         view.endEditing(true)
         self.messagefield.text = nil
-        
+        //set textview width and height back to normal
+        self.resetSizeforTextView(textView: messagefield)
+    }
+    
+    func resetSizeforTextView(textView: UITextView) {
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+            let difference = estimatedSize.height - 36
+            self.heightContraint.constant = 42 + difference
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -263,7 +269,6 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         
         cell.chatLogController = self
         let _message = collectionViewMessages[indexPath.row]
-        cell.textView.text = _message.messagetext
         
         setUpCell(cell: cell, message: _message)
         
@@ -271,6 +276,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             //modify bubbleview width
             cell.bubbleWidthAnchor?.constant = estimatedHeightForText(text: text).width + 32
             cell.textView.isHidden = false
+            cell.textView.text = _message.messagetext
+
         } else if _message.imageURL != nil {
             //fall in here if its an image as a message
             cell.bubbleWidthAnchor?.constant = 200

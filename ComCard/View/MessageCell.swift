@@ -38,7 +38,13 @@ class MessageCell: UITableViewCell {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? NSDictionary {
                     self.name.text = dict["FirstName"] as? String
-                    self.lastmessage.text = self.messagetodisplay?.messagetext
+                    if let text = self.messagetodisplay?.messagetext {
+                        self.lastmessage.text = text
+                    }
+                    if let _ = self.messagetodisplay?.imageURL {
+                        self.lastmessage.text = "sent an image"
+                    }
+
                     self.profileImg.image = UIImage(named: "chatprofileImage")
 
                 }
