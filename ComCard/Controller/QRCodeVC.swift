@@ -17,16 +17,19 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
     
-  
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     var newValueofChildren: Int = 0
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    let loadingView: UIView = UIView()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.setUpActivityIndicator()
+        activityIndicator.startAnimating()
         unreadmessageindicator.isHidden = true
         
         if traitCollection.forceTouchCapability == .available {
@@ -65,7 +68,10 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                                     DispatchQueue.main.async {
                                         if let imageData = UIImage(data: data!) {
                                             self.qrcodeimage.image = imageData
+                                            self.activityIndicator.stopAnimating()
+                                            self.loadingView.removeFromSuperview()
                                             self._imagedata = data!
+                                            
                                         }
                                     }
                                     
@@ -78,7 +84,23 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         }
 
     }
-    
+
+    func setUpActivityIndicator() {
+
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.view.center
+        loadingView.backgroundColor = UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        loadingView.addSubview(activityIndicator)
+        view.addSubview(loadingView)
+    }
     
     
     @IBAction func messagesbtnPressed(_ sender: Any) {
