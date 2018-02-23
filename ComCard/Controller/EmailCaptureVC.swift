@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -97,6 +99,7 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
     
     func captureText() {
         _email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
+        
     }
     
     @objc func backgroundTapped() {

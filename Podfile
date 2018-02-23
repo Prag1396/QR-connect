@@ -14,6 +14,7 @@ target 'ComCard' do
   pod 'IQKeyboardManagerSwift'
   pod 'RNCryptor', '~> 5.0'
   pod 'Firebase/Messaging'
+  pod "PCLBlurEffectAlert"
 
 
   target 'ComCardTests' do

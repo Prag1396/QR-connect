@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
+import PCLBlurEffectAlert
 
 
 
@@ -146,9 +147,16 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 } else {
                     if let loginerror = loginError {
                         AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in
+                            //ADD CUSTOM ALERTVIEW
+                            
+                            let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
+                            alert.addAction(PCLBlurEffectAlertAction(title: "Okay", style: .default, handler: nil))
+                            alert.show()
+                            /*
                             let alert = UIAlertController(title: "Warning", message: errmsg, preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
+                            */
                         })
                     }
                 }

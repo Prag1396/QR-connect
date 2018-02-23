@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '433E90BF6136E433A0FEA61CD4159E56'
-               BlueprintName = 'GoogleToolboxForMac-Defines-NSData+zlib'
+               BlueprintIdentifier = 'D560CD365CD24C9304C7E1ED1B37629B'
+               BlueprintName = 'PCLBlurEffectAlert'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'GoogleToolboxForMac-Defines-NSData+zlib.framework'>
+               BuildableName = 'PCLBlurEffectAlert.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
