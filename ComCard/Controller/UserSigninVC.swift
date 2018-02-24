@@ -102,20 +102,34 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         if let email = self._emailDownloaded {
             AuthService.instance.forgotPassword(withEmail: email, onComplete: { (status, error) in
                 if error != nil {
-                    let alert = UIAlertController(title: "Warning", message: error?.localizedDescription ?? String(), preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
+                    
                 } else {
-                    let alert = UIAlertController(title: "Successfull", message: "An email has been sent to you with instructions on how to reset your password", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: "An email has been sent to you with instructions on how to reset your password", effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
                 }
             })
         } else {
             //Show alert
-            let alert = UIAlertController(title: "Warning", message: "Could not find user", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Could not find user", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
         }
     }
     
@@ -126,7 +140,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
 
     @IBAction func signInBtnTapped(_ sender: Any) {
         
-        if userNameTextField.text != nil && passwordTextField.text != nil {
+        if userNameTextField.text != nil && passwordTextField.text != nil && userNameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false {
             
             AuthService.instance.loginUser(withEmail: userNameTextField.text!, andPassword: passwordTextField.text!, loginComplete: { (success, loginError) in
                 if success {
@@ -150,18 +164,26 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                             //ADD CUSTOM ALERTVIEW
                             
                             let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
-                            alert.addAction(PCLBlurEffectAlertAction(title: "Okay", style: .default, handler: nil))
+                            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                                self.view.alpha = 1.0
+                            }))
+                            alert.configureAlert(alert: alert)
+                            self.view.alpha = 0.7
                             alert.show()
-                            /*
-                            let alert = UIAlertController(title: "Warning", message: errmsg, preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            */
+
                         })
                     }
                 }
             })
             
+        } else {
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
         }
  
     }

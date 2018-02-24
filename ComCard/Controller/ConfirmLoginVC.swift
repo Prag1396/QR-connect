@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import PCLBlurEffectAlert
 
 class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
@@ -37,17 +38,27 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
             if error != nil && status == false {
                 //Present Alert
                 AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
-                    let alert = UIAlertController(title: "Warning", message: "\(errmsg)", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: "\(errmsg)", effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
+                    
                 })
             } else if error == nil && status == false {
-                    let alert = UIAlertController(title: "Warning", message: "Unable to send code", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
-                    self.performSegue(withIdentifier: "backbtnpressedinconfirmvc", sender: Any.self)
 
+                let alert = PCLBlurEffectAlertController(title: "Warning", message: "Unable to send code", effect: UIBlurEffect(style: .light), style: .alert)
+                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (actions) in
+                    self.view.alpha = 1.0
+                    self.performSegue(withIdentifier: "backbtnpressedinconfirmvc", sender: Any.self)
                 }))
-                    self.present(alert, animated: true, completion: nil)
+                alert.configureAlert(alert: alert)
+                self.view.alpha = 0.7
+                alert.show()
+                
 
             }
             else if (status == true) {
@@ -69,9 +80,16 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         AuthService.instance.auth(code: code) { (status, error) in
             if error != nil && status == false {
                 AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
-                    let alert = UIAlertController(title: "Warning", message: "\(errmsg)", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    
+                    //ADD CUSTOM ALERT
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
+                    
                 })
 
 

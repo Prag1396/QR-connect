@@ -11,6 +11,7 @@ import MessageUI
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import PCLBlurEffectAlert
 
 class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -198,9 +199,13 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         if (self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! ||
             self.streetAddresstextfield2.text == nil || (self.streetAddresstextfield2.text?.isEmpty)! || self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
             
-            let alert = UIAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
             
         } else {
             self.storeData()
@@ -211,9 +216,13 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         if let fn = self._firstName, let ln = self._lastName, let ad1 = self._street, let ad2 = self._street2, let city = self._city, let state = self._state, let country = self._country, let zc = self._zipCode, let quant = self._quantity {
             DataService.instance.placeorder(firstname: fn, lastname: ln, addressline1: ad1, addressline2: ad2, city: city, state: state, country: country, zipCode: zc, quantity: quant, onOrderComplete: { (status, error) in
                 if error != nil {
-                    let alert = UIAlertController(title: "Warning", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
                 } else {
                     //Order Complete
                     self.postToSpreadsheet()
@@ -225,9 +234,13 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     func postToSpreadsheet() {
         HTTPService.instance.uploadtoSpreadsheet(firstName: self._firstName!, lastName: self._lastName!, street1: self._street!, street2: self._street2!, city: self._city!, state: self._state!, country: self._country!, zipcode: self._zipCode!, quantity: self._quantity!) { (status, error) in
             if error != nil {
-                let alert = UIAlertController(title: "Warning", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.view.alpha = 1.0
+                }))
+                alert.configureAlert(alert: alert)
+                self.view.alpha = 0.7
+                alert.show()
             } else {
                 //Show confirmation
                 print("Congrats order confirmed")

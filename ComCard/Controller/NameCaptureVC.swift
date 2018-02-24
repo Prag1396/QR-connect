@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
+import PCLBlurEffectAlert
 
 class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -125,9 +126,13 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
         
         if ((firstName.text?.isEmpty)! || (lastName.text?.isEmpty)!) {
             //Present Alert
-            let alert = UIAlertController(title: "Warning", message: "Please enter your full name", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Please enter your full name", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
             
         } else {
             //Create DB User

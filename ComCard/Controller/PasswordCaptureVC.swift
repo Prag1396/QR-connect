@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PCLBlurEffectAlert
 
 class PasswordCaptureVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
@@ -81,10 +82,14 @@ class PasswordCaptureVC: UIViewController, UITextFieldDelegate, UIGestureRecogni
     @IBAction func nextbtnpressed(_ sender: Any) {
         captureText()
         if ((passwordTextField.text?.isEmpty)!) {
-            //Present Alert
-            let alert = UIAlertController(title: "Warning", message: "Please enter a password for your account", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            //ADD CUSTOM ALERT
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Please enter a valid password (minimum 6 digits)", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
             
         } else {
             //Perform segue to password

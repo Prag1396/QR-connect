@@ -11,6 +11,7 @@ import FirebaseAuth
 import Firebase
 import Photos
 import MessageUI
+import PCLBlurEffectAlert
 
 class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate {
 
@@ -248,29 +249,33 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     }
     
     func showAlertView(image: UIImage, data: Data) {
-        let alertView = UIAlertController(title: "QRConnect", message: "QRCode has been downloaded", preferredStyle: .alert)
-        
-        //Add Image
-        alertView.addImage(image: image)
-        
-        alertView.addAction(UIAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
+
+        let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "Your personalised QRCode has been downloaded", effect: UIBlurEffect(style: .light), style: .alert)
+        let img = image.scaleUIImageToSize(image: image, size: CGSize(width: 100, height: 100))
+        alert.addImageView(with: img)
+        alert.addAction(PCLBlurEffectAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
             self.saveToPhotosPressed(image: image)
+            self.view.alpha = 1.0
+
         }))
-        alertView.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
+        alert.addAction(PCLBlurEffectAlertAction(title: "Email", style: .default, handler: { (actions) in
             self.emailPressed(data: data)
+            self.view.alpha = 1.0
+
+        }))
+        alert.addAction(PCLBlurEffectAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            self.view.alpha = 1.0
         }))
         
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            //dismiss alertview
-            alertView.dismiss(animated: true, completion: nil)
-        }))
-        
-        self.present(alertView, animated: true, completion: nil)
+        alert.configureAlert(alert: alert)
+        alert.configure(buttonFont: [:], buttonTextColor: [.default: UIColor(red: 77/255, green: 255/255, blue: 158/255, alpha: 1.0) ], buttonDisableTextColor: [:])
+        self.view.alpha = 0.7
+        alert.show()
         
     }
     
     func emailPressed(data: Data) {
-        print("hrer")
+        
         let composeemail = MFMailComposeViewController()
         composeemail.mailComposeDelegate = self
         composeemail.setToRecipients([self._emailDownloaded!])
@@ -290,9 +295,13 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 if status == .authorized {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 } else {
-                    let alertview = UIAlertController(title: "QRConnect", message: "The app needs access to your photos to save the QRCode", preferredStyle: .alert)
-                    alertview.addAction((UIAlertAction(title: "OK", style: .default, handler: nil)))
-                    self.present(alertview, animated: true, completion: nil)
+                    let alert = PCLBlurEffectAlertController(title: "Warning", message: "The app needs access to your photos to save the QRCode", effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
                     
                 }
             })

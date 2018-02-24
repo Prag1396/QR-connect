@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import Contacts
+import PCLBlurEffectAlert
 
 class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
 
@@ -77,7 +78,11 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
             if granted {
                 //fetch contacts
                 print("Granted")
-                self.performSegue(withIdentifier: "tocontacts", sender: Any.self)
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "tocontacts") as? ContactsInviteVC
+                if let cp = controllertoPresent {
+                    self.present(cp, animated: true, completion: nil)
+                }
             } else {
                 print("Denied")
             }
@@ -104,15 +109,22 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func showSettingsAlert(_ completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
-        let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+
+        let alert = PCLBlurEffectAlertController(title: "Caution", message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", effect: UIBlurEffect(style: .light), style: .alert)
+        alert.addAction(PCLBlurEffectAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(false)
-        })
-        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
-            completionHandler(false)
+            self.view.alpha = 1.0
+        }))
+        alert.addAction(PCLBlurEffectAlertAction(title: "Open Settings", style: .default, handler: { (action) in
+            completionHandler(true)
+            self.view.alpha = 1.0
             UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
-        })
-        present(alert, animated: true)
+        }))
+        
+        alert.configureAlert(alert: alert)
+        self.view.alpha = 0.7
+        alert.show()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,7 +138,11 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
             if granted {
                 //fetch contacts
                 print("Granted")
-                self.performSegue(withIdentifier: "tocontacts", sender: Any.self)
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "tocontacts") as? ContactsInviteVC
+                if let cp = controllertoPresent {
+                    self.present(cp, animated: true, completion: nil)
+                }
             } else {
                 print("Denied")
             }

@@ -24,6 +24,7 @@
 		DB30BE09203D714700A289C5 /* TextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE08203D714700A289C5 /* TextViewExt.swift */; };
 		DB30BE0D203D74F300A289C5 /* textViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE0C203D74F300A289C5 /* textViewStyle.swift */; };
 		DB30BE10203EAE0600A289C5 /* cameraControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE0F203EAE0600A289C5 /* cameraControllerVC.swift */; };
+		DB30BE122040D02F00A289C5 /* CustomAlert+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30BE112040D02F00A289C5 /* CustomAlert+Ext.swift */; };
 		DB34E9FF202314EC00AF8640 /* ChatMessageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */; };
 		DB34EA0320268F0A00AF8640 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34EA0220268F0A00AF8640 /* ImageCache.swift */; };
 		DB67C1F0202D4C38002215F6 /* ComCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67C1EF202D4C38002215F6 /* ComCardTests.swift */; };
@@ -43,7 +44,6 @@
 		DBB1AF39202C4BB100FF6AA6 /* tabBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB1AF38202C4BB100FF6AA6 /* tabBarStyle.swift */; };
 		DBBCCC5620044A050078E662 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5520044A050078E662 /* StorageService.swift */; };
 		DBBCCC592006DA250078E662 /* Image+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC582006DA250078E662 /* Image+size.swift */; };
-		DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */; };
 		DBD1F95B1FF8271200A2CAE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */; };
 		DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */; };
 		DBD1F9601FF8271200A2CAE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD1F95E1FF8271200A2CAE6 /* Main.storyboard */; };
@@ -102,6 +102,7 @@
 		DB30BE08203D714700A289C5 /* TextViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewExt.swift; sourceTree = "<group>"; };
 		DB30BE0C203D74F300A289C5 /* textViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textViewStyle.swift; sourceTree = "<group>"; };
 		DB30BE0F203EAE0600A289C5 /* cameraControllerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraControllerVC.swift; sourceTree = "<group>"; };
+		DB30BE112040D02F00A289C5 /* CustomAlert+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomAlert+Ext.swift"; sourceTree = "<group>"; };
 		DB34E9FE202314EC00AF8640 /* ChatMessageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCVCell.swift; sourceTree = "<group>"; };
 		DB34EA0220268F0A00AF8640 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		DB67C1E1202D4A0F002215F6 /* ComCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComCardTests.swift; sourceTree = "<group>"; };
@@ -125,7 +126,6 @@
 		DBB1AF38202C4BB100FF6AA6 /* tabBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarStyle.swift; sourceTree = "<group>"; };
 		DBBCCC5520044A050078E662 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		DBBCCC582006DA250078E662 /* Image+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+size.swift"; sourceTree = "<group>"; };
-		DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertViewController+image.swift"; sourceTree = "<group>"; };
 		DBD1F9571FF8271200A2CAE6 /* ComCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBD1F95A1FF8271200A2CAE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBD1F95C1FF8271200A2CAE6 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
@@ -240,12 +240,12 @@
 			isa = PBXGroup;
 			children = (
 				DBBCCC582006DA250078E662 /* Image+size.swift */,
-				DBBCCC5A2006E2400078E662 /* AlertViewController+image.swift */,
 				DB2E3AB72018871F00E39C79 /* StringSpaces.swift */,
 				DB34EA0220268F0A00AF8640 /* ImageCache.swift */,
 				DBB1AF2A2029861400FF6AA6 /* CountryCodesAndNames.swift */,
 				DBB1AF2C2029A11C00FF6AA6 /* NSDictionaryFindKey.swift */,
 				DB30BE08203D714700A289C5 /* TextViewExt.swift */,
+				DB30BE112040D02F00A289C5 /* CustomAlert+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -655,6 +655,7 @@
 				DBD1F95D1FF8271200A2CAE6 /* HomeScreenVC.swift in Sources */,
 				DBD1F9891FF8313900A2CAE6 /* buttonStyle.swift in Sources */,
 				DB2E3AAE2011B54D00E39C79 /* PasswordCaptureVC.swift in Sources */,
+				DB30BE122040D02F00A289C5 /* CustomAlert+Ext.swift in Sources */,
 				DBD1F99D1FFB061400A2CAE6 /* AuthService.swift in Sources */,
 				DB34E9FF202314EC00AF8640 /* ChatMessageCVCell.swift in Sources */,
 				DBAF9467203400120008F66B /* ContacCell.swift in Sources */,
@@ -671,7 +672,6 @@
 				DB2E3ABD2019733900E39C79 /* MessageCell.swift in Sources */,
 				DBD1F9951FF9FE4300A2CAE6 /* UserDetailsVC.swift in Sources */,
 				DBBCCC5620044A050078E662 /* StorageService.swift in Sources */,
-				DBBCCC5B2006E2400078E662 /* AlertViewController+image.swift in Sources */,
 				DBD1F98D1FF83B9000A2CAE6 /* UserSignupVC.swift in Sources */,
 				DB30BE05203AE01500A289C5 /* tabbaritemStyle.swift in Sources */,
 				DB0CAE8E1FFDFEE600F7B8C5 /* User.swift in Sources */,

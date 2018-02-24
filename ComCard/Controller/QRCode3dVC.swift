@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-
+import PCLBlurEffectAlert
 
 class QRCode3dVC: UIViewController {
 
@@ -54,9 +54,14 @@ class QRCode3dVC: UIViewController {
                 if status == .authorized {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 } else {
-                    let alertview = UIAlertController(title: "QRConnect", message: "The app needs access to your photos to save the QRCode", preferredStyle: .alert)
-                    alertview.addAction((UIAlertAction(title: "OK", style: .default, handler: nil)))
-                    self.present(alertview, animated: true, completion: nil)
+                    
+                    let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "The app needs access to your photos to save the QRCode", effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                    }))
+                    alert.configureAlert(alert: alert)
+                    self.view.alpha = 0.7
+                    alert.show()
                     
                 }
             })

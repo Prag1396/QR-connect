@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import MessageUI
+import PCLBlurEffectAlert
 
 class ContactsInviteVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate {
 
@@ -149,9 +150,13 @@ class ContactsInviteVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.present(message, animated: true, completion: nil)
         } else {
             
-            let alert = UIAlertController(title: "WARNING", message: "Your device does not have the ability to send text messages", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Your device does not have the ability to send text messages", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
         }
     }
 }

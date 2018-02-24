@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import PCLBlurEffectAlert
 
 class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -77,15 +78,24 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
     @IBAction func continuebrnpressed(_ sender: Any) {
         captureText()
         if ((emailTextField.text?.isEmpty)!) {
-            //Present Alert
-            let alert = UIAlertController(title: "Warning", message: "Please enter your email address", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            //ADD CUSTOM ALERT
+            
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Please enter your email address", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
             
         } else if (isReadytoPerformSegue == false) {
-            let alert = UIAlertController(title: "Warning", message: "Email already in use.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Email aready in use", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
         } else {
             //Perform segue to password
              self.performSegue(withIdentifier: "emailcaptured", sender: Any.self)

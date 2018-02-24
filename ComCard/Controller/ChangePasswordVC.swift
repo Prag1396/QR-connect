@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import PCLBlurEffectAlert
 
 class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
@@ -92,26 +93,36 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
             if let currentemail = self._emailDownloaded {
                 AuthService.instance.changePassword(withEmail: currentemail, currentPassword: currentPwdLabel.text!, andNewPassword: newPasswordLabel.text!, onReauthenticationComplete: { (status, error) in
                     if error != nil {
-                        let alert = UIAlertController(title: "Warning", message: error?.localizedDescription ?? String(), preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                        alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                            self.view.alpha = 1.0
+                        }))
+                        alert.configureAlert(alert: alert)
+                        self.view.alpha = 0.7
+                        alert.show()
 
                     } else {
                         //show alert of password changed successfully
-                        let alert = UIAlertController(title: "Congratulations!", message: "Password has been changed successfully", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
-                            self.signoutUser()
+                        let alert = PCLBlurEffectAlertController(title: "Warning", message: "Password has been successfully changed", effect: UIBlurEffect(style: .light), style: .alert)
+                        alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                            self.view.alpha = 1.0
                         }))
-                        self.present(alert, animated: true, completion: nil)
+                        alert.configureAlert(alert: alert)
+                        self.view.alpha = 0.7
+                        alert.show()
                     }
                 })
             }
             
         } else {
             //Show alert
-            let alert = UIAlertController(title: "Warning", message: "All fields must be entered", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.view.alpha = 1.0
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
         }
     }
     

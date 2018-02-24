@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import RNCryptor
 import FirebaseMessaging
+import PCLBlurEffectAlert
 
 class AuthService: UIViewController {
     static let instance = AuthService()
@@ -98,10 +99,18 @@ class AuthService: UIViewController {
         let imageToUpload = convertToUIImage(c_image: (filter?.outputImage)!)
         StorageService.instance.uploadImage(withuserID: uid, image: imageToUpload) { (status, error, url) in
             if (error != nil) {
-                let alert = UIAlertController(title: "Warning", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                
+                let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.view.alpha = 1.0
+                }))
                 onUploadingImageComplete(nil,false, error)
-                self.present(alert, animated: true, completion: nil)
+                alert.configureAlert(alert: alert)
+                self.view.alpha = 0.7
+                alert.show()
+                
+                
+                
             } else {
                 print("Uploaded Successfully")
                 onUploadingImageComplete("\(url!)", true, nil)
@@ -138,8 +147,15 @@ class AuthService: UIViewController {
         let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (error) in
             if error != nil {
-                print(error.debugDescription)
+                let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
+                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.view.alpha = 1.0
+                }))
+                
+                alert.configureAlert(alert: alert)
+                self.view.alpha = 0.7
                 onReauthenticationComplete(false, error)
+                alert.show()
                 return
             }
             //Re-Authentication successfull
