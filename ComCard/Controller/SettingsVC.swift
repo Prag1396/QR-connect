@@ -169,19 +169,4 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func reportIsuueBtnpressed(_ sender: Any) {
         
     }
-    
-    @IBAction func clearChat(_ sender: Any) {
-        
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
-        DataService.instance.REF_USERMESSAGES.child(uid).removeValue { (error, ref) in
-            if error != nil {
-                print("Unable to delete messages")
-            }
-        }
-        
-    }
-    
 }

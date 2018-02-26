@@ -19,7 +19,7 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var timer: Timer?
     
     @IBOutlet weak var chatTableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

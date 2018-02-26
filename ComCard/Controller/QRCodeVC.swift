@@ -13,7 +13,7 @@ import Photos
 import MessageUI
 import PCLBlurEffectAlert
 
-class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate {
+class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
@@ -22,7 +22,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     var newValueofChildren: Int = 0
-    
+    var leftPanTriggered: Bool = false
+    var rightPanTrigger: Bool = false
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     let loadingView: UIView = UIView()
     
@@ -36,6 +37,18 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.view)
         }
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan))
+        edgePan.delegate = self
+        edgePan.edges = .left
+        edgePan.name = "Left"
+        view.addGestureRecognizer(edgePan)
+        
+        let edgepan2 = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan(_:)))
+        edgepan2.delegate = self
+        edgepan2.edges = .right
+        edgepan2.name = "Right"
+        view.addGestureRecognizer(edgepan2)
         
         self.checkforunreadmessages()
         
@@ -85,7 +98,62 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         }
 
     }
+    
 
+    
+    @objc func handleEdgePan(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        
+        switch recognizer.state {
+        case .began, .changed:
+            if !leftPanTriggered {
+                let threshold: CGFloat = 10
+                let translation = abs(recognizer.translation(in: view).x)
+                if translation >= threshold {
+                    performAnimationLeft(recognizer: recognizer)
+                    leftPanTriggered = true
+                }
+            }
+        case .ended, .cancelled, .failed:
+                self.leftPanTriggered = false
+        default:
+            break
+        }
+    }
+    
+    func performAnimationLeft(recognizer: UIScreenEdgePanGestureRecognizer) {
+        print("here")
+        if(recognizer.name == "Right") {
+            
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "messagesvc") as? MessagesVC
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            view.window?.layer.add(transition, forKey: kCATransition)
+            if let cp = controllerToPresent {
+                self.present(cp, animated: false, completion: nil)
+            }
+            
+            
+        } else if(recognizer.name == "Left") {
+            
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "settingsvc") as? SettingsVC
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromLeft
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            view.window?.layer.add(transition, forKey: kCATransition)
+            if let cp = controllerToPresent {
+                self.present(cp, animated: false, completion: nil)
+            }
+            
+        }
+    }
+    
     func setUpActivityIndicator() {
 
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)

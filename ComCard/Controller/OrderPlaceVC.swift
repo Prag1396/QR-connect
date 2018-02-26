@@ -197,7 +197,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         captureText()
         
         if (self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! ||
-            self.streetAddresstextfield2.text == nil || (self.streetAddresstextfield2.text?.isEmpty)! || self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
+            self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
             
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
