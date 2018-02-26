@@ -26,9 +26,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     let userID = Auth.auth().currentUser?.uid
     
-    var contactbuttonwassender: Bool {
+    var contactbuttonwassender: Bool? {
         get {
-            return _contactbtnwassender
+            return _contactbtnwassender!
         }
         set {
             _contactbtnwassender = newValue
@@ -146,8 +146,13 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 if success {
                     
                     if self.contactbuttonwassender == false {
-                        //perform segue
-                        self.performSegue(withIdentifier: "signinsuccessfull", sender: Any.self)
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let vc = controllerToPresent {
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                        
+                        
                     } else if self.contactbuttonwassender == true {
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                         let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController

@@ -127,7 +127,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "messagesvc") as? MessagesVC
             let transition = CATransition()
-            transition.duration = 0.5
+            transition.duration = 0.23
             transition.type = kCATransitionPush
             transition.subtype = kCATransitionFromRight
             transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -142,7 +142,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "settingsvc") as? SettingsVC
             let transition = CATransition()
-            transition.duration = 0.5
+            transition.duration = 0.23
             transition.type = kCATransitionPush
             transition.subtype = kCATransitionFromLeft
             transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
