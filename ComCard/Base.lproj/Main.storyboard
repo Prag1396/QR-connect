@@ -783,7 +783,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSw-gE-kKf" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
-                                <rect key="frame" x="68" y="380" width="240" height="30"/>
+                                <rect key="frame" x="67.666666666666686" y="380" width="240" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="913-DZ-zUx"/>
@@ -2446,14 +2446,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIV-fa-3zt">
-                                <rect key="frame" x="0.0" y="548.66666666666663" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="553.66666666666663" width="375" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="JQm-Yh-BLK"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJP-fp-Xv3">
-                                <rect key="frame" x="0.0" y="600" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="605.66666666666663" width="375" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="a7p-Y9-Dvs"/>
@@ -2467,10 +2467,10 @@
                             <constraint firstItem="A8s-jD-c5B" firstAttribute="trailing" secondItem="vkV-Gi-Yrf" secondAttribute="trailing" constant="22" id="51c-L9-5aa"/>
                             <constraint firstItem="UUD-dl-4Qx" firstAttribute="centerX" secondItem="39M-K8-s4L" secondAttribute="centerX" id="6xR-tj-7pP"/>
                             <constraint firstAttribute="trailing" secondItem="WJP-fp-Xv3" secondAttribute="trailing" id="94I-sa-t6l"/>
-                            <constraint firstItem="WJP-fp-Xv3" firstAttribute="bottom" secondItem="Mrp-NY-rfF" secondAttribute="bottom" id="CtV-DO-dv7"/>
+                            <constraint firstItem="WJP-fp-Xv3" firstAttribute="bottom" secondItem="Mrp-NY-rfF" secondAttribute="bottom" constant="5" id="CtV-DO-dv7"/>
                             <constraint firstAttribute="bottom" secondItem="D4K-yr-Rvu" secondAttribute="bottom" id="Dmi-aA-RVH"/>
                             <constraint firstAttribute="trailing" secondItem="oIV-fa-3zt" secondAttribute="trailing" id="EAg-LR-LZA"/>
-                            <constraint firstItem="oIV-fa-3zt" firstAttribute="bottom" secondItem="vkV-Gi-Yrf" secondAttribute="bottom" id="Epi-Km-Lj2"/>
+                            <constraint firstItem="oIV-fa-3zt" firstAttribute="bottom" secondItem="vkV-Gi-Yrf" secondAttribute="bottom" constant="5" id="Epi-Km-Lj2"/>
                             <constraint firstItem="A8s-jD-c5B" firstAttribute="trailing" secondItem="US6-EN-QUY" secondAttribute="trailing" constant="27" id="FSq-CN-3Fb"/>
                             <constraint firstItem="Obo-O1-zRz" firstAttribute="trailing" secondItem="A8s-jD-c5B" secondAttribute="trailing" id="Fjl-Ud-GM1"/>
                             <constraint firstItem="7Sf-Kw-ZAm" firstAttribute="centerX" secondItem="UUD-dl-4Qx" secondAttribute="centerX" id="GzK-vO-ifV"/>

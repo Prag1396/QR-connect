@@ -16,6 +16,7 @@ target 'ComCard' do
   pod 'Firebase/Messaging'
   pod "PCLBlurEffectAlert"
   pod 'TKSubmitTransition', :git => 'https://github.com/entotsu/TKSubmitTransition.git', :branch => 'swift4'
+  pod 'UITextField+Shake', '~> 1.2'
 
 
 

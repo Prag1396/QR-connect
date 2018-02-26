@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B535CB1C20523DF24333CE1367D8E6F4"
+               BlueprintIdentifier = "A06B7FF31F009803FD94EC228A6E1E63"
                BuildableName = "TKSubmitTransition.framework"
                BlueprintName = "TKSubmitTransition"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B535CB1C20523DF24333CE1367D8E6F4"
+            BlueprintIdentifier = "A06B7FF31F009803FD94EC228A6E1E63"
             BuildableName = "TKSubmitTransition.framework"
             BlueprintName = "TKSubmitTransition"
             ReferencedContainer = "container:Pods.xcodeproj">

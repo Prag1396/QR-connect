@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import PCLBlurEffectAlert
 import TKSubmitTransition
+import UITextField_Shake
 
 
 class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
@@ -143,6 +144,17 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         }
     }
     
+    func showAlert(withMessage message: String) {
+        //ADD CUSTOM ALERTVIEW
+        let alert = PCLBlurEffectAlertController(title: "Warning", message: message, effect: UIBlurEffect(style: .light), style: .alert)
+        alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.view.alpha = 1.0
+        }))
+        alert.configureAlert(alert: alert)
+        self.view.alpha = 0.7
+        alert.show()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -179,15 +191,14 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 } else {
                     if let loginerror = loginError {
                         AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in
-                            //ADD CUSTOM ALERTVIEW
                             
-                            let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
-                            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                                self.view.alpha = 1.0
-                            }))
-                            alert.configureAlert(alert: alert)
-                            self.view.alpha = 0.7
-                            alert.show()
+                            if errmsg == "Invalid Passcode" {
+                                self.passwordTextField.shake(6, withDelta: 5, completion: {
+                                    self.showAlert(withMessage: errmsg)
+                                })
+                            } else {
+                                self.showAlert(withMessage: errmsg)
+                            }
 
                         })
                     }

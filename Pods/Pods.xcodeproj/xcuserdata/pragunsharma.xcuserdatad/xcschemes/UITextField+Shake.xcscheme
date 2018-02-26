@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95C23CC8AECB8E7925486D58910C79A6"
-               BuildableName = "Pods_ComCard.framework"
-               BlueprintName = "Pods-ComCard"
+               BlueprintIdentifier = "222E222CE772C83494365B7685AB2AC0"
+               BuildableName = "UITextField_Shake.framework"
+               BlueprintName = "UITextField+Shake"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C23CC8AECB8E7925486D58910C79A6"
-            BuildableName = "Pods_ComCard.framework"
-            BlueprintName = "Pods-ComCard"
+            BlueprintIdentifier = "222E222CE772C83494365B7685AB2AC0"
+            BuildableName = "UITextField_Shake.framework"
+            BlueprintName = "UITextField+Shake"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
