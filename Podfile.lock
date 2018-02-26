@@ -67,6 +67,7 @@ PODS:
   - Protobuf (3.5.0)
   - RNCryptor (5.0.2)
   - TextFieldEffects (1.4.0)
+  - TKSubmitTransition (2.0)
 
 DEPENDENCIES:
   - Firebase
@@ -79,6 +80,17 @@ DEPENDENCIES:
   - PCLBlurEffectAlert
   - RNCryptor (~> 5.0)
   - TextFieldEffects
+  - TKSubmitTransition (from `https://github.com/entotsu/TKSubmitTransition.git`, branch `swift4`)
+
+EXTERNAL SOURCES:
+  TKSubmitTransition:
+    :branch: swift4
+    :git: https://github.com/entotsu/TKSubmitTransition.git
+
+CHECKOUT OPTIONS:
+  TKSubmitTransition:
+    :commit: 29fac6072451a4def5cde567075bfc62a728bb1f
+    :git: https://github.com/entotsu/TKSubmitTransition.git
 
 SPEC CHECKSUMS:
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
@@ -98,7 +110,8 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   RNCryptor: 59b9f92e9fa8a1af74c32dc6b1af5e30ff5e1b64
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
+  TKSubmitTransition: 647b907508da58ba864141e3c4382442ec536d40
 
-PODFILE CHECKSUM: 5de62e12f2afe8967e2b4e44aacb622eb1da3d18
+PODFILE CHECKSUM: 71fca5aece32bb4295476d2e75d052a9d101ce77
 
 COCOAPODS: 1.3.1

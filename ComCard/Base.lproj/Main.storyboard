@@ -782,19 +782,25 @@
                                     <constraint firstAttribute="width" constant="33" id="zb4-vh-eA8"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSw-gE-kKf" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSw-gE-kKf" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
                                 <rect key="frame" x="68" y="380" width="240" height="30"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="913-DZ-zUx"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="Bni-9b-Wgb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                 <state key="normal" title="  SIGN IN" image="LoginUIButton">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.77647058820000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.31787589189999998" green="0.6944007874" blue="0.89807963369999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                        <color key="value" red="1" green="0.69411764710000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="normalCornerRadius">
                                         <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
@@ -844,6 +850,7 @@
                     <connections>
                         <outlet property="background" destination="txP-8Z-jXU" id="VEp-He-mgU"/>
                         <outlet property="passwordTextField" destination="lDJ-Ps-pft" id="gw6-xm-OLP"/>
+                        <outlet property="signinBtn" destination="BSw-gE-kKf" id="qjb-uB-Tkp"/>
                         <outlet property="userNameTextField" destination="Ze1-dp-3O2" id="iOk-cN-cEY"/>
                     </connections>
                 </viewController>
@@ -2402,7 +2409,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-NY-rfF" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="82.666666666666686" y="563.66666666666663" width="196" height="38"/>
+                                <rect key="frame" x="89.666666666666686" y="563.66666666666663" width="196" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="PGX-vi-6Wy"/>
@@ -2418,19 +2425,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUD-dl-4Qx" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="112.66666666666669" y="483.66666666666669" width="150" height="40.000000000000057"/>
+                                <rect key="frame" x="77.666666666666686" y="483.66666666666669" width="220" height="30.000000000000057"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="F0Q-We-OUV"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="dsl-k7-fxP"/>
+                                    <constraint firstAttribute="height" constant="30" id="F0Q-We-OUV"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="dsl-k7-fxP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                 <state key="normal" title="Dowload QRCode">
                                     <color key="titleColor" red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -2458,6 +2465,7 @@
                             <constraint firstItem="D4K-yr-Rvu" firstAttribute="trailing" secondItem="39M-K8-s4L" secondAttribute="trailing" id="0Pb-0V-iXs"/>
                             <constraint firstItem="US6-EN-QUY" firstAttribute="leading" secondItem="A8s-jD-c5B" secondAttribute="leading" constant="27" id="1Ly-Uf-AdJ"/>
                             <constraint firstItem="A8s-jD-c5B" firstAttribute="trailing" secondItem="vkV-Gi-Yrf" secondAttribute="trailing" constant="22" id="51c-L9-5aa"/>
+                            <constraint firstItem="UUD-dl-4Qx" firstAttribute="centerX" secondItem="39M-K8-s4L" secondAttribute="centerX" id="6xR-tj-7pP"/>
                             <constraint firstAttribute="trailing" secondItem="WJP-fp-Xv3" secondAttribute="trailing" id="94I-sa-t6l"/>
                             <constraint firstItem="WJP-fp-Xv3" firstAttribute="bottom" secondItem="Mrp-NY-rfF" secondAttribute="bottom" id="CtV-DO-dv7"/>
                             <constraint firstAttribute="bottom" secondItem="D4K-yr-Rvu" secondAttribute="bottom" id="Dmi-aA-RVH"/>
@@ -2465,8 +2473,8 @@
                             <constraint firstItem="oIV-fa-3zt" firstAttribute="bottom" secondItem="vkV-Gi-Yrf" secondAttribute="bottom" id="Epi-Km-Lj2"/>
                             <constraint firstItem="A8s-jD-c5B" firstAttribute="trailing" secondItem="US6-EN-QUY" secondAttribute="trailing" constant="27" id="FSq-CN-3Fb"/>
                             <constraint firstItem="Obo-O1-zRz" firstAttribute="trailing" secondItem="A8s-jD-c5B" secondAttribute="trailing" id="Fjl-Ud-GM1"/>
-                            <constraint firstItem="7Sf-Kw-ZAm" firstAttribute="centerX" secondItem="39M-K8-s4L" secondAttribute="centerX" id="NbQ-3q-2iN"/>
-                            <constraint firstItem="Mrp-NY-rfF" firstAttribute="centerX" secondItem="UUD-dl-4Qx" secondAttribute="centerX" constant="-7" id="O7G-qq-tJv"/>
+                            <constraint firstItem="7Sf-Kw-ZAm" firstAttribute="centerX" secondItem="UUD-dl-4Qx" secondAttribute="centerX" id="GzK-vO-ifV"/>
+                            <constraint firstItem="Mrp-NY-rfF" firstAttribute="centerX" secondItem="UUD-dl-4Qx" secondAttribute="centerX" id="O7G-qq-tJv"/>
                             <constraint firstItem="WJP-fp-Xv3" firstAttribute="leading" secondItem="39M-K8-s4L" secondAttribute="leading" id="Wd3-wO-Fhw"/>
                             <constraint firstItem="Obo-O1-zRz" firstAttribute="leading" secondItem="A8s-jD-c5B" secondAttribute="leading" id="bCd-W1-uae"/>
                             <constraint firstItem="vkV-Gi-Yrf" firstAttribute="leading" secondItem="A8s-jD-c5B" secondAttribute="leading" constant="22" id="c33-in-vaw"/>
@@ -2474,7 +2482,6 @@
                             <constraint firstItem="oIV-fa-3zt" firstAttribute="leading" secondItem="39M-K8-s4L" secondAttribute="leading" id="hNq-i8-OE4"/>
                             <constraint firstItem="Obo-O1-zRz" firstAttribute="top" secondItem="39M-K8-s4L" secondAttribute="top" id="kTh-ho-6OZ"/>
                             <constraint firstItem="D4K-yr-Rvu" firstAttribute="leading" secondItem="39M-K8-s4L" secondAttribute="leading" id="m60-r5-j1I"/>
-                            <constraint firstItem="UUD-dl-4Qx" firstAttribute="centerX" secondItem="7Sf-Kw-ZAm" secondAttribute="centerX" id="n7z-kL-6sR"/>
                             <constraint firstItem="vkV-Gi-Yrf" firstAttribute="top" secondItem="US6-EN-QUY" secondAttribute="bottom" constant="-83" id="qp6-gW-k87"/>
                             <constraint firstItem="UUD-dl-4Qx" firstAttribute="top" secondItem="7Sf-Kw-ZAm" secondAttribute="bottom" constant="33" id="vT0-pS-ILz"/>
                             <constraint firstItem="vkV-Gi-Yrf" firstAttribute="centerY" secondItem="39M-K8-s4L" secondAttribute="centerY" id="vdv-zV-AAH"/>
@@ -3086,6 +3093,6 @@
         <segue reference="EJj-3d-GIx"/>
         <segue reference="tlv-Y4-8pu"/>
         <segue reference="NRl-Jr-igb"/>
-        <segue reference="0cI-Iz-w92"/>
+        <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>
 </document>

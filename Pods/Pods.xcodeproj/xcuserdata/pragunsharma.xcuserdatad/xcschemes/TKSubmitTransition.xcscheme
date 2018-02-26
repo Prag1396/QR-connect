@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DDE498394A381E17DCC3FE133C71A587"
-               BuildableName = "Pods_ComCard.framework"
-               BlueprintName = "Pods-ComCard"
+               BlueprintIdentifier = "B535CB1C20523DF24333CE1367D8E6F4"
+               BuildableName = "TKSubmitTransition.framework"
+               BlueprintName = "TKSubmitTransition"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DDE498394A381E17DCC3FE133C71A587"
-            BuildableName = "Pods_ComCard.framework"
-            BlueprintName = "Pods-ComCard"
+            BlueprintIdentifier = "B535CB1C20523DF24333CE1367D8E6F4"
+            BuildableName = "TKSubmitTransition.framework"
+            BlueprintName = "TKSubmitTransition"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

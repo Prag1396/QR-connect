@@ -11,14 +11,16 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import PCLBlurEffectAlert
+import TKSubmitTransition
 
 
-
-class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
 
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
+    
+    @IBOutlet weak var signinBtn: TKTransitionSubmitButton?
     
     var next_Responder: UIResponder!
     private var _contactbtnwassender: Bool!
@@ -33,6 +35,14 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         set {
             _contactbtnwassender = newValue
         }
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TKFadeInAnimator(transitionDuration: 0.5, startingAlpha: 0.5)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
     }
     
     
@@ -144,25 +154,28 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
             
             AuthService.instance.loginUser(withEmail: userNameTextField.text!, andPassword: passwordTextField.text!, loginComplete: { (success, loginError) in
                 if success {
+                    self.signinBtn?.startLoadingAnimation()
                     
                     if self.contactbuttonwassender == false {
-                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
-                        if let vc = controllerToPresent {
-                            self.present(vc, animated: true, completion: nil)
-                        }
-                        
+                        self.signinBtn?.startFinishAnimation(0.3, completion: {
+                            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                            if let vc = controllerToPresent {
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                        })
                         
                     } else if self.contactbuttonwassender == true {
-                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
-                        if let vc = controllerToPresent {
-                            vc.selectedIndex = 1
-                            self.present(vc, animated: true, completion: nil)
-                        }
+                        self.signinBtn?.startFinishAnimation(0, completion: {
+                            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                            if let vc = controllerToPresent {
+                                vc.selectedIndex = 1
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                        })
                     }
                     
-
                 } else {
                     if let loginerror = loginError {
                         AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in

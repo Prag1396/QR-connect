@@ -15,6 +15,8 @@ target 'ComCard' do
   pod 'RNCryptor', '~> 5.0'
   pod 'Firebase/Messaging'
   pod "PCLBlurEffectAlert"
+  pod 'TKSubmitTransition', :git => 'https://github.com/entotsu/TKSubmitTransition.git', :branch => 'swift4'
+
 
 
   target 'ComCardTests' do
