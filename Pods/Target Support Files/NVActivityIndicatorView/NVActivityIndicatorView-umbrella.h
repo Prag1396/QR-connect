@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double TKSubmitTransitionVersionNumber;
-FOUNDATION_EXPORT const unsigned char TKSubmitTransitionVersionString[];
+FOUNDATION_EXPORT double NVActivityIndicatorViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char NVActivityIndicatorViewVersionString[];
 

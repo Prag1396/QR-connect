@@ -63,11 +63,13 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.1.1):
+    - NVActivityIndicatorView/Presenter (= 4.1.1)
+  - NVActivityIndicatorView/Presenter (4.1.1)
   - PCLBlurEffectAlert (2.1.1)
   - Protobuf (3.5.0)
   - RNCryptor (5.0.2)
   - TextFieldEffects (1.4.0)
-  - TKSubmitTransition (2.0)
   - UITextField+Shake (1.2.1)
 
 DEPENDENCIES:
@@ -78,21 +80,11 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
   - PCLBlurEffectAlert
   - RNCryptor (~> 5.0)
   - TextFieldEffects
-  - TKSubmitTransition (from `https://github.com/entotsu/TKSubmitTransition.git`, branch `swift4`)
   - UITextField+Shake (~> 1.2)
-
-EXTERNAL SOURCES:
-  TKSubmitTransition:
-    :branch: swift4
-    :git: https://github.com/entotsu/TKSubmitTransition.git
-
-CHECKOUT OPTIONS:
-  TKSubmitTransition:
-    :commit: 29fac6072451a4def5cde567075bfc62a728bb1f
-    :git: https://github.com/entotsu/TKSubmitTransition.git
 
 SPEC CHECKSUMS:
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
@@ -108,13 +100,13 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
   PCLBlurEffectAlert: 9671c027e17e9b054ed372fbecded167ea46daf9
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   RNCryptor: 59b9f92e9fa8a1af74c32dc6b1af5e30ff5e1b64
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
-  TKSubmitTransition: 647b907508da58ba864141e3c4382442ec536d40
   UITextField+Shake: 298ac5a0f239d731bdab999b19b628c956ca0ac3
 
-PODFILE CHECKSUM: 8d48ddbd69e350c3aa9eef132e922718edbcfb68
+PODFILE CHECKSUM: 035a728e6543c0dd9d35d4b398c6df809df24a3c
 
 COCOAPODS: 1.3.1

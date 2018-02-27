@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import PCLBlurEffectAlert
+import NVActivityIndicatorView
 
 class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -20,7 +21,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     @IBOutlet weak var background: UIImageView!
     
     var next_responder: UIResponder!
-    
+    var activityIndicatorView: NVActivityIndicatorView?
     private var _imageURL: String? = nil
     private var _phonenumber: String? = nil
     private var _email: String? = nil
@@ -116,12 +117,10 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
         // Dispose of any resources that can be recreated.
     }
     
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
     @IBAction func donebtnpressed(_ sender: Any) {
         
         setUpActivityIndicator()
-        activityIndicator.startAnimating()
+        activityIndicatorView?.startAnimating()
         captureText()
         
         if ((firstName.text?.isEmpty)! || (lastName.text?.isEmpty)!) {
@@ -141,7 +140,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
                     AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
                         
                         print("Successfully registered user")
-                        self.activityIndicator.stopAnimating()
+                        self.activityIndicatorView?.stopAnimating()
                         self.performSegue(withIdentifier: "loaduserdetails", sender: Any.self)
                     })
                 } else {
@@ -161,12 +160,10 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
-        
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingView.addSubview(activityIndicator)
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicatorView = NVActivityIndicatorView(frame:frame , type: .ballPulse, color: UIColor.white, padding: 0)
+        activityIndicatorView?.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        loadingView.addSubview(activityIndicatorView!)
         view.addSubview(loadingView)
         
     }

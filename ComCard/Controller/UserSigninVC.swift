@@ -11,22 +11,22 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import PCLBlurEffectAlert
-import TKSubmitTransition
 import UITextField_Shake
+import NVActivityIndicatorView
 
 
-class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
+class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
     
-    @IBOutlet weak var signinBtn: TKTransitionSubmitButton?
-    
+    var activityIndicatorView: NVActivityIndicatorView?
     var next_Responder: UIResponder!
     private var _contactbtnwassender: Bool!
     private var _emailDownloaded: String? = nil
     
+    let loadingView: UIView = UIView()
     let userID = Auth.auth().currentUser?.uid
     
     var contactbuttonwassender: Bool? {
@@ -38,18 +38,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         }
     }
     
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TKFadeInAnimator(transitionDuration: 0.5, startingAlpha: 0.5)
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.downloadUsername()
         userNameTextField.delegate = self
         userNameTextField.tag = 1
@@ -66,6 +57,23 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         self.view.addGestureRecognizer(tap)
 
         
+    }
+    
+    func setUpActivityIndicator() {
+        
+        
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.view.center
+        loadingView.backgroundColor = UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicatorView = NVActivityIndicatorView(frame:frame , type: .ballPulse, color: UIColor.white, padding: 0)
+        activityIndicatorView?.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        loadingView.addSubview(activityIndicatorView!)
+        self.view.addSubview(loadingView)
     }
     
     func downloadUsername() {
@@ -163,32 +171,34 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBAction func signInBtnTapped(_ sender: Any) {
         
         if userNameTextField.text != nil && passwordTextField.text != nil && userNameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false {
-            
+            setUpActivityIndicator()
+            activityIndicatorView?.startAnimating()
             AuthService.instance.loginUser(withEmail: userNameTextField.text!, andPassword: passwordTextField.text!, loginComplete: { (success, loginError) in
                 if success {
-                    self.signinBtn?.startLoadingAnimation()
-                    
                     if self.contactbuttonwassender == false {
-                        self.signinBtn?.startFinishAnimation(0.3, completion: {
-                            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
-                            if let vc = controllerToPresent {
-                                self.present(vc, animated: true, completion: nil)
-                            }
-                        })
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let vc = controllerToPresent {
+                            self.activityIndicatorView?.stopAnimating()
+                            self.loadingView.removeFromSuperview()
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    
                         
                     } else if self.contactbuttonwassender == true {
-                        self.signinBtn?.startFinishAnimation(0, completion: {
-                            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
-                            if let vc = controllerToPresent {
-                                vc.selectedIndex = 1
-                                self.present(vc, animated: true, completion: nil)
-                            }
-                        })
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let vc = controllerToPresent {
+                            vc.selectedIndex = 1
+                            self.activityIndicatorView?.stopAnimating()
+                            self.loadingView.removeFromSuperview()
+                            self.present(vc, animated: true, completion: nil)
+                        }
                     }
                     
                 } else {
+                    self.activityIndicatorView?.stopAnimating()
+                    self.loadingView.removeFromSuperview()
                     if let loginerror = loginError {
                         AuthService.instance.handleErrorCode(error: loginerror as NSError, onCompleteErrorHandler: { (errmsg, nil) in
                             

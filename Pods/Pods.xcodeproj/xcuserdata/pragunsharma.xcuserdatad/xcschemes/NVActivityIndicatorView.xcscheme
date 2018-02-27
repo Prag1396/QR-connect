@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A06B7FF31F009803FD94EC228A6E1E63"
-               BuildableName = "TKSubmitTransition.framework"
-               BlueprintName = "TKSubmitTransition"
+               BlueprintIdentifier = "123F89F7E8DB3444EAD2F61E835952E2"
+               BuildableName = "NVActivityIndicatorView.framework"
+               BlueprintName = "NVActivityIndicatorView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A06B7FF31F009803FD94EC228A6E1E63"
-            BuildableName = "TKSubmitTransition.framework"
-            BlueprintName = "TKSubmitTransition"
+            BlueprintIdentifier = "123F89F7E8DB3444EAD2F61E835952E2"
+            BuildableName = "NVActivityIndicatorView.framework"
+            BlueprintName = "NVActivityIndicatorView"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

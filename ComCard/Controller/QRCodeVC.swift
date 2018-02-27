@@ -12,6 +12,7 @@ import Firebase
 import Photos
 import MessageUI
 import PCLBlurEffectAlert
+import NVActivityIndicatorView
 
 class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
 
@@ -24,14 +25,16 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     var newValueofChildren: Int = 0
     var leftPanTriggered: Bool = false
     var rightPanTrigger: Bool = false
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var activityIndicatorView: NVActivityIndicatorView?
+
     let loadingView: UIView = UIView()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.setUpActivityIndicator()
-        activityIndicator.startAnimating()
+        activityIndicatorView?.startAnimating()
         unreadmessageindicator.isHidden = true
         
         if traitCollection.forceTouchCapability == .available {
@@ -82,7 +85,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                                     DispatchQueue.main.async {
                                         if let imageData = UIImage(data: data!) {
                                             self.qrcodeimage.image = imageData
-                                            self.activityIndicator.stopAnimating()
+                                            self.activityIndicatorView?.stopAnimating()
                                             self.loadingView.removeFromSuperview()
                                             self._imagedata = data!
                                             
@@ -163,12 +166,11 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         loadingView.layer.cornerRadius = 10
         
         
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingView.addSubview(activityIndicator)
-        view.addSubview(loadingView)
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicatorView = NVActivityIndicatorView(frame:frame , type: .ballPulse, color: UIColor.white, padding: 0)
+        activityIndicatorView?.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        loadingView.addSubview(activityIndicatorView!)
+        self.view.addSubview(loadingView)
     }
     
     
