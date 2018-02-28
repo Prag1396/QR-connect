@@ -17,7 +17,7 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
-    
+    let userDefaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,25 +25,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
+            if let err = error {
+                print("Failed to request auth:", err)
+                return
+            }
             DispatchQueue.main.async(execute: {
                 UIApplication.shared.registerForRemoteNotifications()
             })
         }
         IQKeyboardManager.sharedManager().enable = true
+        checkIfLaunchedBefore()
+        
         return true
     }
     
+    func checkIfLaunchedBefore() {
+        if userDefaults.bool(forKey: "hasLaunchedBefore") == false {
+            
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print(signOutError.localizedDescription)
+            }
+            
+            userDefaults.set(true, forKey: "hasLaunchedBefore")
+            userDefaults.synchronize()
+            
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignUp") as? UserSignupVC
+            if let cp = controllerToPresent {
+                
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window?.rootViewController = cp
+                self.window?.makeKeyAndVisible()
+                cp.backbtn.isHidden = true
+            }
+            
+        }
+
+    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
+        print("Registered")
+        Messaging.messaging().apnsToken = deviceToken
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print(fcmToken)
+        print("token: " + fcmToken)
     }
     
     //Listen for user notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(.alert)
+        UIApplication.shared.applicationIconBadgeNumber = 1
+
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(response)
     }
     
     

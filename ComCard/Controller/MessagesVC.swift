@@ -11,12 +11,13 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
  
     var messageArray = [Message]()
     var messagesDict = [String: Message]()
     var timer: Timer?
+    var panTriggered: Bool = false
     
     @IBOutlet weak var chatTableView: UITableView!
 
@@ -30,6 +31,12 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         messageArray.removeAll()
         messagesDict.removeAll()
         chatTableView.reloadData()
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan))
+        edgePan.delegate = self
+        edgePan.edges = .left
+        edgePan.name = "Left"
+        view.addGestureRecognizer(edgePan)
 
         observeUserMessages()
         
@@ -39,7 +46,36 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
+    @objc func handleEdgePan(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        switch recognizer.state {
+        case .began, .changed:
+            if !panTriggered {
+                let threshold: CGFloat = 10
+                let translation = abs(recognizer.translation(in: self.view).x)
+                if translation > threshold {
+                    
+                    self.performAnimation()
+                    panTriggered = true
+                }
+            }
+        case .ended, .failed, .cancelled:
+            self.panTriggered = false
+        default:
+            break
+        }
+    }
     
+    func performAnimation() {
+        
+        let transition = CATransition()
+        transition.duration = 0.23
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        view.window?.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: false, completion: nil)
+        
+    }
     
     @IBAction func backbtnpressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

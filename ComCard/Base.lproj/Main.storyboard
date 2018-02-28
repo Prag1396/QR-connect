@@ -410,7 +410,7 @@
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="91b-KA-EX1" customClass="textViewStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="99" y="5" width="210" height="36"/>
+                                        <rect key="frame" x="99" y="5" width="200" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="M2R-S7-9cj"/>
@@ -423,11 +423,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendicon" translatesAutoresizingMaskIntoConstraints="NO" id="uRL-wq-2Sl">
-                                        <rect key="frame" x="329" y="8" width="30" height="30"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendicon" translatesAutoresizingMaskIntoConstraints="NO" id="uRL-wq-2Sl">
+                                        <rect key="frame" x="309" y="7.6666666666666288" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="gdl-nQ-Ise"/>
-                                            <constraint firstAttribute="width" constant="30" id="p6S-nx-hQD"/>
+                                            <constraint firstAttribute="width" constant="50" id="p6S-nx-hQD"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -441,7 +441,7 @@
                                     <constraint firstItem="lIs-OG-hxA" firstAttribute="leading" secondItem="Th1-L1-DyE" secondAttribute="leading" constant="6" id="aeM-2n-wer"/>
                                     <constraint firstItem="Gs0-2C-Sie" firstAttribute="leading" secondItem="lIs-OG-hxA" secondAttribute="trailing" constant="8" id="hhc-hE-qpu"/>
                                     <constraint firstAttribute="bottom" secondItem="lIs-OG-hxA" secondAttribute="bottom" constant="7" id="wMA-7u-0kx"/>
-                                    <constraint firstItem="uRL-wq-2Sl" firstAttribute="leading" secondItem="91b-KA-EX1" secondAttribute="trailing" constant="20" id="wwt-W4-LOs"/>
+                                    <constraint firstItem="uRL-wq-2Sl" firstAttribute="leading" secondItem="91b-KA-EX1" secondAttribute="trailing" constant="10" id="wwt-W4-LOs"/>
                                     <constraint firstItem="91b-KA-EX1" firstAttribute="leading" secondItem="Gs0-2C-Sie" secondAttribute="trailing" constant="18" id="xTP-hI-bSz"/>
                                 </constraints>
                             </view>
@@ -742,7 +742,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="T02-rN-a0a"/>
+                                    <action selector="backbtnPressed:" destination="WOu-pG-rtD" eventType="touchUpInside" id="rCG-xv-BWu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGn-29-Z5Z" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
@@ -752,7 +752,7 @@
                                     <constraint firstAttribute="height" constant="30" id="NS0-JE-mwx"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="227" id="qI1-7Q-kVa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                 <state key="normal" title="Don't have an account yet? Sign up">
                                     <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -767,7 +767,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="131" id="6mL-lx-brb"/>
                                     <constraint firstAttribute="height" constant="30" id="RxM-40-RRm"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                 <state key="normal" title="Forgot password?">
                                     <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -1428,6 +1428,7 @@
                         <viewLayoutGuide key="safeArea" id="Tge-Ri-XxY"/>
                     </view>
                     <connections>
+                        <outlet property="backbtn" destination="Jsp-3Q-Apq" id="BgK-5I-7m2"/>
                         <outlet property="background" destination="kLt-wY-EcF" id="krG-8n-BmC"/>
                         <outlet property="connectBtn" destination="yDE-96-7Ge" id="ywx-zO-uPd"/>
                         <outlet property="country_extension_textlabel" destination="jOg-SN-s5U" id="gy6-uY-e2l"/>
@@ -2219,10 +2220,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdb-eV-CNQ">
-                                                    <rect key="frame" x="91" y="43" width="164" height="21"/>
+                                                    <rect key="frame" x="91" y="43" width="0.0" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="6LU-Vh-63h"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="mhM-id-0cX"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="164" id="mhM-id-0cX"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2236,7 +2237,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="w2u-ww-mof">
-                                                    <rect key="frame" x="221" y="27" width="135" height="13"/>
+                                                    <rect key="frame" x="205.66666666666663" y="27" width="150.33333333333337" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="6lu-N1-yAa"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="7n5-PC-auw"/>
@@ -2381,10 +2382,10 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Sf-Kw-ZAm" customClass="imageStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="97.666666666666686" y="270.66666666666669" width="180" height="180"/>
+                                <rect key="frame" x="117.66666666666669" y="270.66666666666669" width="140" height="140"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="BHf-DX-hGo"/>
-                                    <constraint firstAttribute="width" constant="180" id="TcJ-dQ-OH5"/>
+                                    <constraint firstAttribute="height" constant="140" id="BHf-DX-hGo"/>
+                                    <constraint firstAttribute="width" constant="140" id="TcJ-dQ-OH5"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2418,7 +2419,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUD-dl-4Qx" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="77.666666666666686" y="483.66666666666669" width="220" height="30.000000000000057"/>
+                                <rect key="frame" x="77.666666666666686" y="443.66666666666669" width="220" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="F0Q-We-OUV"/>
@@ -2488,6 +2489,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="downloadqrcodebtn" destination="UUD-dl-4Qx" id="hCP-W1-ktN"/>
                         <outlet property="qrcodeimage" destination="7Sf-Kw-ZAm" id="sfV-IX-xHY"/>
                         <outlet property="unreadmessageindicator" destination="CMc-4I-9px" id="VpZ-6h-eV5"/>
                     </connections>
@@ -2941,7 +2943,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eT-lw-yVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3796" y="-3364"/>
+            <point key="canvasLocation" x="4828" y="-2612"/>
         </scene>
         <!--Code 3dVC-->
         <scene sceneID="UXf-k8-43C">

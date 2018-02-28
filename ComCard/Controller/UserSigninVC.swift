@@ -38,6 +38,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         }
     }
     
+    @IBAction func backbtnPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

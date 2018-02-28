@@ -30,6 +30,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     var countryArray = [String]()
     var countryDictReturned = [String(): String()]
     var obj: NSLocale = NSLocale()
+
     
     private var _country: String? = nil
     private var _state: String? = nil
@@ -46,6 +47,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         super.viewDidLoad()
         self.downloadUserName()
         self.setupOutlets()
+        
         //Do any additional setup after loading the view.
         countryDictReturned = obj.countryArrayPopulate()
         countryArray = Array(countryDictReturned.values)
@@ -225,26 +227,24 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                     alert.show()
                 } else {
                     //Order Complete
-                    self.postToSpreadsheet()
+                    let alert = PCLBlurEffectAlertController(title: "Congratulations!", message: "You have successfully placed the order. A confirmation has been sent to your email with order details", effect: UIBlurEffect(style: .light), style: .alert)
+                    alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.view.alpha = 1.0
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "homescreen") as? HomeScreenVC
+                        if let cp = controllerToPresent {
+                            self.present(cp, animated: true, completion: nil)
+                        }
+                        
+                        
+                    }))
+                    alert.configureAlert(alert: alert)
+                    alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
+                    self.view.alpha = 0.7
+                    alert.show()
+                    
                 }
             })
-        }
-    }
-    
-    func postToSpreadsheet() {
-        HTTPService.instance.uploadtoSpreadsheet(firstName: self._firstName!, lastName: self._lastName!, street1: self._street!, street2: self._street2!, city: self._city!, state: self._state!, country: self._country!, zipcode: self._zipCode!, quantity: self._quantity!) { (status, error) in
-            if error != nil {
-                let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
-                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.view.alpha = 1.0
-                }))
-                alert.configureAlert(alert: alert)
-                self.view.alpha = 0.7
-                alert.show()
-            } else {
-                //Show confirmation
-                print("Congrats order confirmed")
-            }
         }
     }
     

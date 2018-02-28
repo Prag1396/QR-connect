@@ -18,13 +18,13 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
 
     @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
+    @IBOutlet weak var downloadqrcodebtn: buttonStyle!
     
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     var newValueofChildren: Int = 0
-    var leftPanTriggered: Bool = false
-    var rightPanTrigger: Bool = false
+    var panTriggered: Bool = false
     
     var activityIndicatorView: NVActivityIndicatorView?
 
@@ -60,6 +60,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             for item in tabArray {
                 item.image = item.image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
             }
+            
         }
         
         let userRef = DataService.instance.REF_BASE
@@ -108,23 +109,22 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         
         switch recognizer.state {
         case .began, .changed:
-            if !leftPanTriggered {
+            if !panTriggered {
                 let threshold: CGFloat = 10
                 let translation = abs(recognizer.translation(in: view).x)
                 if translation >= threshold {
-                    performAnimationLeft(recognizer: recognizer)
-                    leftPanTriggered = true
+                    performAnimation(recognizer: recognizer)
+                    panTriggered = true
                 }
             }
         case .ended, .cancelled, .failed:
-                self.leftPanTriggered = false
+                self.panTriggered = false
         default:
             break
         }
     }
     
-    func performAnimationLeft(recognizer: UIScreenEdgePanGestureRecognizer) {
-        print("here")
+    func performAnimation(recognizer: UIScreenEdgePanGestureRecognizer) {
         if(recognizer.name == "Right") {
             
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -177,6 +177,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBAction func messagesbtnPressed(_ sender: Any) {
         self.writecounttoDatabase(newCount: self.newValueofChildren)
         self.unreadmessageindicator.isHidden = true
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
     }
     
@@ -249,7 +250,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         let convertedLocation = view.convert(location, to: qrcodeimage)
         if qrcodeimage.bounds.contains(convertedLocation) {
             //present options
-            print("here")
             let detailsVC = storyboard?.instantiateViewController(withIdentifier: "threedqr") as? QRCode3dVC
             DispatchQueue.main.async {
                 if let imageData = UIImage(data: self._imagedata!) {
@@ -320,25 +320,34 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     func showAlertView(image: UIImage, data: Data) {
 
+        self.downloadqrcodebtn.alpha = 0.2
         let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "Your personalised QRCode has been downloaded", effect: UIBlurEffect(style: .light), style: .alert)
         let img = image.scaleUIImageToSize(image: image, size: CGSize(width: 100, height: 100))
         alert.addImageView(with: img)
         alert.addAction(PCLBlurEffectAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
             self.saveToPhotosPressed(image: image)
             self.view.alpha = 1.0
+            self.downloadqrcodebtn.alpha = 1.0
+
 
         }))
         alert.addAction(PCLBlurEffectAlertAction(title: "Email", style: .default, handler: { (actions) in
             self.emailPressed(data: data)
             self.view.alpha = 1.0
+            self.downloadqrcodebtn.alpha = 1.0
+
 
         }))
         alert.addAction(PCLBlurEffectAlertAction(title: "Cancel", style: .default, handler: { (action) in
             self.view.alpha = 1.0
+            self.downloadqrcodebtn.alpha = 1.0
+
         }))
         
         alert.configureAlert(alert: alert)
+        alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
         alert.configure(buttonFont: [:], buttonTextColor: [.default: UIColor(red: 77/255, green: 255/255, blue: 158/255, alpha: 1.0) ], buttonDisableTextColor: [:])
+        alert.configure(buttonBackgroundColor: UIColor.clear)
         self.view.alpha = 0.7
         alert.show()
         

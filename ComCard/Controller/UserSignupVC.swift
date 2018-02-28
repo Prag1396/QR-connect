@@ -21,6 +21,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var phoneNumberAlreaduInUse: UILabel!
     @IBOutlet weak var connectBtn: UIButton!
     @IBOutlet weak var country_extension_textlabel: UITextField!
+    @IBOutlet weak var backbtn: UIButton!
     
     private var _plus = "+"
     private var _phoneNumberExt: String? = nil
