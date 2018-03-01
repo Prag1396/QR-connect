@@ -19,6 +19,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBOutlet weak var unreadmessageindicator: UIImageView!
     @IBOutlet weak var qrcodeimage: imageStyle!
     @IBOutlet weak var downloadqrcodebtn: buttonStyle!
+    @IBOutlet weak var messagetext: UILabel!
+    @IBOutlet weak var hometitle: UILabel!
     
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
@@ -29,10 +31,12 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     var activityIndicatorView: NVActivityIndicatorView?
 
     let loadingView: UIView = UIView()
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.checkIfLaunchedBefore()
         self.setUpActivityIndicator()
         activityIndicatorView?.startAnimating()
         unreadmessageindicator.isHidden = true
@@ -101,6 +105,18 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             })
         }
 
+    }
+    
+    func checkIfLaunchedBefore() {
+        if userDefaults.bool(forKey: "hasLaunchedbefore") == true {
+            DispatchQueue.main.async {
+                self.hometitle.text = "Home"
+            }
+
+        } else {
+            userDefaults.set(true, forKey: "hasLaunchedbefore")
+            userDefaults.synchronize()
+        }
     }
     
 
