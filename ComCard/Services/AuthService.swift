@@ -78,7 +78,7 @@ class AuthService: UIViewController {
                             return
                         }
                         
-                        let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "imageURL": imageURL!, "token": fcmtoken]
+                        let userData: Dictionary<String, String> = ["FirstName" :firstName, "lastName": lastname, "imageURL": imageURL!, "token": fcmtoken, "unreadMessagesCounter": String(0)]
                         let pvtData: Dictionary<String, String> = ["PhoneNumber": phonenumber, "Email": email]
                         DataService.instance.createDBUserProfile(uid: (user?.uid)!, userData: userData)
                         DataService.instance.createPrivateData(uid: (user?.uid)!, userData: pvtData)

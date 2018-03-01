@@ -140,8 +140,12 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
                     AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
                         
                         print("Successfully registered user")
-                        self.activityIndicatorView?.stopAnimating()
-                        self.performSegue(withIdentifier: "loaduserdetails", sender: Any.self)
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let cp = controllerToPresent {
+                            self.activityIndicatorView?.stopAnimating()
+                            self.present(cp, animated: true, completion: nil)
+                        }
                     })
                 } else {
                     print(String(describing: registrationError?.localizedDescription))
