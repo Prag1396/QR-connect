@@ -48,16 +48,22 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan))
         edgePan.delegate = self
         edgePan.edges = .left
-        edgePan.name = "Left"
+        if #available(iOS 11.0, *) {
+            edgePan.name = "Left"
+        } else {
+            // Fallback on earlier versions
+        }
         view.addGestureRecognizer(edgePan)
         
         let edgepan2 = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan(_:)))
         edgepan2.delegate = self
         edgepan2.edges = .right
-        edgepan2.name = "Right"
+        if #available(iOS 11.0, *) {
+            edgepan2.name = "Right"
+        } else {
+            // Fallback on earlier versions
+        }
         view.addGestureRecognizer(edgepan2)
-        
-        self.checkforunreadmessages()
         
         if let tabArray: [UITabBarItem] = self.tabBarController?.tabBar.items {
         
@@ -67,6 +73,12 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             
         }
         
+        self.downloadQRCodeandEmail()
+        self.checkforunreadmessages()
+
+    }
+    
+    func downloadQRCodeandEmail() {
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
         userRef.child("pvtdata").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
@@ -74,7 +86,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             self._emailDownloaded = dict?["Email"] as? String
             self.downloadImageUrl(onfirstnamedownloadComplete: { (status) in
                 if status == true {
-                        //download Image
+                    //download Image
                     let downloadimageURL: StorageReference = Storage.storage().reference(forURL: self._imageURLDownloaded!)
                     downloadimageURL.downloadURL { (url, error) in
                         if (error != nil) {
@@ -104,7 +116,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 }
             })
         }
-
     }
     
     func checkIfLaunchedBefore() {
@@ -141,35 +152,39 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     }
     
     func performAnimation(recognizer: UIScreenEdgePanGestureRecognizer) {
-        if(recognizer.name == "Right") {
-            
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "messagesvc") as? MessagesVC
-            let transition = CATransition()
-            transition.duration = 0.23
-            transition.type = kCATransitionPush
-            transition.subtype = kCATransitionFromRight
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            view.window?.layer.add(transition, forKey: kCATransition)
-            if let cp = controllerToPresent {
-                self.present(cp, animated: false, completion: nil)
+        if #available(iOS 11.0, *) {
+            if(recognizer.name == "Right") {
+                
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "messagesvc") as? MessagesVC
+                let transition = CATransition()
+                transition.duration = 0.23
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromRight
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                view.window?.layer.add(transition, forKey: kCATransition)
+                if let cp = controllerToPresent {
+                    self.present(cp, animated: false, completion: nil)
+                }
+                
+                
+            } else if(recognizer.name == "Left") {
+                
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "settingsvc") as? SettingsVC
+                let transition = CATransition()
+                transition.duration = 0.23
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromLeft
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                view.window?.layer.add(transition, forKey: kCATransition)
+                if let cp = controllerToPresent {
+                    self.present(cp, animated: false, completion: nil)
+                }
+                
             }
-            
-            
-        } else if(recognizer.name == "Left") {
-            
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "settingsvc") as? SettingsVC
-            let transition = CATransition()
-            transition.duration = 0.23
-            transition.type = kCATransitionPush
-            transition.subtype = kCATransitionFromLeft
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            view.window?.layer.add(transition, forKey: kCATransition)
-            if let cp = controllerToPresent {
-                self.present(cp, animated: false, completion: nil)
-            }
-            
+        } else {
+            // Fallback on earlier versions
         }
     }
     
@@ -193,7 +208,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBAction func messagesbtnPressed(_ sender: Any) {
         self.writecounttoDatabase(newCount: self.newValueofChildren)
         self.unreadmessageindicator.isHidden = true
-        UIApplication.shared.applicationIconBadgeNumber = 0
         
     }
     
@@ -208,6 +222,9 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                     
                     print(self.newValueofChildren)
                     self.unreadmessageindicator.isHidden = false
+                    let difference = self.newValueofChildren - count
+                    print("Difference: \(self.newValueofChildren) - \(count) = \(difference)")
+                    self.writeUnreadCountToDatabse(currentCount: difference)
                 } else {
                     print("equal")
                     self.unreadmessageindicator.isHidden = true
@@ -254,12 +271,20 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 if toID == uid {
                     //increment counter
                     self.newValueofChildren = self.newValueofChildren + 1
-                    onCompleteCounting()
+                    
                 }
             }
             
         }
-        
+        onCompleteCounting()
+    }
+    
+    func writeUnreadCountToDatabse(currentCount: Int) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userRef = DataService.instance.REF_USERS.child(uid)
+        userRef.updateChildValues(["unreadMessagesCounter": currentCount])
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {

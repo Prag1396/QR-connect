@@ -35,7 +35,6 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan))
         edgePan.delegate = self
         edgePan.edges = .left
-        edgePan.name = "Left"
         view.addGestureRecognizer(edgePan)
 
         observeUserMessages()

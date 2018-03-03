@@ -84,6 +84,9 @@ class cameraControllerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @available(iOS 11.0, *)
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let imageData = photo.fileDataRepresentation() else {
             return
@@ -102,6 +105,26 @@ class cameraControllerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         captureSession.stopRunning()
         
     }
+    
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        
+        guard let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!) else { return }
+        let previewImage = UIImage(data: imageData)
+        if let pimage = previewImage {
+            view.addSubview(imageCaptured)
+            view.addSubview(confirmImagebtn)
+            view.addSubview(retakePicturebtn)
+            
+            DispatchQueue.main.async {
+                self.imageCaptured.image = pimage
+            }
+        }
+        
+        captureSession.stopRunning()
+        
+    }
+    
+    
     
     @IBAction func dismissPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
