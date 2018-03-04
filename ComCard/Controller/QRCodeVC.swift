@@ -206,77 +206,37 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     
     @IBAction func messagesbtnPressed(_ sender: Any) {
-        self.writecounttoDatabase(newCount: self.newValueofChildren)
         self.unreadmessageindicator.isHidden = true
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userRef = DataService.instance.REF_USERS.child(uid)
+        userRef.updateChildValues(["unreadMessagesCounter": 0])
         
     }
     
     func checkforunreadmessages() {
         
-        
-        self.downloadcountfromDatabase(onCompleteObserving: { (count) in
-            print("Current Value downloaded: \(count)")
-            self.observeUnreadMessages {
-                
-                if(count != self.newValueofChildren && self.newValueofChildren > count) {
-                    
-                    print(self.newValueofChildren)
-                    self.unreadmessageindicator.isHidden = false
-
-                } else {
-                    print("equal")
-                    self.unreadmessageindicator.isHidden = true
-                }
-                
-                print("New Value: \(self.newValueofChildren)")
-            }
-        })
-
-    }
-    
-    func downloadcountfromDatabase(onCompleteObserving: @escaping (_ count: Int)->()) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userRef = DataService.instance.REF_USERMESSAGES
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userRef = DataService.instance.REF_USERS
         userRef.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? NSDictionary else {
                 return
             }
-            if let count = dict["count"] as? Int {
-                onCompleteObserving(count)
-            } else {
-                self.writecounttoDatabase(newCount: 0)
-            }
-        }
-    }
-    
-    func writecounttoDatabase(newCount: Int) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userRef = DataService.instance.REF_USERMESSAGES.child(uid)
-        userRef.updateChildValues(["count": newCount])
-    }
-    
-    func observeUnreadMessages(onCompleteCounting: @escaping ()->()) {
-        //count the number of messages recieved for current user
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-        let userRef = DataService.instance.REF_MESS
-        userRef.observe(.childAdded) { (snapshot) in
-            guard let dict = snapshot.value as? NSDictionary else {
-                return
-            }
-            if let toID = dict["toID"] as? String {
-                if toID == uid {
-                    //increment counter
-                    self.newValueofChildren = self.newValueofChildren + 1
-                    onCompleteCounting()
+            if let unreadMessagesCounter = dict["unreadMessagesCounter"] as? Int {
+                if(unreadMessagesCounter != 0) {
+                    self.unreadmessageindicator.isHidden = false
+                } else {
+                    self.unreadmessageindicator.isHidden = true
                 }
             }
             
         }
 
     }
-
+    
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         let convertedLocation = view.convert(location, to: qrcodeimage)
         if qrcodeimage.bounds.contains(convertedLocation) {
