@@ -33,7 +33,7 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        continuebtn.isMultipleTouchEnabled = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
@@ -82,7 +82,9 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
             
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "Please enter your email address", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7
@@ -91,7 +93,9 @@ class EmailCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextField
         } else if (isReadytoPerformSegue == false) {
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "Email aready in use", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7

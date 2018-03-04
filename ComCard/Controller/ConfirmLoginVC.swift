@@ -18,6 +18,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     @IBOutlet weak var code: UITextField!
     @IBOutlet weak var sendCodeButton: UIButton!
     
+    @IBOutlet weak var verifybtn: buttonStyle!
     private var _phoneNumber: String? = nil
     
     
@@ -41,7 +42,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                     
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: "\(errmsg)", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
@@ -52,7 +55,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
 
                 let alert = PCLBlurEffectAlertController(title: "Warning", message: "Unable to send code", effect: UIBlurEffect(style: .light), style: .alert)
                 alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (actions) in
-                    self.view.alpha = 1.0
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.view.alpha = 1.0
+                    })
                     self.performSegue(withIdentifier: "backbtnpressedinconfirmvc", sender: Any.self)
                 }))
                 alert.configureAlert(alert: alert)
@@ -84,7 +89,9 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                     //ADD CUSTOM ALERT
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
@@ -106,6 +113,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        verifybtn.isMultipleTouchEnabled = false
         phoneConfirmText.text = _phoneNumber
         phoneConfirmText.allowsEditingTextAttributes = false
         phoneConfirmText.delegate = self

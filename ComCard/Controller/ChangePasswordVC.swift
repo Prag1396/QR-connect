@@ -16,6 +16,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
 
     @IBOutlet weak var currentPwdLabel: UITextField!
     @IBOutlet weak var newPasswordLabel: UITextField!
+    @IBOutlet weak var confirmbtn: UIButton!
     
     var next_responder: UIResponder!
     
@@ -33,7 +34,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
         let tap = UITapGestureRecognizer(target: self, action: #selector(backGroundTapped))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        
+        confirmbtn.isMultipleTouchEnabled = false
         currentPwdLabel.delegate = self
         currentPwdLabel.tag = 1
         currentPwdLabel.keyboardAppearance = .dark
@@ -95,7 +96,10 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
                     if error != nil {
                         let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                         alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                            self.view.alpha = 1.0
+                            UIView.animate(withDuration: 0.5, animations: {
+                                self.view.alpha = 1.0
+                                self.signoutUser()
+                            })
                         }))
                         alert.configureAlert(alert: alert)
                         self.view.alpha = 0.7
@@ -105,7 +109,9 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
                         //show alert of password changed successfully
                         let alert = PCLBlurEffectAlertController(title: "Warning", message: "Password has been successfully changed", effect: UIBlurEffect(style: .light), style: .alert)
                         alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                            self.view.alpha = 1.0
+                            UIView.animate(withDuration: 0.5, animations: {
+                                self.view.alpha = 1.0
+                            })
                         }))
                         alert.configureAlert(alert: alert)
                         self.view.alpha = 0.7
@@ -118,7 +124,9 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
             //Show alert
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7

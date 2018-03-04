@@ -47,7 +47,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         super.viewDidLoad()
         self.downloadUserName()
         self.setupOutlets()
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         //Do any additional setup after loading the view.
         countryDictReturned = obj.countryArrayPopulate()
         countryArray = Array(countryDictReturned.values)
@@ -203,7 +203,9 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7
@@ -220,7 +222,9 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 if error != nil {
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
@@ -229,7 +233,9 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                     //Order Complete
                     let alert = PCLBlurEffectAlertController(title: "Congratulations!", message: "You have successfully placed the order. A confirmation has been sent to your email with order details", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                         let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "homescreen") as? HomeScreenVC
                         if let cp = controllerToPresent {

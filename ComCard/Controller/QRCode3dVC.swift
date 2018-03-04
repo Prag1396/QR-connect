@@ -57,7 +57,9 @@ class QRCode3dVC: UIViewController {
                     
                     let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "The app needs access to your photos to save the QRCode", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7

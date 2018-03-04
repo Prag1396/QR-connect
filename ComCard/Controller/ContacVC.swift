@@ -87,6 +87,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
         
         performSegue(withIdentifier: "loadchat", sender: Any.self)
     }
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -154,9 +155,6 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
                         self.view.sendSubview(toBack: border)
                         video.removeFromSuperlayer()
                     }
-                    
-
-                    
                 }
             }
             

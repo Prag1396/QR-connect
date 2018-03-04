@@ -24,6 +24,8 @@ class MessagesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         chatTableView.delegate = self
         chatTableView.dataSource = self
         chatTableView.tableFooterView = UIView()

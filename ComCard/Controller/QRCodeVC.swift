@@ -75,7 +75,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         
         self.downloadQRCodeandEmail()
         self.checkforunreadmessages()
-
+        downloadqrcodebtn.isMultipleTouchEnabled = false
     }
     
     func downloadQRCodeandEmail() {
@@ -222,9 +222,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                     
                     print(self.newValueofChildren)
                     self.unreadmessageindicator.isHidden = false
-                    let difference = self.newValueofChildren - count
-                    print("Difference: \(self.newValueofChildren) - \(count) = \(difference)")
-                    self.writeUnreadCountToDatabse(currentCount: difference)
+
                 } else {
                     print("equal")
                     self.unreadmessageindicator.isHidden = true
@@ -271,20 +269,12 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 if toID == uid {
                     //increment counter
                     self.newValueofChildren = self.newValueofChildren + 1
-                    
+                    onCompleteCounting()
                 }
             }
             
         }
-        onCompleteCounting()
-    }
-    
-    func writeUnreadCountToDatabse(currentCount: Int) {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-        let userRef = DataService.instance.REF_USERS.child(uid)
-        userRef.updateChildValues(["unreadMessagesCounter": currentCount])
+
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -335,53 +325,37 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     }
     
     @IBAction func downloadQRCodePressed(_ sender: Any) {
-        //Download QRCode
-        let downloadimageURL: StorageReference = Storage.storage().reference(forURL: self._imageURLDownloaded!)
-        downloadimageURL.downloadURL { (url, error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                
-                StorageService.instance.downloadImage(withURL: url!, downloadCompleteImage: { (status, error, data)  in
-                    if (error != nil) {
-                        //present alert
-                        print(error.debugDescription)
-                    } else {
-                        //Present sub view with the options of saving the image or emailing it
-                        DispatchQueue.main.async {
-                            let imageData = UIImage(data: data!)
-                            self.showAlertView(image: imageData!, data: data!)
-                        }
-                        
-                    }
-                })
-            }
+
+        if let image = self.qrcodeimage.image, let data = self._imagedata {
+            self.showAlertView(image: image, data: data)
         }
     }
     
     func showAlertView(image: UIImage, data: Data) {
 
-        self.downloadqrcodebtn.alpha = 0.2
         let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "Your personalised QRCode has been downloaded", effect: UIBlurEffect(style: .light), style: .alert)
         let img = image.scaleUIImageToSize(image: image, size: CGSize(width: 100, height: 100))
         alert.addImageView(with: img)
         alert.addAction(PCLBlurEffectAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
             self.saveToPhotosPressed(image: image)
-            self.view.alpha = 1.0
-            self.downloadqrcodebtn.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
 
 
         }))
         alert.addAction(PCLBlurEffectAlertAction(title: "Email", style: .default, handler: { (actions) in
             self.emailPressed(data: data)
-            self.view.alpha = 1.0
-            self.downloadqrcodebtn.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
 
 
         }))
         alert.addAction(PCLBlurEffectAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            self.view.alpha = 1.0
-            self.downloadqrcodebtn.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
 
         }))
         
@@ -389,8 +363,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
         alert.configure(buttonFont: [:], buttonTextColor: [.default: UIColor(red: 77/255, green: 255/255, blue: 158/255, alpha: 1.0) ], buttonDisableTextColor: [:])
         alert.configure(buttonBackgroundColor: UIColor.clear)
-        self.view.alpha = 0.7
         alert.show()
+        self.view.alpha = 0.7
         
     }
     
@@ -417,7 +391,9 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                 } else {
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: "The app needs access to your photos to save the QRCode", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7

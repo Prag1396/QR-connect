@@ -102,7 +102,9 @@ class AuthService: UIViewController {
                 
                 let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                 alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.view.alpha = 1.0
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.view.alpha = 1.0
+                    })
                 }))
                 onUploadingImageComplete(nil,false, error)
                 alert.configureAlert(alert: alert)
@@ -126,7 +128,8 @@ class AuthService: UIViewController {
         let img = c_image.transformed(by: transform)
         let cgImage:CGImage = context.createCGImage(img, from: c_image.extent)!
         
-        let image:UIImage = UIImage.init(cgImage: cgImage)
+        let image: UIImage = UIImage.init(cgImage: cgImage)
+        
         //Change size
         let scaledImage = image.scaleUIImageToSize(image: image, size: CGSize(width: 120, height: 120))
         return scaledImage
@@ -149,7 +152,9 @@ class AuthService: UIViewController {
             if error != nil {
                 let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                 alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.view.alpha = 1.0
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.view.alpha = 1.0
+                    })
                 }))
                 
                 alert.configureAlert(alert: alert)

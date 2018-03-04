@@ -58,6 +58,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        donebtn.isMultipleTouchEnabled = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
         tap.delegate = self
@@ -127,7 +128,9 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
             //Present Alert
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "Please enter your full name", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7

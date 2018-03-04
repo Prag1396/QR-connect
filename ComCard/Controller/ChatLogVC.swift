@@ -21,7 +21,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     @IBOutlet weak var heightContraint: NSLayoutConstraint!
     @IBOutlet weak var sendimg: UIImageView!
     @IBOutlet weak var camerabtn: UIButton!
-    
+    @IBOutlet weak var sendmessagebtn: UIImageView!
     
     private var _fullName: String? = nil
     private var _recipientUID: String? = nil
@@ -57,7 +57,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         messageCollectionView?.delegate = self
         messageCollectionView?.dataSource = self
         messageCollectionView?.alwaysBounceVertical = true
-        
+        sendmessagebtn.isMultipleTouchEnabled = false
         messageCollectionView?.register(ChatMessageCVCell.self, forCellWithReuseIdentifier: "messageID")
         messageCollectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         messagefield.delegate = self

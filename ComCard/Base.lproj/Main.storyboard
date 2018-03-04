@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -541,6 +542,7 @@
                         <outlet property="messageCollectionView" destination="f25-xb-GD3" id="LTV-H1-9H9"/>
                         <outlet property="messagefield" destination="91b-KA-EX1" id="z0T-Wc-k7Z"/>
                         <outlet property="sendimg" destination="uRL-wq-2Sl" id="83e-W2-nWu"/>
+                        <outlet property="sendmessagebtn" destination="uRL-wq-2Sl" id="iAg-qA-eCz"/>
                         <outlet property="uploadImageBtn" destination="Gs0-2C-Sie" id="iFv-Z3-u1Y"/>
                         <outlet property="userfirstname" destination="qmk-Dt-sed" id="TV5-8r-Ru4"/>
                     </connections>
@@ -844,6 +846,7 @@
                     <connections>
                         <outlet property="background" destination="txP-8Z-jXU" id="VEp-He-mgU"/>
                         <outlet property="passwordTextField" destination="lDJ-Ps-pft" id="gw6-xm-OLP"/>
+                        <outlet property="signInbtn" destination="BSw-gE-kKf" id="JbG-H1-dOR"/>
                         <outlet property="userNameTextField" destination="Ze1-dp-3O2" id="iOk-cN-cEY"/>
                     </connections>
                 </viewController>
@@ -1634,6 +1637,7 @@
                         <outlet property="code" destination="bxA-hG-WzO" id="RuO-7U-H57"/>
                         <outlet property="phoneConfirmText" destination="4v2-p2-SX7" id="2lz-Gg-D8l"/>
                         <outlet property="sendCodeButton" destination="nl1-EY-e6E" id="6Ux-Wi-GMp"/>
+                        <outlet property="verifybtn" destination="7S6-69-KYS" id="Ub2-qU-81t"/>
                         <segue destination="2o3-8U-A67" kind="show" identifier="backbtnpressedinconfirmvc" id="ffs-XY-gdX"/>
                         <segue destination="8yl-0X-iwC" kind="show" identifier="phoneauthsuccessfull" id="7X4-mX-VV1"/>
                     </connections>
@@ -2930,6 +2934,7 @@
                         <viewLayoutGuide key="safeArea" id="olo-fT-BGp"/>
                     </view>
                     <connections>
+                        <outlet property="confirmbtn" destination="EbM-bK-qGs" id="BxK-Eo-Gba"/>
                         <outlet property="currentPwdLabel" destination="2vj-uy-LVI" id="d4I-SU-uvv"/>
                         <outlet property="newPasswordLabel" destination="qsH-Yf-8qK" id="1Dz-f8-yh5"/>
                     </connections>
@@ -3081,7 +3086,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="EJj-3d-GIx"/>
         <segue reference="tlv-Y4-8pu"/>
-        <segue reference="NRl-Jr-igb"/>
+        <segue reference="ffs-XY-gdX"/>
         <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>
 </document>

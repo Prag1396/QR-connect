@@ -23,6 +23,7 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(fetchContact))
         contactlabel.addGestureRecognizer(tap)
         tap.delegate = self
@@ -113,11 +114,15 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         let alert = PCLBlurEffectAlertController(title: "Caution", message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", effect: UIBlurEffect(style: .light), style: .alert)
         alert.addAction(PCLBlurEffectAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(false)
-            self.view.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
         }))
         alert.addAction(PCLBlurEffectAlertAction(title: "Open Settings", style: .default, handler: { (action) in
             completionHandler(true)
-            self.view.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
             UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
         }))
         

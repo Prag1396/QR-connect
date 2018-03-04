@@ -20,6 +20,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var signInbtn: buttonStyle!
     
     var activityIndicatorView: NVActivityIndicatorView?
     var next_Responder: UIResponder!
@@ -44,6 +45,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signInbtn.isMultipleTouchEnabled = false
         self.downloadUsername()
         userNameTextField.delegate = self
         userNameTextField.tag = 1
@@ -127,7 +129,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                     
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
@@ -136,7 +140,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                 } else {
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: "An email has been sent to you with instructions on how to reset your password", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.view.alpha = 1.0
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.alpha = 1.0
+                        })
                     }))
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
@@ -147,7 +153,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
             //Show alert
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "Could not find user", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7
@@ -159,7 +167,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         //ADD CUSTOM ALERTVIEW
         let alert = PCLBlurEffectAlertController(title: "Warning", message: message, effect: UIBlurEffect(style: .light), style: .alert)
         alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-            self.view.alpha = 1.0
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
         }))
         alert.configureAlert(alert: alert)
         self.view.alpha = 0.7
@@ -221,7 +231,9 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
         } else {
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.view.alpha = 1.0
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
             }))
             alert.configureAlert(alert: alert)
             self.view.alpha = 0.7

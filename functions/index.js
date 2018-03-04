@@ -25,6 +25,7 @@ exports.observeusermessages = functions.database.ref('/messages/{messageID}').on
 function observeUser(senderID, recipientUID, text) {
     admin.database().ref('/users/' + recipientUID).once('value', snapshot => {
         var recipientUIDReference = snapshot.val()
+        var badgeValue = parseInt(recipientUIDReference.unreadMessageIndicator) + 1
 
     console.log("Attempting to send message");
     admin.database().ref('/users/' + senderID).once('value', snapshot => {
@@ -33,7 +34,9 @@ function observeUser(senderID, recipientUID, text) {
         var payload = {
             notification: {
                 title: name + " found your lost item",
-                body:  'Log back in to get it back!'
+                body:  'Log back in to get it back!',
+                badge: '${badgeValue}',
+                sound: 'default'
             },
             data: {
                 //Put data
@@ -55,5 +58,6 @@ function observeUser(senderID, recipientUID, text) {
 
     })
 
+    return admin.database().ref('/users/' + recipientUID).update({unreadMessageIndicator: badgeValue})
     })
 }
