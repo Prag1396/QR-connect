@@ -33,7 +33,7 @@ function observeUser(senderID, recipientUID, text) {
         var name = _senderIDref.FirstName;
         var payload = {
             notification: {
-                title: name + "found your lost item",
+                title: name + " " + "found your lost item",
                 body:  'Log back in to get it back!',
                 badge: badgeValue.toString(),
                 sound: 'default'

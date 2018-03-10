@@ -109,8 +109,8 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
     }
     
     func captureText() {
-        _firstName = firstName.text!
-        _lastName = lastName.text!
+        _firstName = firstName.text?.trimmingCharacters(in: .whitespaces)
+        _lastName = lastName.text?.trimmingCharacters(in: .whitespaces)
     }
     
     override func didReceiveMemoryWarning() {

@@ -36,6 +36,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     @IBAction func sendCodePressed(_ sender: Any) {
         if phoneConfirmText.text != nil {
         AuthService.instance.sendCode(withPhoneNumber: phoneNumber) { (status, error) in
+
             if error != nil && status == false {
                 //Present Alert
                 AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
