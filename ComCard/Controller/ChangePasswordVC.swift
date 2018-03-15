@@ -43,7 +43,6 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
         newPasswordLabel.tag = 2
         newPasswordLabel.keyboardAppearance = .dark
         
-        
     }
     
     func downloadUserInformation() {
@@ -98,7 +97,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
                         alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
                             UIView.animate(withDuration: 0.5, animations: {
                                 self.view.alpha = 1.0
-                                self.signoutUser()
+                                
                             })
                         }))
                         alert.configureAlert(alert: alert)
@@ -107,10 +106,11 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
 
                     } else {
                         //show alert of password changed successfully
-                        let alert = PCLBlurEffectAlertController(title: "Warning", message: "Password has been successfully changed", effect: UIBlurEffect(style: .light), style: .alert)
+                        let alert = PCLBlurEffectAlertController(title: "Congratulations", message: "Password has been successfully changed", effect: UIBlurEffect(style: .light), style: .alert)
                         alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
                             UIView.animate(withDuration: 0.5, animations: {
                                 self.view.alpha = 1.0
+                                self.signoutUser()
                             })
                         }))
                         alert.configureAlert(alert: alert)

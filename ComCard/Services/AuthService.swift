@@ -35,8 +35,21 @@ class AuthService: UIViewController {
     }
     
     func auth(code: UITextField, authorizationComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
-        
-        phoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: code.text!.trimmingCharacters(in: .whitespaces))
+        guard let verificationID = defaults.string(forKey: "authVID") else {
+            //present error
+               let alert = PCLBlurEffectAlertController(title: "Warning", message: "Unable to authenticate device", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
+            
+            return
+        }
+        phoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code.text!.trimmingCharacters(in: .whitespaces))
         if let pac = phoneAuthCredential {
             Auth.auth().signIn(with: pac) { (user, error) in
                 if error != nil {
