@@ -163,17 +163,7 @@ class AuthService: UIViewController {
         let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (error) in
             if error != nil {
-                let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
-                alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self.view.alpha = 1.0
-                    })
-                }))
-                
-                alert.configureAlert(alert: alert)
-                self.view.alpha = 0.7
                 onReauthenticationComplete(false, error)
-                alert.show()
                 return
             }
             //Re-Authentication successfull
