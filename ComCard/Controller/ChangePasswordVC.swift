@@ -114,6 +114,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, UIGestureRecogniz
                             })
                         }))
                         alert.configureAlert(alert: alert)
+                        alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
                         self.view.alpha = 0.7
                         alert.show()
                     }

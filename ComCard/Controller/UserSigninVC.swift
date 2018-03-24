@@ -24,7 +24,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     var activityIndicatorView: NVActivityIndicatorView?
     var next_Responder: UIResponder!
-    private var _contactbtnwassender: Bool!
+    private var _contactbtnwassender: Bool?
     private var _emailDownloaded: String? = nil
     
     let loadingView: UIView = UIView()
@@ -32,7 +32,7 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
     
     var contactbuttonwassender: Bool? {
         get {
-            return _contactbtnwassender!
+            return _contactbtnwassender
         }
         set {
             _contactbtnwassender = newValue
@@ -183,10 +183,10 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
 
     @IBAction func signInBtnTapped(_ sender: Any) {
         
-        if userNameTextField.text != nil && passwordTextField.text != nil && userNameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false {
+        if let username = userNameTextField.text, let password = passwordTextField.text {
             setUpActivityIndicator()
             activityIndicatorView?.startAnimating()
-            AuthService.instance.loginUser(withEmail: userNameTextField.text!, andPassword: passwordTextField.text!, loginComplete: { (success, loginError) in
+            AuthService.instance.loginUser(withEmail: username, andPassword: password, loginComplete: { (success, loginError) in
                 if success {
                     if self.contactbuttonwassender == false {
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -203,6 +203,14 @@ class UserSigninVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldDe
                         let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
                         if let vc = controllerToPresent {
                             vc.selectedIndex = 1
+                            self.activityIndicatorView?.stopAnimating()
+                            self.loadingView.removeFromSuperview()
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    } else {
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
+                        if let vc = controllerToPresent {
                             self.activityIndicatorView?.stopAnimating()
                             self.loadingView.removeFromSuperview()
                             self.present(vc, animated: true, completion: nil)

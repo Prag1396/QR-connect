@@ -25,11 +25,17 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     var numberpickerview: UIPickerView = UIPickerView()
     var countryPickerView: UIPickerView = UIPickerView()
+    var statePickerView: UIPickerView = UIPickerView()
     var next_responder: UIResponder!
-    var quantityArray: [Int] = Array(1...100)
-    var countryArray = [String]()
-    var countryDictReturned = [String(): String()]
-    var obj: NSLocale = NSLocale()
+    var quantityArray: [Int] = Array(1...5)
+    //var countryArray = [String]()
+    //var countryDictReturned = [String(): String()]
+    //var obj: NSLocale = NSLocale()
+    
+    let allStates = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID",
+                      "IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE",
+                      "NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT",
+                      "VA","VI","VT","WA","WI","WV","WY"]
 
     
     private var _country: String? = nil
@@ -49,10 +55,11 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         self.setupOutlets()
         UIApplication.shared.applicationIconBadgeNumber = 0
         //Do any additional setup after loading the view.
-        countryDictReturned = obj.countryArrayPopulate()
-        countryArray = Array(countryDictReturned.values)
-        countryArray.sort()
+        //countryDictReturned = obj.countryArrayPopulate()
+        //countryArray = Array(countryDictReturned.values)
+        //countryArray.sort()
         countrytextfield.text = "United States"
+        countrytextfield.isUserInteractionEnabled = false
     }
     
     func downloadUserName() {
@@ -80,18 +87,25 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         quantitytextfield.keyboardAppearance = .dark
         quantitytextfield.tag = 7
         
-        countryPickerView.delegate = self
-        countryPickerView.dataSource = self
-        countryPickerView.tag = 2
-        countryPickerView.backgroundColor = UIColor.lightText
+//        countryPickerView.delegate = self
+//        countryPickerView.dataSource = self
+//        countryPickerView.tag = 2
+//        countryPickerView.backgroundColor = UIColor.lightText
         countrytextfield.delegate = self
         countrytextfield.keyboardAppearance = .dark
         countrytextfield.tag = 5
-        countrytextfield.inputView = countryPickerView
+        //countrytextfield.inputView = countryPickerView
+        
+        statePickerView.delegate = self
+        statePickerView.dataSource = self
+        statePickerView.tag = 3
+        statePickerView.backgroundColor = UIColor.lightText
+        
         
         statetextfield.delegate = self
         statetextfield.keyboardAppearance = .dark
         statetextfield.tag = 4
+        statetextfield.inputView = statePickerView
         
         citytextfield.delegate = self
         citytextfield.keyboardAppearance = .dark
@@ -139,25 +153,36 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 1 {
-            return quantityArray.count
+        
+        if pickerView.tag == 3 {
+            return allStates.count
         }
-        return countryArray.count
+        //if pickerView.tag == 1 {
+            return quantityArray.count
+        //}
+        //return countryArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             self.quantitytextfield.text = "\(row + 1)"
-        } else {
-            self.countrytextfield.text = countryArray[row]
+        }
+        else if pickerView.tag == 3 {
+            self.statetextfield.text = allStates[row]
+        }
+        else {
+            //self.countrytextfield.text = countryArray[row]
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 1 {
-            return "\(row + 1)"
+        if pickerView.tag == 3 {
+            return allStates[row]
         }
-        return countryArray[row]
+        //if pickerView.tag == 1 {
+            return "\(row + 1)"
+        //}
+        //return countryArray[row]
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

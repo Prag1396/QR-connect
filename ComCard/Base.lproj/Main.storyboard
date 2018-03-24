@@ -117,9 +117,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Border" translatesAutoresizingMaskIntoConstraints="NO" id="ZdK-pK-aRo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Border" translatesAutoresizingMaskIntoConstraints="NO" id="ZdK-pK-aRo">
                                 <rect key="frame" x="11" y="171.66666666666663" width="353" height="386"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="353" id="hrV-JL-zkh"/>
+                                    <constraint firstAttribute="height" constant="386" id="wN2-hz-4Zh"/>
+                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="OtherBackground" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5x0-hQ-BwU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
@@ -237,7 +240,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-un-yJ0" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="83.666666666666686" y="251" width="208" height="34"/>
+                                        <rect key="frame" x="83.666666666666686" y="270" width="208" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="271" id="9a6-fa-5Io"/>
@@ -261,7 +264,7 @@
                                     <constraint firstItem="5Pb-ew-fyH" firstAttribute="leading" secondItem="16l-j8-Xuo" secondAttribute="leading" constant="5" id="3XD-xV-52K"/>
                                     <constraint firstItem="K4W-PA-Uax" firstAttribute="top" secondItem="ck3-PL-gOl" secondAttribute="bottom" constant="10" id="7jq-Eh-rTc"/>
                                     <constraint firstItem="ck3-PL-gOl" firstAttribute="top" secondItem="eOF-uC-bmo" secondAttribute="top" constant="-30" id="AZc-fn-gGc"/>
-                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="5Pb-ew-fyH" secondAttribute="bottom" constant="16" id="Aan-RF-GC9"/>
+                                    <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="5Pb-ew-fyH" secondAttribute="bottom" constant="35" id="Aan-RF-GC9"/>
                                     <constraint firstAttribute="trailing" secondItem="16l-j8-Xuo" secondAttribute="trailing" constant="22" id="DVu-c2-o71"/>
                                     <constraint firstItem="ZOq-VA-5gs" firstAttribute="centerX" secondItem="yxR-Dy-0U2" secondAttribute="centerX" id="Ese-JR-GEu"/>
                                     <constraint firstItem="CWu-tK-YwB" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="8" id="IYL-yh-xWR"/>
@@ -340,8 +343,10 @@
                             <constraint firstItem="eOF-uC-bmo" firstAttribute="leading" secondItem="cBa-3N-wGL" secondAttribute="leading" id="TYU-qx-MU3"/>
                             <constraint firstItem="BWg-2I-E6R" firstAttribute="top" secondItem="4gu-Hb-XwC" secondAttribute="top" id="YzW-Z1-htF"/>
                             <constraint firstItem="eOF-uC-bmo" firstAttribute="trailing" secondItem="cBa-3N-wGL" secondAttribute="trailing" id="Zjn-h4-GWQ"/>
+                            <constraint firstItem="ZdK-pK-aRo" firstAttribute="centerY" secondItem="4gu-Hb-XwC" secondAttribute="centerY" id="fbV-WX-q9W"/>
                             <constraint firstItem="BWg-2I-E6R" firstAttribute="leading" secondItem="cBa-3N-wGL" secondAttribute="leading" id="hYy-WA-RF3"/>
                             <constraint firstItem="eOF-uC-bmo" firstAttribute="centerY" secondItem="4gu-Hb-XwC" secondAttribute="centerY" id="l9n-aG-fUK"/>
+                            <constraint firstItem="ZdK-pK-aRo" firstAttribute="centerX" secondItem="4gu-Hb-XwC" secondAttribute="centerX" id="weX-1N-RQm"/>
                             <constraint firstItem="5x0-hQ-BwU" firstAttribute="bottom" secondItem="cBa-3N-wGL" secondAttribute="bottom" id="xDg-o0-BVu"/>
                             <constraint firstItem="5x0-hQ-BwU" firstAttribute="trailing" secondItem="cBa-3N-wGL" secondAttribute="trailing" id="y1c-XO-LP8"/>
                         </constraints>
@@ -538,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V4X-61-90u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3796" y="-1813.3004926108374"/>
+            <point key="canvasLocation" x="3796" y="-1810"/>
         </scene>
         <!--Camera ControllerVC-->
         <scene sceneID="riK-o1-oaQ">
@@ -2481,7 +2486,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -3028,7 +3033,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eT-lw-yVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4828" y="-2612"/>
+            <point key="canvasLocation" x="3794" y="-3376"/>
         </scene>
         <!--Code 3dVC-->
         <scene sceneID="UXf-k8-43C">
@@ -3184,6 +3189,6 @@
         <segue reference="GIi-xh-yIc"/>
         <segue reference="DuB-DZ-Cxg"/>
         <segue reference="ffs-XY-gdX"/>
-        <segue reference="0cI-Iz-w92"/>
+        <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>
 </document>
