@@ -102,6 +102,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             return
         }
         testImage = UIImage.combineWith(image1: mainImage, image2: overlayImage)
+        
     }
     
     func downloadQRCodeandEmail(onComplete: @escaping (_ status: Bool, _ error: Error?, _ errmsg: String?)->()) {
@@ -277,10 +278,10 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             //present options
             let detailsVC = storyboard?.instantiateViewController(withIdentifier: "threedqr") as? QRCode3dVC
             DispatchQueue.main.async {
-                if let imageData = UIImage(data: self._imagedata!) {
+                if let imageData = UIImage(data: self._imagedata!), let testimg = self.testImage {
                     detailsVC?.qrcode3d.image = imageData
                     detailsVC?.imageData = imageData
- 
+                    detailsVC?.modalImage = testimg
                 }
             }
             detailsVC?.preferredContentSize = CGSize(width: 180, height: 215)
@@ -321,7 +322,10 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     @IBAction func downloadQRCodePressed(_ sender: Any) {
 
-        if let image = self.testImage, let data = self._imagedata {
+        guard let image = testImage else { return }
+        let testimageData = UIImageJPEGRepresentation(image, 1.0) 
+        
+        if let image = self.testImage, let data = testimageData {
             self.showAlertView(image: image, data: data)
         }
     }
@@ -373,6 +377,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         composeemail.setMessageBody("Hi, we are excited to see you. Hope you never lose your belongings again!", isHTML: false)
         composeemail.addAttachmentData(data, mimeType: "image/png", fileName: "QRCode")
         self.present(composeemail, animated: true, completion: nil)
+        
         
     }
     

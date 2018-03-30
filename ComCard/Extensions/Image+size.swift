@@ -35,10 +35,10 @@ extension UIImage {
     static func combineWith(image1: UIImage, image2: UIImage) -> UIImage {
         print(image2.size.width)
         print(image2.size.height)
-        let size = CGSize(width: image1.size.width, height: image1.size.height)
+        let size = CGSize(width: image1.size.width - 1.5, height: image1.size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        image1.draw(in: CGRect(x:0 , y: 0, width: size.width, height: image1.size.height))
+        image1.draw(in: CGRect(x:0 , y: 0, width: image1.size.width, height: image1.size.height))
         let scaledimage2 = image2.scaleUIImageToSize(image: image2, size: CGSize(width: 500, height: 500))
         image2.draw(in: CGRect(x: image1.size.width/6.8, y: image1.size.height/5, width: scaledimage2.size.width ,height: scaledimage2.size.height))
         

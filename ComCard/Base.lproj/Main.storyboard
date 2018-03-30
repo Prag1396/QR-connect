@@ -3156,7 +3156,7 @@
         <image name="MainBackground" width="374" height="667"/>
         <image name="OtherBackground" width="374" height="667"/>
         <image name="PasswordIcon" width="18" height="20"/>
-        <image name="QRModel" width="706" height="843"/>
+        <image name="QRModel" width="711" height="842"/>
         <image name="QRSubview" width="339" height="389"/>
         <image name="Title" width="341" height="69"/>
         <image name="Title_extra" width="352" height="69"/>

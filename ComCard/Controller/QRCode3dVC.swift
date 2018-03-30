@@ -14,6 +14,7 @@ class QRCode3dVC: UIViewController {
 
     @IBOutlet weak var qrcode3d: imageStyle!
     var _imageData: UIImage? = nil
+    var _modalImage: UIImage? = nil
     
     var imageData: UIImage {
         get {
@@ -23,14 +24,21 @@ class QRCode3dVC: UIViewController {
         }
     }
     
+    var modalImage: UIImage {
+        get {
+            return _modalImage!
+        } set {
+            _modalImage = newValue
+        }
+    }
     
     override var previewActionItems: [UIPreviewActionItem] {
         let item1 = UIPreviewAction(title: "Save Image", style: .default) { (action, controller) in
-            self.saveImage(image: self.imageData)
+            self.saveImage(image: self.modalImage)
         }
         
         let item2 = UIPreviewAction(title: "Copy Image", style: .default) { (action, controller) in
-            self.copyImage(image: self.imageData)
+            self.copyImage(image: self.modalImage)
         }
         return [item1, item2]
     }
