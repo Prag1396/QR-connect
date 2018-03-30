@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImage {
+    
     func scaleUIImageToSize( image: UIImage, size: CGSize) -> UIImage {
         
         var scaledImageRect = CGRect.zero
@@ -30,4 +31,18 @@ extension UIImage {
         
         return scaledImage!
     }
+    
+    func combineWith(image: UIImage) -> UIImage {
+        let size = CGSize(width: self.size.width, height: self.size.height + image.size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        self.draw(in: CGRect(x:0 , y: 0, width: size.width, height: self.size.height))
+        image.draw(in: CGRect(x: 0, y: self.size.height, width: size.width,  height: image.size.height).insetBy(dx: size.width * 0.2, dy: size.height * 0.2))
+        
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
 }

@@ -21,8 +21,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBOutlet weak var downloadqrcodebtn: buttonStyle!
     @IBOutlet weak var messagetext: UILabel!
     @IBOutlet weak var hometitle: UILabel!
+    @IBOutlet weak var qrModelImg: UIImageView!
     
-    @IBOutlet weak var qrborderimg: UIImageView!
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
@@ -37,7 +37,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        qrborderimg.isHidden = true
+        self.qrModelImg.isHidden = true
         self.checkIfLaunchedBefore()
         self.setUpActivityIndicator()
         activityIndicatorView?.startAnimating()
@@ -103,12 +103,14 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                                     //Present sub view with the options of saving the image or emailing it
                                     DispatchQueue.main.async {
                                         if let imageData = UIImage(data: data!) {
-                                            self.qrborderimg.isHidden = false
+                                            //overlap images
+                                            
+                                            self.qrModelImg.isHidden = false
                                             self.qrcodeimage.image = imageData
-                                
                                             self.activityIndicatorView?.stopAnimating()
                                             self.loadingView.removeFromSuperview()
                                             self._imagedata = data!
+                                            
                                             
                                         }
                                     }
@@ -121,6 +123,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             })
         }
     }
+    
     
     func checkIfLaunchedBefore() {
         if userDefaults.bool(forKey: "hasLaunchedbefore") == true {
@@ -253,7 +256,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
  
                 }
             }
-            previewingContext.sourceRect = qrcodeimage.frame
+            detailsVC?.preferredContentSize = CGSize(width: 180, height: 215)
+            previewingContext.sourceRect = qrModelImg.frame
             return detailsVC
         } else {
             return nil

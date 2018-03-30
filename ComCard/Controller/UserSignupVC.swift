@@ -8,6 +8,7 @@
 
 import UIKit
 import PCLBlurEffectAlert
+import IQKeyboardManagerSwift
 
 struct CurrentLength {
     static var currLength: Int = 0
@@ -37,6 +38,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     var obj: NSLocale = NSLocale()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         connectBtn.isMultipleTouchEnabled = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         background.addGestureRecognizer(tap)
@@ -53,7 +55,7 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         setupDeafultValueForPickerView()
         self._phoneNumberExt = _plus + "1"
         isReadytoPerformSegue = true
-        
+        phoneNumberLabel.keyboardType = .numberPad
     }
 
     func sortCountryArray() {
@@ -97,6 +99,11 @@ class UserSignupVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         return false
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let maxLength = text.count + string.count - range.length
+        return maxLength <= 10
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if(phoneNumberLabel.text?.isEmpty == false) {
