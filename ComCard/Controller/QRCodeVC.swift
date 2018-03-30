@@ -22,13 +22,14 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     @IBOutlet weak var messagetext: UILabel!
     @IBOutlet weak var hometitle: UILabel!
     @IBOutlet weak var qrModelImg: UIImageView!
+
     
     private var _imageURLDownloaded: String? = nil
     private var _emailDownloaded: String? = nil
     private var _imagedata: Data? = nil
     var newValueofChildren: Int = 0
     var panTriggered: Bool = false
-    
+    var testImage: UIImage?
     var activityIndicatorView: NVActivityIndicatorView?
 
     let loadingView: UIView = UIView()
@@ -75,12 +76,35 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
             
         }
         
-        self.downloadQRCodeandEmail()
+        self.downloadQRCodeandEmail { (status, error, errmsg) in
+            if error != nil {
+                print(error?.localizedDescription ?? String())
+                return
+            }
+            else if errmsg != nil {
+                print(errmsg ?? String())
+                return
+            }
+            
+            self.convergeImages()
+        }
         self.checkforunreadmessages()
+    
         downloadqrcodebtn.isMultipleTouchEnabled = false
     }
     
-    func downloadQRCodeandEmail() {
+    func convergeImages() {
+        print("FUCK THIS")
+        guard let mainImage = self.qrModelImg.image else {
+            return
+        }
+        guard let overlayImage = self.qrcodeimage.image else {
+            return
+        }
+        testImage = UIImage.combineWith(image1: mainImage, image2: overlayImage)
+    }
+    
+    func downloadQRCodeandEmail(onComplete: @escaping (_ status: Bool, _ error: Error?, _ errmsg: String?)->()) {
         let userRef = DataService.instance.REF_BASE
         let userID = Auth.auth().currentUser?.uid
         userRef.child("pvtdata").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
@@ -99,6 +123,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                                 if (error != nil) {
                                     //present alert
                                     print(error.debugDescription)
+                                    onComplete(false, error, nil)
                                 } else {
                                     //Present sub view with the options of saving the image or emailing it
                                     DispatchQueue.main.async {
@@ -110,8 +135,10 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                                             self.activityIndicatorView?.stopAnimating()
                                             self.loadingView.removeFromSuperview()
                                             self._imagedata = data!
+                                            onComplete(true, nil, nil)
                                             
-                                            
+                                        } else {
+                                            onComplete(false, nil, nil)
                                         }
                                     }
                                     
@@ -294,7 +321,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     @IBAction func downloadQRCodePressed(_ sender: Any) {
 
-        if let image = self.qrcodeimage.image, let data = self._imagedata {
+        if let image = self.testImage, let data = self._imagedata {
             self.showAlertView(image: image, data: data)
         }
     }
@@ -302,9 +329,10 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     func showAlertView(image: UIImage, data: Data) {
 
         let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "Your personalised QRCode has been downloaded", effect: UIBlurEffect(style: .light), style: .alert)
-        let img = image.scaleUIImageToSize(image: image, size: CGSize(width: 100, height: 100))
+        let img = image.resizeImage(image: image, newSize: CGSize(width: 100, height: 100))
         alert.addImageView(with: img)
         alert.addAction(PCLBlurEffectAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
+            print(image.size)
             self.saveToPhotosPressed(image: image)
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.alpha = 1.0

@@ -32,17 +32,33 @@ extension UIImage {
         return scaledImage!
     }
     
-    func combineWith(image: UIImage) -> UIImage {
-        let size = CGSize(width: self.size.width, height: self.size.height + image.size.height)
+    static func combineWith(image1: UIImage, image2: UIImage) -> UIImage {
+        print(image2.size.width)
+        print(image2.size.height)
+        let size = CGSize(width: image1.size.width, height: image1.size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        self.draw(in: CGRect(x:0 , y: 0, width: size.width, height: self.size.height))
-        image.draw(in: CGRect(x: 0, y: self.size.height, width: size.width,  height: image.size.height).insetBy(dx: size.width * 0.2, dy: size.height * 0.2))
+        image1.draw(in: CGRect(x:0 , y: 0, width: size.width, height: image1.size.height))
+        let scaledimage2 = image2.scaleUIImageToSize(image: image2, size: CGSize(width: 500, height: 500))
+        image2.draw(in: CGRect(x: image1.size.width/6.8, y: image1.size.height/5, width: scaledimage2.size.width ,height: scaledimage2.size.height))
         
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    func resizeImage(image: UIImage, newSize: CGSize) -> UIImage {
+        let horizontalRatio = newSize.width / image.size.width
+        let verticalRatio = newSize.height / image.size.height
+        
+        let ratio = max(horizontalRatio, verticalRatio)
+        let newSize = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
 }
