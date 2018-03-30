@@ -12,10 +12,15 @@ import FirebaseAuth
 
 class HomeScreenVC: UIViewController {
 
+    @IBOutlet weak var generateQRCodeBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
+        if let _ = Auth.auth().currentUser?.uid {
+            generateQRCodeBtn.setTitle("View my QR-Code", for: .normal)
+        } else {
+            generateQRCodeBtn.setTitle("Generate my QR Code", for: .normal)
+        }
     }
     
     @IBAction func generateQRCodeBtnPressed(_ sender: Any) {

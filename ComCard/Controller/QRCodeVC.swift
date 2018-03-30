@@ -284,7 +284,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
                     detailsVC?.modalImage = testimg
                 }
             }
-            detailsVC?.preferredContentSize = CGSize(width: 180, height: 215)
+            detailsVC?.preferredContentSize = CGSize(width: 179, height: 210)
             previewingContext.sourceRect = qrModelImg.frame
             return detailsVC
         } else {

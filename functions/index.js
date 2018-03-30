@@ -18,11 +18,11 @@ exports.observeusermessages = functions.database.ref('/messages/{messageID}').on
     return admin.database().ref('/messages/' + messageID).once('value', snapshot => {
         var message = snapshot.val();
 
-        observeUser(message.fromID, message.toID, message.messagetext);
+        observeUser(message.fromID, message.toID, message.messagetext, message.imageURL);
     })
 })
 
-function observeUser(senderID, recipientUID, text) {
+function observeUser(senderID, recipientUID, text, imageURL) {
     admin.database().ref('/users/' + recipientUID).once('value', snapshot => {
         var recipientUIDReference = snapshot.val()
         var badgeValue = parseInt(recipientUIDReference.unreadMessagesCounter) + 1
@@ -41,7 +41,7 @@ function observeUser(senderID, recipientUID, text) {
             data: {
                 //Put data
                 senderID: name,
-                text: text
+                //text: text
             }
         }
 

@@ -72,7 +72,7 @@
                                     <constraint firstAttribute="height" constant="46" id="ofY-l4-aOk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Generate your QR-Code" backgroundImage="button_bg">
+                                <state key="normal" title="Generate my QR-Code" backgroundImage="button_bg">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -104,6 +104,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b7l-Nu-0sw"/>
                     </view>
+                    <connections>
+                        <outlet property="generateQRCodeBtn" destination="58t-Ms-JYC" id="mAG-Mb-fzd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
