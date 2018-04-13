@@ -57,7 +57,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("here")
+        //print("here")
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(textField: )))
         background.addGestureRecognizer(tap)
         tap.delegate = self
@@ -121,7 +121,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
             let input = try AVCaptureDeviceInput(device: captureDevice!)
             session.addInput(input)
         } catch {
-            print("ERROR: Input not working")
+            //print("ERROR: Input not working")
         }
         
         let output = AVCaptureMetadataOutput()
@@ -168,7 +168,7 @@ class ContacVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, MFMail
                 setData(data: output)
             }
         } catch {
-            print(error)
+            //print(error)
         }
     }
     

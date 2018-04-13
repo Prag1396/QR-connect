@@ -142,7 +142,7 @@ class NameCaptureVC: UIViewController, UIGestureRecognizerDelegate, UITextFieldD
                 if success {
                     AuthService.instance.loginUser(withEmail: self.email, andPassword: self.password, loginComplete: { (success, nil) in
                         
-                        print("Successfully registered user")
+                        //print("Successfully registered user")
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                         let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
                         if let cp = controllerToPresent {

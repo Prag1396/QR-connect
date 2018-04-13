@@ -33,8 +33,8 @@ extension UIImage {
     }
     
     static func combineWith(image1: UIImage, image2: UIImage) -> UIImage {
-        print(image2.size.width)
-        print(image2.size.height)
+        //print(image2.size.width)
+        //print(image2.size.height)
         let size = CGSize(width: image1.size.width - 1.5, height: image1.size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         

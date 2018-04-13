@@ -339,7 +339,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         let img = image.resizeImage(image: image, newSize: CGSize(width: 100, height: 100))
         alert.addImageView(with: img)
         alert.addAction(PCLBlurEffectAlertAction(title: "Save to Photos", style: .default, handler: { (action) in
-            print(image.size)
+            //print(image.size)
             self.saveToPhotosPressed(image: image)
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.alpha = 1.0

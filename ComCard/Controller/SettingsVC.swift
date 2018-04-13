@@ -78,14 +78,14 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         self.requestAccess { (granted) in
             if granted {
                 //fetch contacts
-                print("Granted")
+                //print("Granted")
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "tocontacts") as? ContactsInviteVC
                 if let cp = controllertoPresent {
                     self.present(cp, animated: true, completion: nil)
                 }
             } else {
-                print("Denied")
+                //print("Denied")
             }
         }
     }
@@ -142,14 +142,14 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         self.requestAccess { (granted) in
             if granted {
                 //fetch contacts
-                print("Granted")
+                //print("Granted")
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "tocontacts") as? ContactsInviteVC
                 if let cp = controllertoPresent {
                     self.present(cp, animated: true, completion: nil)
                 }
             } else {
-                print("Denied")
+                //print("Denied")
             }
         }
     }

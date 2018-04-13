@@ -33,7 +33,8 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     var blackBackroundView : UIView?
     var startingImageView: UIImageView?
     var expandContraint: NSLayoutConstraint?
-
+    var panTriggered: Bool = false
+    
     
     var fullname: String {
         get {
@@ -77,6 +78,12 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         let cameraTap = UITapGestureRecognizer(target: self, action: #selector(showCamera))
         cameraTap.delegate = self
         self.camerabtn.addGestureRecognizer(cameraTap)
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan))
+        edgePan.delegate = self
+        edgePan.edges = .left
+        view.addGestureRecognizer(edgePan)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -88,10 +95,40 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             
             self.resetSizeforTextView(textView: textView)
             self.expandContraint?.isActive = true
-
+            
             
             self.sendimg.isUserInteractionEnabled = true
         }
+    }
+    
+    @objc func handleEdgePan(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        
+        switch recognizer.state {
+        case .began, .changed:
+            if !panTriggered {
+                let threshold: CGFloat = 10
+                let translation = abs(recognizer.translation(in: view).x)
+                if translation >= threshold {
+                    performAnimation(recognizer: recognizer)
+                    panTriggered = true
+                }
+            }
+        case .ended, .cancelled, .failed:
+            self.panTriggered = false
+        default:
+            break
+        }
+    }
+    
+    func performAnimation(recognizer: UIScreenEdgePanGestureRecognizer) {
+ 
+        let transition = CATransition()
+        transition.duration = 0.23
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: false, completion: nil)
     }
     
     @objc func showCamera() {
@@ -278,7 +315,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             cell.bubbleWidthAnchor?.constant = estimatedHeightForText(text: text).width + 32
             cell.textView.isHidden = false
             cell.textView.text = _message.messagetext
-
+            
         } else if _message.imageURL != nil {
             //fall in here if its an image as a message
             cell.bubbleWidthAnchor?.constant = 200
