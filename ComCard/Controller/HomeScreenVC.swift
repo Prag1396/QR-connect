@@ -11,15 +11,21 @@ import Firebase
 import FirebaseAuth
 
 class HomeScreenVC: UIViewController {
-
+    
     @IBOutlet weak var generateQRCodeBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let _ = Auth.auth().currentUser?.uid {
-            generateQRCodeBtn.setTitle("View my QR-Code", for: .normal)
-        } else {
+        checkifLaunchedBefore()
+        
+    }
+    
+    func checkifLaunchedBefore() {
+
+        if checkifLaunched.userDefaultsQRVC.bool(forKey: "hasLaunchedbefore") == false {
             generateQRCodeBtn.setTitle("Generate my QR Code", for: .normal)
+        } else {
+            generateQRCodeBtn.setTitle("View my QR Code", for: .normal)
         }
     }
     
@@ -27,13 +33,24 @@ class HomeScreenVC: UIViewController {
         //Check if user authenticated
         //If yes then load usersignin if not authenticated then load sign up screen
         if Auth.auth().currentUser?.uid == nil {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
-            controllerToPresent?.contactbuttonwassender = false
-            self.present(controllerToPresent!, animated: true, completion: nil)
+            
+            if checkifLaunched.userDefaultsQRVC.bool(forKey: "hasLaunchedbefore") == false {
+                //Launch sign up screen
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignUp") as? UserSignupVC
+                self.present(controllerToPresent!, animated: true, completion: nil)
+                
+            } else {
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "userSignin") as? UserSigninVC
+                controllerToPresent?.contactbuttonwassender = false
+                self.present(controllerToPresent!, animated: true, completion: nil)
+            }
+            
+            
+
         } else {
             //load sign in
-            print(Auth.auth().currentUser?.uid ?? String())
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let controllerToPresent = storyBoard.instantiateViewController(withIdentifier: "tabbarvc") as? UITabBarController
             self.present(controllerToPresent!, animated: true, completion: nil)

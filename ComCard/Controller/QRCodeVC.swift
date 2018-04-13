@@ -14,6 +14,10 @@ import MessageUI
 import PCLBlurEffectAlert
 import NVActivityIndicatorView
 
+struct checkifLaunched {
+    public static let userDefaultsQRVC = UserDefaults.standard
+}
+
 class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var unreadmessageindicator: UIImageView!
@@ -33,7 +37,7 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     var activityIndicatorView: NVActivityIndicatorView?
 
     let loadingView: UIView = UIView()
-    let userDefaults = UserDefaults.standard
+    //let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         
@@ -94,7 +98,6 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     }
     
     func convergeImages() {
-        print("FUCK THIS")
         guard let mainImage = self.qrModelImg.image else {
             return
         }
@@ -154,14 +157,14 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
     
     
     func checkIfLaunchedBefore() {
-        if userDefaults.bool(forKey: "hasLaunchedbefore") == true {
+        if checkifLaunched.userDefaultsQRVC.bool(forKey: "hasLaunchedbefore") == true {
             DispatchQueue.main.async {
                 self.hometitle.text = "Home"
             }
 
         } else {
-            userDefaults.set(true, forKey: "hasLaunchedbefore")
-            userDefaults.synchronize()
+            checkifLaunched.userDefaultsQRVC.set(true, forKey: "hasLaunchedbefore")
+            checkifLaunched.userDefaultsQRVC.synchronize()
         }
     }
     

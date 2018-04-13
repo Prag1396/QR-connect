@@ -26,6 +26,7 @@ class AuthService: UIViewController {
                 messageSentComplete(false, error)
             } else {
                         self.defaults.set(verificationID, forKey: "authVID")
+                        self.defaults.synchronize()
                         messageSentComplete(true, nil)
 
                     }
