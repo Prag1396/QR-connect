@@ -107,7 +107,7 @@ class DataService {
     }
     
     
-    func placeorder(firstname: String, lastname: String, addressline1: String, addressline2: String, city: String, state: String, country: String, zipCode: String, quantity: String, onOrderComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
+    func placeorder(firstname: String, lastname: String, addressline1: String, addressline2: String, city: String, state: String, country: String, zipCode: String, onOrderComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
@@ -115,7 +115,7 @@ class DataService {
         let orderRef = REF_ORDERSPLACED.childByAutoId()
         let orderOwnerData: Dictionary<String, String> = ["OrderOwner": uid]
         
-        let orderData: Dictionary<String, AnyObject> = ["FirstName": firstname as AnyObject, "LastName": lastname as AnyObject, "addline1": addressline1 as AnyObject, "addline2": addressline2 as AnyObject, "city": city as AnyObject, "state": state as AnyObject, "country": country as AnyObject, "zipcode": zipCode as AnyObject, "Quantity": quantity as AnyObject]
+        let orderData: Dictionary<String, AnyObject> = ["FirstName": firstname as AnyObject, "LastName": lastname as AnyObject, "addline1": addressline1 as AnyObject, "addline2": addressline2 as AnyObject, "city": city as AnyObject, "state": state as AnyObject, "country": country as AnyObject, "zipcode": zipCode as AnyObject, "Quantity": "5" as AnyObject]
         
         
         orderRef.updateChildValues(orderOwnerData) { (error, ref) in

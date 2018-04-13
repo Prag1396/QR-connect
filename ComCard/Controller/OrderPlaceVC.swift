@@ -21,13 +21,13 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var citytextfield: UITextField!
     @IBOutlet weak var streetaddresstextfield: UITextField!
     @IBOutlet weak var streetAddresstextfield2: UITextField!
-    @IBOutlet weak var quantitytextfield: UITextField!
+    //@IBOutlet weak var quantitytextfield: UITextField!
     
     var numberpickerview: UIPickerView = UIPickerView()
     var countryPickerView: UIPickerView = UIPickerView()
     var statePickerView: UIPickerView = UIPickerView()
     var next_responder: UIResponder!
-    var quantityArray: [Int] = Array(1...5)
+    //var quantityArray: [Int] = Array(1...5)
     //var countryArray = [String]()
     //var countryDictReturned = [String(): String()]
     //var obj: NSLocale = NSLocale()
@@ -43,7 +43,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     private var _city: String? = nil
     private var _street: String? = nil
     private var _street2: String? = nil
-    private var _quantity: String? = nil
+    //private var _quantity: String? = nil
     private var _firstName: String? = nil
     private var _lastName: String? = nil
     private var _zipCode: String? = nil
@@ -83,9 +83,9 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
         
-        quantitytextfield.delegate = self
-        quantitytextfield.keyboardAppearance = .dark
-        quantitytextfield.tag = 7
+//        quantitytextfield.delegate = self
+//        quantitytextfield.keyboardAppearance = .dark
+//        quantitytextfield.tag = 7
         
 //        countryPickerView.delegate = self
 //        countryPickerView.dataSource = self
@@ -125,11 +125,11 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         zipcodeTextField.tag = 6
         
         
-        numberpickerview.delegate = self
-        numberpickerview.dataSource = self
-        numberpickerview.tag = 1
-        numberpickerview.backgroundColor = UIColor.lightText
-        quantitytextfield.inputView = numberpickerview
+//        numberpickerview.delegate = self
+//        numberpickerview.dataSource = self
+//        numberpickerview.tag = 1
+//        numberpickerview.backgroundColor = UIColor.lightText
+        //quantitytextfield.inputView = numberpickerview
         
  
     }
@@ -154,33 +154,33 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        if pickerView.tag == 3 {
+        //if pickerView.tag == 3 {
             return allStates.count
-        }
+        //}
         //if pickerView.tag == 1 {
-            return quantityArray.count
+            //return quantityArray.count
         //}
         //return countryArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView.tag == 1 {
-            self.quantitytextfield.text = "\(row + 1)"
-        }
-        else if pickerView.tag == 3 {
+//        if pickerView.tag == 1 {
+//            self.quantitytextfield.text = "\(row + 1)"
+//        }
+        //if pickerView.tag == 3 {
             self.statetextfield.text = allStates[row]
-        }
-        else {
+        //}
+        //else {
             //self.countrytextfield.text = countryArray[row]
-        }
+        //}
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 3 {
+        //if pickerView.tag == 3 {
             return allStates[row]
-        }
+        //}
         //if pickerView.tag == 1 {
-            return "\(row + 1)"
+            //return "\(row + 1)"
         //}
         //return countryArray[row]
     }
@@ -204,7 +204,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func captureText() {
-        guard let streetaddres = streetaddresstextfield.text, let streetadress2 = streetAddresstextfield2.text, let city = citytextfield.text, let state = statetextfield.text, let country = countrytextfield.text,let zipCode = zipcodeTextField.text, let quantity = quantitytextfield.text else {
+        guard let streetaddres = streetaddresstextfield.text, let streetadress2 = streetAddresstextfield2.text, let city = citytextfield.text, let state = statetextfield.text, let country = countrytextfield.text,let zipCode = zipcodeTextField.text else {
             return
             }
 
@@ -214,7 +214,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             self._state = state
             self._country = country
             self._zipCode = zipCode
-            self._quantity = quantity
+            //self._quantity = quantity
         
     }
     
@@ -224,7 +224,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         captureText()
         
         if (self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! ||
-            self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)! || self.quantitytextfield.text == nil || (self.quantitytextfield.text?.isEmpty)!) {
+            self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)!) {
             
             let alert = PCLBlurEffectAlertController(title: "Warning", message: "All fields must be entered to place an order successfully", effect: UIBlurEffect(style: .light), style: .alert)
             alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -242,8 +242,8 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func storeData() {
-        if let fn = self._firstName, let ln = self._lastName, let ad1 = self._street, let ad2 = self._street2, let city = self._city, let state = self._state, let country = self._country, let zc = self._zipCode, let quant = self._quantity {
-            DataService.instance.placeorder(firstname: fn, lastname: ln, addressline1: ad1, addressline2: ad2, city: city, state: state, country: country, zipCode: zc, quantity: quant, onOrderComplete: { (status, error) in
+        if let fn = self._firstName, let ln = self._lastName, let ad1 = self._street, let ad2 = self._street2, let city = self._city, let state = self._state, let country = self._country, let zc = self._zipCode {
+            DataService.instance.placeorder(firstname: fn, lastname: ln, addressline1: ad1, addressline2: ad2, city: city, state: state, country: country, zipCode: zc, onOrderComplete: { (status, error) in
                 if error != nil {
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: error?.localizedDescription, effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
