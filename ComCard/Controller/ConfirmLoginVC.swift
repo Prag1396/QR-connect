@@ -65,6 +65,12 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         cd6.addTarget(self, action: #selector(self.textfieldDidChange(textfield: )), for: UIControlEvents.editingChanged)
     }
     
+    @objc func resendCodePressed() {
+        
+        self.resendCode.setTitle("SENT. RESEND CODE?", for: .normal)
+        self.sendcode()
+    }
+    
     
     //Send code to device
     @objc func sendcode() {
@@ -173,6 +179,8 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 self.performSegue(withIdentifier: "phoneauthsuccessfull", sender: Any.self)
             }
+                
+
         }
     }
     
@@ -186,7 +194,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         background.addGestureRecognizer(tap)
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        resendCode.addTarget(self, action: #selector(self.sendcode), for: UIControlEvents.touchUpInside)
+        resendCode.addTarget(self, action: #selector(self.resendCodePressed), for: UIControlEvents.touchUpInside)
 
     }
     

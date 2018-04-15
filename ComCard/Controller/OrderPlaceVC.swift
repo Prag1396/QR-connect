@@ -21,16 +21,12 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet weak var citytextfield: UITextField!
     @IBOutlet weak var streetaddresstextfield: UITextField!
     @IBOutlet weak var streetAddresstextfield2: UITextField!
-    //@IBOutlet weak var quantitytextfield: UITextField!
     
     var numberpickerview: UIPickerView = UIPickerView()
     var countryPickerView: UIPickerView = UIPickerView()
     var statePickerView: UIPickerView = UIPickerView()
     var next_responder: UIResponder!
-    //var quantityArray: [Int] = Array(1...5)
-    //var countryArray = [String]()
-    //var countryDictReturned = [String(): String()]
-    //var obj: NSLocale = NSLocale()
+
     
     let allStates = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID",
                       "IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE",
@@ -43,7 +39,6 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     private var _city: String? = nil
     private var _street: String? = nil
     private var _street2: String? = nil
-    //private var _quantity: String? = nil
     private var _firstName: String? = nil
     private var _lastName: String? = nil
     private var _zipCode: String? = nil
@@ -54,10 +49,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         self.downloadUserName()
         self.setupOutlets()
         UIApplication.shared.applicationIconBadgeNumber = 0
-        //Do any additional setup after loading the view.
-        //countryDictReturned = obj.countryArrayPopulate()
-        //countryArray = Array(countryDictReturned.values)
-        //countryArray.sort()
+
         countrytextfield.text = "United States"
         countrytextfield.isUserInteractionEnabled = false
     }
@@ -82,19 +74,10 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
-        
-//        quantitytextfield.delegate = self
-//        quantitytextfield.keyboardAppearance = .dark
-//        quantitytextfield.tag = 7
-        
-//        countryPickerView.delegate = self
-//        countryPickerView.dataSource = self
-//        countryPickerView.tag = 2
-//        countryPickerView.backgroundColor = UIColor.lightText
+
         countrytextfield.delegate = self
         countrytextfield.keyboardAppearance = .dark
         countrytextfield.tag = 5
-        //countrytextfield.inputView = countryPickerView
         
         statePickerView.delegate = self
         statePickerView.dataSource = self
@@ -123,14 +106,6 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         zipcodeTextField.delegate = self
         zipcodeTextField.keyboardAppearance = .dark
         zipcodeTextField.tag = 6
-        
-        
-//        numberpickerview.delegate = self
-//        numberpickerview.dataSource = self
-//        numberpickerview.tag = 1
-//        numberpickerview.backgroundColor = UIColor.lightText
-        //quantitytextfield.inputView = numberpickerview
-        
  
     }
     
@@ -152,37 +127,24 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
         
-        //if pickerView.tag == 3 {
-            return allStates.count
-        //}
-        //if pickerView.tag == 1 {
-            //return quantityArray.count
-        //}
-        //return countryArray.count
+        return allStates.count
+
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if pickerView.tag == 1 {
-//            self.quantitytextfield.text = "\(row + 1)"
-//        }
-        //if pickerView.tag == 3 {
-            self.statetextfield.text = allStates[row]
-        //}
-        //else {
-            //self.countrytextfield.text = countryArray[row]
-        //}
+
+        self.statetextfield.text = allStates[row]
+
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //if pickerView.tag == 3 {
-            return allStates[row]
-        //}
-        //if pickerView.tag == 1 {
-            //return "\(row + 1)"
-        //}
-        //return countryArray[row]
+        
+        return allStates[row]
+      
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -214,7 +176,6 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             self._state = state
             self._country = country
             self._zipCode = zipCode
-            //self._quantity = quantity
         
     }
     
@@ -222,7 +183,7 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBAction func placeOrderbtnpressed(_ sender: Any) {
         
         captureText()
-        
+
         if (self.streetaddresstextfield.text == nil || (self.streetaddresstextfield.text?.isEmpty)! ||
             self.citytextfield.text == nil || (self.citytextfield.text?.isEmpty)! || self.statetextfield.text == nil || (self.statetextfield.text?.isEmpty)! || self.countrytextfield.text == nil || (self.countrytextfield.text?.isEmpty)! || self.zipcodeTextField.text == nil || (self.zipcodeTextField.text?.isEmpty)!) {
             
@@ -236,9 +197,24 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             self.view.alpha = 0.7
             alert.show()
             
-        } else {
+        }
+
+        
+        else if (((self.zipcodeTextField.text?.count)! != 5)) {
+            let alert = PCLBlurEffectAlertController(title: "Warning", message: "Invalide Zipcode entered", effect: UIBlurEffect(style: .light), style: .alert)
+            alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.alpha = 1.0
+                })
+            }))
+            alert.configureAlert(alert: alert)
+            self.view.alpha = 0.7
+            alert.show()
+        }
+        else {
             self.storeData()
         }
+        
     }
     
     func storeData() {
@@ -254,6 +230,8 @@ class OrderPlaceVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                     alert.configureAlert(alert: alert)
                     self.view.alpha = 0.7
                     alert.show()
+                
+                    
                 } else {
                     //Order Complete
                     let alert = PCLBlurEffectAlertController(title: "Congratulations!", message: "You have successfully placed the order. A confirmation has been sent to your email with order details", effect: UIBlurEffect(style: .light), style: .alert)
