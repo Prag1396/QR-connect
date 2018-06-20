@@ -15,6 +15,9 @@ import PCLBlurEffectAlert
 
 class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
 
+    
+    @IBOutlet weak var reportIssuelabel: UILabel!
+    @IBOutlet weak var helpcenterlabel: UILabel!
     @IBOutlet weak var requestQRStickerslabel: UILabel!
     @IBOutlet weak var changePwdLabel: UILabel!
     @IBOutlet weak var viewProfileLabel: UILabel!
@@ -40,15 +43,39 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         requestQRStickerslabel.addGestureRecognizer(tap4)
         tap4.delegate = self
         
+        let tap5 = UITapGestureRecognizer(target: self, action: #selector(loadsite))
+        reportIssuelabel.addGestureRecognizer(tap5)
+        tap5.delegate = self
+        
+        let tap6 = UIGestureRecognizer(target: self, action: #selector(loadsite))
+        helpcenterlabel.addGestureRecognizer(tap6)
+        tap6.delegate = self
+        
         
     }
     
+    @objc func loadsite() {
+        //Start URL Session
+        UIApplication.shared.open(URL(string: "https://psharma52.wixsite.com/qrconnect")!, options: [:], completionHandler: nil)
+    }
+    
     @objc func loadordervc() {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "ordervc") as? OrderPlaceVC
-        if let vc = controllertoPresent {
-            self.present(vc, animated: true, completion: nil)
-        }
+//        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//        let controllertoPresent = storyBoard.instantiateViewController(withIdentifier: "ordervc") as? OrderPlaceVC
+//        if let vc = controllertoPresent {
+//            self.present(vc, animated: true, completion: nil)
+//        }
+        let alert = PCLBlurEffectAlertController(title: "Feature Coming Soon", message: "Thank you for you patience", effect: UIBlurEffect(style: .light), style: .alert)
+        alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
+        }))
+        alert.configureAlert(alert: alert)
+        alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
+        alert.configure(buttonBackgroundColor: UIColor.clear)
+        self.view.alpha = 0.7
+        alert.show()
     }
     
     @objc func loadchangepwdvc() {
@@ -154,10 +181,6 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @IBAction func requestQRStickerPressed(_ sender: Any) {
-        
-    }
-    
     @IBAction func logoutPressed(_ sender: Any) {
         //Logout user
         let firebaseAuth = Auth.auth()
@@ -172,6 +195,15 @@ class SettingsVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func reportIsuueBtnpressed(_ sender: Any) {
-        
+        self.loadsite()
     }
+    
+    @IBAction func requestQrbtnpressed(_ sender: Any) {
+        self.loadordervc()
+    }
+    
+    @IBAction func helpcenterbtnpressed(_ sender: Any) {
+        self.loadsite()
+    }
+    
 }

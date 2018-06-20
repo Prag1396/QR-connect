@@ -1502,8 +1502,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7S6-69-KYS" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                <rect key="frame" x="11" y="538" width="353" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="11" y="458" width="353" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39783283390410962" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="x7S-mQ-V4B"/>
                                 </constraints>
@@ -1662,7 +1662,7 @@
                             <constraint firstItem="yd8-J8-oTc" firstAttribute="leading" secondItem="a17-i0-hjy" secondAttribute="leading" constant="11" id="brk-wj-gVE"/>
                             <constraint firstItem="Fhn-qk-T69" firstAttribute="centerX" secondItem="a17-i0-hjy" secondAttribute="centerX" id="ghZ-Sf-NSL"/>
                             <constraint firstItem="a17-i0-hjy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yd8-J8-oTc" secondAttribute="trailing" constant="227" id="jjh-bs-X0G"/>
-                            <constraint firstItem="7S6-69-KYS" firstAttribute="top" secondItem="N1S-8j-SL9" secondAttribute="bottom" constant="-40" id="l6X-Ks-d6x"/>
+                            <constraint firstItem="7S6-69-KYS" firstAttribute="top" secondItem="N1S-8j-SL9" secondAttribute="bottom" constant="-120" id="l6X-Ks-d6x"/>
                             <constraint firstItem="a17-i0-hjy" firstAttribute="trailing" secondItem="lnK-xW-deC" secondAttribute="trailing" constant="11" id="mSA-qS-YXu"/>
                             <constraint firstItem="uUw-kk-beU" firstAttribute="leading" secondItem="a17-i0-hjy" secondAttribute="leading" constant="15" id="mZy-0C-ZBb"/>
                             <constraint firstItem="7S6-69-KYS" firstAttribute="leading" secondItem="N1S-8j-SL9" secondAttribute="leading" id="mge-Qb-vRu"/>
@@ -2508,7 +2508,7 @@
                                 <state key="normal" title="  Order free QR-Stickers" image="cart" backgroundImage="button_bg2"/>
                                 <connections>
                                     <action selector="generateQRCodeBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9g0-Nb-sws"/>
-                                    <segue destination="bau-6V-9rE" kind="show" id="JP0-0X-bgi"/>
+                                    <action selector="orderPlacebtnPressed:" destination="vN6-yn-BQc" eventType="touchUpInside" id="fjc-OP-ZbP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUD-dl-4Qx" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
@@ -2731,8 +2731,7 @@
                                 </constraints>
                                 <state key="normal" image="next_bt"/>
                                 <connections>
-                                    <action selector="requestQRStickerPressed:" destination="ymd-lD-qY6" eventType="touchUpInside" id="ccs-gj-iRo"/>
-                                    <segue destination="bau-6V-9rE" kind="show" id="0cI-Iz-w92"/>
+                                    <action selector="requestQrbtnpressed:" destination="ymd-lD-qY6" eventType="touchUpInside" id="6zf-j4-ITh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdM-Bq-qmh">
@@ -2742,6 +2741,9 @@
                                     <constraint firstAttribute="height" constant="30" id="Bj5-lZ-zvl"/>
                                 </constraints>
                                 <state key="normal" image="next_bt"/>
+                                <connections>
+                                    <action selector="helpcenterbtnpressed:" destination="ymd-lD-qY6" eventType="touchUpInside" id="cf8-86-yx0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-kH-Ssh" userLabel="issuebtn">
                                 <rect key="frame" x="327" y="271.66666666666669" width="30" height="30"/>
@@ -2890,13 +2892,15 @@
                     <connections>
                         <outlet property="changePwdLabel" destination="Kfk-ht-08g" id="xbt-p5-79g"/>
                         <outlet property="contactlabel" destination="Xh3-xF-HLz" id="44g-nz-fR5"/>
+                        <outlet property="helpcenterlabel" destination="LlE-St-okj" id="swx-jX-A7e"/>
+                        <outlet property="reportIssuelabel" destination="TPk-Bn-3be" id="Bno-kp-SmK"/>
                         <outlet property="requestQRStickerslabel" destination="MGV-1c-asV" id="Hcu-qV-ARC"/>
                         <outlet property="viewProfileLabel" destination="GQ9-Vc-Z6E" id="gNN-8i-3gI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0X-WW-nIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2714" y="-2612"/>
+            <point key="canvasLocation" x="2572" y="-2613"/>
         </scene>
         <!--Change PasswordVC-->
         <scene sceneID="S33-hg-23H">
@@ -3196,6 +3200,5 @@
         <segue reference="EJj-3d-GIx"/>
         <segue reference="tlv-Y4-8pu"/>
         <segue reference="ffs-XY-gdX"/>
-        <segue reference="JP0-0X-bgi"/>
     </inferredMetricsTieBreakers>
 </document>

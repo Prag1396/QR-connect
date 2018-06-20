@@ -333,6 +333,23 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         }
     }
     
+    
+    
+    @IBAction func orderPlacebtnPressed(_ sender: Any) {
+        
+        let alert = PCLBlurEffectAlertController(title: "Feature Coming Soon", message: "Thank you for you patience", effect: UIBlurEffect(style: .light), style: .alert)
+        alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.alpha = 1.0
+            })
+        }))
+        alert.configureAlert(alert: alert)
+        alert.configure(titleColor: UIColor(red: 77/255, green: 225/255, blue: 158/255, alpha: 1.0))
+        alert.configure(buttonBackgroundColor: UIColor.clear)
+        self.view.alpha = 0.7
+        alert.show()
+    }
+    
     func showAlertView(image: UIImage, data: Data) {
 
         let alert = PCLBlurEffectAlertController(title: "QRConnect", message: "Your personalised QRCode has been downloaded", effect: UIBlurEffect(style: .light), style: .alert)
@@ -383,6 +400,8 @@ class QRCodeVC: UIViewController, MFMailComposeViewControllerDelegate, UIViewCon
         
         
     }
+    
+    
     
     func saveToPhotosPressed(image: UIImage) {
         
