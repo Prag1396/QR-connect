@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
-import IQKeyboardManagerSwift
 
 class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -84,7 +83,36 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         edgePan.edges = .left
         view.addGestureRecognizer(edgePan)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func keyboardFrameWillChange(notification: Notification) {
+        
+        
+        guard let dict = notification.userInfo else { return }
+        
+        let keyboardBeginFrame = ((dict as NSDictionary).object(forKey: UIKeyboardFrameBeginUserInfoKey)! as AnyObject).cgRectValue
+        let keyboardEndFrame = ((dict as NSDictionary).object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue
+        
+        let animationCurve = UIViewAnimationCurve(rawValue: ((dict as NSDictionary).object(forKey: UIKeyboardAnimationCurveUserInfoKey)! as AnyObject).integerValue)
+        
+        let animationDuration: TimeInterval = ((dict as NSDictionary).object(forKey: UIKeyboardAnimationDurationUserInfoKey)! as AnyObject).doubleValue
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(animationDuration)
+        UIView.setAnimationCurve(animationCurve!)
+        
+        var newFrame = self.view.frame
+        let keyboardFrameEnd = self.view.convert(keyboardEndFrame!, to: nil)
+        let keyboardFrameBegin = self.view.convert(keyboardBeginFrame!, to: nil)
+        
+        newFrame.origin.y -= (keyboardFrameBegin.origin.y - keyboardFrameEnd.origin.y)
+        self.view.frame = newFrame;
+        
+        UIView.commitAnimations()
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -95,8 +123,6 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
             
             self.resetSizeforTextView(textView: textView)
             self.expandContraint?.isActive = true
-            
-            
             self.sendimg.isUserInteractionEnabled = true
         }
     }
@@ -140,16 +166,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         }
     }
     
-    func setUpKeyBoardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-    }
-    
-    @objc func handleKeyBoardDidShow() {
-        if collectionViewMessages.count > 0 {
-            let indexPath = IndexPath(item: collectionViewMessages.count - 1, section: 0)
-            self.messageCollectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
-        }
-    }
+
     @IBAction func uploadImageBtnPressed(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -205,6 +222,7 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
         } else {
             self.sendimg.isUserInteractionEnabled = true
         }
+        
         return false
     }
     
@@ -231,13 +249,15 @@ class ChatLogVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelega
     @objc func sendimgpressed() {
         handleSend()
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
+        
         if textView.text == nil || textView.text.isEmpty == true {
             self.sendimg.isUserInteractionEnabled = false
         } else {
             self.sendimg.isUserInteractionEnabled = true
         }
+        
     }
     
     func observeMessagesforuserClicked() {

@@ -11,7 +11,7 @@ target 'ComCard' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
-  pod 'IQKeyboardManagerSwift'
+  pod 'IQKeyboardManagerSwift', '5.0.0'
   pod 'RNCryptor', '~> 5.0'
   pod 'Firebase/Messaging'
   pod "PCLBlurEffectAlert"

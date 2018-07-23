@@ -106,7 +106,6 @@ open class IQTitleBarButtonItem: IQBarButtonItem {
         _titleButton?.titleLabel?.font = self.titleFont
         _titleView?.addSubview(_titleButton!)
         
-#if swift(>=3.2)
         if #available(iOS 11, *) {
             
             var layoutDefaultLowPriority : UILayoutPriority
@@ -144,10 +143,6 @@ open class IQTitleBarButtonItem: IQBarButtonItem {
             _titleView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
             _titleButton?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         }
-#else
-    _titleView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-    _titleButton?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-#endif
 
         customView = _titleView
     }

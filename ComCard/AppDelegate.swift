@@ -33,9 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 UIApplication.shared.registerForRemoteNotifications()
             })
         }
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+//        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         checkIfLaunchedBefore()
+        
+        
         
         return true
     }
