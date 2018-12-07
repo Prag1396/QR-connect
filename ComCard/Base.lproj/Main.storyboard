@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-DemiBold</string>
-            <string>AvenirNext-Medium</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Home ScreenVC-->
         <scene sceneID="tne-QT-ifu">
@@ -150,10 +143,10 @@
                                         <rect key="frame" x="27" y="135.00000000000003" width="321" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWu-tK-YwB">
-                                                <rect key="frame" x="223" y="67" width="35.666666666666686" height="21"/>
+                                                <rect key="frame" x="223.33333333333334" y="67" width="35.333333333333343" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="PTS-aH-dpV"/>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="39" id="eTs-PN-9BH"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35.670000000000002" id="TyZ-e6-wQK"/>
+                                                    <constraint firstAttribute="height" constant="21" id="bTK-3b-jbe"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,8 +155,8 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-app message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOq-VA-5gs">
                                                 <rect key="frame" x="29.666666666666664" y="67" width="102.33333333333334" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="102.33" id="QEB-CE-bqv"/>
-                                                    <constraint firstAttribute="height" constant="21" id="xbj-PP-nvQ"/>
+                                                    <constraint firstAttribute="height" constant="21" id="Mx3-0A-JhW"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="102.33" id="SLx-9t-NUz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,7 +165,6 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="0.56755672089041098" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="ZOq-VA-5gs" firstAttribute="centerY" secondItem="CWu-tK-YwB" secondAttribute="centerY" id="6yx-w7-xnu"/>
                                             <constraint firstAttribute="height" constant="100" id="ijy-1k-kMS"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -203,45 +195,49 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woE-hP-wlV">
-                                        <rect key="frame" x="167" y="-17" width="42" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woE-hP-wlV">
+                                        <rect key="frame" x="167" y="-17.333333333333314" width="42" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="3mI-Zh-rYW"/>
+                                            <constraint firstAttribute="height" constant="40" id="qY2-ib-GXy"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="38"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxR-Dy-0U2" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="88.666666666666671" y="156.00000000000003" width="38" height="38"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="lzq-TA-aBo">
+                                        <rect key="frame" x="87.666666666666686" y="156.00000000000003" width="200" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxR-Dy-0U2" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <state key="normal" backgroundImage="message ui"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="19"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="messagebtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="MJW-Za-KSy"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-Pt-xNc" userLabel="email" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
+                                                <rect key="frame" x="160" y="0.0" width="40" height="40"/>
+                                                <state key="normal" image="emailIconcontactvc"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="19"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="emailbtnpressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="SWk-oK-Z7Z"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="nGZ-d7-QOk"/>
-                                            <constraint firstAttribute="width" constant="38" id="rBy-77-Tsb"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZNg-r5-q91"/>
+                                            <constraint firstAttribute="width" constant="200" id="lPG-7M-TXg"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="message ui"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="19"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="messagebtnPressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="MJW-Za-KSy"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-Pt-xNc" userLabel="email" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
-                                        <rect key="frame" x="248.66666666666663" y="156.00000000000003" width="38" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="38" id="euB-zl-t2F"/>
-                                            <constraint firstAttribute="height" constant="38" id="fsZ-Vd-KRd"/>
-                                        </constraints>
-                                        <state key="normal" image="emailIconcontactvc"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="19"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="emailbtnpressed:" destination="YW1-c0-l1G" eventType="touchUpInside" id="SWk-oK-Z7Z"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-un-yJ0" customClass="buttonStyle" customModule="ComCard" customModuleProvider="target">
                                         <rect key="frame" x="83.666666666666686" y="270" width="208" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -269,21 +265,22 @@
                                     <constraint firstItem="ck3-PL-gOl" firstAttribute="top" secondItem="eOF-uC-bmo" secondAttribute="top" constant="-30" id="AZc-fn-gGc"/>
                                     <constraint firstItem="aJF-un-yJ0" firstAttribute="top" secondItem="5Pb-ew-fyH" secondAttribute="bottom" constant="35" id="Aan-RF-GC9"/>
                                     <constraint firstAttribute="trailing" secondItem="16l-j8-Xuo" secondAttribute="trailing" constant="22" id="DVu-c2-o71"/>
-                                    <constraint firstItem="ZOq-VA-5gs" firstAttribute="centerX" secondItem="yxR-Dy-0U2" secondAttribute="centerX" id="Ese-JR-GEu"/>
-                                    <constraint firstItem="CWu-tK-YwB" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="8" id="IYL-yh-xWR"/>
+                                    <constraint firstItem="CWu-tK-YwB" firstAttribute="centerX" secondItem="GAf-Pt-xNc" secondAttribute="centerX" id="Dt6-hu-bZ6"/>
                                     <constraint firstItem="ck3-PL-gOl" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="KtO-As-YCl"/>
                                     <constraint firstItem="aJF-un-yJ0" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="NKv-6u-BBc"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="centerY" secondItem="5Pb-ew-fyH" secondAttribute="centerY" constant="-10" id="Q0i-zs-c69"/>
+                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerX" secondItem="ck3-PL-gOl" secondAttribute="centerX" id="NyY-4q-v0Y"/>
                                     <constraint firstAttribute="height" constant="370" id="QXg-EA-cIe"/>
+                                    <constraint firstItem="woE-hP-wlV" firstAttribute="centerY" secondItem="ck3-PL-gOl" secondAttribute="centerY" id="Uad-bm-1KA"/>
                                     <constraint firstItem="16l-j8-Xuo" firstAttribute="centerY" secondItem="eOF-uC-bmo" secondAttribute="centerY" id="VWQ-p1-bEK"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="leading" secondItem="yxR-Dy-0U2" secondAttribute="trailing" constant="121.99999999999996" id="Xan-sa-6pB"/>
                                     <constraint firstItem="16l-j8-Xuo" firstAttribute="leading" secondItem="eOF-uC-bmo" secondAttribute="leading" constant="22" id="Zt0-ED-gUC"/>
+                                    <constraint firstItem="lzq-TA-aBo" firstAttribute="top" secondItem="K4W-PA-Uax" secondAttribute="bottom" constant="90" id="Zz0-cd-Vxq"/>
                                     <constraint firstItem="5Pb-ew-fyH" firstAttribute="trailing" secondItem="16l-j8-Xuo" secondAttribute="trailing" constant="-5" id="gqN-5G-1cR"/>
-                                    <constraint firstItem="yxR-Dy-0U2" firstAttribute="centerY" secondItem="GAf-Pt-xNc" secondAttribute="centerY" id="lci-aq-6OM"/>
                                     <constraint firstItem="K4W-PA-Uax" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="m7j-hB-AfG"/>
                                     <constraint firstItem="5Pb-ew-fyH" firstAttribute="centerY" secondItem="16l-j8-Xuo" secondAttribute="centerY" id="peI-oq-xmu"/>
-                                    <constraint firstItem="GAf-Pt-xNc" firstAttribute="leading" secondItem="5Pb-ew-fyH" secondAttribute="trailing" constant="-99.333333333333371" id="peo-da-VcK"/>
-                                    <constraint firstItem="CWu-tK-YwB" firstAttribute="centerX" secondItem="GAf-Pt-xNc" secondAttribute="centerX" id="rj2-Hy-E3w"/>
+                                    <constraint firstItem="ZOq-VA-5gs" firstAttribute="centerX" secondItem="yxR-Dy-0U2" secondAttribute="centerX" id="trE-VM-Fs5"/>
+                                    <constraint firstItem="CWu-tK-YwB" firstAttribute="top" secondItem="GAf-Pt-xNc" secondAttribute="bottom" constant="6" id="tzQ-Xp-Wiq"/>
+                                    <constraint firstItem="lzq-TA-aBo" firstAttribute="centerX" secondItem="eOF-uC-bmo" secondAttribute="centerX" id="vBf-C2-cTh"/>
+                                    <constraint firstItem="ZOq-VA-5gs" firstAttribute="top" secondItem="yxR-Dy-0U2" secondAttribute="bottom" constant="6" id="wgO-4x-fBG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWg-2I-E6R">
@@ -3197,8 +3194,8 @@
         <image name="verifybtn" width="12" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EJj-3d-GIx"/>
-        <segue reference="tlv-Y4-8pu"/>
+        <segue reference="GIi-xh-yIc"/>
+        <segue reference="DuB-DZ-Cxg"/>
         <segue reference="ffs-XY-gdX"/>
     </inferredMetricsTieBreakers>
 </document>

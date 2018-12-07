@@ -82,7 +82,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
 
             if error != nil && status == false {
                 //Present Alert
-                AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
+                AuthService.instance.handleErrorCode(error: (error as NSError?)!, onCompleteErrorHandler: { (errmsg, nil) in
                     
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: "\(errmsg)", effect: UIBlurEffect(style: .light), style: .alert)
                     alert.addAction(PCLBlurEffectAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -157,7 +157,7 @@ class ConfirmLoginVC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
         }
         AuthService.instance.auth(code: finalCode) { (status, error) in
             if error != nil && status == false {
-                AuthService.instance.handleErrorCode(error: error as NSError!, onCompleteErrorHandler: { (errmsg, nil) in
+                AuthService.instance.handleErrorCode(error: (error as NSError?)!, onCompleteErrorHandler: { (errmsg, nil) in
                     
                     //ADD CUSTOM ALERT
                     let alert = PCLBlurEffectAlertController(title: "Warning", message: errmsg, effect: UIBlurEffect(style: .light), style: .alert)
